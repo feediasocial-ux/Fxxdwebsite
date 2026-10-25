@@ -26,6 +26,7 @@ import { PACKAGES } from '@/content/pricing';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { NICHE_PHOTOS } from '@/lib/niche-photos';
 import { linkTo } from '@/lib/routes';
+import { faqPageJsonLd, serviceJsonLd } from '@/lib/seo';
 import type { ImageMetadata } from 'astro';
 
 import proceso01 from '@/assets/photos/proceso-01-onboarding.jpg';
@@ -46,6 +47,16 @@ const path = COUNTRIES[country].basePath;
 
 <BaseLayout
   pageId="home"
+  jsonLdNodes={[
+    ...serviceJsonLd({
+      name: ui.meta.homeTitle,
+      description: ui.meta.homeDescription,
+      path,
+      country,
+      serviceType: 'Social Media Content Agency',
+    }),
+    faqPageJsonLd(ui.faqSection.items),
+  ]}
   seo={{
     title: ui.meta.homeTitle,
     description: ui.meta.homeDescription,

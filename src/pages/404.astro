@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Logo from '@/components/Logo.astro';
+import Button from '@/components/Button.astro';
+import Photo from '@/components/Photo.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import { notFoundCopy } from '@/content';
+import error404Img from '@/assets/photos/error-404.jpg';
+---
+
+<BaseLayout
+  hideChrome
+  pageId="404"
+  seo={{
+    title: notFoundCopy.title,
+    description: notFoundCopy.description,
+    path: '/404.html',
+    noindex: true,
+  }}
+>
+  <div class="flex min-h-dvh flex-col justify-between">
+    <header class="container-site flex items-center justify-between py-6">
+      <Logo href="/" label="Feediasocial" />
+    </header>
+
+    <section class="container-site my-auto py-10">
+      <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+        <div class="space-y-5">
+          <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-xs font-bold uppercase">
+            {notFoundCopy.badge}
+          </p>
+          <h1 class="text-display-hero">{notFoundCopy.h1}</h1>
+          <p class="max-w-xl text-lg text-ink-soft">{notFoundCopy.intro}</p>
+
+          <div class="flex flex-wrap gap-3 pt-2">
+            <Button href="/es/" variant="primary" size="lg">{notFoundCopy.ctaEs}</Button>
+            <Button href="/mx/" variant="lemon" size="lg">{notFoundCopy.ctaMx}</Button>
+            <Button href="/" variant="outline" size="lg">{notFoundCopy.ctaRoot}</Button>
+          </div>
+        </div>
+
+        <div class="mx-auto w-full max-w-sm">
+          <div class="overflow-hidden rounded-[32px] border-2 border-ink shadow-[10px_12px_0_0_var(--coral)]">
+            <Photo src={error404Img} alt={notFoundCopy.photoAlt} aspect="1/1" widths={[360, 540]} sizes="360px" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div>
+      <StripeBand colors={['var(--coral)', 'var(--cream)']} height="20px" />
+    </div>
+  </div>
+</BaseLayout>

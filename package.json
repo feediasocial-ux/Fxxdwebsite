@@ -8,13 +8,16 @@
   },
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "build": "node scripts/generate-og.ts && ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "generate:og": "node scripts/generate-og.ts",
     "check:contrast": "node scripts/check-contrast.ts",
     "check:similarity": "node scripts/check-similarity.ts",
     "check:seo": "node scripts/check-hreflang.ts",
-    "validate": "node scripts/check-contrast.ts && node scripts/check-similarity.ts && node scripts/check-hreflang.ts"
+    "check:links": "node scripts/check-links.ts",
+    "check:budget": "node scripts/check-budget.ts",
+    "validate": "node scripts/check-contrast.ts && node scripts/check-similarity.ts && node scripts/check-hreflang.ts && node scripts/check-links.ts && node scripts/check-budget.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",

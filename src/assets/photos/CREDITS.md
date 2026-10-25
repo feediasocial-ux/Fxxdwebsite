@@ -6,23 +6,20 @@ Sustituir por fotografía real del equipo y de clientes (con permiso) en cuanto 
 
 | Archivo | Uso previsto | Estado |
 |---|---|---|
-| hero-es.jpg | Hero Home /es/ | ✅ |
-| hero-mx.jpg | Hero Home /mx/ | ✅ |
-| proceso-01-onboarding.jpg | Paso 01 | ✅ |
-| proceso-02-guiones-calendario.jpg | Paso 02 / Servicios | ✅ |
-| proceso-03-edicion.jpg | Paso 03 / Servicios | ⏳ pendiente (cuota) |
-| proceso-grabacion-checklist.jpg | Cómo funciona | ⏳ pendiente (cuota) |
-| sin-camara.jpg | Landing sin cámara / Plan B | ✅ |
-| contacto-chat.jpg | Contacto / CTA final | ✅ |
-| servicios-ia-graficos.jpg | Servicios | ✅ |
-| servicios-tendencias.jpg | Servicios | ⏳ pendiente (cuota) |
-| error-404.jpg | 404 | ⏳ pendiente (cuota) |
-| og-fondo | Base OG | 🛠 se hará en SVG |
-| niches/clinicas-es.jpg · clinicas-mx.jpg | Landing clínicas | ✅ |
-| niches/restaurantes-es.jpg | Landing restaurantes ES | ✅ |
-| niches/restaurantes-mx.jpg | Landing restaurantes MX | ⏳ pendiente (cuota) |
-| niches/inmobiliarias-es.jpg · inmobiliarias-mx.jpg | Landing inmobiliarias | ✅ |
-| niches/gimnasios-es.jpg | Landing gimnasios ES | ✅ |
-| niches/gimnasios-mx.jpg | Landing gimnasios MX | ⏳ pendiente (cuota) |
+| hero-es.jpg | Hero Home /es/ | ✅ IA editorial |
+| hero-mx.jpg | Hero Home /mx/ | ✅ IA editorial |
+| proceso-01-onboarding.jpg | Paso 01 | ✅ IA editorial |
+| proceso-02-guiones-calendario.jpg | Paso 02 / Servicios | ✅ IA editorial |
+| sin-camara.jpg | Landing sin cámara / Plan B | ✅ IA editorial |
+| contacto-chat.jpg | Contacto / CTA final | ✅ IA editorial |
+| servicios-ia-graficos.jpg | Servicios | ✅ IA editorial |
+| error-404.jpg | Página 404 | ✅ Ilustración vectorial editorial (`scripts/generate-og.ts`) |
+| og-fondo.svg + `public/og/*.png` | 39 tarjetas Open Graph (1200×630) | ✅ Generadas en build (`scripts/generate-og.ts`) |
+| niches/clinicas-es.jpg · clinicas-mx.jpg | Landing clínicas | ✅ IA editorial |
+| niches/restaurantes-es.jpg | Landing restaurantes ES | ✅ IA editorial |
+| niches/restaurantes-mx.jpg | Landing restaurantes MX | ✅ Variante cromática editorial (`sharp`), pendiente foto dedicada |
+| niches/inmobiliarias-es.jpg · inmobiliarias-mx.jpg | Landing inmobiliarias | ✅ IA editorial |
+| niches/gimnasios-es.jpg | Landing gimnasios ES | ✅ IA editorial |
+| niches/gimnasios-mx.jpg | Landing gimnasios MX | ✅ Variante cromática editorial (`sharp`), pendiente foto dedicada |
 
 Formato de origen: JPG 3:4 / 1:1. Astro (`astro:assets`) genera AVIF/WebP optimizados en build.

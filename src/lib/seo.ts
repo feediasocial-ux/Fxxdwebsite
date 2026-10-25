@@ -37,6 +37,11 @@ export type SeoOutput = {
 
 export const abs = (path: string) => new URL(path, BRAND.url).toString();
 
+export function ogSlugForPath(path: string): string {
+  const clean = path.replace(/^\/+|\/+$/g, '').replace(/\//g, '-');
+  return clean ? `/og/${clean}.png` : '/og/default.png';
+}
+
 export function buildSeo(input: SeoInput): SeoOutput {
   const alternates: Alternate[] = [];
   if (input.routeKey && !input.noindex) {
@@ -60,7 +65,7 @@ export function buildSeo(input: SeoInput): SeoOutput {
     canonical: abs(input.path),
     alternates,
     robots: input.noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large',
-    ogImage: abs(input.ogImage || '/og/default.png'),
+    ogImage: abs(input.ogImage || ogSlugForPath(input.path)),
     ogLocale: c?.ogLocale || 'es_ES',
     lang: c?.locale || 'es',
   };

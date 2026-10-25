@@ -1,12 +1,12 @@
 import type { CountryKey } from '@/lib/i18n';
-import type { CorePagesCopy, UiCopy } from './types';
-import type { Phase4Copy } from './phase4-types';
-import { ui as esES } from './es-ES/ui';
-import { ui as esMX } from './es-MX/ui';
-import { pages as pagesES } from './es-ES/pages';
-import { pages as pagesMX } from './es-MX/pages';
-import { phase4ES } from './es-ES/phase4';
-import { phase4MX } from './es-MX/phase4';
+import type { CorePagesCopy, UiCopy } from './types.ts';
+import type { Phase4Copy } from './phase4-types.ts';
+import { ui as esES } from './es-ES/ui.ts';
+import { ui as esMX } from './es-MX/ui.ts';
+import { pages as pagesES } from './es-ES/pages.ts';
+import { pages as pagesMX } from './es-MX/pages.ts';
+import { phase4ES } from './es-ES/phase4.ts';
+import { phase4MX } from './es-MX/phase4.ts';
 
 const COPY: Record<CountryKey, UiCopy> = { es: esES, mx: esMX };
 const PAGES: Record<CountryKey, CorePagesCopy> = { es: pagesES, mx: pagesMX };
@@ -37,4 +37,17 @@ export const rootCopy = {
   },
   suggestion: 'Tu última visita',
   note: 'No te redirigimos automáticamente: tú eliges.',
+};
+
+export const notFoundCopy = {
+  title: '404 · Esta toma se nos ha caído del guion | Feediasocial',
+  description: 'La página que buscas no existe o ha cambiado de ruta. Vuelve al inicio de España o México.',
+  badge: 'Error 404 · Toma descartada',
+  h1: 'Esta página se ha quedado fuera del montaje final',
+  intro:
+    'La dirección que has abierto no existe o ha cambiado de ubicación. Elige tu país para volver al calendario principal o escríbenos por WhatsApp si buscabas algo concreto.',
+  ctaEs: 'Ir a España (/es/)',
+  ctaMx: 'Ir a México (/mx/)',
+  ctaRoot: 'Selector de país (/)',
+  photoAlt: 'Ilustración editorial de un trípode y teléfono móvil en pausa sobre fondo crema y coral',
 };
