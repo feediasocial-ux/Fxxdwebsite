@@ -73,6 +73,7 @@ export type UiCopy = {
     planBTitle: string;
     planBText: string;
     planBCta: string;
+    planBGuideCta: string;
     planBWaMessage: string;
   };
   proofSection: {
@@ -80,6 +81,7 @@ export type UiCopy = {
     title: string;
     subtitle: string;
     pendingBadge: string;
+    ctaMore: string;
     sampleScriptTitle: string;
     sampleScriptMeta: string;
     sampleScriptHook: string;

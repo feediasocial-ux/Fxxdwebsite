@@ -103,6 +103,7 @@ export const ui: UiCopy = {
     planBText:
       'Si tú o tu equipo prefieren no aparecer en video, armamos tu mes con carruseles educativos, foto de tus productos o servicios y diseño gráfico con IA.',
     planBCta: 'Preguntar por el Plan B sin cámara',
+    planBGuideCta: 'Cómo funciona el Plan B sin cámara',
     planBWaMessage: 'Hola, vengo de la página de México y me interesa el Plan B sin salir en cámara.',
   },
   proofSection: {
@@ -111,6 +112,7 @@ export const ui: UiCopy = {
     subtitle:
       'No inventamos testimonios ni números inflados. Así se ve el material real que te entregamos cada mes antes de que grabes con tu celular.',
     pendingBadge: '[PENDIENTE: aportar capturas reales de Metricool y casos piloto con permiso]',
+    ctaMore: 'Ver más muestras de guiones y calendarios',
     sampleScriptTitle: 'Ejemplo de guion listo para grabar (Reel · 25 s)',
     sampleScriptMeta: 'Giro: Consultorio dental / fisioterapia · Objetivo: responder una duda real de pacientes',
     sampleScriptHook: 'Gancho (0–3 s): «Si te truena la mandíbula al despertar, no lo dejes pasar como algo normal.»',

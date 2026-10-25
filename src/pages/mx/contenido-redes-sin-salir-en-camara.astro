@@ -1,0 +1,8 @@
+---
+import IntentLandingPage from '@/components/IntentLandingPage.astro';
+import { getIntent } from '@/content/intents';
+
+const intent = getIntent('mx', 'sin-camara')!;
+---
+
+<IntentLandingPage intent={intent} />

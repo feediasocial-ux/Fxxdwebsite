@@ -5,6 +5,7 @@
  * - Verifica también que la regla anti-doorway de ciudades se respete.
  */
 import { ALL_NICHES, type NicheLandingData } from '../src/content/niches/index.ts';
+import { ALL_INTENTS, type IntentLandingData } from '../src/content/intents/index.ts';
 import { CITY_LANDINGS, CITY_LANDINGS_ENABLED } from '../src/content/cities.ts';
 
 const MAX_SIMILARITY = 0.4; // 40 % máximo permitido
@@ -33,6 +34,27 @@ function extractCorpus(n: NicheLandingData): string {
   return parts.join(' ');
 }
 
+function extractIntentCorpus(i: IntentLandingData): string {
+  const parts: string[] = [
+    i.metaTitle,
+    i.metaDescription,
+    i.h1,
+    i.intro,
+    i.comparisonTable.title,
+    i.comparisonTable.subtitle,
+    ...i.comparisonTable.headers,
+    ...i.comparisonTable.rows.flatMap((r) => [r.label, r.col1, r.col2, r.col3]),
+    i.pillarsTitle,
+    ...i.pillars.flatMap((p) => [p.badge, p.title, p.text, ...p.bullets]),
+    i.whenToChooseTitle,
+    ...i.whenToChoose.flatMap((w) => [w.profile, w.recommendation, w.honestVerdict]),
+    i.faqTitle,
+    ...i.faqs.flatMap((f) => [f.q, f.a]),
+    i.waMessage,
+  ];
+  return parts.join(' ');
+}
+
 function tokenize(text: string): string[] {
   return text
     .toLowerCase()
@@ -52,8 +74,8 @@ function buildShingles(words: string[], k = 3): Set<string> {
 }
 
 /**
- * Calcula tanto el coeficiente de solapamiento (containment: intersección / min(A, B))
- * como Jaccard sobre 3-gramas de palabras significativas, y toma el máximo (más estricto).
+ * Calcula el coeficiente de solapamiento (containment: intersección / min(A, B))
+ * sobre 3-gramas de palabras significativas.
  */
 function similarity(a: Set<string>, b: Set<string>): number {
   if (a.size === 0 || b.size === 0) return 0;
@@ -66,10 +88,14 @@ function similarity(a: Set<string>, b: Set<string>): number {
 }
 
 let errors = 0;
-console.log('--- Validación de landings de nicho (campos obligatorios + similitud <= 40 %) ---');
+console.log('--- Validación de landings de nicho e intención (campos obligatorios + similitud <= 40 %) ---');
 
 if (ALL_NICHES.length < 8) {
-  console.error(`❌ Se esperaban al menos 8 landings (4 nichos × 2 países), encontradas: ${ALL_NICHES.length}`);
+  console.error(`❌ Se esperaban al menos 8 landings de nicho (4 nichos × 2 países), encontradas: ${ALL_NICHES.length}`);
+  errors++;
+}
+if (ALL_INTENTS.length < 6) {
+  console.error(`❌ Se esperaban al menos 6 landings de intención (3 × 2 países), encontradas: ${ALL_INTENTS.length}`);
   errors++;
 }
 
@@ -105,10 +131,36 @@ for (const n of ALL_NICHES) {
   }
 }
 
-const shingleMap = ALL_NICHES.map((n) => ({
-  label: `${n.country}/${n.slug}`,
-  shingles: buildShingles(tokenize(extractCorpus(n)), 3),
-}));
+for (const intent of ALL_INTENTS) {
+  const label = `${intent.country}/${intent.slug}`;
+  if (!intent.h1 || !intent.intro || !intent.waMessage || !intent.metaTitle || !intent.metaDescription) {
+    console.error(`❌ [${label}] Faltan campos base obligatorios`);
+    errors++;
+  }
+  if (!intent.comparisonTable || intent.comparisonTable.rows.length < 3) {
+    console.error(`❌ [${label}] Debe incluir tabla comparativa con al menos 3 filas`);
+    errors++;
+  }
+  if (!intent.pillars || intent.pillars.length !== 3) {
+    console.error(`❌ [${label}] Debe incluir 3 pilares de análisis`);
+    errors++;
+  }
+  if (!intent.faqs || intent.faqs.length < 5) {
+    console.error(`❌ [${label}] Debe tener al menos 5 FAQs propias`);
+    errors++;
+  }
+}
+
+const shingleMap = [
+  ...ALL_NICHES.map((n) => ({
+    label: `${n.country}/${n.slug}`,
+    shingles: buildShingles(tokenize(extractCorpus(n)), 3),
+  })),
+  ...ALL_INTENTS.map((i) => ({
+    label: `${i.country}/${i.slug}`,
+    shingles: buildShingles(tokenize(extractIntentCorpus(i)), 3),
+  })),
+];
 
 let maxObserved = 0;
 let maxPair = '';
@@ -125,11 +177,11 @@ for (let i = 0; i < shingleMap.length; i++) {
     if (sim > MAX_SIMILARITY) {
       console.error(`❌ Similitud excesiva (${(sim * 100).toFixed(1)} % > 40 %): ${A.label} ↔ ${B.label}`);
       errors++;
-    } else {
-      console.log(`✅ ${A.label} ↔ ${B.label}: ${(sim * 100).toFixed(1)} % de solapamiento (máx 40 %)`);
     }
   }
 }
+
+console.log(`✅ Verificadas ${shingleMap.length} landings (${(shingleMap.length * (shingleMap.length - 1)) / 2} pares comparados).`);
 
 // Regla anti-doorway de ciudades
 if (CITY_LANDINGS_ENABLED) {
@@ -149,4 +201,4 @@ if (errors > 0) {
   console.error(`\n❌ Fallaron ${errors} validaciones en check-similarity.ts`);
   process.exit(1);
 }
-console.log('✅ Todas las landings de nicho cumplen campos obligatorios y < 40 % de similitud.');
+console.log('✅ Todas las landings de nicho e intención cumplen campos obligatorios y < 40 % de similitud.');

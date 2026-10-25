@@ -1,0 +1,8 @@
+---
+import LegalPage from '@/components/LegalPage.astro';
+import { getPhase4 } from '@/content';
+
+const copy = getPhase4('mx').legales.avisoLegal;
+---
+
+<LegalPage country="mx" routeKey="avisoLegal" copy={copy} />

@@ -1,0 +1,135 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Card from '@/components/Card.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import { getPhase4, getUi } from '@/content';
+import { getIntentsByCountry } from '@/content/intents';
+import { COUNTRIES, type CountryKey } from '@/lib/i18n';
+import { pathFor } from '@/lib/routes';
+import { breadcrumbJsonLd } from '@/lib/seo';
+
+interface Props {
+  country: CountryKey;
+}
+
+const { country } = Astro.props;
+const ui = getUi(country);
+const copy = getPhase4(country).blog;
+const intents = getIntentsByCountry(country);
+const path = pathFor('blog', country)!;
+const crumbs = [
+  { name: ui.countryName, path: COUNTRIES[country].basePath },
+  { name: 'Blog y recursos', path },
+];
+---
+
+<BaseLayout
+  pageId="blog"
+  jsonLdNodes={[breadcrumbJsonLd(crumbs)]}
+  seo={{
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    path,
+    routeKey: 'blog',
+    country,
+  }}
+>
+  <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
+
+  <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
+    <div class="max-w-3xl space-y-5">
+      <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
+        {copy.eyebrow}
+      </p>
+      <h1 class="text-display-hero">{copy.h1}</h1>
+      <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
+    </div>
+
+    <div class="mt-10 rounded-[28px] border-2 border-ink bg-cream-deep p-6 md:p-8">
+      <h2 class="text-2xl md:text-3xl">{copy.editorialPromiseTitle}</h2>
+      <p class="mt-2 text-ink-soft">{copy.editorialPromiseText}</p>
+      <ul class="mt-4 grid gap-3 md:grid-cols-3">
+        {
+          copy.editorialRules.map((rule) => (
+            <li class="flex gap-2 rounded-2xl border border-ink bg-cream p-3.5 text-sm font-bold">
+              <span class="text-coral-deep" aria-hidden="true">✓</span>
+              <span>{rule}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
+
+  <!-- Guías completas ya publicadas (landings de intención comercial y comparativa) -->
+  <section class="container-site py-16 md:py-24">
+    <div class="max-w-3xl space-y-2">
+      <h2 class="text-display-lg">{copy.guidesSectionTitle}</h2>
+      <p class="text-lg text-ink-soft">{copy.guidesSectionSubtitle}</p>
+    </div>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        intents.map((item, idx) => (
+          <Card color={idx === 0 ? 'lemon' : idx === 1 ? 'sky' : 'cream-deep'} bordered class="flex flex-col gap-4">
+            <span class="inline-block w-fit rounded-pill border border-ink bg-cream px-3 py-0.5 text-xs font-bold uppercase">
+              {item.eyebrow}
+            </span>
+            <h3 class="text-2xl">{item.shortTitle}</h3>
+            <p class="text-sm text-ink-soft">{item.cardSummary}</p>
+            <a
+              href={pathFor(item.routeKey, country)!}
+              class="mt-auto inline-flex items-center gap-2 pt-2 font-bold text-ink underline underline-offset-4"
+            >
+              Leer guía completa →
+            </a>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Próximos artículos en preparación (sin publicar páginas vacías) -->
+  <section class="theme-dark py-16 md:py-24">
+    <div class="container-site space-y-8">
+      <div class="max-w-3xl space-y-3">
+        <span class="inline-block rounded-pill border border-cream bg-maroon px-3 py-1 text-xs font-bold uppercase text-lemon">
+          {copy.upcomingBadge}
+        </span>
+        <h2 class="text-display-lg text-cream">{copy.upcomingTitle}</h2>
+        <p class="text-lg text-cream/85">{copy.upcomingText}</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          copy.upcomingTopics.map((topic) => (
+            <div class="rounded-[28px] border-2 border-dashed border-cream/60 bg-ink p-6 text-cream space-y-3">
+              <span class="inline-block rounded-pill bg-lemon px-3 py-0.5 text-xs font-bold uppercase text-ink">
+                {topic.category}
+              </span>
+              <h3 class="text-2xl text-cream">{topic.title}</h3>
+              <p class="text-sm text-cream/80">{topic.summary}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="pt-4">
+        <WhatsAppButton
+          message={copy.waMessage}
+          label={copy.waCta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page="blog"
+          placement="bottom"
+          variant="lemon"
+          size="lg"
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

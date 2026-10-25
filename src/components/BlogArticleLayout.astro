@@ -1,0 +1,123 @@
+---
+/**
+ * Plantilla reutilizable para artículos del blog (con JSON-LD Article + FAQPage + BreadcrumbList).
+ * Lista para renderizar cualquier entrada BlogArticleData cuando se publiquen los artículos.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FAQ from '@/components/FAQ.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import { getUi } from '@/content';
+import type { BlogArticleData } from '@/content/phase4-types';
+import { COUNTRIES } from '@/lib/i18n';
+import { linkTo, pathFor } from '@/lib/routes';
+import { articleJsonLd, breadcrumbJsonLd, faqPageJsonLd } from '@/lib/seo';
+
+interface Props {
+  article: BlogArticleData;
+}
+
+const { article } = Astro.props;
+const { country } = article;
+const ui = getUi(country);
+const path = `${COUNTRIES[country].basePath}blog/${article.slug}/`;
+const crumbs = [
+  { name: ui.countryName, path: COUNTRIES[country].basePath },
+  { name: 'Blog', path: linkTo('blog', country) },
+  { name: article.title, path },
+];
+---
+
+<BaseLayout
+  pageId={`blog-${article.slug}`}
+  jsonLdNodes={[
+    breadcrumbJsonLd(crumbs),
+    articleJsonLd({
+      headline: article.title,
+      description: article.description,
+      path,
+      datePublished: article.pubDate,
+      dateModified: article.updatedDate,
+      authorName: article.author,
+      country,
+    }),
+    ...(article.faqs.length ? [faqPageJsonLd(article.faqs)] : []),
+  ]}
+  seo={{
+    title: article.title,
+    description: article.description,
+    path,
+    country,
+  }}
+>
+  <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
+
+  <article class="container-site py-10 md:py-16">
+    <header class="mx-auto max-w-3xl space-y-4">
+      <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-xs font-bold uppercase">
+        {article.intent} · {article.readingTime}
+      </p>
+      <h1 class="text-display-hero">{article.title}</h1>
+      <p class="text-sm text-ink-soft">
+        Por <strong>{article.author}</strong> · Publicado el {article.pubDate}
+      </p>
+      <p class="rounded-2xl border-2 border-ink bg-cream-deep p-5 text-lg font-medium">
+        {article.intro}
+      </p>
+    </header>
+
+    <div class="mx-auto mt-10 max-w-3xl space-y-10">
+      {
+        article.sections.map((sec) => (
+          <section class="space-y-4">
+            <h2 class="text-display-md">{sec.heading}</h2>
+            {sec.paragraphs.map((p) => (
+              <p class="text-ink-soft">{p}</p>
+            ))}
+            {sec.bullets && (
+              <ul class="space-y-2 pl-4">
+                {sec.bullets.map((b) => (
+                  <li class="list-disc">{b}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))
+      }
+    </div>
+
+    {
+      article.faqs.length > 0 && (
+        <section class="mx-auto mt-14 max-w-3xl space-y-6">
+          <h2 class="text-display-md">Preguntas frecuentes</h2>
+          <FAQ items={article.faqs} />
+        </section>
+      )
+    }
+
+    <footer class="mx-auto mt-14 max-w-3xl rounded-[28px] border-2 border-ink bg-maroon p-6 text-cream md:p-8 space-y-4">
+      <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
+      <p class="text-cream/85">{ui.finalCta.subtitle}</p>
+      <WhatsAppButton
+        message={article.waMessage}
+        label={article.waCta}
+        a11yLabel={ui.a11y.openWhatsApp}
+        country={country}
+        page={`blog-${article.slug}`}
+        placement="article-footer"
+        variant="lemon"
+      />
+      {
+        article.relatedRoutes.length > 0 && (
+          <div class="flex flex-wrap gap-3 pt-2 text-sm">
+            {article.relatedRoutes.map((r) => (
+              <a href={pathFor(r, country) || linkTo(r, country)} class="underline text-lemon">
+                {pathFor(r, country)}
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </footer>
+  </article>
+</BaseLayout>

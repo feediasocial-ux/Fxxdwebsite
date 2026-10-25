@@ -1,0 +1,269 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Card from '@/components/Card.astro';
+import Button from '@/components/Button.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import PackageCard from '@/components/PackageCard.astro';
+import FAQ from '@/components/FAQ.astro';
+import Photo from '@/components/Photo.astro';
+import AuditForm from '@/components/AuditForm.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import { getUi } from '@/content';
+import { PACKAGES } from '@/content/pricing';
+import { getIntentsByCountry, type IntentLandingData } from '@/content/intents';
+import { COUNTRIES } from '@/lib/i18n';
+import { linkTo, pathFor } from '@/lib/routes';
+import { breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd } from '@/lib/seo';
+
+import sinCamara from '@/assets/photos/sin-camara.jpg';
+import proceso02 from '@/assets/photos/proceso-02-guiones-calendario.jpg';
+import serviciosIa from '@/assets/photos/servicios-ia-graficos.jpg';
+
+interface Props {
+  intent: IntentLandingData;
+}
+
+const { intent } = Astro.props;
+const { country } = intent;
+const ui = getUi(country);
+const path = pathFor(intent.routeKey, country)!;
+const pageId = `intencion-${intent.id}`;
+const heroImg = intent.id === 'sin-camara' ? sinCamara : intent.id === 'precio' ? proceso02 : serviciosIa;
+const otherIntents = getIntentsByCountry(country).filter((i) => i.id !== intent.id);
+
+const crumbs = [
+  { name: ui.countryName, path: COUNTRIES[country].basePath },
+  { name: 'Recursos', path: linkTo('blog', country) },
+  { name: intent.shortTitle, path },
+];
+---
+
+<BaseLayout
+  pageId={pageId}
+  jsonLdNodes={[
+    breadcrumbJsonLd(crumbs),
+    ...serviceJsonLd({
+      name: intent.h1,
+      description: intent.metaDescription,
+      path,
+      country,
+      serviceType: 'Social Media Content Management',
+    }),
+    faqPageJsonLd(intent.faqs),
+  ]}
+  seo={{
+    title: intent.metaTitle,
+    description: intent.metaDescription,
+    path,
+    routeKey: intent.routeKey,
+    country,
+  }}
+>
+  <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
+
+  <!-- Hero con respuesta directa en las primeras 100 palabras -->
+  <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
+    <div class="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
+      <div class="space-y-5">
+        <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1.5 text-sm font-bold uppercase">
+          {intent.eyebrow}
+        </p>
+        <h1 class="text-display-hero">{intent.h1}</h1>
+        <p class="text-lg text-ink-soft md:text-xl">{intent.intro}</p>
+        {
+          intent.pendingNote && (
+            <p class="inline-block rounded-xl border-2 border-dashed border-ink bg-cream-deep px-3 py-1.5 text-xs font-bold">
+              {intent.pendingNote}
+            </p>
+          )
+        }
+        <div class="flex flex-col gap-3 pt-2 sm:flex-row">
+          <WhatsAppButton
+            message={intent.waMessage}
+            label={intent.waCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page={pageId}
+            placement="hero"
+            size="lg"
+          />
+          <Button href="#paquetes" variant="outline" size="lg">
+            {ui.hero.ctaSecondary}
+          </Button>
+        </div>
+      </div>
+
+      <div class="mx-auto w-full max-w-md lg:max-w-none">
+        <div class="overflow-hidden rounded-[32px] border-2 border-ink shadow-[10px_12px_0_0_var(--coral)]">
+          <Photo
+            src={heroImg}
+            alt={intent.shortTitle}
+            priority
+            aspect="4/3"
+            widths={[360, 540, 720]}
+            sizes="(min-width: 1024px) 42vw, 92vw"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
+
+  <!-- Tabla comparativa de mercado / opciones -->
+  <section class="container-site py-16 md:py-24">
+    <div class="max-w-3xl space-y-3">
+      <h2 class="text-display-lg">{intent.comparisonTable.title}</h2>
+      <p class="text-lg text-ink-soft">{intent.comparisonTable.subtitle}</p>
+    </div>
+
+    <div class="mt-8 overflow-x-auto rounded-[28px] border-2 border-ink bg-cream-deep">
+      <table class="w-full min-w-[680px] border-collapse text-left text-sm md:text-base">
+        <thead>
+          <tr class="border-b-2 border-ink bg-ink text-cream">
+            {
+              intent.comparisonTable.headers.map((h, i) => (
+                <th class:list={['p-4 font-display text-lg uppercase tracking-wide', i === 3 && 'text-lemon']}>
+                  {h}
+                </th>
+              ))
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {
+            intent.comparisonTable.rows.map((row, idx) => (
+              <tr class:list={['border-b border-ink/20 align-top', idx % 2 === 0 ? 'bg-cream' : 'bg-cream-deep']}>
+                <th scope="row" class="p-4 font-bold">{row.label}</th>
+                <td class="p-4">{row.col1}</td>
+                <td class="p-4">{row.col2}</td>
+                <td class="p-4 font-medium">{row.col3}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3 pilares de análisis -->
+  <section class="theme-dark py-16 md:py-24">
+    <div class="container-site space-y-10">
+      <h2 class="text-display-lg text-cream">{intent.pillarsTitle}</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          intent.pillars.map((p) => (
+            <Card color={p.color} bordered class="flex flex-col gap-4">
+              <span class="inline-block w-fit rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
+                {p.badge}
+              </span>
+              <h3 class="text-2xl">{p.title}</h3>
+              <p class="text-sm md:text-base">{p.text}</p>
+              <ul class="mt-auto space-y-2 border-t border-ink/20 pt-3 text-sm font-medium">
+                {p.bullets.map((b) => (
+                  <li class="flex gap-2">
+                    <span class="font-bold" aria-hidden="true">✓</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Veredicto honesto: cuándo elegir cada opción -->
+  <section class="container-site py-16 md:py-24">
+    <h2 class="text-display-lg">{intent.whenToChooseTitle}</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        intent.whenToChoose.map((item, idx) => (
+          <Card color={idx === 1 ? 'lemon' : 'cream-deep'} bordered class="flex flex-col gap-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-coral-deep">Caso 0{idx + 1}</span>
+            <h3 class="text-2xl">{item.profile}</h3>
+            <p class="rounded-2xl border border-ink bg-cream p-3.5 text-sm font-bold">
+              Recomendación: {item.recommendation}
+            </p>
+            <p class="text-sm text-ink-soft">{item.honestVerdict}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Nuestros paquetes claros -->
+  <section id="paquetes" class="container-site pb-16 md:pb-24">
+    <div class="max-w-3xl space-y-4">
+      <h2 class="text-display-lg">{ui.pricing.title}</h2>
+      <p class="text-lg text-ink-soft">{ui.pricing.subtitle}</p>
+    </div>
+
+    <div class="mt-10 grid gap-8 md:grid-cols-3">
+      {PACKAGES.map((pkg) => <PackageCard pkg={pkg} country={country} page={pageId} />)}
+    </div>
+
+    <div class="mt-8 space-y-1 text-sm text-ink-soft">
+      <p>• {ui.pricing.adsNote}</p>
+      <p>• {ui.pricing.taxNote}</p>
+    </div>
+  </section>
+
+  <!-- FAQ con JSON-LD FAQPage -->
+  <section class="container-site py-16 md:py-20">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
+      <h2 class="text-display-lg">{intent.faqTitle}</h2>
+      <FAQ items={intent.faqs} />
+    </div>
+  </section>
+
+  <!-- Otras guías de decisión + enlaces internos -->
+  <section class="container-site pb-16">
+    <div class="rounded-[32px] border-2 border-ink bg-cream-deep p-6 md:p-8">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <h2 class="text-display-md">Otras guías prácticas para {ui.countryName}</h2>
+        <div class="flex flex-wrap gap-3">
+          <Button href={linkTo('servicios', country)} variant="outline">Ver servicios</Button>
+          <Button href={linkTo('comoTrabajamos', country)} variant="outline">Ver guiones de muestra</Button>
+        </div>
+      </div>
+      <div class="mt-6 grid gap-6 md:grid-cols-2">
+        {
+          otherIntents.map((other) => (
+            <a
+              href={pathFor(other.routeKey, country)!}
+              class="group flex flex-col gap-2 rounded-[24px] border-2 border-ink bg-cream p-6 text-ink no-underline transition-colors hover:bg-lemon"
+            >
+              <span class="text-xs font-bold uppercase text-coral-deep">{other.eyebrow}</span>
+              <span class="font-display text-2xl uppercase">{other.shortTitle}</span>
+              <span class="text-sm text-ink-soft">{other.cardSummary}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="container-site pb-20">
+    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream md:p-10 lg:grid-cols-[1fr_1.15fr]">
+      <div class="space-y-5">
+        <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
+        <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
+        <WhatsAppButton
+          message={intent.waMessage}
+          label={intent.waCta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page={pageId}
+          placement="final-cta"
+          variant="lemon"
+          size="lg"
+        />
+      </div>
+      <AuditForm country={country} page={pageId} />
+    </div>
+  </section>
+</BaseLayout>

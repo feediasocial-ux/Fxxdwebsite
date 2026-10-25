@@ -1,0 +1,89 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { getUi } from '@/content';
+import type { LegalPageCopy } from '@/content/phase4-types';
+import { COUNTRIES, type CountryKey } from '@/lib/i18n';
+import { pathFor, type RouteKey } from '@/lib/routes';
+import { breadcrumbJsonLd } from '@/lib/seo';
+
+interface Props {
+  country: CountryKey;
+  routeKey: Extract<RouteKey, 'avisoLegal' | 'privacidad' | 'cookies'>;
+  copy: LegalPageCopy;
+}
+
+const { country, routeKey, copy } = Astro.props;
+const ui = getUi(country);
+const path = pathFor(routeKey, country)!;
+const crumbs = [
+  { name: ui.countryName, path: COUNTRIES[country].basePath },
+  { name: copy.h1, path },
+];
+---
+
+<BaseLayout
+  pageId={`legal-${routeKey}`}
+  jsonLdNodes={[breadcrumbJsonLd(crumbs)]}
+  seo={{
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    path,
+    routeKey,
+    country,
+  }}
+>
+  <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
+
+  <article class="container-site py-10 md:py-16">
+    <div class="mx-auto max-w-3xl space-y-6">
+      <p class="inline-block rounded-pill border-2 border-ink bg-cream-deep px-4 py-1 text-xs font-bold uppercase">
+        {copy.eyebrow} · Actualizado: {copy.lastUpdated}
+      </p>
+      <h1 class="text-display-hero">{copy.h1}</h1>
+
+      <div class="rounded-2xl border-2 border-dashed border-ink bg-lemon/60 p-4 text-xs font-bold">
+        {copy.pendingNotice}
+      </div>
+
+      <p class="text-lg text-ink-soft">{copy.intro}</p>
+
+      {
+        copy.showCookieReopen && copy.cookieReopenCta && (
+          <div class="pt-2">
+            <button
+              type="button"
+              data-cookie-reopen
+              class="inline-flex min-h-12 cursor-pointer items-center justify-center rounded-pill border-2 border-ink bg-coral px-6 font-bold text-ink shadow-[0_4px_0_0_var(--ink)] hover:bg-lemon"
+            >
+              {copy.cookieReopenCta}
+            </button>
+          </div>
+        )
+      }
+
+      <div class="space-y-8 pt-4">
+        {
+          copy.sections.map((sec) => (
+            <section class="rounded-[24px] border-2 border-ink bg-cream-deep p-6 space-y-3">
+              <h2 class="text-2xl">{sec.heading}</h2>
+              {sec.paragraphs.map((p) => (
+                <p class="text-sm text-ink-soft md:text-base">{p}</p>
+              ))}
+              {sec.bullets && (
+                <ul class="space-y-2 pt-1 text-sm md:text-base">
+                  {sec.bullets.map((b) => (
+                    <li class="flex gap-2">
+                      <span class="font-bold text-coral-deep" aria-hidden="true">•</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </article>
+</BaseLayout>

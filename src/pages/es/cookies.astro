@@ -1,0 +1,8 @@
+---
+import LegalPage from '@/components/LegalPage.astro';
+import { getPhase4 } from '@/content';
+
+const copy = getPhase4('es').legales.cookies;
+---
+
+<LegalPage country="es" routeKey="cookies" copy={copy} />

@@ -150,6 +150,32 @@ export function faqPageJsonLd(faqs: { q: string; a: string }[]) {
   };
 }
 
+export function articleJsonLd(opts: {
+  headline: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  dateModified?: string;
+  authorName: string;
+  country: CountryKey;
+}) {
+  return {
+    '@type': 'Article',
+    '@id': abs(`${opts.path}#article`),
+    headline: opts.headline,
+    description: opts.description,
+    url: abs(opts.path),
+    inLanguage: COUNTRIES[opts.country].hreflang,
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified || opts.datePublished,
+    author: {
+      '@type': 'Person',
+      name: opts.authorName,
+    },
+    publisher: { '@id': abs('/#organization') },
+  };
+}
+
 /** Une nodos en un único @graph. */
 export function graph(...nodes: object[]) {
   return { '@context': 'https://schema.org', '@graph': nodes };

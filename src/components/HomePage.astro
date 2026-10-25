@@ -214,15 +214,20 @@ const path = COUNTRIES[country].basePath;
       <div class="space-y-4">
         <h3 class="text-3xl md:text-4xl">{ui.pricing.planBTitle}</h3>
         <p class="text-ink-soft">{ui.pricing.planBText}</p>
-        <WhatsAppButton
-          message={ui.pricing.planBWaMessage}
-          label={ui.pricing.planBCta}
-          a11yLabel={ui.a11y.openWhatsApp}
-          country={country}
-          page="home"
-          placement="plan-b"
-          variant="dark"
-        />
+        <div class="flex flex-wrap gap-3">
+          <WhatsAppButton
+            message={ui.pricing.planBWaMessage}
+            label={ui.pricing.planBCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page="home"
+            placement="plan-b"
+            variant="dark"
+          />
+          <Button href={linkTo('intencionSinCamara', country)} variant="outline">
+            {ui.pricing.planBGuideCta}
+          </Button>
+        </div>
       </div>
       <div class="overflow-hidden rounded-[24px] border-2 border-ink">
         <Photo src={sinCamara} alt={ui.pricing.planBTitle} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 38vw, 90vw" />
@@ -232,15 +237,20 @@ const path = COUNTRIES[country].basePath;
 
   <!-- 8. Prueba: ejemplos reales de guiones y calendarios propios -->
   <section class="container-site py-16 md:py-24">
-    <div class="max-w-3xl space-y-4">
-      <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase">
-        {ui.proofSection.eyebrow}
-      </p>
-      <h2 class="text-display-lg">{ui.proofSection.title}</h2>
-      <p class="text-lg text-ink-soft">{ui.proofSection.subtitle}</p>
-      <p class="inline-block rounded-xl border-2 border-dashed border-ink bg-cream-deep px-3 py-1.5 text-xs font-bold">
-        {ui.proofSection.pendingBadge}
-      </p>
+    <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+      <div class="max-w-3xl space-y-4">
+        <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase">
+          {ui.proofSection.eyebrow}
+        </p>
+        <h2 class="text-display-lg">{ui.proofSection.title}</h2>
+        <p class="text-lg text-ink-soft">{ui.proofSection.subtitle}</p>
+        <p class="inline-block rounded-xl border-2 border-dashed border-ink bg-cream-deep px-3 py-1.5 text-xs font-bold">
+          {ui.proofSection.pendingBadge}
+        </p>
+      </div>
+      <Button href={linkTo('comoTrabajamos', country)} variant="outline">
+        {ui.proofSection.ctaMore}
+      </Button>
     </div>
 
     <div class="mt-10 grid gap-8 lg:grid-cols-2">
