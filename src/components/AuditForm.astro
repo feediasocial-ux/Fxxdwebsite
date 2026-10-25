@@ -1,0 +1,139 @@
+---
+/**
+ * Formulario corto de mini-auditoría gratuita (conversión secundaria).
+ * - Campos: nombre, Instagram, WhatsApp, país.
+ * - Antispam: honeypot invisible (`website`).
+ * - Conserva parámetros UTM hasta el contacto.
+ * - Envía por fetch a PUBLIC_FORM_ENDPOINT (Formspree/Web3Forms) si está configurado y dispara `form_submit`.
+ * - Incluye botón de envío rápido a WhatsApp con los datos ya rellenados.
+ */
+import Button from './Button.astro';
+import { getUi } from '@/content';
+import { COUNTRIES, type CountryKey } from '@/lib/i18n';
+
+interface Props {
+  country: CountryKey;
+  page: string;
+}
+
+const { country, page } = Astro.props;
+const ui = getUi(country).auditForm;
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || '';
+const waNumber = (
+  country === 'es'
+    ? import.meta.env.PUBLIC_WA_NUMBER_ES || import.meta.env.PUBLIC_WA_NUMBER_MX || '525534402921'
+    : import.meta.env.PUBLIC_WA_NUMBER_MX || '525534402921'
+).replace(/\D/g, '');
+---
+
+<div
+  class="audit-form-box rounded-[32px] border-2 border-ink bg-cream p-6 text-ink shadow-[0_6px_0_0_var(--ink)] md:p-8"
+  data-audit-form-wrapper
+  data-endpoint={endpoint}
+  data-wa-number={waNumber}
+  data-page={page}
+  data-country={country}
+>
+  <h3 class="text-2xl md:text-3xl">{ui.title}</h3>
+  <p class="mt-2 text-sm text-ink-soft md:text-base">{ui.subtitle}</p>
+
+  <form class="mt-6 space-y-4" data-audit-form novalidate={false}>
+    <!-- Honeypot antispam -->
+    <div class="sr-only" aria-hidden="true">
+      <label>
+        {ui.honeypotLabel}
+        <input type="text" name="website" tabindex="-1" autocomplete="off" />
+      </label>
+    </div>
+
+    <input type="hidden" name="origin_page" value={page} />
+    <input type="hidden" name="origin_country" value={country} />
+    <input type="hidden" name="utm_data" value="" data-utm-input />
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label class="block text-sm font-bold" for={`audit-name-${page}`}>
+          {ui.nameLabel} *
+        </label>
+        <input
+          id={`audit-name-${page}`}
+          name="name"
+          type="text"
+          required
+          autocomplete="name"
+          placeholder={ui.namePlaceholder}
+          class="mt-1.5 w-full rounded-2xl border-2 border-ink bg-cream-deep px-4 py-3 text-base text-ink placeholder:text-ink-soft/60"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-bold" for={`audit-ig-${page}`}>
+          {ui.igLabel} *
+        </label>
+        <input
+          id={`audit-ig-${page}`}
+          name="instagram"
+          type="text"
+          required
+          placeholder={ui.igPlaceholder}
+          class="mt-1.5 w-full rounded-2xl border-2 border-ink bg-cream-deep px-4 py-3 text-base text-ink placeholder:text-ink-soft/60"
+        />
+      </div>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label class="block text-sm font-bold" for={`audit-wa-${page}`}>
+          {ui.waLabel} *
+        </label>
+        <input
+          id={`audit-wa-${page}`}
+          name="whatsapp"
+          type="tel"
+          required
+          autocomplete="tel"
+          placeholder={ui.waPlaceholder}
+          class="mt-1.5 w-full rounded-2xl border-2 border-ink bg-cream-deep px-4 py-3 text-base text-ink placeholder:text-ink-soft/60"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-bold" for={`audit-country-${page}`}>
+          {ui.countryLabel} *
+        </label>
+        <select
+          id={`audit-country-${page}`}
+          name="country"
+          required
+          class="mt-1.5 w-full rounded-2xl border-2 border-ink bg-cream-deep px-4 py-3 text-base font-bold text-ink"
+        >
+          <option value="es" selected={country === 'es'}>{COUNTRIES.es.flag} {ui.countryOptions.es}</option>
+          <option value="mx" selected={country === 'mx'}>{COUNTRIES.mx.flag} {ui.countryOptions.mx}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="pt-2">
+      <Button type="submit" variant="primary" size="lg" class="w-full" data-submit-btn data-submitting-label={ui.submittingLabel}>
+        {ui.submitLabel}
+      </Button>
+    </div>
+
+    <p class="text-center text-xs text-ink-soft">{ui.privacyNote}</p>
+  </form>
+
+  <!-- Mensaje de éxito tras envío -->
+  <div hidden data-audit-success class="mt-6 space-y-4 rounded-[24px] border-2 border-ink bg-lemon p-6 text-ink">
+    <p class="font-display text-2xl uppercase">{ui.successTitle}</p>
+    <p class="text-sm">{ui.successText}</p>
+    <a
+      href="#"
+      target="_blank"
+      rel="noopener"
+      data-audit-wa-fallback
+      class="inline-flex min-h-12 items-center justify-center gap-2 rounded-pill border-2 border-ink bg-ink px-6 font-bold text-cream no-underline"
+    >
+      {ui.fallbackWaCta}
+    </a>
+  </div>
+</div>

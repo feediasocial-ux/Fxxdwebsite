@@ -1,0 +1,96 @@
+---
+/**
+ * Banner de cookies por categorías (GDPR /es/ + normativa mexicana /mx/).
+ * - Cero tracking no esencial antes del consentimiento (Consent Mode v2 default denied).
+ * - Actualiza --cookie-offset en :root para que el botón flotante de WhatsApp no quede tapado.
+ */
+import { getUi } from '@/content';
+import type { CountryKey } from '@/lib/i18n';
+
+interface Props {
+  country: CountryKey;
+}
+const { country } = Astro.props;
+const copy = getUi(country).cookieBanner;
+---
+
+<aside
+  id="cookie-banner"
+  hidden
+  aria-label={copy.title}
+  class="fixed inset-x-0 bottom-0 z-50 p-3 md:p-5"
+>
+  <div class="container-site">
+    <div class="rounded-[28px] border-2 border-ink bg-cream p-5 text-ink shadow-[0_8px_28px_rgb(27_27_31/0.28)] md:p-6">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div class="max-w-3xl space-y-1.5">
+          <p class="font-display text-2xl uppercase">{copy.title}</p>
+          <p class="text-sm text-ink-soft">{copy.text}</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+          <button
+            type="button"
+            data-cookie-accept-all
+            class="min-h-11 rounded-pill border-2 border-ink bg-coral px-5 text-sm font-bold text-ink shadow-[0_3px_0_0_var(--ink)] hover:bg-lemon"
+          >
+            {copy.acceptAll}
+          </button>
+          <button
+            type="button"
+            data-cookie-reject
+            class="min-h-11 rounded-pill border-2 border-ink bg-cream-deep px-4 text-sm font-bold text-ink hover:bg-lemon"
+          >
+            {copy.rejectOptional}
+          </button>
+          <button
+            type="button"
+            data-cookie-toggle-config
+            class="min-h-11 rounded-pill border-2 border-ink bg-transparent px-4 text-sm font-bold text-ink underline underline-offset-4"
+          >
+            {copy.configure}
+          </button>
+        </div>
+      </div>
+
+      <!-- Panel de categorías -->
+      <div hidden data-cookie-config-panel class="mt-5 border-t-2 border-ink/20 pt-5">
+        <div class="grid gap-4 md:grid-cols-3">
+          <div class="rounded-2xl border-2 border-ink bg-cream-deep p-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-bold">{copy.categories.necessary.title}</span>
+              <span class="rounded-pill bg-ink px-2.5 py-0.5 text-xs font-bold text-cream">{copy.categories.necessary.badge}</span>
+            </div>
+            <p class="mt-1.5 text-xs text-ink-soft">{copy.categories.necessary.desc}</p>
+          </div>
+
+          <label class="flex cursor-pointer flex-col justify-between rounded-2xl border-2 border-ink bg-cream-deep p-4">
+            <span class="flex items-center justify-between gap-2">
+              <span class="font-bold">{copy.categories.analytics.title}</span>
+              <input type="checkbox" data-cookie-cat="analytics" class="size-5 accent-ink" />
+            </span>
+            <span class="mt-1.5 text-xs text-ink-soft">{copy.categories.analytics.desc}</span>
+          </label>
+
+          <label class="flex cursor-pointer flex-col justify-between rounded-2xl border-2 border-ink bg-cream-deep p-4">
+            <span class="flex items-center justify-between gap-2">
+              <span class="font-bold">{copy.categories.marketing.title}</span>
+              <input type="checkbox" data-cookie-cat="marketing" class="size-5 accent-ink" />
+            </span>
+            <span class="mt-1.5 text-xs text-ink-soft">{copy.categories.marketing.desc}</span>
+          </label>
+        </div>
+
+        <div class="mt-4 flex justify-end">
+          <button
+            type="button"
+            data-cookie-save
+            class="min-h-11 rounded-pill border-2 border-ink bg-ink px-6 text-sm font-bold text-cream hover:bg-maroon"
+          >
+            {copy.savePrefs}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>

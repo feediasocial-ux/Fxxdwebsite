@@ -1,0 +1,89 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Logo from '@/components/Logo.astro';
+import Sticker from '@/components/Sticker.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import { COUNTRIES, COUNTRY_KEYS } from '@/lib/i18n';
+import { rootCopy } from '@/content';
+---
+
+<BaseLayout
+  hideChrome
+  seo={{
+    title: rootCopy.title,
+    description: rootCopy.description,
+    path: '/',
+    routeKey: 'home',
+    xDefault: true,
+  }}
+>
+  <div class="flex min-h-dvh flex-col justify-between">
+    <header class="container-site flex items-center justify-between py-6">
+      <Logo href="/" label="Feediasocial" />
+      <Sticker color="lemon" rotate={-5}>100 % remoto</Sticker>
+    </header>
+
+    <section class="container-site my-auto py-10">
+      <div class="mx-auto max-w-3xl text-center">
+        <h1 class="text-display-xl">{rootCopy.h1}</h1>
+        <p class="mx-auto mt-4 max-w-xl text-lg text-ink-soft md:text-xl">{rootCopy.intro}</p>
+      </div>
+
+      <div class="mx-auto mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
+        {
+          COUNTRY_KEYS.map((k) => {
+            const c = COUNTRIES[k];
+            const copy = rootCopy.countries[k];
+            return (
+              <a
+                href={c.basePath}
+                hreflang={c.hreflang}
+                lang={c.locale}
+                data-set-country={k}
+                data-country-card={k}
+                class="country-card group relative flex flex-col items-start gap-4 rounded-[32px] border-2 border-ink bg-cream-deep p-8 text-left no-underline shadow-[0_6px_0_0_var(--ink)] transition-transform hover:-translate-y-1 hover:bg-lemon"
+              >
+                <span
+                  data-country-badge={k}
+                  hidden
+                  class="rounded-pill border-2 border-ink bg-coral px-3 py-1 text-xs font-bold uppercase text-ink"
+                >
+                  {rootCopy.suggestion}
+                </span>
+                <span class="text-5xl" aria-hidden="true">{c.flag}</span>
+                <span class="font-display text-4xl uppercase leading-none text-ink">{copy.name}</span>
+                <span class="text-base text-ink-soft">{copy.detail}</span>
+                <span class="mt-2 inline-flex items-center gap-2 font-bold text-ink underline underline-offset-4">
+                  Entrar a {copy.name}
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </span>
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <p class="mt-8 text-center text-sm text-ink-soft">{rootCopy.note}</p>
+    </section>
+
+    <div>
+      <StripeBand colors={['var(--coral)', 'var(--cream)']} height="20px" />
+    </div>
+  </div>
+
+  <script is:inline>
+    // Lee la cookie propia SOLO para resaltar visualmente el país sugerido (cero redirecciones).
+    (function () {
+      var cookieName = document.body.getAttribute('data-cookie-name') || 'fs_country';
+      var m = document.cookie.match(new RegExp('(?:^|; )' + cookieName + '=([^;]*)'));
+      var saved = m ? decodeURIComponent(m[1]) : '';
+      if (saved !== 'es' && saved !== 'mx') return;
+      var badge = document.querySelector('[data-country-badge="' + saved + '"]');
+      var card = document.querySelector('[data-country-card="' + saved + '"]');
+      if (badge) badge.removeAttribute('hidden');
+      if (card) card.classList.add('bg-lemon');
+    })();
+  </script>
+</BaseLayout>

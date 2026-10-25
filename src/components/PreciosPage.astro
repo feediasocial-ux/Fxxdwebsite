@@ -1,0 +1,137 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import PackageCard from '@/components/PackageCard.astro';
+import Card from '@/components/Card.astro';
+import FAQ from '@/components/FAQ.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Photo from '@/components/Photo.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import { getCorePages, getUi } from '@/content';
+import { PACKAGES } from '@/content/pricing';
+import { COUNTRIES, type CountryKey } from '@/lib/i18n';
+import { pathFor } from '@/lib/routes';
+import { breadcrumbJsonLd } from '@/lib/seo';
+
+import sinCamara from '@/assets/photos/sin-camara.jpg';
+
+interface Props {
+  country: CountryKey;
+}
+const { country } = Astro.props;
+const ui = getUi(country);
+const copy = getCorePages(country).precios;
+const path = pathFor('precios', country)!;
+const crumbs = [
+  { name: ui.countryName, path: COUNTRIES[country].basePath },
+  { name: 'Precios', path },
+];
+---
+
+<BaseLayout
+  pageId="precios"
+  jsonLdNodes={[breadcrumbJsonLd(crumbs)]}
+  seo={{
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    path,
+    routeKey: 'precios',
+    country,
+  }}
+>
+  <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
+
+  <section id="paquetes" class="container-site pt-6 pb-16 md:pt-10 md:pb-24">
+    <div class="max-w-3xl space-y-4">
+      <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase">
+        {copy.eyebrow}
+      </p>
+      <h1 class="text-display-xl">{copy.h1}</h1>
+      <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
+    </div>
+
+    <div class="mt-12 grid gap-8 md:grid-cols-3">
+      {PACKAGES.map((pkg) => <PackageCard pkg={pkg} country={country} page="precios" headingLevel="h2" />)}
+    </div>
+
+    <div class="mt-8 space-y-1 text-sm text-ink-soft">
+      <p>• {ui.pricing.adsNote}</p>
+      <p>• {ui.pricing.taxNote}</p>
+    </div>
+  </section>
+
+  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
+
+  <!-- Tabla comparativa detallada (elemento único de la página) -->
+  <section class="container-site py-16 md:py-24">
+    <h2 class="text-display-lg">{copy.comparisonTitle}</h2>
+    <div class="mt-8 overflow-x-auto rounded-[28px] border-2 border-ink bg-cream-deep">
+      <table class="w-full min-w-[640px] border-collapse text-left text-sm md:text-base">
+        <thead>
+          <tr class="border-b-2 border-ink bg-ink text-cream">
+            <th class="p-4 font-display text-xl uppercase tracking-wide">Entregable mensual</th>
+            <th class="p-4 font-display text-xl uppercase tracking-wide">Esencial</th>
+            <th class="p-4 font-display text-xl uppercase tracking-wide text-lemon">Crecimiento</th>
+            <th class="p-4 font-display text-xl uppercase tracking-wide">Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            copy.comparisonRows.map((row, idx) => (
+              <tr class:list={['border-b border-ink/20', idx % 2 === 0 ? 'bg-cream' : 'bg-cream-deep']}>
+                <th scope="row" class="p-4 font-bold">{row.feature}</th>
+                <td class="p-4">{row.esencial}</td>
+                <td class="p-4 font-bold">{row.crecimiento}</td>
+                <td class="p-4">{row.pro}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Qué incluye siempre + Plan B sin cámara -->
+  <section class="theme-dark py-16 md:py-24">
+    <div class="container-site space-y-12">
+      <h2 class="text-display-lg text-cream">{copy.includedTitle}</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          copy.includedItems.map((it, i) => (
+            <Card color={i === 0 ? 'lemon' : i === 1 ? 'coral' : 'sky'} bordered class="space-y-3">
+              <h3 class="text-2xl">{it.title}</h3>
+              <p>{it.text}</p>
+            </Card>
+          ))
+        }
+      </div>
+
+      <div class="grid items-center gap-8 rounded-[32px] border-2 border-cream bg-maroon p-6 text-cream md:grid-cols-[1.3fr_1fr] md:p-10">
+        <div class="space-y-4">
+          <h2 class="text-display-md text-cream">{ui.pricing.planBTitle}</h2>
+          <p class="text-cream/85">{ui.pricing.planBText}</p>
+          <WhatsAppButton
+            message={ui.pricing.planBWaMessage}
+            label={ui.pricing.planBCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page="precios"
+            placement="plan-b"
+            variant="lemon"
+          />
+        </div>
+        <div class="overflow-hidden rounded-[24px] border-2 border-cream">
+          <Photo src={sinCamara} alt={ui.pricing.planBTitle} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 38vw, 90vw" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ de precios -->
+  <section class="container-site py-16 md:py-24">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
+      <h2 class="text-display-lg">{copy.faqTitle}</h2>
+      <FAQ items={copy.faqs} />
+    </div>
+  </section>
+</BaseLayout>

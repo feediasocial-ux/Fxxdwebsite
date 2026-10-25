@@ -1,0 +1,49 @@
+---
+/** Tarjeta redondeada (24–32 px) con color de marca y forma opcional. */
+type Color = 'cream' | 'cream-deep' | 'coral' | 'lemon' | 'sky' | 'maroon' | 'ink' | 'accent-1' | 'accent-2' | 'accent-3';
+type Shape = 'rounded' | 'pill' | 'arch' | 'cloud';
+
+interface Props {
+  color?: Color;
+  shape?: Shape;
+  as?: 'div' | 'article' | 'li' | 'section';
+  class?: string;
+  bordered?: boolean;
+}
+
+const { color = 'cream-deep', shape = 'rounded', as: Tag = 'div', class: cls = '', bordered = false } = Astro.props;
+
+const colors: Record<Color, string> = {
+  cream: 'bg-cream text-ink',
+  'cream-deep': 'bg-cream-deep text-ink',
+  coral: 'bg-coral text-ink',
+  lemon: 'bg-lemon text-ink',
+  sky: 'bg-sky text-ink',
+  maroon: 'bg-maroon text-cream',
+  ink: 'bg-ink text-cream',
+  'accent-1': 'bg-accent-1 text-ink',
+  'accent-2': 'bg-accent-2 text-ink',
+  'accent-3': 'bg-accent-3 text-ink',
+};
+const shapes: Record<Shape, string> = {
+  rounded: 'rounded-[28px]',
+  pill: 'rounded-[999px] px-8',
+  arch: 'rounded-t-[999px] rounded-b-[28px] pt-16',
+  cloud: 'card-cloud',
+};
+---
+
+<Tag class:list={['relative p-6 md:p-8', colors[color], shapes[shape], bordered && 'border-2 border-ink', cls]}>
+  <slot />
+</Tag>
+
+<style>
+  /* "Nube": radios asimétricos suaves, inspirada en formas orgánicas (no copia literal). */
+  .card-cloud {
+    border-radius: 56px 40px 64px 36px / 44px 60px 40px 56px;
+  }
+  /* En tema sobrio el acento 1 es burdeos: texto claro para mantener contraste. */
+  :global([data-theme='sober']) .bg-accent-1 {
+    color: var(--cream);
+  }
+</style>

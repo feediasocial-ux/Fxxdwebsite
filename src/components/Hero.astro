@@ -1,0 +1,73 @@
+---
+/**
+ * Hero: H1 + promesa + 2 CTA + foto (LCP) + hueco para cara de fundadores.
+ * La foto hero es una escena ilustrativa; los fundadores van en placeholder hasta tener foto real.
+ */
+import Button from './Button.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+import Sticker from './Sticker.astro';
+import Photo from './Photo.astro';
+import Placeholder from './Placeholder.astro';
+import type { ImageMetadata } from 'astro';
+import type { CountryKey } from '@/lib/i18n';
+import type { UiCopy } from '@/content/types';
+
+interface Props {
+  copy: UiCopy['hero'];
+  country: CountryKey;
+  page: string;
+  waMessage: string;
+  waA11y: string;
+  secondaryHref: string;
+  image: ImageMetadata;
+}
+const { copy, country, page, waMessage, waA11y, secondaryHref, image } = Astro.props;
+---
+
+<section class="hero relative overflow-hidden">
+  <div class="container-site grid items-center gap-10 pt-8 pb-14 md:pt-14 lg:grid-cols-[1.15fr_1fr] lg:gap-14 lg:pb-20">
+    <div class="relative z-10 flex flex-col gap-6">
+      <p class="inline-flex w-fit items-center gap-2 rounded-pill border-2 border-ink bg-sky px-4 py-1.5 text-sm font-bold">
+        <span class="size-2.5 rounded-full bg-coral" aria-hidden="true"></span>
+        {copy.eyebrow}
+      </p>
+      <h1 class="text-display-xl">
+        {copy.title}
+        <span class="hero__mark">{copy.titleHighlight}</span>
+      </h1>
+      <p class="max-w-xl text-lg md:text-xl">{copy.promise}</p>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <WhatsAppButton message={waMessage} label={copy.ctaPrimary} a11yLabel={waA11y} country={country} page={page} placement="hero" size="lg" />
+        <Button href={secondaryHref} variant="outline" size="lg">{copy.ctaSecondary}</Button>
+      </div>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+      <div class="hero__photo overflow-hidden rounded-[32px] border-2 border-ink">
+        <Photo src={image} alt={copy.photoAlt} priority aspect="4/5" widths={[360, 480, 640, 800]} sizes="(min-width: 1024px) 42vw, 92vw" />
+      </div>
+      <div class="absolute -bottom-6 -left-4 w-32 rotate-[-5deg] md:w-40">
+        <Placeholder label={copy.founderPlaceholder} aspect="1/1" tone="lemon" />
+      </div>
+      <Sticker color="coral" shape="circle" rotate={12} class="absolute -top-4 -right-2 md:-right-6">{copy.stickers[1]}</Sticker>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero__mark {
+    display: inline;
+    background: var(--lemon);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0 0.12em;
+    border-radius: 0.12em;
+  }
+  :global([data-theme='sober']) .hero__mark {
+    background: var(--cream-deep);
+    color: var(--maroon);
+  }
+  .hero__photo {
+    box-shadow: 10px 12px 0 0 var(--accent-1);
+  }
+</style>

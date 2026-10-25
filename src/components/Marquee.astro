@@ -1,0 +1,102 @@
+---
+/**
+ * Cinta ondulada con texto en bucle. Solo CSS.
+ * - Contenido duplicado con aria-hidden para el bucle; lectores de pantalla leen `label` una vez.
+ * - prefers-reduced-motion: se detiene. Hover/focus: se pausa.
+ */
+interface Props {
+  items: string[];
+  label: string;
+  tone?: 'ink' | 'coral' | 'lemon' | 'maroon';
+  tilt?: number;
+  speed?: number; // segundos por vuelta
+}
+const { items, label, tone = 'ink', tilt = -2, speed = 28 } = Astro.props;
+
+const tones = {
+  ink: { bg: 'var(--ink)', fg: 'var(--lemon)', dot: 'var(--coral)' },
+  coral: { bg: 'var(--coral)', fg: 'var(--ink)', dot: 'var(--cream)' },
+  lemon: { bg: 'var(--lemon)', fg: 'var(--ink)', dot: 'var(--coral)' },
+  maroon: { bg: 'var(--maroon)', fg: 'var(--cream)', dot: 'var(--lemon)' },
+}[tone];
+
+// Repetimos para que una "mitad" sea más ancha que cualquier pantalla.
+const run = Array.from({ length: 4 }, () => items).flat();
+---
+
+<div
+  class="marquee relative overflow-hidden py-5"
+  style={`--bg:${tones.bg};--fg:${tones.fg};--dot:${tones.dot};--tilt:${tilt}deg;--speed:${speed}s`}
+>
+  <p class="sr-only">{label}</p>
+  <div class="marquee__band" aria-hidden="true">
+    <div class="marquee__track">
+      {[0, 1].map(() => (
+        <ul class="marquee__group">
+          {run.map((t) => (
+            <li class="marquee__item font-display uppercase">
+              {t}
+              <span class="marquee__dot" />
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .marquee__band {
+    background: var(--bg);
+    color: var(--fg);
+    transform: rotate(var(--tilt));
+    margin-inline: -2rem;
+    padding-block: 1.1rem;
+    /* bordes ondulados con máscara */
+    --w: 18px;
+    mask:
+      radial-gradient(var(--w) at 50% calc(100% + var(--w) * 0.55), #0000 98%, #000) top / calc(var(--w) * 2.2) 51% repeat-x,
+      radial-gradient(var(--w) at 50% calc(var(--w) * -0.55), #0000 98%, #000) bottom / calc(var(--w) * 2.2) 51% repeat-x;
+  }
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: marquee var(--speed) linear infinite;
+  }
+  .marquee:hover .marquee__track {
+    animation-play-state: paused;
+  }
+  .marquee__group {
+    display: flex;
+    flex-shrink: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-inline-end: 1.5rem;
+    font-size: clamp(1.75rem, 6vw, 3rem);
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .marquee__dot {
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 50%;
+    background: var(--dot);
+    flex-shrink: 0;
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track {
+      animation: none !important;
+    }
+  }
+</style>

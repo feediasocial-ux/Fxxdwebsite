@@ -1,0 +1,179 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Card from '@/components/Card.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Button from '@/components/Button.astro';
+import Photo from '@/components/Photo.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import { getCorePages, getUi } from '@/content';
+import { COUNTRIES, type CountryKey } from '@/lib/i18n';
+import { linkTo, pathFor } from '@/lib/routes';
+import { breadcrumbJsonLd } from '@/lib/seo';
+
+import proceso01 from '@/assets/photos/proceso-01-onboarding.jpg';
+import proceso02 from '@/assets/photos/proceso-02-guiones-calendario.jpg';
+import sinCamara from '@/assets/photos/sin-camara.jpg';
+
+interface Props {
+  country: CountryKey;
+}
+const { country } = Astro.props;
+const ui = getUi(country);
+const copy = getCorePages(country).comoFunciona;
+const path = pathFor('comoFunciona', country)!;
+const crumbs = [
+  { name: ui.countryName, path: COUNTRIES[country].basePath },
+  { name: 'Cómo funciona', path },
+];
+---
+
+<BaseLayout
+  pageId="como-funciona"
+  jsonLdNodes={[breadcrumbJsonLd(crumbs)]}
+  seo={{
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    path,
+    routeKey: 'comoFunciona',
+    country,
+  }}
+>
+  <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
+
+  <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
+    <div class="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
+      <div class="space-y-5">
+        <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
+          {copy.eyebrow}
+        </p>
+        <h1 class="text-display-xl">{copy.h1}</h1>
+        <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <WhatsAppButton
+            message={copy.waMessage}
+            label={copy.waCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page="como-funciona"
+            placement="hero"
+            size="lg"
+          />
+          <Button href={linkTo('precios', country)} variant="outline" size="lg">
+            {ui.hero.ctaSecondary}
+          </Button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="overflow-hidden rounded-[28px] border-2 border-ink">
+          <Photo src={proceso01} alt={copy.processSteps[0].title} priority aspect="1/1" widths={[360, 540]} sizes="45vw" />
+        </div>
+        <div class="overflow-hidden rounded-[28px] border-2 border-ink">
+          <Photo src={proceso02} alt={copy.processSteps[1].title} aspect="1/1" widths={[360, 540]} sizes="45vw" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
+
+  <!-- Los 5 pasos del proceso real -->
+  <section class="container-site py-16 md:py-24">
+    <ol class="space-y-6">
+      {
+        copy.processSteps.map((step) => (
+          <li class="grid items-center gap-6 rounded-[32px] border-2 border-ink bg-cream-deep p-6 md:grid-cols-[auto_1fr_auto] md:p-8">
+            <span class="font-display text-6xl leading-none text-coral-deep md:text-7xl" aria-hidden="true">
+              {step.num}
+            </span>
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase">
+                <span class="rounded-pill border border-ink bg-lemon px-3 py-0.5">{step.who}</span>
+                <span class="rounded-pill border border-ink bg-cream px-3 py-0.5">{step.duration}</span>
+              </div>
+              <h2 class="text-3xl md:text-4xl">{step.title}</h2>
+              <p class="text-ink-soft">{step.text}</p>
+            </div>
+            <div class="rounded-2xl border-2 border-ink bg-cream p-4 text-sm font-bold md:max-w-xs">
+              {step.deliverable}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <!-- Quién graba qué -->
+  <section class="theme-dark py-16 md:py-24">
+    <div class="container-site space-y-10">
+      <div class="max-w-3xl space-y-3">
+        <h2 class="text-display-lg text-cream">{copy.whoRecordsTitle}</h2>
+        <p class="text-lg text-cream/85">{copy.whoRecordsIntro}</p>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2">
+        {
+          copy.whoRecordsCols.map((col) => (
+            <Card color={col.color} bordered class="space-y-4">
+              <span class="inline-block rounded-pill border-2 border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
+                {col.badge}
+              </span>
+              <h3 class="text-3xl">{col.who}</h3>
+              <ul class="space-y-2.5">
+                {col.items.map((item) => (
+                  <li class="flex gap-2.5">
+                    <span class="font-bold" aria-hidden="true">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Ejemplo único: Lista de tomas real para grabar en 30 minutos -->
+  <section class="container-site py-16 md:py-24">
+    <div class="max-w-3xl space-y-3">
+      <h2 class="text-display-lg">{copy.shotListTitle}</h2>
+      <p class="text-lg text-ink-soft">{copy.shotListSubtitle}</p>
+    </div>
+
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      {
+        copy.shotListItems.map((shot) => (
+          <Card color="cream-deep" bordered class="space-y-3">
+            <span class="inline-block rounded-pill border border-ink bg-sky px-3 py-0.5 text-xs font-bold">
+              {shot.duration}
+            </span>
+            <h3 class="text-2xl">{shot.clip}</h3>
+            <p class="text-sm text-ink-soft">{shot.instruction}</p>
+          </Card>
+        ))
+      }
+    </div>
+
+    <!-- Plan B sin cámara -->
+    <div class="mt-14 grid items-center gap-8 rounded-[32px] border-2 border-ink bg-sky p-6 md:grid-cols-[1.3fr_1fr] md:p-10">
+      <div class="space-y-4">
+        <h2 class="text-display-md">{copy.planBTitle}</h2>
+        <p class="text-ink-soft">{copy.planBText}</p>
+        <WhatsAppButton
+          message={ui.pricing.planBWaMessage}
+          label={ui.pricing.planBCta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page="como-funciona"
+          placement="plan-b"
+          variant="dark"
+        />
+      </div>
+      <div class="overflow-hidden rounded-[24px] border-2 border-ink">
+        <Photo src={sinCamara} alt={copy.planBTitle} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 38vw, 90vw" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+/**
+ * Imagen optimizada (AVIF/WebP) con dimensiones declaradas.
+ * priority = imagen LCP: eager + fetchpriority="high". Resto: lazy.
+ */
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  widths?: number[];
+  sizes?: string;
+  priority?: boolean;
+  class?: string;
+  imgClass?: string;
+  aspect?: string; // p. ej. "4/5"
+  quality?: number;
+}
+
+const { src, alt, widths = [360, 540, 720, 960], sizes = '(min-width: 1024px) 40vw, 92vw', priority = false, class: cls = '', imgClass = '', aspect, quality = 62 } = Astro.props;
+---
+
+<Picture
+  src={src}
+  alt={alt}
+  widths={widths.filter((w) => w <= src.width)}
+  sizes={sizes}
+  formats={['avif', 'webp']}
+  quality={quality}
+  loading={priority ? 'eager' : 'lazy'}
+  decoding={priority ? 'sync' : 'async'}
+  fetchpriority={priority ? 'high' : 'auto'}
+  pictureAttributes={{ class: cls }}
+  class:list={['h-full w-full object-cover', imgClass]}
+  style={aspect ? `aspect-ratio:${aspect}` : undefined}
+/>

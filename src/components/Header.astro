@@ -1,0 +1,51 @@
+---
+import Logo from './Logo.astro';
+import CountrySwitcher from './CountrySwitcher.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+import { getUi } from '@/content';
+import { ROUTES, linkTo, type RouteKey } from '@/lib/routes';
+import type { CountryKey } from '@/lib/i18n';
+
+interface Props {
+  country: CountryKey;
+  routeKey?: RouteKey;
+  page: string;
+}
+const { country, routeKey, page } = Astro.props;
+const ui = getUi(country);
+// Solo enlazamos páginas ya publicadas.
+const nav = ui.header.nav.filter((n) => ROUTES[n.route].live);
+---
+
+<header class="site-header sticky top-0 z-30 border-b-2 border-ink bg-cream/95 backdrop-blur-sm">
+  <div class="container-site flex min-h-16 items-center justify-between gap-3 py-2">
+    <Logo href={linkTo('home', country)} label={ui.a11y.logoHome} />
+    {
+      nav.length > 0 && (
+        <nav aria-label={ui.a11y.mainNav} class="hidden lg:block">
+          <ul class="flex items-center gap-6 font-bold">
+            {nav.map((n) => (
+              <li>
+                <a href={linkTo(n.route, country)} class="underline-offset-4 hover:underline" aria-current={routeKey === n.route ? 'page' : undefined}>
+                  {n.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+    <div class="flex items-center gap-2">
+      <CountrySwitcher current={country} routeKey={routeKey} label={ui.countrySwitcher.label} a11yLabel={ui.a11y.countrySwitcher} />
+      <WhatsAppButton
+        message={ui.whatsapp.defaultMessage}
+        label={ui.header.waCtaShort}
+        a11yLabel={ui.a11y.openWhatsApp}
+        country={country}
+        page={page}
+        placement="header"
+        class="hidden min-h-11! px-4! text-sm! md:inline-flex"
+      />
+    </div>
+  </div>
+</header>

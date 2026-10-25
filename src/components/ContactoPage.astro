@@ -1,0 +1,97 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Card from '@/components/Card.astro';
+import AuditForm from '@/components/AuditForm.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Photo from '@/components/Photo.astro';
+import { getCorePages, getUi } from '@/content';
+import { COUNTRIES, type CountryKey } from '@/lib/i18n';
+import { pathFor } from '@/lib/routes';
+import { breadcrumbJsonLd } from '@/lib/seo';
+import { waNumberDisplay } from '@/lib/whatsapp';
+
+import contactoChat from '@/assets/photos/contacto-chat.jpg';
+
+interface Props {
+  country: CountryKey;
+}
+const { country } = Astro.props;
+const ui = getUi(country);
+const copy = getCorePages(country).contacto;
+const path = pathFor('contacto', country)!;
+const crumbs = [
+  { name: ui.countryName, path: COUNTRIES[country].basePath },
+  { name: 'Contacto', path },
+];
+---
+
+<BaseLayout
+  pageId="contacto"
+  jsonLdNodes={[breadcrumbJsonLd(crumbs)]}
+  seo={{
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    path,
+    routeKey: 'contacto',
+    country,
+  }}
+>
+  <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
+
+  <section class="container-site pt-6 pb-20 md:pt-10 md:pb-24">
+    <div class="max-w-3xl space-y-4">
+      <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase">
+        {copy.eyebrow}
+      </p>
+      <h1 class="text-display-xl">{copy.h1}</h1>
+      <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
+    </div>
+
+    <div class="mt-12 grid items-start gap-10 lg:grid-cols-[1fr_1.15fr]">
+      <!-- Columna izquierda: WhatsApp destacado + qué esperar + foto -->
+      <div class="space-y-8">
+        <Card color="lemon" bordered class="space-y-4 shadow-[0_6px_0_0_var(--ink)]">
+          <span class="inline-block rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold">
+            WhatsApp · {waNumberDisplay(country)}
+          </span>
+          <h2 class="text-3xl md:text-4xl">{copy.waCardTitle}</h2>
+          <p>{copy.waCardText}</p>
+          <WhatsAppButton
+            message={copy.waMessage}
+            label={copy.waCardCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page="contacto"
+            placement="hero-card"
+            variant="dark"
+            size="lg"
+            class="w-full"
+          />
+          <p class="text-xs font-bold">{copy.responseGuarantee}</p>
+        </Card>
+
+        <Card color="cream-deep" bordered class="space-y-4">
+          <h2 class="text-2xl">{copy.expectationsTitle}</h2>
+          <ol class="space-y-2.5 text-sm md:text-base">
+            {
+              copy.expectations.map((exp, i) => (
+                <li class="flex gap-2.5">
+                  <span class="font-bold text-coral-deep">0{i + 1}.</span>
+                  <span>{exp}</span>
+                </li>
+              ))
+            }
+          </ol>
+        </Card>
+
+        <div class="overflow-hidden rounded-[28px] border-2 border-ink">
+          <Photo src={contactoChat} alt={copy.photoAlt} aspect="4/3" widths={[360, 540, 720]} sizes="(min-width: 1024px) 42vw, 92vw" />
+        </div>
+      </div>
+
+      <!-- Columna derecha: Formulario de mini-auditoría gratuita -->
+      <AuditForm country={country} page="contacto" />
+    </div>
+  </section>
+</BaseLayout>

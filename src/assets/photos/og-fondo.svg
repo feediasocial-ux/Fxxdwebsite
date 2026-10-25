@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#FFF6E5" />
+  <!-- Forma celeste en pastilla -->
+  <rect x="820" y="60" width="320" height="150" rx="75" transform="rotate(8 980 135)" fill="#BFE3FF" stroke="#1B1B1F" stroke-width="4" />
+  <!-- Blob limón -->
+  <circle cx="1030" cy="390" r="130" fill="#E8F05A" stroke="#1B1B1F" stroke-width="4" />
+  <!-- Cinta coral ondulada cruzando el fondo -->
+  <path d="M-80,520 C220,380 460,610 780,450 S1120,250 1280,340" fill="none" stroke="#FF5A36" stroke-width="58" stroke-linecap="round" />
+  <!-- Franja inferior burdeos -->
+  <rect x="0" y="594" width="1200" height="36" fill="#5A2530" />
+</svg>

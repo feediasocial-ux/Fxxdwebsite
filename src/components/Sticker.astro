@@ -1,0 +1,64 @@
+---
+/** Pegatina girada. `decor` = se oculta en tema sobrio (clínicas). */
+interface Props {
+  color?: 'lemon' | 'coral' | 'sky' | 'maroon' | 'cream';
+  rotate?: number;
+  shape?: 'circle' | 'pill' | 'star';
+  decor?: boolean;
+  class?: string;
+}
+const { color = 'lemon', rotate = -8, shape = 'pill', decor = true, class: cls = '' } = Astro.props;
+
+const colors = {
+  lemon: 'bg-lemon text-ink',
+  coral: 'bg-coral text-ink',
+  sky: 'bg-sky text-ink',
+  maroon: 'bg-maroon text-cream',
+  cream: 'bg-cream text-ink',
+} as const;
+---
+
+<span
+  class:list={['sticker font-display uppercase border-2 border-ink inline-flex items-center justify-center text-center leading-none', `sticker--${shape}`, colors[color], decor && 'sticker--decor', cls]}
+  style={`--rot:${rotate}deg`}
+>
+  <slot />
+</span>
+
+<style>
+  .sticker {
+    transform: rotate(var(--rot));
+    box-shadow: 3px 4px 0 0 var(--ink);
+    font-size: clamp(0.85rem, 2.6vw, 1.05rem);
+    letter-spacing: 0.02em;
+  }
+  .sticker--pill {
+    border-radius: 999px;
+    padding: 0.6rem 1.1rem;
+  }
+  .sticker--circle {
+    border-radius: 50%;
+    width: 7.5rem;
+    aspect-ratio: 1;
+    padding: 0.9rem;
+  }
+  .sticker--star {
+    width: 8rem;
+    aspect-ratio: 1;
+    padding: 1.6rem;
+    border: 0;
+    box-shadow: none;
+    clip-path: polygon(50% 0, 61% 18%, 82% 10%, 80% 32%, 100% 40%, 85% 56%, 96% 76%, 74% 78%, 68% 100%, 50% 86%, 32% 100%, 26% 78%, 4% 76%, 15% 56%, 0 40%, 20% 32%, 18% 10%, 39% 18%);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .sticker {
+      transition: transform 0.3s ease;
+    }
+    .sticker:hover {
+      transform: rotate(calc(var(--rot) * -1)) scale(1.04);
+    }
+  }
+  :global([data-theme='sober']) .sticker--decor {
+    display: none;
+  }
+</style>

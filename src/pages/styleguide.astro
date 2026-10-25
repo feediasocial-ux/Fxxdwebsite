@@ -1,0 +1,184 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/Button.astro';
+import Card from '@/components/Card.astro';
+import Sticker from '@/components/Sticker.astro';
+import Marquee from '@/components/Marquee.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import WavyLine from '@/components/WavyLine.astro';
+import StepCard from '@/components/StepCard.astro';
+import PackageCard from '@/components/PackageCard.astro';
+import NicheCard from '@/components/NicheCard.astro';
+import FAQ from '@/components/FAQ.astro';
+import PhoneMockup from '@/components/PhoneMockup.astro';
+import Placeholder from '@/components/Placeholder.astro';
+import Hero from '@/components/Hero.astro';
+import { getUi } from '@/content';
+import { PACKAGES } from '@/content/pricing';
+
+import heroEs from '@/assets/photos/hero-es.jpg';
+import clinicasEs from '@/assets/photos/niches/clinicas-es.jpg';
+import restaurantesEs from '@/assets/photos/niches/restaurantes-es.jpg';
+import inmobiliariasEs from '@/assets/photos/niches/inmobiliarias-es.jpg';
+
+const ui = getUi('es');
+const swatches = [
+  { name: '--cream', hex: '#FFF6E5', bg: 'bg-cream', fg: 'text-ink', note: 'Fondo principal · contraste con --ink 15.8:1 (AAA)' },
+  { name: '--ink', hex: '#1B1B1F', bg: 'bg-ink', fg: 'text-cream', note: 'Texto y bordes · contraste sobre crema 15.8:1' },
+  { name: '--coral', hex: '#FF5A36', bg: 'bg-coral', fg: 'text-ink', note: 'Solo fondo con texto --ink (5.5:1 AA) o titulares grandes' },
+  { name: '--lemon', hex: '#E8F05A', bg: 'bg-lemon', fg: 'text-ink', note: 'Acento vivo · texto --ink (13.4:1 AAA)' },
+  { name: '--sky', hex: '#BFE3FF', bg: 'bg-sky', fg: 'text-ink', note: 'Acento fresco · texto --ink (12.1:1 AAA)' },
+  { name: '--maroon', hex: '#5A2530', bg: 'bg-maroon', fg: 'text-cream', note: 'Bloques oscuros / clínicas · texto --cream (9.7:1 AAA)' },
+];
+---
+
+<BaseLayout
+  pageId="styleguide"
+  seo={{
+    title: 'Style Guide interna · Feediasocial',
+    description: 'Catálogo interno de tokens y componentes del sistema de diseño (no indexado).',
+    path: '/styleguide/',
+    country: 'es',
+    noindex: true,
+  }}
+>
+  <!-- 1. Hero de demostración -->
+  <Hero
+    copy={ui.hero}
+    country="es"
+    page="styleguide"
+    waMessage={ui.whatsapp.defaultMessage}
+    waA11y={ui.a11y.openWhatsApp}
+    secondaryHref="#componentes"
+    image={heroEs}
+  />
+
+  <Marquee items={ui.marquee} label={ui.a11y.marqueePaused} tone="ink" />
+
+  <div id="componentes" class="container-site space-y-20 py-16">
+    <!-- 2. Paleta y contraste -->
+    <section class="space-y-6">
+      <h2 class="text-display-lg">01 · Tokens de color y contraste WCAG AA</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          swatches.map((s) => (
+            <div class:list={['rounded-[28px] border-2 border-ink p-6', s.bg, s.fg]}>
+              <p class="font-display text-3xl">{s.name}</p>
+              <p class="font-mono text-sm font-bold">{s.hex}</p>
+              <p class="mt-2 text-sm">{s.note}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- 3. Tipografía y caracteres en español -->
+    <section class="space-y-6">
+      <h2 class="text-display-lg">02 · Tipografía y soporte español (ñ, á, é, í, ó, ú, ¿, ¡)</h2>
+      <Card color="cream-deep" bordered class="space-y-4">
+        <p class="font-display text-5xl uppercase">¡QUÉ FÁCIL ES DISEÑAR UN GUION CADA MES! ¿GRABAMOS MAÑANA?</p>
+        <p class="text-lg">
+          Texto corrido en <strong>DM Sans Variable</strong>: España y México comparten idioma, pero no vocabulario. En Madrid grabas un
+          <em>vídeo</em> con el <em>móvil</em>; en Ciudad de México grabas un <em>video</em> con tu <em>celular</em>. Soporte completo de
+          caracteres latinos: á, é, í, ó, ú, ü, ñ, Ñ, ¿, ¡, € y $.
+        </p>
+      </Card>
+    </section>
+
+    <!-- 4. Botones y pegatinas -->
+    <section class="space-y-6">
+      <h2 class="text-display-lg">03 · Botones pastilla y pegatinas giradas</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <Button variant="primary" size="lg">Primario coral</Button>
+        <Button variant="dark" size="lg">Oscuro tinta</Button>
+        <Button variant="lemon" size="lg">Acento limón</Button>
+        <Button variant="outline" size="lg">Contorno</Button>
+      </div>
+      <div class="flex flex-wrap items-center gap-6 pt-4">
+        <Sticker color="lemon" rotate={-6}>1 sesión al mes</Sticker>
+        <Sticker color="coral" shape="circle" rotate={10}>100 % remoto</Sticker>
+        <Sticker color="sky" rotate={4}>Guiones + edición</Sticker>
+      </div>
+    </section>
+
+    <!-- 5. Tarjetas y formas -->
+    <section class="space-y-6">
+      <h2 class="text-display-lg">04 · Tarjetas, pasos y nichos</h2>
+      <ol class="grid gap-6 md:grid-cols-3">
+        {
+          ui.steps.map((s, i) => (
+            <StepCard n={i + 1} title={s.title} text={s.text} color={i === 0 ? 'lemon' : i === 1 ? 'coral' : 'sky'} />
+          ))
+        }
+      </ol>
+      <div class="grid gap-6 md:grid-cols-3">
+        <NicheCard
+          title="Clínicas"
+          text="Contenido educativo y cercano para clínicas de estética, dental y fisioterapia."
+          href="/es/"
+          linkLabel="Ver propuesta para clínicas"
+          image={clinicasEs}
+          imageAlt="Doctora grabando un vídeo educativo en su clínica con un móvil en trípode"
+          color="cream-deep"
+        />
+        <NicheCard
+          title="Restaurantes"
+          text="Platos, ambiente y equipo en vídeo vertical para llenar mesas entre semana."
+          href="/es/"
+          linkLabel="Ver propuesta para hostelería"
+          image={restaurantesEs}
+          imageAlt="Chef emplatando tapas mientras un camarero graba un vídeo vertical con el móvil"
+          color="coral"
+        />
+        <NicheCard
+          title="Inmobiliarias"
+          text="Recorridos en vídeo y consejos de compra para captar propietarios y compradores."
+          href="/es/"
+          linkLabel="Ver propuesta inmobiliaria"
+          image={inmobiliariasEs}
+          imageAlt="Agente inmobiliaria grabando un recorrido en vídeo vertical en un piso luminoso"
+          color="sky"
+        />
+      </div>
+    </section>
+
+    <!-- 6. Mockup de teléfono + Placeholder -->
+    <section class="space-y-6">
+      <h2 class="text-display-lg">05 · Mockup de teléfono y placeholders honestos</h2>
+      <div class="grid items-center gap-8 md:grid-cols-3">
+        <PhoneMockup tilt={-3}>
+          <Placeholder label="[CAPTURA: reel propio de muestra]" aspect="9/19" tone="lemon" class="h-full rounded-none border-0" />
+        </PhoneMockup>
+        <Placeholder label="[FOTO: fundadora 1 en acción]" aspect="4/5" tone="sky" />
+        <Placeholder label="[FOTO: fundador 2 en acción]" aspect="4/5" tone="cream-deep" />
+      </div>
+    </section>
+
+    <!-- 7. Tema sobrio (Clínicas) -->
+    <section data-theme="sober" class="rounded-[32px] border-2 border-ink bg-cream p-8 space-y-6">
+      <h2 class="text-display-lg">06 · Adaptación por nicho: data-theme="sober" (Clínicas)</h2>
+      <p class="max-w-2xl text-ink-soft">
+        En el tema sobrio se ocultan las pegatinas decorativas y el acento principal pasa a burdeos (<code>--maroon</code>) con más crema y tinta.
+      </p>
+      <div class="flex flex-wrap items-center gap-4">
+        <Card color="accent-1" bordered class="max-w-sm">
+          <h3 class="text-2xl">Bloque con acento sobrio</h3>
+          <p class="mt-2">Texto claro sobre burdeos para transmitir serenidad y rigor sanitario.</p>
+        </Card>
+        <Sticker color="lemon" decor>Esta pegatina decorativa se oculta en modo sobrio</Sticker>
+      </div>
+    </section>
+
+    <!-- 8. Paquetes y FAQ -->
+    <section class="space-y-8">
+      <h2 class="text-display-lg">07 · Paquetes y FAQ accesible (details nativo)</h2>
+      <div class="grid gap-8 md:grid-cols-3">
+        {PACKAGES.map((pkg) => <PackageCard pkg={pkg} country="es" page="styleguide" />)}
+      </div>
+      <FAQ items={ui.faqSection.items} />
+    </section>
+  </div>
+
+  <WavyLine text="Guiones · Tendencias · Edición · Calendario" />
+  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
+</BaseLayout>

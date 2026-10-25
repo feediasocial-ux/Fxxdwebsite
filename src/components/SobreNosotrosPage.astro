@@ -1,0 +1,122 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Card from '@/components/Card.astro';
+import Placeholder from '@/components/Placeholder.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import { getCorePages, getUi } from '@/content';
+import { COUNTRIES, type CountryKey } from '@/lib/i18n';
+import { pathFor } from '@/lib/routes';
+import { abs, breadcrumbJsonLd } from '@/lib/seo';
+
+interface Props {
+  country: CountryKey;
+}
+const { country } = Astro.props;
+const ui = getUi(country);
+const copy = getCorePages(country).sobreNosotros;
+const path = pathFor('sobreNosotros', country)!;
+const crumbs = [
+  { name: ui.countryName, path: COUNTRIES[country].basePath },
+  { name: 'Sobre nosotros', path },
+];
+
+// JSON-LD Person para las dos personas fundadoras (con marcadores pendientes reales)
+const foundersJsonLd = copy.founders.map((f, i) => ({
+  '@type': 'Person',
+  '@id': abs(`${path}#founder-${i + 1}`),
+  name: f.name,
+  jobTitle: f.role,
+  worksFor: { '@id': abs('/#organization') },
+}));
+---
+
+<BaseLayout
+  pageId="sobre-nosotros"
+  jsonLdNodes={[breadcrumbJsonLd(crumbs), ...foundersJsonLd]}
+  seo={{
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    path,
+    routeKey: 'sobreNosotros',
+    country,
+  }}
+>
+  <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
+
+  <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
+    <div class="max-w-3xl space-y-5">
+      <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase">
+        {copy.eyebrow}
+      </p>
+      <h1 class="text-display-xl">{copy.h1}</h1>
+      <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
+    </div>
+  </section>
+
+  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
+
+  <!-- Las dos personas fundadoras -->
+  <section class="container-site py-16 md:py-24">
+    <h2 class="text-display-lg">{copy.foundersTitle}</h2>
+    <div class="mt-10 grid gap-8 md:grid-cols-2">
+      {
+        copy.founders.map((f) => (
+          <Card color="cream-deep" bordered class="grid gap-6 sm:grid-cols-[0.9fr_1.1fr] sm:items-center">
+            <Placeholder label={f.placeholder} aspect="4/5" tone={f.color} />
+            <div class="space-y-3">
+              <span class="inline-block rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
+                {f.role}
+              </span>
+              <h3 class="text-3xl">{f.name}</h3>
+              <p class="text-sm text-ink-soft">{f.bio}</p>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Nuestra historia y por qué hablamos su idioma -->
+  <section class="theme-dark py-16 md:py-24">
+    <div class="container-site grid gap-12 lg:grid-cols-2">
+      <div class="space-y-4">
+        <h2 class="text-display-md text-cream">{copy.storyTitle}</h2>
+        {copy.storyParagraphs.map((p) => <p class="text-lg text-cream/85">{p}</p>)}
+      </div>
+
+      <Card color="lemon" bordered class="space-y-4 self-center">
+        <h2 class="text-display-md">{copy.whyTwoCountriesTitle}</h2>
+        <p>{copy.whyTwoCountriesText}</p>
+      </Card>
+    </div>
+  </section>
+
+  <!-- Valores honestos -->
+  <section class="container-site py-16 md:py-24">
+    <h2 class="text-display-lg">{copy.valuesTitle}</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        copy.values.map((v) => (
+          <Card color={v.color} bordered class="space-y-3">
+            <h3 class="text-3xl">{v.title}</h3>
+            <p>{v.text}</p>
+          </Card>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 flex justify-center">
+      <WhatsAppButton
+        message={copy.waMessage}
+        label={copy.waCta}
+        a11yLabel={ui.a11y.openWhatsApp}
+        country={country}
+        page="sobre-nosotros"
+        placement="bottom"
+        size="lg"
+      />
+    </div>
+  </section>
+</BaseLayout>

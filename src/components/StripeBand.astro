@@ -1,0 +1,25 @@
+---
+/** Franja de rayas decorativa como separador. */
+interface Props {
+  colors?: [string, string];
+  height?: string;
+  angle?: number;
+  class?: string;
+}
+const { colors = ['var(--coral)', 'var(--cream)'], height = '28px', angle = 0, class: cls = '' } = Astro.props;
+---
+
+<div
+  role="presentation"
+  class:list={['stripe-band w-full', cls]}
+  style={`--a:${colors[0]};--b:${colors[1]};--h:${height};--angle:${angle}deg`}
+>
+</div>
+
+<style>
+  .stripe-band {
+    height: var(--h);
+    background: repeating-linear-gradient(calc(90deg + var(--angle)), var(--a) 0 22px, var(--b) 22px 44px);
+    border-block: 2px solid var(--ink);
+  }
+</style>

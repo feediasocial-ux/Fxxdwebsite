@@ -1,0 +1,313 @@
+---
+/**
+ * Estructura completa de la Home (12 bloques según brief):
+ * 1. Header · 2. Hero · 3. Cinta en movimiento · 4. Problema · 5. Cómo funciona ·
+ * 6. Servicios · 7. Paquetes + Plan B · 8. Prueba (guion + calendario de muestra) ·
+ * 9. Quiénes somos · 10. FAQ · 11. CTA final (mini-auditoría + WhatsApp) · 12. Footer
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import Marquee from '@/components/Marquee.astro';
+import Card from '@/components/Card.astro';
+import Button from '@/components/Button.astro';
+import StepCard from '@/components/StepCard.astro';
+import PackageCard from '@/components/PackageCard.astro';
+import FAQ from '@/components/FAQ.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import WavyLine from '@/components/WavyLine.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Photo from '@/components/Photo.astro';
+import Placeholder from '@/components/Placeholder.astro';
+import AuditForm from '@/components/AuditForm.astro';
+import { getUi } from '@/content';
+import { PACKAGES } from '@/content/pricing';
+import { COUNTRIES, type CountryKey } from '@/lib/i18n';
+import { linkTo } from '@/lib/routes';
+import type { ImageMetadata } from 'astro';
+
+import proceso01 from '@/assets/photos/proceso-01-onboarding.jpg';
+import proceso02 from '@/assets/photos/proceso-02-guiones-calendario.jpg';
+import serviciosIa from '@/assets/photos/servicios-ia-graficos.jpg';
+import sinCamara from '@/assets/photos/sin-camara.jpg';
+
+interface Props {
+  country: CountryKey;
+  heroImage: ImageMetadata;
+}
+
+const { country, heroImage } = Astro.props;
+const ui = getUi(country);
+const path = COUNTRIES[country].basePath;
+---
+
+<BaseLayout
+  pageId="home"
+  seo={{
+    title: ui.meta.homeTitle,
+    description: ui.meta.homeDescription,
+    path,
+    routeKey: 'home',
+    country,
+    xDefault: true,
+  }}
+>
+  <!-- 2. Hero -->
+  <Hero
+    copy={ui.hero}
+    country={country}
+    page="home"
+    waMessage={ui.whatsapp.defaultMessage}
+    waA11y={ui.a11y.openWhatsApp}
+    secondaryHref="#paquetes"
+    image={heroImage}
+  />
+
+  <!-- 3. Cinta con texto en movimiento -->
+  <Marquee items={ui.marquee} label={ui.a11y.marqueePaused} tone="ink" />
+
+  <!-- 4. Problema -->
+  <section class="container-site py-16 md:py-24">
+    <div class="max-w-3xl space-y-4">
+      <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase">
+        {ui.problem.eyebrow}
+      </p>
+      <h2 class="text-display-lg">{ui.problem.title}</h2>
+    </div>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        ui.problem.points.map((pt, idx) => (
+          <Card color={idx === 1 ? 'sky' : 'cream-deep'} bordered class="flex flex-col gap-3">
+            <span class="font-display text-4xl text-coral-deep" aria-hidden="true">0{idx + 1}</span>
+            <h3 class="text-2xl">{pt.title}</h3>
+            <p class="text-ink-soft">{pt.text}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
+
+  <!-- 5. Cómo funciona -->
+  <section class="theme-dark py-16 md:py-24">
+    <div class="container-site">
+      <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+        <div class="max-w-3xl space-y-4">
+          <p class="inline-block rounded-pill border-2 border-cream bg-maroon px-4 py-1 text-sm font-bold uppercase text-lemon">
+            {ui.stepsSection.eyebrow}
+          </p>
+          <h2 class="text-display-lg text-cream">{ui.stepsSection.title}</h2>
+          <p class="text-lg text-cream/85">{ui.stepsSection.subtitle}</p>
+        </div>
+        <Button href={linkTo('comoFunciona', country)} variant="lemon" size="md">
+          {ui.stepsSection.ctaMore}
+        </Button>
+      </div>
+
+      <ol class="mt-10 grid gap-6 md:grid-cols-3">
+        {
+          ui.steps.map((s, i) => (
+            <StepCard
+              n={i + 1}
+              title={s.title}
+              text={s.text}
+              color={i === 0 ? 'lemon' : i === 1 ? 'coral' : 'sky'}
+            />
+          ))
+        }
+      </ol>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="overflow-hidden rounded-[28px] border-2 border-cream">
+          <Photo src={proceso01} alt={ui.steps[0].title} aspect="1/1" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
+        </div>
+        <div class="overflow-hidden rounded-[28px] border-2 border-cream">
+          <Photo src={proceso02} alt={ui.steps[1].title} aspect="1/1" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
+        </div>
+        <div class="overflow-hidden rounded-[28px] border-2 border-cream">
+          <Photo src={serviciosIa} alt={ui.steps[2].title} aspect="1/1" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Servicios -->
+  <section class="container-site py-16 md:py-24">
+    <div class="max-w-3xl space-y-4">
+      <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
+        {ui.servicesSection.eyebrow}
+      </p>
+      <h2 class="text-display-lg">{ui.servicesSection.title}</h2>
+    </div>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        ui.services.map((srv) => (
+          <Card color={srv.color} bordered class="flex flex-col gap-4">
+            <h3 class="text-3xl">{srv.title}</h3>
+            <p>{srv.text}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <WavyLine text={ui.marquee.join(' · ')} />
+
+  <!-- 7. Paquetes con precio del país + Plan B sin cámara -->
+  <section id="paquetes" class="container-site py-16 md:py-24">
+    <div class="max-w-3xl space-y-4">
+      <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase">
+        {ui.pricing.eyebrow}
+      </p>
+      <h2 class="text-display-lg">{ui.pricing.title}</h2>
+      <p class="text-lg text-ink-soft">{ui.pricing.subtitle}</p>
+    </div>
+
+    <div class="mt-12 grid gap-8 md:grid-cols-3">
+      {PACKAGES.map((pkg) => <PackageCard pkg={pkg} country={country} page="home" />)}
+    </div>
+
+    <div class="mt-8 space-y-1 text-sm text-ink-soft">
+      <p>• {ui.pricing.adsNote}</p>
+      <p>• {ui.pricing.taxNote}</p>
+    </div>
+
+    <!-- Plan B sin cámara -->
+    <div class="mt-12 grid items-center gap-8 rounded-[32px] border-2 border-ink bg-sky p-6 md:grid-cols-[1.3fr_1fr] md:p-10">
+      <div class="space-y-4">
+        <h3 class="text-3xl md:text-4xl">{ui.pricing.planBTitle}</h3>
+        <p class="text-ink-soft">{ui.pricing.planBText}</p>
+        <WhatsAppButton
+          message={ui.pricing.planBWaMessage}
+          label={ui.pricing.planBCta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page="home"
+          placement="plan-b"
+          variant="dark"
+        />
+      </div>
+      <div class="overflow-hidden rounded-[24px] border-2 border-ink">
+        <Photo src={sinCamara} alt={ui.pricing.planBTitle} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 38vw, 90vw" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Prueba: ejemplos reales de guiones y calendarios propios -->
+  <section class="container-site py-16 md:py-24">
+    <div class="max-w-3xl space-y-4">
+      <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase">
+        {ui.proofSection.eyebrow}
+      </p>
+      <h2 class="text-display-lg">{ui.proofSection.title}</h2>
+      <p class="text-lg text-ink-soft">{ui.proofSection.subtitle}</p>
+      <p class="inline-block rounded-xl border-2 border-dashed border-ink bg-cream-deep px-3 py-1.5 text-xs font-bold">
+        {ui.proofSection.pendingBadge}
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-8 lg:grid-cols-2">
+      <!-- Muestra de guion -->
+      <Card color="cream-deep" bordered class="space-y-4">
+        <p class="text-xs font-bold uppercase tracking-wider text-coral-deep">{ui.proofSection.sampleScriptMeta}</p>
+        <h3 class="text-3xl">{ui.proofSection.sampleScriptTitle}</h3>
+        <div class="rounded-2xl border-2 border-ink bg-lemon p-4 font-bold">
+          {ui.proofSection.sampleScriptHook}
+        </div>
+        <ul class="space-y-2.5 text-sm md:text-base">
+          {ui.proofSection.sampleScriptBody.map((line) => <li class="flex gap-2"><span>→</span><span>{line}</span></li>)}
+        </ul>
+        <div class="rounded-2xl border-2 border-ink bg-cream p-4 text-sm font-bold">
+          {ui.proofSection.sampleScriptCta}
+        </div>
+      </Card>
+
+      <!-- Muestra de calendario -->
+      <Card color="cream-deep" bordered class="space-y-4">
+        <h3 class="text-3xl">{ui.proofSection.sampleCalendarTitle}</h3>
+        <ul class="space-y-3">
+          {
+            ui.proofSection.sampleCalendarItems.map((item) => (
+              <li class="flex flex-col gap-1 rounded-2xl border-2 border-ink bg-cream p-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <span class:list={['inline-block rounded-pill border border-ink px-2.5 py-0.5 text-xs font-bold uppercase', item.color === 'coral' ? 'bg-coral' : item.color === 'lemon' ? 'bg-lemon' : 'bg-sky']}>
+                    {item.day} · {item.format}
+                  </span>
+                  <p class="mt-1.5 font-bold">{item.topic}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </Card>
+    </div>
+  </section>
+
+  <!-- 9. Quiénes somos -->
+  <section class="theme-dark py-16 md:py-24">
+    <div class="container-site grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
+      <div class="space-y-5">
+        <p class="inline-block rounded-pill border-2 border-cream bg-maroon px-4 py-1 text-sm font-bold uppercase text-lemon">
+          {ui.aboutTeaser.eyebrow}
+        </p>
+        <h2 class="text-display-lg text-cream">{ui.aboutTeaser.title}</h2>
+        <p class="text-lg text-cream/85">{ui.aboutTeaser.text}</p>
+        <ul class="space-y-2.5 text-cream/90">
+          {
+            ui.aboutTeaser.bullets.map((b) => (
+              <li class="flex gap-2.5">
+                <span class="font-bold text-lemon" aria-hidden="true">✓</span>
+                <span>{b}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="pt-2">
+          <Button href={linkTo('sobreNosotros', country)} variant="lemon" size="lg">
+            {ui.aboutTeaser.cta}
+          </Button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-5">
+        <Placeholder label={ui.aboutTeaser.founder1Placeholder} aspect="4/5" tone="lemon" class="text-ink" />
+        <Placeholder label={ui.aboutTeaser.founder2Placeholder} aspect="4/5" tone="sky" class="text-ink" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. FAQ localizada -->
+  <section class="container-site py-16 md:py-24">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
+      <div class="space-y-4">
+        <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase">
+          {ui.faqSection.eyebrow}
+        </p>
+        <h2 class="text-display-lg">{ui.faqSection.title}</h2>
+      </div>
+      <FAQ items={ui.faqSection.items} />
+    </div>
+  </section>
+
+  <!-- 11. CTA final: mini-auditoría gratuita (formulario + WhatsApp) -->
+  <section id="mini-auditoria" class="container-site pb-20">
+    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream md:p-10 lg:grid-cols-[1fr_1.15fr]">
+      <div class="space-y-5">
+        <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
+        <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
+        <WhatsAppButton
+          message={ui.finalCta.waMessage}
+          label={ui.finalCta.cta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page="home"
+          placement="final-cta"
+          variant="lemon"
+          size="lg"
+        />
+      </div>
+      <AuditForm country={country} page="home" />
+    </div>
+  </section>
+</BaseLayout>

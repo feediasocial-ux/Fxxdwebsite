@@ -1,0 +1,48 @@
+---
+/**
+ * Selector de país: enlaces normales (funciona sin JS) a la página equivalente.
+ * Al pulsar, un script global guarda la cookie `fs_country` (solo para sugerir).
+ */
+import { COUNTRIES, COUNTRY_KEYS, type CountryKey } from '@/lib/i18n';
+import { equivalentPath, type RouteKey } from '@/lib/routes';
+import { getUi } from '@/content';
+
+interface Props {
+  current: CountryKey;
+  routeKey?: RouteKey;
+  label: string;
+  a11yLabel: string;
+  tone?: 'light' | 'dark';
+}
+const { current, routeKey, label, a11yLabel, tone = 'light' } = Astro.props;
+---
+
+<nav aria-label={a11yLabel} class="country-switcher">
+  <span class="sr-only">{label}:</span>
+  <ul class:list={['flex items-center gap-1 rounded-pill border-2 p-1', tone === 'light' ? 'border-ink' : 'border-cream']}>
+    {
+      COUNTRY_KEYS.map((k) => {
+        const active = k === current;
+        return (
+          <li>
+            <a
+              href={equivalentPath(routeKey, k)}
+              hreflang={COUNTRIES[k].hreflang}
+              lang={COUNTRIES[k].locale}
+              data-set-country={k}
+              aria-current={active ? 'page' : undefined}
+              class:list={[
+                'inline-flex min-h-10 items-center gap-1.5 rounded-pill px-3 text-sm font-bold no-underline transition-colors',
+                active ? (tone === 'light' ? 'bg-ink text-cream' : 'bg-cream text-ink') : 'hover:bg-lemon hover:text-ink',
+              ]}
+            >
+              <span aria-hidden="true">{COUNTRIES[k].flag}</span>
+              <span class="uppercase">{k}</span>
+              <span class="sr-only">{getUi(k).countryName}</span>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>

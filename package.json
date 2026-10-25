@@ -1,0 +1,27 @@
+{
+  "name": "feediasocial-web",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "check:contrast": "node scripts/check-contrast.ts",
+    "check:seo": "node scripts/check-hreflang.ts",
+    "validate": "node scripts/check-contrast.ts && node scripts/check-hreflang.ts"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@fontsource-variable/dm-sans": "^5.2.8",
+    "@fontsource/anton": "^5.2.8",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^6.1.8",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3"
+  }
+}

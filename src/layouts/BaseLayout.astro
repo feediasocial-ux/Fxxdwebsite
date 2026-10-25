@@ -1,0 +1,400 @@
+---
+import '@/styles/global.css';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
+import CookieBanner from '@/components/CookieBanner.astro';
+import { buildSeo, graph, orgJsonLd, websiteJsonLd, type SeoInput } from '@/lib/seo';
+import { getUi } from '@/content';
+import { COUNTRY_COOKIE } from '@/lib/i18n';
+import { CONSENT_COOKIE, UTM_STORAGE_KEY } from '@/lib/analytics';
+import antonWoff2 from '@fontsource/anton/files/anton-latin-400-normal.woff2?url';
+
+interface Props {
+  seo: SeoInput;
+  theme?: 'vivid' | 'sober';
+  jsonLdNodes?: object[];
+  pageId?: string;
+  hideChrome?: boolean;
+}
+
+const { seo: seoInput, theme = 'vivid', jsonLdNodes = [], pageId = 'home', hideChrome = false } = Astro.props;
+const seo = buildSeo(seoInput);
+const country = seoInput.country;
+const ui = country ? getUi(country) : getUi('es');
+const jsonLd = graph(orgJsonLd(), websiteJsonLd(), ...jsonLdNodes);
+const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION;
+const ga4Id = import.meta.env.PUBLIC_GA4_ID || '';
+const clarityId = import.meta.env.PUBLIC_CLARITY_ID || '';
+---
+
+<!doctype html>
+<html lang={seo.lang} data-theme={theme}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    <meta name="robots" content={seo.robots} />
+    <link rel="canonical" href={seo.canonical} />
+
+    {seo.alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href={antonWoff2} as="font" type="font/woff2" crossorigin />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Feediasocial" />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:url" content={seo.canonical} />
+    <meta property="og:image" content={seo.ogImage} />
+    <meta property="og:locale" content={seo.ogLocale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.description} />
+    <meta name="twitter:image" content={seo.ogImage} />
+
+    {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body
+    class="flex min-h-dvh flex-col"
+    data-country={country || ''}
+    data-page={pageId}
+    data-cookie-name={COUNTRY_COOKIE}
+    data-consent-cookie={CONSENT_COOKIE}
+    data-utm-key={UTM_STORAGE_KEY}
+    data-ga4-id={ga4Id}
+    data-clarity-id={clarityId}
+  >
+    <a href="#main-content" class="sr-only-focusable rounded-pill border-2 border-ink bg-lemon px-4 py-2 font-bold text-ink">
+      {ui.a11y.skipLink}
+    </a>
+
+    {!hideChrome && country && <Header country={country} routeKey={seoInput.routeKey} page={pageId} />}
+
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    {!hideChrome && country && <Footer country={country} routeKey={seoInput.routeKey} />}
+    {
+      !hideChrome && country && (
+        <WhatsAppFloat
+          country={country}
+          page={pageId}
+          message={ui.whatsapp.defaultMessage}
+          label={ui.whatsapp.floatLabel}
+          a11yLabel={ui.a11y.openWhatsApp}
+        />
+      )
+    }
+    {!hideChrome && country && <CookieBanner country={country} />}
+
+    <script is:inline>
+      (function () {
+        var b = document.body;
+        var countryCookie = b.getAttribute('data-cookie-name') || 'fs_country';
+        var consentCookie = b.getAttribute('data-consent-cookie') || 'fs_consent_v2';
+        var utmKey = b.getAttribute('data-utm-key') || 'fs_utm_params';
+        var currentCountry = b.getAttribute('data-country') || '';
+        var currentPage = b.getAttribute('data-page') || 'home';
+        var ga4Id = b.getAttribute('data-ga4-id') || '';
+        var clarityId = b.getAttribute('data-clarity-id') || '';
+
+        /* 1. Cookie de país (solo para sugerir en la raíz, nunca redirigir) */
+        function setCookie(name, val, days) {
+          var maxAge = (days || 365) * 86400;
+          document.cookie = name + '=' + encodeURIComponent(val) + '; path=/; max-age=' + maxAge + '; SameSite=Lax';
+        }
+        function getCookie(name) {
+          var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+          return m ? decodeURIComponent(m[1]) : '';
+        }
+        if (currentCountry === 'es' || currentCountry === 'mx') {
+          setCookie(countryCookie, currentCountry, 365);
+        }
+
+        /* 2. Persistencia de UTMs en sessionStorage hasta el contacto */
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+          var found = {};
+          var hasUtm = false;
+          for (var i = 0; i < utmKeys.length; i++) {
+            var k = utmKeys[i];
+            if (params.get(k)) {
+              found[k] = params.get(k);
+              hasUtm = true;
+            }
+          }
+          if (hasUtm) {
+            sessionStorage.setItem(utmKey, JSON.stringify(found));
+          }
+          var storedUtm = sessionStorage.getItem(utmKey) || '';
+          if (storedUtm) {
+            var utmInputs = document.querySelectorAll('[data-utm-input]');
+            for (var j = 0; j < utmInputs.length; j++) {
+              utmInputs[j].value = storedUtm;
+            }
+          }
+        } catch (_e) {}
+
+        /* 3. Consent Mode v2 (por defecto denegado) + carga diferida de GA4 y Clarity */
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          window.dataLayer.push(arguments);
+        }
+        window.gtag = gtag;
+        gtag('consent', 'default', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          wait_for_update: 500,
+        });
+
+        var scriptsLoaded = false;
+        function applyConsent(state) {
+          gtag('consent', 'update', {
+            analytics_storage: state.analytics ? 'granted' : 'denied',
+            ad_storage: state.marketing ? 'granted' : 'denied',
+            ad_user_data: state.marketing ? 'granted' : 'denied',
+            ad_personalization: state.marketing ? 'granted' : 'denied',
+          });
+          if (state.analytics && !scriptsLoaded) {
+            scriptsLoaded = true;
+            if (ga4Id) {
+              var s = document.createElement('script');
+              s.async = true;
+              s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ga4Id);
+              document.head.appendChild(s);
+              gtag('js', new Date());
+              gtag('config', ga4Id, { anonymize_ip: true });
+            }
+            if (clarityId) {
+              (function (c, l, a, r, i, t, y) {
+                c[a] =
+                  c[a] ||
+                  function () {
+                    (c[a].q = c[a].q || []).push(arguments);
+                  };
+                t = l.createElement(r);
+                t.async = 1;
+                t.src = 'https://www.clarity.ms/tag/' + i;
+                y = l.getElementsByTagName(r)[0];
+                y.parentNode.insertBefore(t, y);
+              })(window, document, 'clarity', 'script', clarityId);
+            }
+          }
+        }
+
+        function track(eventName, params) {
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', eventName, params || {});
+          }
+        }
+
+        /* 4. Banner de cookies e interacción */
+        var banner = document.getElementById('cookie-banner');
+        var configPanel = banner ? banner.querySelector('[data-cookie-config-panel]') : null;
+        var analyticsChk = banner ? banner.querySelector('[data-cookie-cat="analytics"]') : null;
+        var marketingChk = banner ? banner.querySelector('[data-cookie-cat="marketing"]') : null;
+
+        function updateBannerOffset() {
+          if (!banner || banner.hasAttribute('hidden')) {
+            document.documentElement.style.setProperty('--cookie-offset', '0px');
+          } else {
+            var h = banner.getBoundingClientRect().height || 140;
+            document.documentElement.style.setProperty('--cookie-offset', h + 'px');
+          }
+        }
+
+        function showBanner() {
+          if (!banner) return;
+          banner.removeAttribute('hidden');
+          updateBannerOffset();
+        }
+        function hideBanner() {
+          if (!banner) return;
+          banner.setAttribute('hidden', '');
+          updateBannerOffset();
+        }
+        function saveConsent(analytics, marketing) {
+          var st = { necessary: true, analytics: !!analytics, marketing: !!marketing, ts: Date.now() };
+          setCookie(consentCookie, JSON.stringify(st), 180);
+          applyConsent(st);
+          hideBanner();
+        }
+
+        var rawConsent = getCookie(consentCookie);
+        if (rawConsent) {
+          try {
+            var parsed = JSON.parse(rawConsent);
+            applyConsent(parsed);
+          } catch (_e) {
+            showBanner();
+          }
+        } else {
+          showBanner();
+        }
+
+        window.addEventListener('resize', updateBannerOffset, { passive: true });
+
+        /* 5. Delegación de clics (WhatsApp, selector de país, cookies) */
+        document.addEventListener('click', function (e) {
+          var t = e.target;
+          if (!t || !t.closest) return;
+
+          var countryBtn = t.closest('[data-set-country]');
+          if (countryBtn) {
+            var c = countryBtn.getAttribute('data-set-country');
+            if (c) {
+              setCookie(countryCookie, c, 365);
+              track('select_country', { from_page: currentPage, to_country: c });
+            }
+          }
+
+          var waBtn = t.closest('[data-wa]');
+          if (waBtn) {
+            track('click_whatsapp', {
+              page: waBtn.getAttribute('data-wa-page') || currentPage,
+              country: waBtn.getAttribute('data-wa-country') || currentCountry,
+              niche: waBtn.getAttribute('data-wa-niche') || '',
+              placement: waBtn.getAttribute('data-wa-placement') || 'inline',
+            });
+          }
+
+          if (t.closest('[data-cookie-accept-all]')) {
+            saveConsent(true, true);
+          } else if (t.closest('[data-cookie-reject]')) {
+            saveConsent(false, false);
+          } else if (t.closest('[data-cookie-toggle-config]')) {
+            if (configPanel) {
+              if (configPanel.hasAttribute('hidden')) configPanel.removeAttribute('hidden');
+              else configPanel.setAttribute('hidden', '');
+              updateBannerOffset();
+            }
+          } else if (t.closest('[data-cookie-save]')) {
+            saveConsent(analyticsChk && analyticsChk.checked, marketingChk && marketingChk.checked);
+          } else if (t.closest('[data-cookie-reopen]')) {
+            showBanner();
+          }
+        });
+
+        /* 6. Evento scroll_75 */
+        var scroll75Sent = false;
+        window.addEventListener(
+          'scroll',
+          function () {
+            if (scroll75Sent) return;
+            var doc = document.documentElement;
+            var max = doc.scrollHeight - doc.clientHeight;
+            if (max > 100 && window.scrollY / max >= 0.75) {
+              scroll75Sent = true;
+              track('scroll_75', { page: currentPage, country: currentCountry });
+            }
+          },
+          { passive: true }
+        );
+
+        /* 7. Evento view_pricing */
+        var pricingEl = document.getElementById('paquetes');
+        if (pricingEl && 'IntersectionObserver' in window) {
+          var obs = new IntersectionObserver(
+            function (entries) {
+              for (var k = 0; k < entries.length; k++) {
+                if (entries[k].isIntersecting) {
+                  track('view_pricing', { page: currentPage, country: currentCountry });
+                  obs.disconnect();
+                  break;
+                }
+              }
+            },
+            { threshold: 0.25 }
+          );
+          obs.observe(pricingEl);
+        }
+
+        /* 8. Envío de formularios de mini-auditoría */
+        var wrappers = document.querySelectorAll('[data-audit-form-wrapper]');
+        for (var w = 0; w < wrappers.length; w++) {
+          (function (wrap) {
+            var form = wrap.querySelector('[data-audit-form]');
+            var successBox = wrap.querySelector('[data-audit-success]');
+            var waFallback = wrap.querySelector('[data-audit-wa-fallback]');
+            var submitBtn = wrap.querySelector('[data-submit-btn]');
+            var endpoint = wrap.getAttribute('data-endpoint') || '';
+            var waNum = wrap.getAttribute('data-wa-number') || '525534402921';
+            var pg = wrap.getAttribute('data-page') || currentPage;
+            var ct = wrap.getAttribute('data-country') || currentCountry;
+
+            if (!form) return;
+            form.addEventListener('submit', function (ev) {
+              ev.preventDefault();
+              var fd = new FormData(form);
+              // Antispam honeypot
+              if (fd.get('website')) return;
+
+              var name = String(fd.get('name') || '').trim();
+              var ig = String(fd.get('instagram') || '').trim();
+              var wa = String(fd.get('whatsapp') || '').trim();
+              var selCountry = String(fd.get('country') || ct).trim();
+              if (!name || !ig || !wa) {
+                form.reportValidity();
+                return;
+              }
+
+              if (submitBtn) {
+                submitBtn.setAttribute('disabled', 'true');
+                var subLbl = submitBtn.getAttribute('data-submitting-label');
+                if (subLbl) submitBtn.textContent = subLbl;
+              }
+
+              var waMsg =
+                'Hola, soy ' +
+                name +
+                ' (' +
+                ig +
+                ', WhatsApp: ' +
+                wa +
+                ') y pido mis 3 ideas de reels gratis (ref: ' +
+                selCountry +
+                '-' +
+                pg +
+                '-form)';
+              if (waFallback) {
+                waFallback.setAttribute('href', 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(waMsg));
+              }
+
+              function finish() {
+                track('form_submit', { page: pg, country: selCountry });
+                form.setAttribute('hidden', '');
+                if (successBox) successBox.removeAttribute('hidden');
+              }
+
+              if (endpoint) {
+                fetch(endpoint, {
+                  method: 'POST',
+                  body: fd,
+                  headers: { Accept: 'application/json' },
+                })
+                  .then(function () {
+                    finish();
+                  })
+                  .catch(function () {
+                    finish();
+                  });
+              } else {
+                finish();
+              }
+            });
+          })(wrappers[w]);
+        }
+      })();
+    </script>
+  </body>
+</html>

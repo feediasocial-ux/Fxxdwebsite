@@ -1,0 +1,34 @@
+---
+/** Migas de pan semánticas para páginas interiores. */
+interface Props {
+  items: { name: string; path: string }[];
+  ariaLabel: string;
+}
+const { items, ariaLabel } = Astro.props;
+---
+
+<nav aria-label={ariaLabel} class="container-site pt-5 pb-2 text-sm">
+  <ol class="flex flex-wrap items-center gap-2 text-ink-soft">
+    {
+      items.map((item, idx) => {
+        const isLast = idx === items.length - 1;
+        return (
+          <li class="flex items-center gap-2">
+            {isLast ? (
+              <span aria-current="page" class="font-bold text-ink">
+                {item.name}
+              </span>
+            ) : (
+              <>
+                <a href={item.path} class="underline underline-offset-4 hover:text-ink">
+                  {item.name}
+                </a>
+                <span aria-hidden="true">/</span>
+              </>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

@@ -1,0 +1,26 @@
+---
+/** Logotipo tipográfico provisional. [PENDIENTE: logo definitivo] */
+interface Props {
+  href: string;
+  tone?: 'light' | 'dark';
+  label: string;
+}
+const { href, tone = 'light', label } = Astro.props;
+---
+
+<a href={href} class="logo inline-flex items-center gap-1 no-underline" aria-label={label}>
+  <span class:list={['font-display text-[1.65rem] leading-none tracking-wide uppercase', tone === 'light' ? 'text-ink' : 'text-cream']} aria-hidden="true">Feedia</span>
+  <span class="logo__pill font-bold text-sm leading-none" aria-hidden="true">social</span>
+</a>
+
+<style>
+  .logo__pill {
+    background: var(--coral);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.3rem 0.55rem 0.35rem;
+    transform: rotate(-6deg);
+    display: inline-block;
+  }
+</style>

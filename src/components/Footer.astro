@@ -1,0 +1,78 @@
+---
+import Logo from './Logo.astro';
+import CountrySwitcher from './CountrySwitcher.astro';
+import StripeBand from './StripeBand.astro';
+import { getUi } from '@/content';
+import { ROUTES, linkTo, type RouteKey } from '@/lib/routes';
+import type { CountryKey } from '@/lib/i18n';
+
+interface Props {
+  country: CountryKey;
+  routeKey?: RouteKey;
+}
+const { country, routeKey } = Astro.props;
+const ui = getUi(country);
+const nav = ui.header.nav.filter((n) => ROUTES[n.route].live);
+const legal = ui.footer.legal.filter((l) => ROUTES[l.route].live);
+const year = new Date().getFullYear();
+---
+
+<footer class="theme-dark mt-auto">
+  <StripeBand colors={['var(--lemon)', 'var(--ink)']} height="22px" />
+  <div class="container-site grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div class="space-y-4">
+      <Logo href={linkTo('home', country)} tone="dark" label={ui.a11y.logoHome} />
+      <p class="max-w-sm text-cream/85">{ui.footer.tagline}</p>
+    </div>
+
+    <div class="space-y-4">
+      {
+        nav.length > 0 && (
+          <nav aria-label={ui.a11y.mainNav}>
+            <ul class="space-y-2 font-bold">
+              {nav.map((n) => (
+                <li>
+                  <a href={linkTo(n.route, country)} class="underline underline-offset-4 hover:text-lemon">
+                    {n.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+      {
+        legal.length > 0 && (
+          <nav aria-label={ui.footer.legalNav} class="pt-2">
+            <ul class="space-y-2 text-sm text-cream/80">
+              {legal.map((l) => (
+                <li>
+                  <a href={linkTo(l.route, country)} class="underline underline-offset-4 hover:text-lemon">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+    </div>
+
+    <div class="space-y-4">
+      <p class="font-bold">{ui.footer.countryLabel}</p>
+      <CountrySwitcher current={country} routeKey={routeKey} label={ui.countrySwitcher.label} a11yLabel={ui.a11y.countrySwitcher} tone="dark" />
+      <div class="pt-2">
+        <button
+          type="button"
+          data-cookie-reopen
+          class="text-sm text-cream/80 underline underline-offset-4 hover:text-lemon"
+        >
+          {ui.cookieBanner.reopenLabel}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="container-site border-t border-cream/20 py-6 text-sm text-cream/80">
+    <p>© {year} Feediasocial. {ui.footer.rights}</p>
+  </div>
+</footer>

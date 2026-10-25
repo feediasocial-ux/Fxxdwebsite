@@ -1,0 +1,30 @@
+---
+/**
+ * Trazo ondulado que guía la lectura, con texto sobre la línea (SVG estático).
+ * Decorativo: el texto se repite en el contenido, por eso va aria-hidden.
+ */
+interface Props {
+  text: string;
+  color?: string;
+  textColor?: string;
+  class?: string;
+}
+const { text, color = 'var(--coral)', textColor = 'var(--ink)', class: cls = '' } = Astro.props;
+const id = `wave-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<svg class:list={['wavy-line w-full h-auto', cls]} viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+  <defs>
+    <path id={id} d="M0,90 C150,10 300,10 450,80 S750,150 900,70 S1100,20 1200,60"></path>
+  </defs>
+  <use href={`#${id}`} fill="none" stroke={color} stroke-width="14" stroke-linecap="round"></use>
+  <text fill={textColor} font-family="var(--font-display)" font-size="30" letter-spacing="2">
+    <textPath href={`#${id}`} startOffset="4%" dy="-14">{`${text.toUpperCase()} · ${text.toUpperCase()} · ${text.toUpperCase()}`}</textPath>
+  </text>
+</svg>
+
+<style>
+  .wavy-line text {
+    dominant-baseline: text-after-edge;
+  }
+</style>

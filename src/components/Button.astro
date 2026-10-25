@@ -1,0 +1,48 @@
+---
+/**
+ * Botón pastilla. Renderiza <a> si hay href, si no <button>.
+ * Contraste: coral solo como FONDO con texto tinta (5.5:1), nunca texto coral pequeño sobre crema.
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+type Variant = 'primary' | 'dark' | 'outline' | 'lemon' | 'light';
+type Size = 'md' | 'lg';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
+  href?: string;
+  variant?: Variant;
+  size?: Size;
+  type?: 'button' | 'submit';
+  class?: string;
+  external?: boolean;
+}
+
+const { href, variant = 'primary', size = 'md', type = 'button', class: cls = '', external = false, ...rest } = Astro.props;
+
+const variants: Record<Variant, string> = {
+  primary: 'bg-coral text-ink border-ink shadow-[0_4px_0_0_var(--ink)] hover:shadow-[0_6px_0_0_var(--ink)] hover:-translate-y-0.5',
+  dark: 'bg-ink text-cream border-ink hover:bg-maroon',
+  outline: 'bg-transparent text-current border-current hover:bg-ink hover:text-cream hover:border-ink',
+  lemon: 'bg-lemon text-ink border-ink shadow-[0_4px_0_0_var(--ink)] hover:shadow-[0_6px_0_0_var(--ink)] hover:-translate-y-0.5',
+  light: 'bg-cream text-ink border-cream hover:bg-lemon hover:border-lemon',
+};
+const sizes: Record<Size, string> = {
+  md: 'min-h-12 px-6 text-base',
+  lg: 'min-h-14 px-8 text-lg',
+};
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-pill border-2 font-bold leading-tight text-center no-underline transition-[transform,box-shadow,background-color,color] duration-200 active:translate-y-0.5 active:shadow-none select-none';
+const classes = [base, variants[variant], sizes[size], cls].join(' ');
+---
+
+{
+  href ? (
+    <a href={href} class={classes} {...(external ? { target: '_blank', rel: 'noopener' } : {})} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} {...(rest as HTMLAttributes<'button'>)}>
+      <slot />
+    </button>
+  )
+}

@@ -1,0 +1,15 @@
+---
+description: Reglas permanentes del proyecto Feediasocial (España + México)
+globs: **/*
+alwaysApply: true
+---
+
+- Stack: Astro (static output) + TypeScript + Tailwind CSS. Cero frameworks JS en el cliente salvo que sea imprescindible. Islas interactivas solo con `client:visible` o `client:idle`.
+- Todo el copy vive en archivos de datos por locale (`src/content/es-ES`, `src/content/es-MX`). Nunca textos hardcodeados en componentes.
+- Nunca traducir: localizar. España (`es-ES`): "móvil", "vídeo", tú/vosotros, precios en €. México (`es-MX`): "celular", "video", tú/ustedes, precios en MXN.
+- Prohibido inventar testimonios, cifras, logos de clientes, casos de éxito, reseñas, direcciones o números de clientes. Si falta un dato real, usa un placeholder visible `[PENDIENTE: ...]` y lístalo en `TODO.md`.
+- Prohibido prometer seguidores, ventas o viralidad. Prometemos sistema y constancia.
+- Prohibido copiar layouts, assets, textos o marcas de los sitios de referencia. Se toma el lenguaje visual, no el diseño.
+- Cada página nueva debe cumplir la checklist SEO y el presupuesto de rendimiento (ver brief) antes de darla por terminada.
+- Accesibilidad: contraste WCAG AA, foco visible, `prefers-reduced-motion`, HTML semántico, un solo H1 por página.
+- Commits pequeños y descriptivos. Después de cada fase: ejecuta build, Lighthouse CI (móvil) y valida hreflang/sitemaps; reporta resultados.

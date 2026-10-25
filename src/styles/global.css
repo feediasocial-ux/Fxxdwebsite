@@ -1,0 +1,179 @@
+/* Fuentes auto-alojadas (woff2, font-display: swap, subset latino vía unicode-range) */
+@import '@fontsource/anton/latin-400.css';
+@import '@fontsource-variable/dm-sans/wght.css';
+
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   TOKENS DE DISEÑO (fuente de verdad)
+   ------------------------------------------------------------------ */
+:root {
+  --cream: #fff6e5;
+  --ink: #1b1b1f;
+  --coral: #ff5a36;
+  --lemon: #e8f05a;
+  --sky: #bfe3ff;
+  --maroon: #5a2530;
+
+  /* Derivados (no son colores nuevos de marca: variantes accesibles) */
+  --coral-deep: #c2381a; /* coral apto para texto sobre crema (AA ≥ 4.5:1) */
+  --cream-deep: #f5e6c8; /* superficie secundaria sobre crema */
+  --ink-soft: #3d3d45; /* texto secundario sobre crema (AA) */
+
+  /* Acentos por tema (data-theme) */
+  --accent-1: var(--coral);
+  --accent-2: var(--lemon);
+  --accent-3: var(--sky);
+  --surface: var(--cream);
+  --on-surface: var(--ink);
+
+  --radius-card: 28px;
+  --radius-pill: 999px;
+  --shadow-pop: 0 6px 0 0 var(--ink);
+  --wa-float-size: 60px;
+  --cookie-offset: 0px; /* lo actualiza el banner de cookies (fase 2) */
+}
+
+/* Clínicas y nichos sobrios: más crema y tinta, un solo color fuerte */
+[data-theme='sober'] {
+  --accent-1: var(--maroon);
+  --accent-2: var(--cream-deep);
+  --accent-3: var(--cream-deep);
+}
+
+/* Bloques oscuros puntuales */
+.theme-dark {
+  --surface: var(--ink);
+  --on-surface: var(--cream);
+  background: var(--surface);
+  color: var(--on-surface);
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-coral: var(--coral);
+  --color-coral-deep: var(--coral-deep);
+  --color-lemon: var(--lemon);
+  --color-sky: var(--sky);
+  --color-maroon: var(--maroon);
+  --color-accent-1: var(--accent-1);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+
+  --font-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
+  --font-sans: 'DM Sans Variable', 'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-card: var(--radius-card);
+  --radius-pill: var(--radius-pill);
+}
+
+/* ------------------------------------------------------------------
+   BASE
+   ------------------------------------------------------------------ */
+@layer base {
+  html {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    min-height: 100dvh;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: 0.005em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Foco visible y consistente */
+  :focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+    border-radius: 6px;
+    box-shadow: 0 0 0 6px var(--lemon);
+  }
+  .theme-dark :focus-visible {
+    outline-color: var(--lemon);
+    box-shadow: 0 0 0 6px var(--ink);
+  }
+
+  ::selection {
+    background: var(--lemon);
+    color: var(--ink);
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ------------------------------------------------------------------
+   UTILIDADES PROPIAS
+   ------------------------------------------------------------------ */
+@utility container-site {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility sr-only-focusable {
+  position: absolute;
+  left: -9999px;
+  &:focus {
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+  }
+}
+
+@utility text-display-xl {
+  font-size: clamp(3.25rem, 13vw, 9.5rem);
+}
+@utility text-display-lg {
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+}
+@utility text-display-md {
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
+}
+
+/* ------------------------------------------------------------------
+   MOVIMIENTO: todo se apaga con prefers-reduced-motion
+   ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
