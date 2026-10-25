@@ -5,19 +5,25 @@ interface Props {
   aspect?: string;
   class?: string;
   tone?: 'sky' | 'lemon' | 'cream-deep';
+  compact?: boolean;
 }
-const { label, aspect = '4/5', class: cls = '', tone = 'sky' } = Astro.props;
+const { label, aspect = '4/5', class: cls = '', tone = 'sky', compact = false } = Astro.props;
 const bg = { sky: 'bg-sky', lemon: 'bg-lemon', 'cream-deep': 'bg-cream-deep' }[tone];
 ---
 
 <div
-  class:list={['placeholder grid place-items-center rounded-[28px] border-2 border-dashed border-ink p-4 text-center font-bold', bg, cls]}
+  class:list={[
+    'placeholder grid place-items-center border-2 border-dashed border-ink text-center font-bold shadow-[3px_4px_0_0_var(--ink)]',
+    compact ? 'rounded-2xl p-2.5' : 'rounded-[28px] p-4',
+    bg,
+    cls,
+  ]}
   style={`aspect-ratio:${aspect}`}
   role="img"
   aria-label={label}
 >
-  <span class="flex flex-col items-center gap-2">
-    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h3l2-3h6l2 3h3v13H4z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-    <span class="text-sm">{label}</span>
+  <span class:list={['flex flex-col items-center', compact ? 'gap-1' : 'gap-2']}>
+    <svg width={compact ? '22' : '32'} height={compact ? '22' : '32'} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h3l2-3h6l2 3h3v13H4z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+    <span class:list={['leading-snug', compact ? 'text-xs' : 'text-sm']}>{label}</span>
   </span>
 </div>

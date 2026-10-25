@@ -50,7 +50,7 @@ const foundersJsonLd = copy.founders.map((f, i) => ({
       <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase">
         {copy.eyebrow}
       </p>
-      <h1 class="text-display-xl">{copy.h1}</h1>
+      <h1 class="text-display-hero">{copy.h1}</h1>
       <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
     </div>
   </section>
@@ -63,13 +63,13 @@ const foundersJsonLd = copy.founders.map((f, i) => ({
     <div class="mt-10 grid gap-8 md:grid-cols-2">
       {
         copy.founders.map((f) => (
-          <Card color="cream-deep" bordered class="grid gap-6 sm:grid-cols-[0.9fr_1.1fr] sm:items-center">
+          <Card color="cream-deep" bordered class="grid gap-6 sm:grid-cols-[0.85fr_1.15fr] sm:items-center">
             <Placeholder label={f.placeholder} aspect="4/5" tone={f.color} />
             <div class="space-y-3">
               <span class="inline-block rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
                 {f.role}
               </span>
-              <h3 class="text-3xl">{f.name}</h3>
+              <h3 class="text-2xl">{f.name}</h3>
               <p class="text-sm text-ink-soft">{f.bio}</p>
             </div>
           </Card>

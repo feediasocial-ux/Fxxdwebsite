@@ -19,9 +19,9 @@ const bg = {
 }[color];
 ---
 
-<li class:list={['step relative flex flex-col gap-4 rounded-[28px] border-2 border-ink p-6 text-ink md:p-8', bg]}>
-  <span class="step__n font-display text-7xl leading-none md:text-8xl" aria-hidden="true">{String(n).padStart(2, '0')}</span>
-  <H class="text-3xl md:text-4xl">{title}</H>
+<li class:list={['step relative flex flex-col gap-3 rounded-[28px] border-2 border-ink p-6 text-ink md:p-8', bg]}>
+  <span class="step__n font-display text-6xl leading-none md:text-7xl" aria-hidden="true">{String(n).padStart(2, '0')}</span>
+  <H class="text-2xl md:text-3xl">{title}</H>
   <p>{text}</p>
 </li>
 

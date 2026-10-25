@@ -25,14 +25,14 @@ const { copy, country, page, waMessage, waA11y, secondaryHref, image } = Astro.p
 ---
 
 <section class="hero relative overflow-hidden">
-  <div class="container-site grid items-center gap-10 pt-8 pb-14 md:pt-14 lg:grid-cols-[1.15fr_1fr] lg:gap-14 lg:pb-20">
+  <div class="container-site grid items-center gap-10 pt-8 pb-14 md:pt-12 lg:grid-cols-[1.15fr_1fr] lg:gap-12 lg:pb-20">
     <div class="relative z-10 flex flex-col gap-6">
       <p class="inline-flex w-fit items-center gap-2 rounded-pill border-2 border-ink bg-sky px-4 py-1.5 text-sm font-bold">
         <span class="size-2.5 rounded-full bg-coral" aria-hidden="true"></span>
         {copy.eyebrow}
       </p>
-      <h1 class="text-display-xl">
-        {copy.title}
+      <h1 class="text-display-xl flex flex-col items-start gap-2">
+        <span class="block">{copy.title}</span>
         <span class="hero__mark">{copy.titleHighlight}</span>
       </h1>
       <p class="max-w-xl text-lg md:text-xl">{copy.promise}</p>
@@ -42,26 +42,28 @@ const { copy, country, page, waMessage, waA11y, secondaryHref, image } = Astro.p
       </div>
     </div>
 
-    <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+    <div class="relative mx-auto w-full max-w-md pt-4 pr-4 pb-8 pl-4 lg:max-w-none">
       <div class="hero__photo overflow-hidden rounded-[32px] border-2 border-ink">
         <Photo src={image} alt={copy.photoAlt} priority aspect="4/5" widths={[360, 480, 640, 800]} sizes="(min-width: 1024px) 42vw, 92vw" />
       </div>
-      <div class="absolute -bottom-6 -left-4 w-32 rotate-[-5deg] md:w-40">
-        <Placeholder label={copy.founderPlaceholder} aspect="1/1" tone="lemon" />
+      <div class="absolute bottom-2 left-0 z-10 w-44 rotate-[-4deg] sm:w-48">
+        <Placeholder label={copy.founderPlaceholder} aspect="16/10" tone="lemon" compact />
       </div>
-      <Sticker color="coral" shape="circle" rotate={12} class="absolute -top-4 -right-2 md:-right-6">{copy.stickers[1]}</Sticker>
+      <Sticker color="coral" shape="circle" rotate={10} class="absolute top-0 right-0 z-10">{copy.stickers[1]}</Sticker>
     </div>
   </div>
 </section>
 
 <style>
   .hero__mark {
-    display: inline;
+    display: inline-block;
     background: var(--lemon);
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    padding: 0 0.12em;
-    border-radius: 0.12em;
+    color: var(--ink);
+    line-height: 1.05;
+    padding: 0.14em 0.28em 0.1em;
+    border-radius: 0.22em;
+    border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 0 var(--ink);
   }
   :global([data-theme='sober']) .hero__mark {
     background: var(--cream-deep);

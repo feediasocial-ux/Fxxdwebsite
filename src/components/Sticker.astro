@@ -19,7 +19,7 @@ const colors = {
 ---
 
 <span
-  class:list={['sticker font-display uppercase border-2 border-ink inline-flex items-center justify-center text-center leading-none', `sticker--${shape}`, colors[color], decor && 'sticker--decor', cls]}
+  class:list={['sticker font-display uppercase border-2 border-ink inline-flex items-center justify-center text-center', `sticker--${shape}`, colors[color], decor && 'sticker--decor', cls]}
   style={`--rot:${rotate}deg`}
 >
   <slot />
@@ -29,18 +29,21 @@ const colors = {
   .sticker {
     transform: rotate(var(--rot));
     box-shadow: 3px 4px 0 0 var(--ink);
-    font-size: clamp(0.85rem, 2.6vw, 1.05rem);
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
+    line-height: 1.14;
     letter-spacing: 0.02em;
   }
   .sticker--pill {
     border-radius: 999px;
-    padding: 0.6rem 1.1rem;
+    padding: 0.5rem 1rem;
   }
   .sticker--circle {
     border-radius: 50%;
-    width: 7.5rem;
+    width: 7.75rem;
     aspect-ratio: 1;
-    padding: 0.9rem;
+    padding: 0.85rem;
+    font-size: 0.82rem;
+    line-height: 1.12;
   }
   .sticker--star {
     width: 8rem;

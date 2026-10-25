@@ -60,7 +60,7 @@ const crumbs = [
         <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
           {copy.eyebrow}
         </p>
-        <h1 class="text-display-xl">{copy.h1}</h1>
+        <h1 class="text-display-hero">{copy.h1}</h1>
         <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
         <div class="flex flex-wrap gap-3 pt-2">
           <WhatsAppButton
@@ -101,7 +101,7 @@ const crumbs = [
             <span class="inline-block w-fit rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
               {b.badge}
             </span>
-            <h3 class="text-3xl">{b.title}</h3>
+            <h3 class="text-2xl md:text-3xl">{b.title}</h3>
             <p>{b.text}</p>
             <ul class="mt-auto space-y-2 pt-2 text-sm font-medium">
               {b.bullets.map((item) => (
@@ -147,7 +147,7 @@ const crumbs = [
       <p class="text-lg text-ink-soft">{copy.nichesSubtitle}</p>
     </div>
 
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
       {
         niches.map((n, idx) => (
           <NicheCard

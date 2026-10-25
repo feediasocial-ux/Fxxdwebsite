@@ -13,13 +13,13 @@ const { text, color = 'var(--coral)', textColor = 'var(--ink)', class: cls = '' 
 const id = `wave-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
-<svg class:list={['wavy-line w-full h-auto', cls]} viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+<svg class:list={['wavy-line w-full h-auto py-2', cls]} viewBox="0 0 1200 130" aria-hidden="true" focusable="false">
   <defs>
-    <path id={id} d="M0,90 C150,10 300,10 450,80 S750,150 900,70 S1100,20 1200,60"></path>
+    <path id={id} d="M 0,88 Q 300,48 600,82 T 1200,72"></path>
   </defs>
-  <use href={`#${id}`} fill="none" stroke={color} stroke-width="14" stroke-linecap="round"></use>
-  <text fill={textColor} font-family="var(--font-display)" font-size="30" letter-spacing="2">
-    <textPath href={`#${id}`} startOffset="4%" dy="-14">{`${text.toUpperCase()} · ${text.toUpperCase()} · ${text.toUpperCase()}`}</textPath>
+  <use href={`#${id}`} fill="none" stroke={color} stroke-width="12" stroke-linecap="round"></use>
+  <text fill={textColor} font-family="var(--font-display)" font-size="22" letter-spacing="3">
+    <textPath href={`#${id}`} startOffset="2%" dy="-12">{`${text.toUpperCase()} · ${text.toUpperCase()} · ${text.toUpperCase()}`}</textPath>
   </text>
 </svg>
 
