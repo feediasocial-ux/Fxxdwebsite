@@ -604,4 +604,304 @@ export const nichesES: NicheLandingData[] = [
     waMessage: 'Hola, vengo de la página de gimnasios en España y quiero ver los paquetes.',
     waCta: 'Ver paquetes para mi centro fitness por WhatsApp',
   },
+
+  /* ==================================================================
+     5. ABOGADOS, ASESORÍAS Y DESPACHOS PROFESIONALES ESPAÑA (tema: sober)
+     ================================================================== */
+  {
+    id: 'abogados',
+    country: 'es',
+    slug: 'redes-sociales-abogados-asesorias',
+    routeKey: 'nichoAbogados',
+    theme: 'sober',
+    photoKey: 'abogados-es',
+    photoAlt: 'Abogado o asesor fiscal en su despacho en España grabando una explicación breve con el móvil',
+    shortTitle: 'Abogados y asesorías',
+    cardSummary: 'Contenido riguroso y sobrio para despachos de abogados, asesorías fiscales y laborales en España.',
+    metaTitle: 'Redes sociales para abogados y asesorías en España | Feediasocial',
+    metaDescription:
+      'Gestión de contenido mensual para despachos de abogados, asesorías fiscales, laborales y gestorías en España: guiones rigurosos, edición y calendario.',
+    eyebrow: 'Despachos y asesorías · España (versión sobria)',
+    h1: 'Redes sociales para abogados y asesorías: explica la ley en claro y atrae consultas cualificadas',
+    intro:
+      'Cuando un autónomo, una pyme o un particular necesita un abogado mercantil, laboralista, de familia o una asesoría fiscal en España, busca quién le explique su problema sin jerga incomprensible antes de pedir cita en el despacho. Redactamos guiones rigurosos, editamos tus vídeos con estética sobria y dejamos tu calendario mensual listo con solo 30 minutos de grabación con el móvil.',
+    nicheVocabulary: [
+      'consulta jurídica',
+      'autónomos y sociedades',
+      'declaración trimestral',
+      'estatuto de los trabajadores',
+      'secreto profesional',
+      'iguala mensual',
+    ],
+    painsTitle: 'Los 3 obstáculos habituales en las redes de un despacho o asesoría en España',
+    pains: [
+      {
+        title: 'Entre plazos de Hacienda, juzgados y cierres trimestrales, es imposible pensar en publicar',
+        text: 'En enero, abril, julio y octubre el despacho arde de trabajo y las redes sociales se quedan congeladas durante meses.',
+      },
+      {
+        title: 'Miedo a parecer poco serio o caer en el estilo frívolo de otros sectores',
+        text: 'Un bufete o asesoría colegiada no puede permitirse bailes, titulares sensacionalistas ni consejos imprecisos que dañen su prestigio profesional.',
+      },
+      {
+        title: 'Publicaciones llenas de artículos del BOE que el cliente de la calle no entiende',
+        text: 'Copiar el número de un Real Decreto en una imagen estática no genera consultas; traducir cómo afecta al bolsillo del cliente en 25 segundos, sí.',
+      },
+    ],
+    objectionsTitle: 'Objeciones frecuentes de socios de despachos y titulares de asesorías',
+    objections: [
+      {
+        objection: '«El derecho y la fiscalidad son materias delicadas; una agencia externa puede cometer errores técnicos.»',
+        answer:
+          'Por eso nunca publicamos nada sin vuestro visto bueno previo. Nosotros estructuramos el gancho pedagógico y el ritmo de frase, y el letrado o asesor valida el matiz técnico en 5 minutos antes de grabar.',
+      },
+      {
+        objection: '«Nuestros mejores clientes llegan por recomendación; ¿de verdad buscan abogado en Instagram o TikTok?»',
+        answer:
+          'Incluso quien recibe tu contacto por el boca a boca busca hoy el nombre del despacho en el móvil antes de llamar. Ver cuatro vídeos claros explicando casos tipo cierra la duda y acelera la reserva de consulta.',
+      },
+      {
+        objection: '«No quiero dar asesoramiento gratuito completo por mensaje directo.»',
+        answer:
+          'Todos nuestros cierres de guion educan al espectador para que entienda el marco general y dirigen a reservar una consulta remunerada o pedir propuesta de iguala por WhatsApp.',
+      },
+    ],
+    reelIdeasTitle: '3 ideas de reels sobrios para despachos y asesorías en España',
+    reelIdeasSubtitle: 'Sin tecnicismos vacíos y cumpliendo con la deontología profesional:',
+    reelIdeas: [
+      {
+        title: 'Fiscal y autónomos · El gasto deducible que más inspecciones genera',
+        hook: '«Si eres autónomo en España y te deduces el vehículo o el teléfono móvil, ten mucho cuidado con este requisito de Hacienda.»',
+        visual: 'Asesor en su mesa de despacho hablando con calma a cámara + rótulos limpios con los dos criterios reales.',
+        goal: 'Atraer autónomos y pymes cansados de que su gestoría actual no les avise a tiempo.',
+      },
+      {
+        title: 'Laboral / Mercantil · Qué hacer en las primeras 48 horas tras una notificación',
+        hook: '«El plazo de 20 días hábiles empieza a correr mucho antes de lo que la mayoría piensa cuando recibes una carta de despido o sanción.»',
+        visual: 'Abogado mostrando un esquema temporal sencillo en tres pasos y explicando qué documentos reunir antes de la cita.',
+        goal: 'Generar consultas urgentes y cualificadas por WhatsApp.',
+      },
+      {
+        title: 'Sucesiones e inmobiliario · Qué revisar antes de firmar un contrato de arras o aceptar una herencia',
+        hook: '«Firmar este documento estándar descargado de internet puede costarte la señal entera si el banco tarda en conceder la hipoteca.»',
+        visual: 'Explicación pausada subrayando la cláusula clave en un folio de muestra (sin datos reales).',
+        goal: 'Posicionar al despacho como preventivo y cercano.',
+      },
+    ],
+    calendarTitle: 'Ejemplo de calendario mensual para un despacho o asesoría en España',
+    calendarSubtitle: 'Equilibrio entre pedagogía legal/fiscal, autoridad de firma y captación de consultas:',
+    sampleCalendar: [
+      {
+        week: 'Semana 1 · Duda frecuente de empresa o autónomo',
+        focus: 'Traducir una novedad normativa al lenguaje del cliente',
+        pieces: [
+          'Reel 1: explicación en 30 s de un cambio fiscal o laboral que entra en vigor este trimestre.',
+          'Carrusel (6 láminas): lista de documentos que debes guardar cada mes para evitar sanciones.',
+          'Stories: recordatorio del calendario del contribuyente o plazos clave del mes.',
+        ],
+      },
+      {
+        week: 'Semana 2 · Autoridad y prevención jurídica',
+        focus: 'Mostrar por qué consultar a tiempo ahorra miles de euros en litigios',
+        pieces: [
+          'Reel 2: los 3 errores más caros al firmar un pacto de socios o contrato de alquiler de local.',
+          'Post de criterio: cuándo compensa pasar de autónomo a Sociedad Limitada en España.',
+          'Stories de despacho: cómo preparamos una primera reunión de diagnóstico.',
+        ],
+      },
+      {
+        week: 'Semana 3 · Solución sin salir en cámara (carrusel + método)',
+        focus: 'Explicar cómo trabajáis por dentro con vuestros clientes de iguala',
+        pieces: [
+          'Reel 3: qué incluye exactamente una iguala fiscal/laboral bien llevada para una pyme.',
+          'Carrusel comparativo: gestoría tradicional que solo pica facturas vs. asesoramiento proactivo.',
+          'Stories de preguntas: resolución breve de dudas generales y enlace a reserva de consulta.',
+        ],
+      },
+      {
+        week: 'Semana 4 · Conversión a consulta en despacho o videollamada',
+        focus: 'Facilitar el contacto directo a quienes necesitan cambiar de asesoría o iniciar un trámite',
+        pieces: [
+          'Reel 4: cómo funciona el cambio de asesoría paso a paso sin perder ni un papel por el camino.',
+          'Post de servicios: áreas de práctica del despacho y modalidades de atención.',
+          'Stories con enlace a WhatsApp para agendar consulta inicial.',
+        ],
+      },
+    ],
+    faqTitle: 'Preguntas frecuentes de abogados y asesorías en España',
+    faqs: [
+      {
+        q: '¿Respetáis el Código Deontológico de la Abogacía Española en los contenidos?',
+        a: 'Absolutamente. Aplicamos nuestro tema visual sobrio, evitamos cualquier promesa de resultado judicial, respetamos el secreto profesional y jamás utilizamos titulares sensacionalistas.',
+      },
+      {
+        q: '¿Qué ocurre durante las campañas de Renta, Sociedades o cierres trimestrales si no podemos grabar?',
+        a: 'Como planificamos a mes vista, dejamos grabados los vídeos antes del pico de trabajo o activamos el Plan B con carruseles técnicos y gráficos editoriales para que la cuenta no se pare en pleno trimestre.',
+      },
+      {
+        q: '¿Revisamos nosotros los guiones antes de grabar?',
+        a: 'Siempre. Recibís los guiones con antelación para validar cada término jurídico o tributario antes de encender la cámara del móvil.',
+      },
+      {
+        q: '¿Atendéis tanto a despachos unipersonales como a firmas con varios socios?',
+        a: 'Sí. Podemos centrar la comunicación en un único titular o repartir los 4 reels mensuales entre los responsables de fiscal, laboral, mercantil y civil.',
+      },
+      {
+        q: '¿Cómo se factura el servicio en España?',
+        a: 'Emitimos factura mensual por servicios profesionales de comunicación y marketing. [PENDIENTE: confirmar detalles fiscales con asesoría].',
+      },
+    ],
+    waMessage: 'Hola, vengo de la página de abogados y asesorías en España y quiero ver los paquetes.',
+    waCta: 'Ver propuesta para mi despacho por WhatsApp',
+  },
+
+  /* ==================================================================
+     6. PELUQUERÍAS, SALONES DE BELLEZA Y BARBERÍAS ESPAÑA (tema: vivid)
+     ================================================================== */
+  {
+    id: 'belleza',
+    country: 'es',
+    slug: 'redes-sociales-peluquerias-salones-belleza',
+    routeKey: 'nichoBelleza',
+    theme: 'vivid',
+    photoKey: 'belleza-es',
+    photoAlt: 'Estilista en un salón de belleza en España grabando con el móvil el resultado de un trabajo técnico',
+    shortTitle: 'Peluquerías y salones',
+    cardSummary: 'Reels de transformación, diagnóstico capilar y reservas por WhatsApp para salones de belleza y barberías en España.',
+    metaTitle: 'Redes sociales para peluquerías y salones de belleza | Feediasocial',
+    metaDescription:
+      'Contenido mensual para peluquerías, salones de coloración, centros de uñas y barberías en España: guiones, edición de reels y calendario.',
+    eyebrow: 'Salones de belleza y peluquerías · España',
+    h1: 'Redes sociales para peluquerías y salones: enseña tu técnica en vídeo y llena las horas valle',
+    intro:
+      'En España nadie cambia de peluquería, salón de coloración orgánica, estudio de cejas o barbería a ciegas: antes entra en Instagram para ver cómo queda el rubio con luz natural, cómo cuidáis el cabello y quién le va a atender en el tocador. Te damos la lista de planos para grabar en 30 minutos al mes con tu móvil y nosotros editamos y programamos todo tu calendario.',
+    nicheVocabulary: [
+      'diagnóstico capilar',
+      'balayage y coloración',
+      'tratamiento de hidratación',
+      'tocador y lavacabezas',
+      'reserva de cita',
+      'mantenimiento en casa',
+    ],
+    painsTitle: 'Los 3 problemas clásicos en el Instagram de un salón de belleza o peluquería',
+    pains: [
+      {
+        title: 'Se te olvida hacer la foto del «antes» y acabas subiendo solo nucas todas iguales',
+        text: 'Con el salón lleno un viernes por la tarde vas corriendo entre secadores y tintes, y las pocas fotos que sacas con mala luz no hacen justicia al trabajo real.',
+      },
+      {
+        title: 'Viernes y sábados completos, pero martes y miércoles con huecos en la agenda',
+        text: 'Sin un calendario que eduque sobre tratamientos entre semana y facilite la reserva por WhatsApp, la facturación se concentra solo en el fin de semana.',
+      },
+      {
+        title: 'Clientas que piden por mensaje presupuesto cerrado de color sin haber visto su pelo',
+        text: 'Cuando tus redes no explican por qué hacéis diagnóstico previo en el tocador, pierdes media hora al día respondiendo mensajes confusos.',
+      },
+    ],
+    objectionsTitle: 'Dudas habituales de dueños de salones de belleza y peluquerías en España',
+    objections: [
+      {
+        objection: '«Muchas clientas vienen a relajarse y no quieren que les grabemos la cara.»',
+        answer:
+          'Nuestra lista de planos combina tomas de manos trabajando la mecha, caída del cabello de espaldas con brillo natural y explicaciones del estilista a cámara en 15 segundos antes de abrir el salón.',
+      },
+      {
+        objection: '«No tengo tiempo de parar entre clienta y clienta para montar un estudio de vídeo.»',
+        answer:
+          'No tienes que parar tu jornada. Te damos una pauta de clips de 4 segundos que un compañero graba al vuelo en el tocador más 15 minutos al mes de consejos hablados a puerta cerrada.',
+      },
+      {
+        objection: '«Ya subimos fotos de peinados y apenas tienen alcance fuera de nuestras clientas de siempre.»',
+        answer:
+          'Las fotos estáticas de melenas vistas desde atrás ya no llegan a gente nueva de tu barrio. Los reels que explican por qué un rubio se oxida o qué corte favorece según el rostro multiplican los guardados y las citas nuevas.',
+      },
+    ],
+    reelIdeasTitle: '3 ideas de reels que llenan agenda en peluquerías y salones de España',
+    reelIdeasSubtitle: 'Pensados para atraer clientas que valoran el cuidado técnico y el ticket medio alto:',
+    reelIdeas: [
+      {
+        title: 'Diagnóstico real · Por qué no damos precio de mechas por teléfono sin ver tu cabello',
+        hook: '«Si nos pides presupuesto de balayage por WhatsApp, siempre te vamos a hacer estas 3 preguntas antes de darte cita.»',
+        visual: 'Estilista en el tocador mostrando mechón, historial de tinte previo y tiempo real de trabajo.',
+        goal: 'Educar a la clienta nueva y aumentar las reservas de diagnóstico en salón.',
+      },
+      {
+        title: 'Cuidado en casa · El error al usar la plancha o el champú matizador que apaga tu color',
+        hook: '«Dejar el champú violeta diez minutos puesto no te deja el rubio más bonito: te reseca la punta y oscurece el matiz.»',
+        visual: 'Demostración rápida en lavacabezas y recomendación de frecuencia exacta.',
+        goal: 'Conseguir guardados y posicionar al equipo como experto en salud capilar.',
+      },
+      {
+        title: 'Transformación con criterio · Cómo corregimos un color oxidado sin castigar la fibra',
+        hook: '«Así recuperamos la luz de una melena que llevaba seis meses sin tocar el salón en una sola mañana.»',
+        visual: 'Plano de punto de partida, aplicación de tratamiento protector y resultado final en movimiento con luz de calle.',
+        goal: 'Atraer servicios de ticket alto para las mañanas de martes a jueves.',
+      },
+    ],
+    calendarTitle: 'Ejemplo de calendario mensual para una peluquería o salón en España',
+    calendarSubtitle: 'Diseñado para elevar el ticket medio y mover reservas hacia los días entre semana:',
+    sampleCalendar: [
+      {
+        week: 'Semana 1 · Coloración y diagnóstico profesional',
+        focus: 'Explicar la diferencia entre vuestra técnica y un servicio rápido de bajo coste',
+        pieces: [
+          'Reel 1: qué miramos en los primeros 10 minutos de diagnóstico capilar gratuito.',
+          'Carrusel (6 slides): diferencia real entre babylights, balayage y baño de color para saber qué pedir.',
+          'Stories: huecos disponibles de martes a jueves con enlace directo a WhatsApp.',
+        ],
+      },
+      {
+        week: 'Semana 2 · Salud del cabello, piel o uñas en casa',
+        focus: 'Aportar consejos prácticos que tus clientas guarden y compartan',
+        pieces: [
+          'Reel 2: los 3 gestos al secar el pelo en casa que evitan el encrespamiento.',
+          'Post de tratamiento: en qué consiste nuestro ritual de hidratación profunda en salón.',
+          'Stories de equipo: presentación de cada especialista del salón.',
+        ],
+      },
+      {
+        week: 'Semana 3 · Trabajos reales y experiencia en el salón',
+        focus: 'Enseñar el ambiente cuidado y los productos con los que trabajáis',
+        pieces: [
+          'Reel 3: transformación real explicada paso a paso con tiempos y mantenimiento.',
+          'Carrusel educativo: cada cuántas semanas conviene retocar corte o color según tu tipo de pelo.',
+          'Stories interactivas: cajita de dudas sobre caída estacional, cuero cabelludo o manicura.',
+        ],
+      },
+      {
+        week: 'Semana 4 · Reserva anticipada de agenda',
+        focus: 'Llenar el calendario del mes siguiente sin depender de descuentos agresivos',
+        pieces: [
+          'Reel 4: por qué reservar tu cita de color con dos semanas de margen te asegura tu horario ideal.',
+          'Post de carta de servicios: tiempos estimados en salón y cómo pedir cita.',
+          'Stories de cierre de mes: apertura de agenda y botón directo a WhatsApp.',
+        ],
+      },
+    ],
+    faqTitle: 'Preguntas frecuentes de peluquerías, barberías y salones en España',
+    faqs: [
+      {
+        q: '¿Sirve tanto para peluquería orgánica/coloración como para barbería o centro de uñas y pestañas?',
+        a: 'Sí. Adaptamos los guiones, el vocabulario y el ritmo de edición a vuestra especialidad concreta.',
+      },
+      {
+        q: '¿Cómo grabamos los vídeos si durante el día estamos con las manos en el lavacabezas o con el secador?',
+        a: 'Os entregamos una hoja de ruta muy sencilla: 15 minutos hablados antes de abrir un martes por la mañana y clips mudos de 4 segundos del acabado final con un pequeño trípode junto al tocador.',
+      },
+      {
+        q: '¿Podéis conectar las publicaciones con nuestro WhatsApp de citas o sistema de reservas?',
+        a: 'Por supuesto. Dirigimos los llamados a la acción a vuestro WhatsApp con mensaje precargado para que recepción gestione la cita al instante.',
+      },
+      {
+        q: '¿Qué pasa en diciembre o época de bodas y comuniones cuando no damos abasto?',
+        a: 'Justo para eso sirve trabajar con calendario anticipado: dejamos todo el mes programado antes de que empiece el pico de trabajo en el salón.',
+      },
+      {
+        q: '¿Hay permanencia obligatoria?',
+        a: 'No. Trabajamos mes a mes con tarifas claras desde 349 €/mes en España.',
+      },
+    ],
+    waMessage: 'Hola, vengo de la página de peluquerías y salones en España y quiero ver los paquetes.',
+    waCta: 'Ver paquetes para mi salón por WhatsApp',
+  },
 ];

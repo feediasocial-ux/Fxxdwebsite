@@ -37,10 +37,38 @@ export const ROUTES = {
       mx: '/mx/blog/como-organizar-calendario-redes-metricool/',
     },
   },
+  blogCarruseles: {
+    live: true,
+    paths: {
+      es: '/es/blog/como-disenar-carruseles-instagram-que-convierten/',
+      mx: '/mx/blog/como-hacer-carruseles-instagram-para-vender/',
+    },
+  },
+  blogTiktokVsReels: {
+    live: true,
+    paths: {
+      es: '/es/blog/tiktok-vs-instagram-reels-para-pymes-espana/',
+      mx: '/mx/blog/tiktok-vs-instagram-reels-para-negocios-mexico/',
+    },
+  },
   nichoClinicas: { live: true, paths: { es: '/es/redes-sociales-clinicas/', mx: '/mx/manejo-redes-sociales-clinicas/' } },
   nichoRestaurantes: { live: true, paths: { es: '/es/redes-sociales-restaurantes/', mx: '/mx/manejo-redes-sociales-restaurantes/' } },
   nichoInmobiliarias: { live: true, paths: { es: '/es/redes-sociales-inmobiliarias/', mx: '/mx/manejo-redes-sociales-inmobiliarias/' } },
   nichoGimnasios: { live: true, paths: { es: '/es/redes-sociales-gimnasios/', mx: '/mx/manejo-redes-sociales-gimnasios/' } },
+  nichoAbogados: {
+    live: true,
+    paths: {
+      es: '/es/redes-sociales-abogados-asesorias/',
+      mx: '/mx/manejo-redes-sociales-abogados-contadores/',
+    },
+  },
+  nichoBelleza: {
+    live: true,
+    paths: {
+      es: '/es/redes-sociales-peluquerias-salones-belleza/',
+      mx: '/mx/manejo-redes-sociales-salones-belleza-spas/',
+    },
+  },
   intencionPrecio: { live: true, paths: { es: '/es/precio-community-manager/', mx: '/mx/precio-manejo-redes-sociales/' } },
   intencionComparativa: { live: true, paths: { es: '/es/agencia-vs-community-manager-vs-freelancer/', mx: '/mx/agencia-vs-community-manager/' } },
   intencionSinCamara: { live: true, paths: { es: '/es/contenido-redes-sin-salir-en-camara/', mx: '/mx/contenido-redes-sin-salir-en-camara/' } },

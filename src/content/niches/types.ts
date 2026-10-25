@@ -1,7 +1,7 @@
 import type { CountryKey } from '@/lib/i18n';
 import type { RouteKey } from '@/lib/routes';
 
-export type NicheId = 'clinicas' | 'restaurantes' | 'inmobiliarias' | 'gimnasios';
+export type NicheId = 'clinicas' | 'restaurantes' | 'inmobiliarias' | 'gimnasios' | 'abogados' | 'belleza';
 
 export type NichePhotoKey =
   | 'clinicas-es'
@@ -11,7 +11,11 @@ export type NichePhotoKey =
   | 'inmobiliarias-es'
   | 'inmobiliarias-mx'
   | 'gimnasios-es'
-  | 'gimnasios-mx';
+  | 'gimnasios-mx'
+  | 'abogados-es'
+  | 'abogados-mx'
+  | 'belleza-es'
+  | 'belleza-mx';
 
 export type NicheLandingData = {
   id: NicheId;

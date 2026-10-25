@@ -127,6 +127,33 @@ async function run() {
   const err404Path = path.join(PHOTOS_DIR, 'error-404.jpg');
   await sharp(Buffer.from(buildError404Svg())).jpeg({ quality: 88 }).toFile(err404Path);
 
+  // 1b. Generar variantes cromáticas editoriales para nuevos nichos (abogados y belleza)
+  const nichesPhotoDir = path.join(PHOTOS_DIR, 'niches');
+  await fs.mkdir(nichesPhotoDir, { recursive: true });
+  await sharp(path.join(PHOTOS_DIR, 'proceso-01-onboarding.jpg'))
+    .resize(768, 960, { fit: 'cover' })
+    .modulate({ saturation: 0.85, brightness: 1.02 })
+    .jpeg({ quality: 84 })
+    .toFile(path.join(nichesPhotoDir, 'abogados-es.jpg'));
+  await sharp(path.join(PHOTOS_DIR, 'proceso-01-onboarding.jpg'))
+    .flop()
+    .resize(768, 960, { fit: 'cover' })
+    .modulate({ saturation: 0.9, brightness: 0.98, hue: 8 })
+    .jpeg({ quality: 84 })
+    .toFile(path.join(nichesPhotoDir, 'abogados-mx.jpg'));
+  await sharp(path.join(PHOTOS_DIR, 'hero-es.jpg'))
+    .flop()
+    .resize(768, 960, { fit: 'cover' })
+    .modulate({ saturation: 1.08, brightness: 1.03, hue: -8 })
+    .jpeg({ quality: 84 })
+    .toFile(path.join(nichesPhotoDir, 'belleza-es.jpg'));
+  await sharp(path.join(PHOTOS_DIR, 'hero-mx.jpg'))
+    .flop()
+    .resize(768, 960, { fit: 'cover' })
+    .modulate({ saturation: 1.08, brightness: 1.02, hue: 10 })
+    .jpeg({ quality: 84 })
+    .toFile(path.join(nichesPhotoDir, 'belleza-mx.jpg'));
+
   // 2. Recopilar todas las páginas y generar su tarjeta OG 1200×630
   const cards: { file: string; badge: string; title: string; subtitle: string; accent: string }[] = [
     {

@@ -538,4 +538,370 @@ export const BLOG_ES: EditorialBlogArticle[] = [
       'Hola, he leído vuestra guía sobre cómo organizar el calendario en Metricool en España y quiero ver cómo quedaría para mi negocio [REF:blog-metricool-es]',
     waCta: 'Ver cómo organizar mi calendario por WhatsApp',
   },
+  {
+    id: 'carruseles',
+    slug: 'como-disenar-carruseles-instagram-que-convierten',
+    routeKey: 'blogCarruseles',
+    country: 'es',
+    category: 'Carruseles y diseño sin cámara',
+    eyebrow: 'Guía visual · España',
+    title: 'Cómo estructurar carruseles de Instagram en 7 láminas para conseguir guardados y consultas en España',
+    metaTitle: 'Cómo Hacer Carruseles de Instagram que Convierten | Feediasocial España',
+    metaDescription:
+      'Estructura de 7 láminas para diseñar carruseles educativos en Instagram para pymes en España: portada gancho, desarrollo visual y cierre hacia WhatsApp.',
+    cardSummary:
+      'La anatomía exacta de 7 láminas que utilizamos en España para que quienes no quieren salir en vídeo consigan autoridad, guardados y clientes reales.',
+    intent: 'comercial',
+    targetKeyword: 'cómo hacer carruseles de instagram para empresas',
+    author: 'Equipo Editorial Feediasocial',
+    authorRole: 'Dirección de Arte y Copywriting (España)',
+    pubDate: '2026-10-22',
+    updatedDate: '2026-10-25',
+    readingTime: '7 min de lectura',
+    heroPhotoKey: 'sin-camara',
+    heroPhotoAlt: 'Mesa de diseño en España con carruseles editoriales de varias láminas en tonos crema, coral y limón',
+    heroPhotoCaption:
+      'Escena editorial ilustrativa: un carrusel de 7 láminas funciona como un folleto consultivo que tu cliente guarda en el móvil.',
+    heroSticker: '7 LÁMINAS CLAVE',
+    intro:
+      'Mientras los Reels te descubren ante gente nueva de tu ciudad, los carruseles de Instagram son el formato que convence al cliente que está comparando precios o dudando si pedir cita en tu negocio en España. Un carrusel efectivo no es un cartel publicitario lleno de texto diminuto: es una secuencia visual de 6 a 8 láminas donde cada deslizamiento resuelve una objeción concreta y lleva con naturalidad a tu WhatsApp.',
+    tldrTitle: 'En 30 segundos · Arquitectura del carrusel de 7 láminas en España',
+    keyFacts: [
+      { label: 'Lámina 1 (Portada)', value: 'Titular de máximo 9 palabras que promete resolver una duda real' },
+      { label: 'Láminas 2 a 5 (Desarrollo)', value: '1 idea por lámina con jerarquía tipográfica limpia y contraste AA' },
+      { label: 'Lámina 6 (Resumen / Tabla)', value: 'Cuadro comparativo o lista rápida digna de guardar en favoritos' },
+      { label: 'Lámina 7 (Cierre comercial)', value: 'Llamada a acción única hacia mensaje directo o enlace del perfil' },
+    ],
+    pullQuote: {
+      text: 'El Reel atrae la mirada del curioso; el carrusel cierra la decisión de quien ya tiene la tarjeta o el teléfono en la mano para reservar.',
+      context: 'Estrategia combinada de formatos en Feediasocial España',
+    },
+    sections: [
+      {
+        id: 'por-que-funcionan-carruseles',
+        number: '01',
+        heading: 'Por qué Instagram vuelve a enseñar tu carrusel dos veces al mismo seguidor',
+        lead: 'A diferencia de una imagen suelta, el carrusel tiene una ventaja algorítmica única en Instagram: si un usuario pasa de largo la primera lámina, la plataforma vuelve a mostrarle el post horas después empezando por la segunda diapositiva.',
+        paragraphs: [
+          'Para una clínica dental, un despacho de abogados, una inmobiliaria o un restaurante en España, eso significa tener una segunda oportunidad gratuita de captar la atención sin publicar el doble.',
+          'Además, cuando un potencial cliente desliza cinco o seis láminas leyendo una comparativa de tratamientos o de gastos de compraventa, pasa más de 40 segundos en tu publicación, enviando la señal más fuerte de interés que existe hoy en la red.',
+        ],
+        bullets: [
+          'Formato vertical 4:5 (1080 × 1350 px) para ocupar toda la pantalla del móvil.',
+          'Máximo 35 palabras por lámina: si cabe en un tuit corto, se lee sin esfuerzo.',
+          'Indicador visual sutil en el borde derecho que invite a deslizar el dedo.',
+        ],
+      },
+      {
+        id: 'secuencia-siete-laminas',
+        number: '02',
+        heading: 'La secuencia exacta lámina por lámina para no perder lectores a mitad',
+        lead: 'El fallo más habitual en las cuentas de pymes españolas es meter toda la explicación en la primera imagen y dejar el resto como relleno decorativo.',
+        paragraphs: [
+          'En nuestro estudio diseñamos cada carrusel como una conversación guiada: la lámina 1 abre la pregunta, la lámina 2 explica por qué ocurre el problema y las láminas 3, 4 y 5 entregan los tres criterios prácticos con ejemplos reales.',
+          'La lámina 6 actúa como ficha de resumen (la que todo el mundo pulsa el icono de guardar para consultar más tarde) y la lámina 7 explica cómo pedir cita o presupuesto sin rodeos.',
+        ],
+        scriptBox: {
+          title: 'Guion tipo de 7 láminas para un negocio de servicios en España',
+          badge: 'Estructura lista para usar',
+          items: [
+            {
+              label: 'Láminas 1 y 2 · Gancho y contexto',
+              text: 'Lámina 1: «3 gastos ocultos al reformar o comprar piso que nadie te avisa». Lámina 2: «Por qué calcular solo el precio del anuncio descuadra tu presupuesto».',
+            },
+            {
+              label: 'Láminas 3 a 5 · Los 3 puntos',
+              text: 'Una lámina por cada punto clave con titular grande arriba, dos líneas de explicación en tinta oscura y un ejemplo en euros.',
+            },
+            {
+              label: 'Láminas 6 y 7 · Guardado y acción',
+              text: 'Lámina 6: «Checklist resumen antes de firmar». Lámina 7: «¿Quieres que revisemos tu caso? Escríbenos desde el enlace del perfil».',
+            },
+          ],
+        },
+        figure: {
+          photoKey: 'proceso-02',
+          alt: 'Planificación visual de carruseles y guiones sobre mesa de trabajo en España',
+          caption: 'Cada carrusel mensual nace de las preguntas reales que tus clientes hacen por teléfono o en el mostrador.',
+          badge: 'Diseño editorial + IA',
+          callouts: [
+            'Tipografía condensada de alto impacto para titulares y sans-serif limpia para lectura.',
+            'Gráficos e ilustraciones a medida generados con IA siguiendo la paleta de tu marca.',
+            'Contraste verificado para que se lea perfecto en la calle a pleno sol desde el móvil.',
+          ],
+        },
+      },
+      {
+        id: 'pilar-del-plan-b-sin-camara',
+        number: '03',
+        heading: 'El motor de nuestro Plan B para negocios donde nadie quiere grabarse hablando',
+        lead: 'Si en tu despacho, clínica o comercio en España preferís no salir frente a la cámara, los carruseles bien construidos sostienen el 80 % de la conversión mensual.',
+        paragraphs: [
+          'Combinando carruseles educativos de 7 láminas con fotografía real de tus instalaciones o producto y gráficos editoriales con IA, tu cuenta transmite orden, solvencia y actividad constante cada semana.',
+        ],
+        figure: {
+          photoKey: 'servicios-ia',
+          alt: 'Composición gráfica editorial asistida por IA en pantalla de diseño',
+          caption: 'Nuestros gráficos asistidos por IA evitan el aspecto frío de banco de imágenes y mantienen la identidad visual de tu empresa.',
+          badge: 'Cero plantillas clónicas',
+          callouts: [
+            'Adaptación al tono de tu sector (sobrio para clínicas y despachos; vivo para hostelería y gimnasios).',
+            'Redacción íntegra en español de España incluida en todos los paquetes.',
+            'Programación directa en Metricool junto al resto del mes.',
+          ],
+        },
+      },
+      {
+        id: 'como-medir-exito-carrusel',
+        number: '04',
+        heading: 'Por qué un «guardado» vale diez veces más que un «me gusta»',
+        lead: 'Cuando alguien guarda tu carrusel de precios, cuidados o pasos legales, te está diciendo que piensa volver a tu perfil cuando tome la decisión de compra.',
+        paragraphs: [
+          'En nuestros informes mensuales de Metricool analizamos qué carruseles han acumulado más guardados y envíos por mensaje privado, utilizando esos mismos temas para crear los guiones de Reels del mes siguiente.',
+        ],
+      },
+    ],
+    comparisonTable: {
+      title: 'Post de imagen suelta vs. Carrusel editorial de 7 láminas (España)',
+      subtitle: 'Diferencia de rendimiento orgánico y comercial en cuentas de pymes:',
+      headers: ['Criterio', 'Cartel suelto tipo flyer', 'Carrusel genérico con mucho texto', 'Carrusel editorial Feediasocial'],
+      rows: [
+        {
+          col1: 'Oportunidades de impresión',
+          col2: '1 sola vez en el feed',
+          col3: '2 veces, pero baja lectura',
+          col4: 'Doble impresión automática + alta retención',
+        },
+        {
+          col1: 'Tiempo de lectura del cliente',
+          col2: 'Menos de 3 segundos',
+          col3: 'Abandono en la lámina 2 por letra pequeña',
+          col4: '35 a 50 segundos deslizando hasta el final',
+        },
+        {
+          col1: 'Señal al algoritmo (Guardados)',
+          col2: 'Casi nula',
+          col3: 'Baja si no incluye lámina resumen',
+          col4: 'Alta gracias a la lámina 6 de checklist',
+        },
+        {
+          col1: 'Trabajo requerido del dueño',
+          col2: 'Pelearse con plantillas',
+          col3: '2 horas diseñando y redactando',
+          col4: '0 minutos (incluido en tu paquete mensual)',
+        },
+      ],
+    },
+    checklist: {
+      title: 'Lista de control de 5 puntos para cada carrusel del mes',
+      subtitle: 'El estándar que aplicamos en cada entrega mensual:',
+      items: [
+        'Portada con titular de menos de 9 palabras que nombra un beneficio o error concreto.',
+        'Segunda lámina potente pensada para la re-impresión automática de Instagram.',
+        'Una sola idea por diapositiva con márgenes amplios para no agobiar la vista.',
+        'Penúltima lámina en formato tabla o lista de control fácil de guardar.',
+        'Última lámina con instrucción clara hacia WhatsApp o enlace de la biografía.',
+      ],
+    },
+    faqs: [
+      {
+        q: '¿Cuántos posts y carruseles incluís al mes en los paquetes de España?',
+        a: 'El paquete Esencial (349 €/mes) incluye 8 publicaciones de feed; y los paquetes Crecimiento (649 €/mes) y Pro (990 €/mes) incluyen 12 publicaciones mensuales combinando carruseles y posts.',
+      },
+      {
+        q: '¿Tenéis que enviarme vosotros el texto de cada lámina o lo redactáis en la agencia?',
+        a: 'Lo redactamos nosotros íntegramente a partir de lo hablado en el onboarding y de las dudas reales de vuestro sector. Vosotros solo lo revisáis en Metricool.',
+      },
+      {
+        q: '¿Se pueden publicar los mismos carruseles en TikTok además de en Instagram?',
+        a: 'Sí. El modo foto deslizable de TikTok funciona extraordinariamente bien para contenido educativo de negocios locales en España.',
+      },
+      {
+        q: '¿Usáis nuestros colores y tipografías corporativas?',
+        a: 'Siempre. En la primera semana configuramos vuestro sistema visual para que cada lámina sea reconocible al instante como vuestra.',
+      },
+      {
+        q: '¿Puedo contratar solo el sistema sin vídeo si nadie quiere salir en cámara?',
+        a: 'Sí, a través de nuestro Plan B sin salir en cámara adaptamos el paquete mensual para volcar la producción en carruseles, fotos de detalle y gráficos con IA.',
+      },
+    ],
+    relatedRoutes: ['intencionSinCamara', 'servicios', 'precios', 'nichoAbogados', 'nichoClinicas'],
+    waMessage:
+      'Hola, he leído vuestra guía sobre cómo diseñar carruseles que convierten en España y quiero ver ejemplos para mi sector [REF:blog-carruseles-es]',
+    waCta: 'Ver cómo aplicar carruseles a mi cuenta por WhatsApp',
+  },
+  {
+    id: 'tiktok-vs-reels',
+    slug: 'tiktok-vs-instagram-reels-para-pymes-espana',
+    routeKey: 'blogTiktokVsReels',
+    country: 'es',
+    category: 'Estrategia multicanal',
+    eyebrow: 'Comparativa 2026 · España',
+    title: 'TikTok vs. Instagram Reels para pymes en España en 2026: dónde invertir tu media hora mensual',
+    metaTitle: 'TikTok vs Instagram Reels para Pymes en España (2026) | Feediasocial',
+    metaDescription:
+      'Comparativa honesta entre TikTok e Instagram Reels para negocios locales y pymes en España: dónde está tu cliente, cómo reutilizar vídeos y qué convierte más.',
+    cardSummary:
+      'No necesitas grabar el doble para estar en las dos plataformas: analizamos qué aporta cada red a un negocio local en España y cómo publicar en ambas con una sola sesión.',
+    intent: 'comparativa',
+    targetKeyword: 'tiktok vs instagram reels para empresas espana',
+    author: 'Equipo Editorial Feediasocial',
+    authorRole: 'Estrategia Digital y Alcance Orgánico (España)',
+    pubDate: '2026-10-24',
+    updatedDate: '2026-10-25',
+    readingTime: '7 min de lectura',
+    heroPhotoKey: 'contacto-chat',
+    heroPhotoAlt: 'Teléfono móvil en una cafetería española mostrando conversaciones de clientes procedentes de redes sociales',
+    heroPhotoCaption:
+      'Escena editorial ilustrativa: un único vídeo vertical bien guionizado trabaja a la vez en Instagram Reels y en TikTok sin duplicar tu tiempo de rodaje.',
+    heroSticker: '1 VÍDEO · 2 REDES',
+    intro:
+      'La respuesta corta para una pyme en España en 2026 es clara: Instagram sigue siendo el escaparate donde el cliente revisa tu credibilidad, tus precios y te escribe para reservar, mientras que TikTok es el motor de descubrimiento local más rápido para que personas de tu ciudad que no te seguían te vean por primera vez. Y lo mejor es que con una sola sesión de grabación de 30 minutos al mes cubres ambas redes sin grabar ni un minuto extra.',
+    tldrTitle: 'En 30 segundos · Qué papel juega cada red en una pyme española',
+    keyFacts: [
+      { label: 'Función principal de Instagram', value: 'Escaparate de confianza, carruseles de detalle y cierre por DM / WhatsApp' },
+      { label: 'Función principal de TikTok', value: 'Descubrimiento orgánico local y búsquedas por ciudad + servicio' },
+      { label: 'Tiempo extra de grabación', value: '0 minutos (el mismo vídeo vertical 9:16 sirve para ambas sin marcas de agua)' },
+      { label: 'Edad media del comprador activo', value: '28 a 58 años en ambas plataformas en España en 2026' },
+    ],
+    pullQuote: {
+      text: 'El mito de que en TikTok solo hay adolescentes bailando murió hace años: hoy un vecino de Madrid, Valencia o Bilbao busca allí dónde cenar, qué clínica elegir o qué piso visitar.',
+      context: 'Análisis de comportamiento de búsqueda social en España',
+    },
+    sections: [
+      {
+        id: 'diferencia-intencion-compra',
+        number: '01',
+        heading: 'Descubrimiento en TikTok vs. Validación y reserva en Instagram',
+        lead: 'Entender cómo usa el móvil tu cliente en España te ahorra exigirle a una red lo que hace mejor la otra.',
+        paragraphs: [
+          'En TikTok, el algoritmo distribuye tus vídeos por interés temático y proximidad geográfica aunque tengas cero seguidores. Es habitual que el vídeo de un restaurante, un gimnasio o una clínica recién abierta supere miles de visualizaciones en su propia provincia en la primera semana.',
+          'En cambio, cuando ese usuario siente curiosidad real por contratarte, muchas veces busca tu nombre en Instagram para ver tus historias destacadas, leer tus carruseles con calma y pulsar el enlace de WhatsApp. Por eso las dos redes no compiten entre sí: se alimentan mutuamente.',
+        ],
+        bullets: [
+          'TikTok actúa como el cartel en la avenida principal que atrae miradas nuevas.',
+          'Instagram funciona como el interior de tu consulta o local donde cierras la cita.',
+          'El buscador interno de ambas redes ya compite con Google en consultas como «fisioterapeuta en…» o «arrocería en…».',
+        ],
+      },
+      {
+        id: 'un-rodaje-dos-formatos',
+        number: '02',
+        heading: 'Cómo reutilizar tus 4 Reels mensuales en TikTok sin que ninguna red te penalice',
+        lead: 'El único error que penaliza el alcance al publicar el mismo vídeo en Instagram y TikTok es descargarlo con el logotipo flotante de la otra aplicación.',
+        paragraphs: [
+          'En nuestro flujo de edición exportamos siempre el archivo maestro limpio en alta definición desde nuestro software profesional, sin marcas de agua de terceros.',
+          'Después programamos en Metricool la versión de Instagram Reels (con su portada cuidada para el grid de tu perfil y su texto detallado) y la versión de TikTok (con palabras clave de búsqueda local en la descripción para posicionar en el buscador de tu ciudad).',
+        ],
+        figure: {
+          photoKey: 'restaurantes-es',
+          alt: 'Grabación de un único vídeo vertical con el móvil en un negocio de hostelería en España',
+          caption: 'Una sola toma vertical bien iluminada en tu local se convierte simultáneamente en un Reel de Instagram y en un TikTok optimizado para búsquedas locales.',
+          badge: 'Rentabilidad de tu media hora',
+          callouts: [
+            'Archivo máster limpio en 1080×1920 sin marcas de agua que resten alcance.',
+            'Subtítulos situados en la zona segura central para que los botones de cada app no los tapen.',
+            'Descripciones adaptadas con palabras clave del sector y de tu localidad en España.',
+          ],
+        },
+      },
+      {
+        id: 'que-funciona-por-sector',
+        number: '03',
+        heading: 'Qué red tira más según tu tipo de negocio en España',
+        lead: 'Aunque recomendamos publicar tus vídeos verticales en ambas, el peso de cada canal varía según el ticket y la urgencia de tu servicio.',
+        paragraphs: [
+          'En hostelería, gimnasios, peluquerías y estética, TikTok e Instagram aportan clientes casi al 50 % porque la decisión es muy visual e inmediata. En cambio, en abogacía, asesoría fiscal, clínicas médicas e inmobiliarias, Instagram (apoyado por carruseles explicativos) suele concentrar la mayor parte de los mensajes privados cualificados.',
+        ],
+        figure: {
+          photoKey: 'belleza-es',
+          alt: 'Profesional en España mostrando un trabajo técnico grabado en vertical para redes sociales',
+          caption: 'En sectores visuales y de servicios locales, los usuarios menores de 45 años utilizan TikTok como buscador antes de reservar por WhatsApp.',
+          badge: 'Búsqueda local (SEO Social)',
+          callouts: [
+            'Restaurantes y salones: impacto inmediato mostrando el plato o el resultado en los 3 primeros segundos.',
+            'Clínicas y despachos: vídeos de 30 segundos respondiendo una duda frecuente con voz serena.',
+            'Inmobiliarias: recorridos ágiles diciendo metros, zona y precio desde el primer segundo.',
+          ],
+        },
+      },
+      {
+        id: 'conclusion-operativa',
+        number: '04',
+        heading: 'La regla práctica: prioriza el sistema mensual antes que abrir cinco redes a medias',
+        lead: 'Es infinitamente más rentable tener Instagram al 100 % y replicar tus vídeos limpios en TikTok que abrir cinco perfiles y abandonarlos a las tres semanas.',
+        paragraphs: [
+          'Con cualquiera de nuestros paquetes en España (desde 349 €/mes) dejas cubierta la columna vertebral de tu presencia digital con una sola sesión de 30 minutos al mes.',
+        ],
+      },
+    ],
+    comparisonTable: {
+      title: 'Comparativa real: Instagram Reels vs. TikTok para pymes en España (2026)',
+      subtitle: 'Qué esperar de cada plataforma cuando publicas con constancia mensual:',
+      headers: ['Factor de negocio', 'Instagram (Reels + Carruseles + Stories)', 'TikTok (Vídeo vertical + Modo Foto)', 'Combinando ambas con Feediasocial'],
+      rows: [
+        {
+          col1: 'Alcance sin tener seguidores',
+          col2: 'Medio-alto a través de la pestaña de Reels',
+          col3: 'Muy alto desde el primer vídeo por geolocalización',
+          col4: 'Sumas ambos alcances con el mismo rodaje',
+        },
+        {
+          col1: 'Cierre de ventas y citas por DM / WhatsApp',
+          col2: 'Muy alto (historias destacadas + enlace en bio)',
+          col3: 'Medio (muchos usuarios pasan antes por tu Instagram)',
+          col4: 'TikTok descubre y tu perfil de Instagram convierte',
+        },
+        {
+          col1: 'Posicionamiento en búsquedas locales',
+          col2: 'Bueno por nombre de perfil y ubicación',
+          col3: 'Excelente como buscador por servicio + ciudad',
+          col4: 'Textos optimizados con palabras clave de tu sector',
+        },
+        {
+          col1: 'Tiempo de grabación del dueño',
+          col2: '30 minutos al mes con tu móvil',
+          col3: '0 minutos extra (reutilizamos el máster limpio)',
+          col4: '30 minutos totales al mes para todo el sistema',
+        },
+      ],
+    },
+    checklist: {
+      title: 'Checklist de 5 reglas para publicar el mismo vídeo en Instagram y TikTok',
+      subtitle: 'Cómo lo hacemos en la agencia para que rinda al máximo en las dos:',
+      items: [
+        'Subir siempre el archivo MP4 original editado, jamás un vídeo descargado con el logo de la otra red.',
+        'Mantener todos los rótulos dentro del margen central para que la interfaz no los corte.',
+        'Usar audios en tendencia o voz limpia propia libre de bloqueos por derechos de autor para cuentas de empresa.',
+        'Incluir el nombre del servicio y la ciudad o zona en la primera línea de la descripción.',
+        'Asegurar que en ambas biografías haya un camino directo a tu WhatsApp o formulario de contacto.',
+      ],
+    },
+    faqs: [
+      {
+        q: '¿Tengo que bailar o hacer humor en TikTok si tengo una clínica, inmobiliaria o despacho en España?',
+        a: 'Rotundamente no. En 2026 los vídeos que mejor funcionan para empresas de servicios en TikTok España son explicaciones claras de 25 a 35 segundos hablando a cámara con naturalidad.',
+      },
+      {
+        q: '¿Me cobráis el doble por usar mis Reels también en TikTok?',
+        a: 'No. Los vídeos y carruseles que producimos en tu paquete mensual son 100 % tuyos y los dejamos listos en formato vertical limpio para publicar en tu ecosistema.',
+      },
+      {
+        q: '¿Qué hago si aún no tengo cuenta de TikTok creada para mi negocio?',
+        a: 'En el onboarding inicial te indicamos cómo abrirla en 5 minutos con los datos correctos de empresa y enlace a tu web o WhatsApp.',
+      },
+      {
+        q: '¿Y si mis clientes tienen entre 45 y 65 años?',
+        a: 'Ese tramo de edad es hoy el más estable en Instagram en España y el que más ha crecido en TikTok para consultas de salud, reformas, gastronomía e inversión inmobiliaria.',
+      },
+      {
+        q: '¿Cómo empiezo si quiero que reviséis mi perfil actual?',
+        a: 'Escríbenos por WhatsApp o rellena el formulario de mini-auditoría gratuita y te enviamos 3 ideas de vídeo vertical pensadas para tu negocio en menos de 24 horas laborables.',
+      },
+    ],
+    relatedRoutes: ['servicios', 'precios', 'intencionComparativa', 'nichoRestaurantes', 'nichoBelleza'],
+    waMessage:
+      'Hola, he leído vuestra comparativa de TikTok vs Instagram Reels para pymes en España y quiero ver qué enfoque me recomendáis [REF:blog-tiktok-reels-es]',
+    waCta: 'Consultar estrategia para mi negocio por WhatsApp',
+  },
 ];

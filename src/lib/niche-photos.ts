@@ -9,6 +9,10 @@ import inmobiliariasEs from '@/assets/photos/niches/inmobiliarias-es.jpg';
 import inmobiliariasMx from '@/assets/photos/niches/inmobiliarias-mx.jpg';
 import gimnasiosEs from '@/assets/photos/niches/gimnasios-es.jpg';
 import gimnasiosMx from '@/assets/photos/niches/gimnasios-mx.jpg';
+import abogadosEs from '@/assets/photos/niches/abogados-es.jpg';
+import abogadosMx from '@/assets/photos/niches/abogados-mx.jpg';
+import bellezaEs from '@/assets/photos/niches/belleza-es.jpg';
+import bellezaMx from '@/assets/photos/niches/belleza-mx.jpg';
 
 export const NICHE_PHOTOS: Record<NichePhotoKey, ImageMetadata> = {
   'clinicas-es': clinicasEs,
@@ -19,4 +23,8 @@ export const NICHE_PHOTOS: Record<NichePhotoKey, ImageMetadata> = {
   'inmobiliarias-mx': inmobiliariasMx,
   'gimnasios-es': gimnasiosEs,
   'gimnasios-mx': gimnasiosMx,
+  'abogados-es': abogadosEs,
+  'abogados-mx': abogadosMx,
+  'belleza-es': bellezaEs,
+  'belleza-mx': bellezaMx,
 };

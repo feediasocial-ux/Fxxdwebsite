@@ -24,9 +24,9 @@ export type BlogArticleSection = {
 };
 
 export type EditorialBlogArticle = {
-  id: 'grabacion' | 'guiones' | 'metricool';
+  id: 'grabacion' | 'guiones' | 'metricool' | 'carruseles' | 'tiktok-vs-reels';
   slug: string;
-  routeKey: 'blogGrabacion' | 'blogGuiones' | 'blogMetricool';
+  routeKey: 'blogGrabacion' | 'blogGuiones' | 'blogMetricool' | 'blogCarruseles' | 'blogTiktokVsReels';
   country: CountryKey;
   category: string;
   eyebrow: string;

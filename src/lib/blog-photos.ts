@@ -14,6 +14,10 @@ import inmobiliariasEs from '@/assets/photos/niches/inmobiliarias-es.jpg';
 import inmobiliariasMx from '@/assets/photos/niches/inmobiliarias-mx.jpg';
 import gimnasiosEs from '@/assets/photos/niches/gimnasios-es.jpg';
 import gimnasiosMx from '@/assets/photos/niches/gimnasios-mx.jpg';
+import abogadosEs from '@/assets/photos/niches/abogados-es.jpg';
+import abogadosMx from '@/assets/photos/niches/abogados-mx.jpg';
+import bellezaEs from '@/assets/photos/niches/belleza-es.jpg';
+import bellezaMx from '@/assets/photos/niches/belleza-mx.jpg';
 
 export type EditorialPhotoKey =
   | 'hero-es'
@@ -30,7 +34,11 @@ export type EditorialPhotoKey =
   | 'inmobiliarias-es'
   | 'inmobiliarias-mx'
   | 'gimnasios-es'
-  | 'gimnasios-mx';
+  | 'gimnasios-mx'
+  | 'abogados-es'
+  | 'abogados-mx'
+  | 'belleza-es'
+  | 'belleza-mx';
 
 export const EDITORIAL_PHOTOS: Record<EditorialPhotoKey, ImageMetadata> = {
   'hero-es': heroEs,
@@ -48,4 +56,8 @@ export const EDITORIAL_PHOTOS: Record<EditorialPhotoKey, ImageMetadata> = {
   'inmobiliarias-mx': inmobiliariasMx,
   'gimnasios-es': gimnasiosEs,
   'gimnasios-mx': gimnasiosMx,
+  'abogados-es': abogadosEs,
+  'abogados-mx': abogadosMx,
+  'belleza-es': bellezaEs,
+  'belleza-mx': bellezaMx,
 };

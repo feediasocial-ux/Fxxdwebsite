@@ -147,7 +147,7 @@ const crumbs = [
       <p class="text-lg text-ink-soft">{copy.nichesSubtitle}</p>
     </div>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-2">
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {
         niches.map((n, idx) => (
           <NicheCard
@@ -157,7 +157,7 @@ const crumbs = [
             linkLabel={copy.nicheCtaLabel}
             image={NICHE_PHOTOS[n.photoKey]}
             imageAlt={n.photoAlt}
-            color={idx === 0 ? 'cream-deep' : idx === 1 ? 'coral' : idx === 2 ? 'sky' : 'lemon'}
+            color={idx % 3 === 0 ? 'cream-deep' : idx % 3 === 1 ? 'lemon' : 'sky'}
           />
         ))
       }

@@ -604,4 +604,304 @@ export const nichesMX: NicheLandingData[] = [
     waMessage: 'Hola, vengo de la página de gimnasios en México y quiero ver los paquetes.',
     waCta: 'Ver paquetes para mi gimnasio o estudio por WhatsApp',
   },
+
+  /* ==================================================================
+     5. ABOGADOS Y DESPACHOS CONTABLES MÉXICO (tema: sober)
+     ================================================================== */
+  {
+    id: 'abogados',
+    country: 'mx',
+    slug: 'manejo-redes-sociales-abogados-contadores',
+    routeKey: 'nichoAbogados',
+    theme: 'sober',
+    photoKey: 'abogados-mx',
+    photoAlt: 'Abogado o contador público en México grabando un video informativo breve con su celular en su despacho',
+    shortTitle: 'Abogados y contadores',
+    cardSummary: 'Contenido sobrio y profesional para despachos de abogados, firmas legales y despachos contables en México.',
+    metaTitle: 'Redes sociales para abogados y contadores en México | Feediasocial',
+    metaDescription:
+      'Manejo de contenido mensual para despachos jurídicos, fiscalistas y contadores públicos en México: guiones claros, edición de reels y calendario.',
+    eyebrow: 'Despachos legales y contables · México (versión sobria)',
+    h1: 'Manejo de redes para abogados y contadores: explica temas del SAT, contratos o juicios en claro y genera asesorías por WhatsApp',
+    intro:
+      'En México, los dueños de negocios, profesionistas y familias buscan en Instagram y TikTok quién les explique en español claro sus dudas del SAT, RESICO, contratos laborales, marcas en el IMPI o trámites legales antes de agendar una asesoría pagada. Redactamos tus guiones con total rigor, aplicamos diseño sobrio y editamos tus reels con solo 30 minutos de grabación al mes con tu celular.',
+    nicheVocabulary: [
+      'declaración ante el SAT',
+      'régimen RESICO y personas morales',
+      'contratos y cumplimiento laboral',
+      'asesoría jurídica inicial',
+      'iguala contable o legal',
+      'secreto y ética profesional',
+    ],
+    painsTitle: 'Los 3 frenos que viven los despachos legales y contables en México con sus redes',
+    pains: [
+      {
+        title: 'Entre cierres mensuales del SAT, declaraciones anuales y audiencias, nadie tiene tiempo de publicar',
+        text: 'En marzo, abril y cada día 17 del mes la carga del despacho se triplica, dejando las redes sociales abandonadas por semanas.',
+      },
+      {
+        title: 'Temor a verse poco profesionales o caer en contenido informal que reste seriedad a la firma',
+        text: 'Un socio de despacho jurídico o fiscal necesita proyectar solvencia, discreción y dominio técnico, nunca improvisación ni chistes virales.',
+      },
+      {
+        title: 'Posts llenos de artículos del Código Fiscal o la Ley Federal del Trabajo que no traen clientes',
+        text: 'Subir capturas de reformas legales con letra diminuta no hace que un empresario te escriba; explicarle en 25 segundos cómo proteger su negocio, sí.',
+      },
+    ],
+    objectionsTitle: 'Dudas comunes de socios de firmas legales y despachos contables en México',
+    objections: [
+      {
+        objection: '«Los temas fiscales y jurídicos en México son muy técnicos; una agencia externa puede decir algo impreciso.»',
+        answer:
+          'Jamás publicamos sin tu autorización. Nuestro equipo estructura el gancho y la claridad narrativa, y tú validas el criterio fiscal o legal en 5 minutos antes de grabar.',
+      },
+      {
+        objection: '«No queremos llenarnos de mensajes pidiendo consultas gratis por DM.»',
+        answer:
+          'Diseñamos cada cierre de guion y cada historia destacada para filtrar prospectos serios, aclarando que la revisión personalizada se realiza mediante asesoría agendada o cotización de iguala mensual.',
+      },
+      {
+        objection: '«Nuestros clientes empresariales llegan por recomendados.»',
+        answer:
+          'Hoy el empresario al que le recomiendan tu despacho te busca primero en redes desde su celular. Encontrar un perfil activo con videos claros confirma tu autoridad y acelera el cierre.',
+      },
+    ],
+    reelIdeasTitle: '3 ideas de reels sobrios para abogados y contadores en México',
+    reelIdeasSubtitle: 'Pensados para atraer dueños de pymes, profesionistas y clientes que valoran la prevención:',
+    reelIdeas: [
+      {
+        title: 'Fiscal y SAT · El error con transferencias o CFDI que detona cartas invitación',
+        hook: '«Si recibes pagos en tu cuenta y emites factura días después con método PUE, ojo con esta discrepancia ante el SAT.»',
+        visual: 'Contador en su escritorio explicando con calma + rótulos limpios con la diferencia entre PUE y PPD.',
+        goal: 'Atraer médicos, consultores y dueños de negocios que buscan cambiar de contador.',
+      },
+      {
+        title: 'Jurídico corporativo / laboral · Qué documentos debe firmar tu equipo desde el primer día',
+        hook: '«Tener a un colaborador sin contrato individual actualizado puede costarle muy caro a tu empresa en una conciliación laboral.»',
+        visual: 'Abogado mostrando los 3 documentos básicos de blindaje laboral en México en 25 segundos.',
+        goal: 'Generar citas de diagnóstico legal para empresas e igualas mensuales.',
+      },
+      {
+        title: 'Patrimonial e inmobiliario · Qué revisar antes de dar un anticipo o firmar promesa de compraventa',
+        hook: '«Antes de transferir el apartado de un terreno o departamento en preventa, pide siempre estos 3 documentos legales.»',
+        visual: 'Explicación sobria a cámara enumerando antecedentes registrales, uso de suelo y penalizaciones.',
+        goal: 'Captar consultas preventivas de alto valor por WhatsApp.',
+      },
+    ],
+    calendarTitle: 'Ejemplo de calendario mensual para un despacho legal o contable en México',
+    calendarSubtitle: 'Enfocado en autoridad técnica, claridad para el cliente y generación de citas:',
+    sampleCalendar: [
+      {
+        week: 'Semana 1 · Prevención fiscal o legal para negocios',
+        focus: 'Explicar un tema complejo en lenguaje claro para dueños de empresas',
+        pieces: [
+          'Reel 1: error frecuente en facturación CFDI 4.0 o contratos comerciales y cómo corregirlo.',
+          'Carrusel (6 láminas): checklist mensual para mantener tu contabilidad o empresa en orden.',
+          'Historias: fechas clave del mes y enlace directo a WhatsApp para agendar diagnóstico.',
+        ],
+      },
+      {
+        week: 'Semana 2 · Autoridad de la firma y criterios reales',
+        focus: 'Demostrar experiencia sin revelar datos confidenciales de clientes',
+        pieces: [
+          'Reel 2: qué pasa paso a paso cuando una empresa recibe un requerimiento o demanda.',
+          'Post informativo: diferencias entre persona física con actividad empresarial, RESICO y S.A. de C.V.',
+          'Historias del despacho: cómo funciona nuestra primera sesión de valoración.',
+        ],
+      },
+      {
+        week: 'Semana 3 · Servicios recurrentes e igualas mensuales',
+        focus: 'Explicar el alcance de trabajar con tu despacho todo el año',
+        pieces: [
+          'Reel 3: 3 señales de que tu negocio ya creció y necesita asesoría preventiva mes a mes.',
+          'Carrusel comparativo: apagar fuegos cuando ya llegó la multa vs. tener blindaje mensual.',
+          'Historias de preguntas frecuentes: respuesta a dudas generales de seguidores.',
+        ],
+      },
+      {
+        week: 'Semana 4 · Conversión a asesoría o cotización de iguala',
+        focus: 'Invitar a dar el paso a quienes buscan orden fiscal o jurídico',
+        pieces: [
+          'Reel 4: cómo hacemos la transición de tu contabilidad o expediente sin frenar tu operación.',
+          'Post de especialidades: áreas de atención del despacho en México.',
+          'Historias de cierre de mes: agenda abierta para diagnósticos iniciales por WhatsApp.',
+        ],
+      },
+    ],
+    faqTitle: 'Preguntas frecuentes de abogados y contadores en México',
+    faqs: [
+      {
+        q: '¿Usan un diseño serio y acorde a una firma legal o contable?',
+        a: 'Sí. En despachos activamos nuestro tema visual sobrio (`data-theme="sober"`), con tipografía limpia, paleta crema/tinta/burdeos y cero elementos caricaturescos.',
+      },
+      {
+        q: '¿Qué pasa en meses de declaraciones anuales si no tenemos ni media hora para grabar?',
+        a: 'Podemos adelantar la grabación unas semanas antes o activar el Plan B sin cámara con carruseles técnicos e infografías ejecutivas para que el despacho nunca deje de publicar.',
+      },
+      {
+        q: '¿Nosotros autorizamos todos los textos antes de que se publiquen?',
+        a: 'Por supuesto. Revisas y apruebas tanto los guiones antes de grabar como el calendario completo en Metricool en 10 minutos al mes.',
+      },
+      {
+        q: '¿Atienden despachos en CDMX, Monterrey, Guadalajara o cualquier ciudad de México?',
+        a: 'Sí, operamos 100 % en remoto para firmas y consultores en toda la República Mexicana.',
+      },
+      {
+        q: '¿Los precios están fijos en pesos mexicanos?',
+        a: 'Sí: Esencial ($3,900 MXN/mes), Crecimiento ($7,500 MXN/mes) y Pro ($12,900 MXN/mes). [PENDIENTE: facturación/CFDI].',
+      },
+    ],
+    waMessage: 'Hola, vengo de la página de abogados y contadores en México y quiero ver los paquetes.',
+    waCta: 'Ver paquetes para mi despacho por WhatsApp',
+  },
+
+  /* ==================================================================
+     6. SALONES DE BELLEZA, BARBERÍAS Y SPAS MÉXICO (tema: vivid)
+     ================================================================== */
+  {
+    id: 'belleza',
+    country: 'mx',
+    slug: 'manejo-redes-sociales-salones-belleza-spas',
+    routeKey: 'nichoBelleza',
+    theme: 'vivid',
+    photoKey: 'belleza-mx',
+    photoAlt: 'Especialista en un salón de belleza y spa en México grabando con su celular el resultado de un servicio',
+    shortTitle: 'Salones de belleza y spas',
+    cardSummary: 'Reels de transformación, cuidado capilar/facial y citas por WhatsApp para salones de belleza, barberías y spas en México.',
+    metaTitle: 'Manejo de redes para salones de belleza y spas | Feediasocial MX',
+    metaDescription:
+      'Contenido mensual para salones de belleza, estudios de color, uñas, pestañas, barberías y spas en México: guiones, edición de reels y calendario.',
+    eyebrow: 'Salones de belleza, estudios y spas · México',
+    h1: 'Manejo de redes para salones de belleza y spas: luce tu trabajo en video y llena tu agenda por WhatsApp',
+    intro:
+      'En México, antes de agendar un diseño de color, balayage, facial hidratante, set de pestañas o corte en una barbería, el cliente revisa tu Instagram para ver la calidad real de tus trabajos, la higiene de la sucursal y quién lo va a atender. Te damos una lista de tomas fácil para grabar en 30 minutos al mes con tu celular y nosotros editamos y programamos todo tu calendario.',
+    nicheVocabulary: [
+      'cita por WhatsApp',
+      'diseño de color y balayage',
+      'valoración capilar o facial',
+      'tratamiento de cabina',
+      'sucursal y estilistas',
+      'mantenimiento en casa',
+    ],
+    painsTitle: 'Lo que frena las redes de la mayoría de los salones de belleza y spas en México',
+    pains: [
+      {
+        title: 'Con las citas encima el viernes y sábado, nadie alcanza a editar videos',
+        text: 'Tienes el carrete del celular lleno de videos sueltos de clientas felices, pero nunca te da tiempo de armar los reels con subtítulos y buena portada.',
+      },
+      {
+        title: 'Agenda llena en quincena o fin de semana, pero días flojos de lunes a miércoles',
+        text: 'Sin una estrategia mensual que impulse tratamientos de mantenimiento y citas entre semana, tus sillones o cabinas se quedan vacíos la mitad de la semana.',
+      },
+      {
+        title: 'Mensajes eternos preguntando «precio» sin saber qué procedimiento necesita su cabello o piel',
+        text: 'Cuando tu perfil no educa sobre cómo evalúas cada caso, recepción pierde horas contestando cotizaciones a ciegas que no se concretan.',
+      },
+    ],
+    objectionsTitle: 'Objeciones comunes de dueños de salones, estudios de belleza y spas en México',
+    objections: [
+      {
+        objection: '«A varias clientas no les gusta salir de frente en las redes del salón.»',
+        answer:
+          'No hace falta. Nuestra guía de tomas prioriza acercamientos de técnica, brillo del cabello en movimiento de espaldas, preparación de productos y consejos de 20 segundos hablados por tu equipo.',
+      },
+      {
+        objection: '«Ya subimos fotos de uñas o cabellos terminados y casi no llegan clientas nuevas.»',
+        answer:
+          'El algoritmo hoy premia los reels que muestran el proceso, resuelven dudas de duración/cuidado y enseñan la experiencia dentro de tu sucursal a personas que viven o trabajan cerca.',
+      },
+      {
+        objection: '«No tenemos equipo profesional de cámara ni iluminación de estudio.»',
+        answer:
+          'Con la cámara trasera de tu celular actual y la luz de tu tocador o ventana es suficiente. Te indicamos el ángulo exacto y nosotros hacemos la corrección de color y ritmo en edición.',
+      },
+    ],
+    reelIdeasTitle: '3 ideas de reels que generan citas en salones y spas de México',
+    reelIdeasSubtitle: 'Diseñados para atraer clientas que buscan calidad, confianza y buen trato:',
+    reelIdeas: [
+      {
+        title: 'Valoración honesta · Qué revisamos antes de hacerte un cambio de color o alaciado',
+        hook: '«Si traes tinte negro o decoloración previa, esta es la prueba de mechón que siempre hacemos en el salón antes de cotizar.»',
+        visual: 'Estilista mostrando el diagnóstico en el tocador y explicando cómo cuidan la salud de la hebra.',
+        goal: 'Generar confianza inmediata y citas de valoración por WhatsApp.',
+      },
+      {
+        title: 'Cuidado post-servicio · 3 errores que hacen que tu color, facial o set dure la mitad',
+        hook: '«Lavar tu cabello con agua muy caliente los primeros tres días después de tu diseño de color apaga el brillo muchísimo más rápido.»',
+        visual: 'Especialista dando 3 recomendaciones prácticas en 25 segundos con tomas de productos y aplicación.',
+        goal: 'Lograr que tus seguidoras guarden el video y compartan tu cuenta.',
+      },
+      {
+        title: 'Experiencia en cabina / sillón · Así son 60 minutos de desconexión en nuestro spa o salón',
+        hook: '«Si sientes el rostro cansado por el estrés de la semana, mira paso a paso lo que incluye nuestro facial de hidratación profunda.»',
+        visual: 'Secuencia envolvente: recepción, preparación de cabina, aplicación y piel luminosa al terminar.',
+        goal: 'Impulsar reservaciones para martes, miércoles y jueves.',
+      },
+    ],
+    calendarTitle: 'Ejemplo de calendario mensual para un salón de belleza o spa en México',
+    calendarSubtitle: 'Equilibrio entre resultados visuales, educación de cuidado y agenda por WhatsApp:',
+    sampleCalendar: [
+      {
+        week: 'Semana 1 · Diagnóstico y servicios estrella',
+        focus: 'Mostrar por qué tu técnica cuida el cabello o la piel mejor que la competencia',
+        pieces: [
+          'Reel 1: proceso real de transformación con explicación de tiempos y cuidados.',
+          'Carrusel (6 slides): cómo elegir el servicio ideal según tu tipo de cabello o piel.',
+          'Historias: lugares disponibles entre semana con botón directo a WhatsApp.',
+        ],
+      },
+      {
+        week: 'Semana 2 · Mantenimiento y autoridad del equipo',
+        focus: 'Dar consejos útiles para que tu cuenta sea referente en tu zona',
+        pieces: [
+          'Reel 2: los 3 errores en casa que dañan tu procedimiento y cómo evitarlos.',
+          'Post de equipo: conoce a nuestras especialistas e higiene de la sucursal.',
+          'Historias interactivas: encuesta sobre el servicio que más se les antoja esta quincena.',
+        ],
+      },
+      {
+        week: 'Semana 3 · Experiencia en sucursal y paquetes',
+        focus: 'Quitar dudas de primera visita (ubicación, tiempos, estacionamiento)',
+        pieces: [
+          'Reel 3: recorrido rápido desde que llegas a la sucursal hasta que sales lista.',
+          'Carrusel informativo: cada cuántas semanas agendar tu retoque para no gastar el doble.',
+          'Historias de preguntas: dudas sobre duración de servicios, formas de pago y citas.',
+        ],
+      },
+      {
+        week: 'Semana 4 · Cierre de quincena y agenda del mes entrante',
+        focus: 'Asegurar citas anticipadas antes del fin de mes',
+        pieces: [
+          'Reel 4: por qué apartar tu cita con anticipación te garantiza tu horario favorito de viernes o sábado.',
+          'Post de menú de servicios principales y paquetes combinados.',
+          'Historias con link directo a WhatsApp para agendar cita.',
+        ],
+      },
+    ],
+    faqTitle: 'Preguntas frecuentes de salones de belleza, barberías y spas en México',
+    faqs: [
+      {
+        q: '¿Funciona para estudios de uñas, pestañas, cejas, barberías o spas faciales?',
+        a: 'Sí. Adaptamos los guiones y la lista de tomas exactamente a los servicios que manejas en tu sucursal.',
+      },
+      {
+        q: '¿Cómo grabamos si todo el día estamos atendiendo citas?',
+        a: 'Te damos una guía súper práctica: 15 minutos de consejos hablados antes de abrir un día tranquilo y tomas cortas de 4 segundos de los resultados que ya haces a diario.',
+      },
+      {
+        q: '¿Podemos mandar a todas las interesadas directo al WhatsApp de citas?',
+        a: 'Claro. Todos los botones y llamados a la acción llevan mensaje precargado para que tu recepción agende la cita sin perder tiempo.',
+      },
+      {
+        q: '¿Qué pasa en diciembre, mayo o temporada de graduaciones cuando el salón está lleno?',
+        a: 'Como dejamos todo el mes programado en Metricool con anticipación, tus redes siguen publicando puntualmente mientras tú atiendes el salón lleno.',
+      },
+      {
+        q: '¿Hay plazo forzoso al contratar?',
+        a: 'No. Trabajamos mes a mes con precios claros en pesos mexicanos desde $3,900 MXN/mes.',
+      },
+    ],
+    waMessage: 'Hola, vengo de la página de salones de belleza y spas en México y quiero ver los paquetes.',
+    waCta: 'Ver paquetes para mi salón o spa por WhatsApp',
+  },
 ];

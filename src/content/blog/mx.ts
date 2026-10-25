@@ -537,4 +537,370 @@ export const BLOG_MX: EditorialBlogArticle[] = [
       'Hola, leí su guía sobre cómo organizar el calendario de redes en Metricool en México y me gustaría ver cómo aplicarlo a mi negocio [REF:blog-metricool-mx]',
     waCta: 'Ver cómo organizar mi calendario por WhatsApp',
   },
+  {
+    id: 'carruseles',
+    slug: 'como-hacer-carruseles-instagram-para-vender',
+    routeKey: 'blogCarruseles',
+    country: 'mx',
+    category: 'Carruseles y Plan B sin cámara',
+    eyebrow: 'Guía visual · México',
+    title: 'Cómo armar carruseles de Instagram en 7 láminas que generan guardados y prospectos por WhatsApp en México',
+    metaTitle: 'Cómo Hacer Carruseles de Instagram para Negocios | Feediasocial México',
+    metaDescription:
+      'Aprende la estructura de 7 láminas para diseñar carruseles de Instagram que convierten seguidores en mensajes de WhatsApp para tu negocio en México.',
+    cardSummary:
+      'La fórmula visual de 7 láminas que usamos en México para que tu negocio eduque, demuestre autoridad y cierre citas sin necesidad de salir siempre a cuadro.',
+    intent: 'comercial',
+    targetKeyword: 'como hacer carruseles de instagram para negocios mexico',
+    author: 'Equipo Editorial Feediasocial',
+    authorRole: 'Diseño Editorial y Conversión (México)',
+    pubDate: '2026-10-22',
+    updatedDate: '2026-10-25',
+    readingTime: '7 min de lectura',
+    heroPhotoKey: 'sin-camara',
+    heroPhotoAlt: 'Composición de carruseles educativos e infografías para redes sociales sobre mesa de trabajo en México',
+    heroPhotoCaption:
+      'Escena editorial ilustrativa: un carrusel de 7 láminas explica a detalle lo que un prospecto en México necesita saber antes de mandarte WhatsApp.',
+    heroSticker: '7 LÁMINAS CLAVE',
+    intro:
+      'En México, los Reels sirven para que gente nueva de tu ciudad descubra que existes, pero los carruseles de Instagram son los que terminan de convencer al cliente que está comparando precios, revisando qué incluye tu servicio o decidiendo en qué consultorio o negocio agendar. Un buen carrusel no es un flyer saturado de letras chiquitas: es una ruta visual de 7 láminas que responde dudas reales y cierra con un paso claro hacia tu WhatsApp.',
+    tldrTitle: 'En 30 segundos · Anatomía de un carrusel de 7 láminas en México',
+    keyFacts: [
+      { label: 'Lámina 1 (Portada)', value: 'Titular directo de máximo 9 palabras con promesa útil para tu cliente' },
+      { label: 'Láminas 2 a 5 (Valor)', value: '1 sola idea por imagen con letra grande que se lea fácil en el celular' },
+      { label: 'Lámina 6 (Para guardar)', value: 'Tabla resumen o checklist que el usuario quiera conservar en su teléfono' },
+      { label: 'Lámina 7 (Cierre a WhatsApp)', value: 'Invitación clara a pedir cotización o agendar cita desde el link del perfil' },
+    ],
+    pullQuote: {
+      text: 'Un flyer tradicional pide que te compren sin haber dado nada antes; un carrusel de 7 láminas resuelve una duda real y se gana el mensaje de WhatsApp.',
+      context: 'Criterio de diseño consultivo en Feediasocial México',
+    },
+    sections: [
+      {
+        id: 'doble-oportunidad-instagram',
+        number: '01',
+        heading: 'La ventaja oculta de los carruseles: Instagram los muestra dos veces gratis',
+        lead: 'Cuando subes una sola imagen estática y tu seguidor pasa de largo, esa publicación muere ahí. Con un carrusel ocurre exactamente lo contrario.',
+        paragraphs: [
+          'Si un usuario en México ve la primera lámina de tu carrusel en la mañana pero no interactúa, el algoritmo de Instagram vuelve a mostrarle tu publicación más tarde abriendo directamente en la segunda lámina.',
+          'Además, cada segundo que el prospecto pasa deslizando de la lámina 1 a la 7 le indica a la plataforma que tu cuenta entrega información valiosa, impulsando tu alcance orgánico frente a tu competencia local.',
+        ],
+        bullets: [
+          'Proporción vertical 4:5 (1080 × 1350 px) para aprovechar toda la pantalla del celular.',
+          'Menos de 35 palabras por lámina con alto contraste visual.',
+          'Flecha o acento gráfico que invite a deslizar hacia la siguiente tarjeta.',
+        ],
+      },
+      {
+        id: 'estructura-siete-laminas-mexico',
+        number: '02',
+        heading: 'Qué poner en cada una de las 7 láminas para que la gente llegue hasta el final',
+        lead: 'El secreto para que el lector deslice hasta la séptima imagen es no soltar toda la información de golpe en la portada.',
+        paragraphs: [
+          'En la lámina 1 planteamos la pregunta o el error común que le cuesta dinero o tiempo a tu cliente en México. En la lámina 2 explicamos por qué pasa eso y en las láminas 3, 4 y 5 desglosamos la solución paso a paso en español claro.',
+          'La lámina 6 concentra un resumen visual listo para guardar o tomar captura de pantalla, y la lámina 7 indica cómo escribirte por WhatsApp para cotizar o agendar.',
+        ],
+        scriptBox: {
+          title: 'Ejemplo de secuencia de 7 láminas para un negocio en México',
+          badge: 'Fórmula paso a paso',
+          items: [
+            {
+              label: 'Láminas 1 y 2 · El gancho',
+              text: 'Lámina 1: «3 cosas que debes revisar antes de firmar contrato de preventa o servicio». Lámina 2: «Por qué fijarte solo en la mensualidad más baja sale caro».',
+            },
+            {
+              label: 'Láminas 3 a 5 · Explicación',
+              text: 'Un punto por lámina con ejemplos reales en pesos mexicanos (MXN) y lenguaje directo de tu giro.',
+            },
+            {
+              label: 'Láminas 6 y 7 · Cierre',
+              text: 'Lámina 6: «Checklist de 4 puntos antes de decidir». Lámina 7: «Mándanos WhatsApp desde el link del perfil y revisamos tu caso».',
+            },
+          ],
+        },
+        figure: {
+          photoKey: 'proceso-02',
+          alt: 'Planeación de carruseles y calendario mensual para negocios en México',
+          caption: 'Alineamos los carruseles de cada semana con los servicios o productos que más te interesa mover en el mes.',
+          badge: 'Copy + Diseño incluido',
+          callouts: [
+            'Jerarquía visual limpia para que se entienda en 3 segundos desde el celular.',
+            'Gráficos e ilustraciones asistidos por IA personalizados con los colores de tu marca.',
+            'Cero plantillas genéricas repetidas entre distintos negocios.',
+          ],
+        },
+      },
+      {
+        id: 'solucion-sin-salir-en-camara',
+        number: '03',
+        heading: 'La base de nuestro Plan B cuando prefieres no aparecer en video',
+        lead: 'Si en tu consultorio, despacho o empresa en México nadie quiere hablar frente al celular, los carruseles estratégicos mantienen tus redes vendiendo todo el año.',
+        paragraphs: [
+          'En nuestro Plan B sin salir en cámara combinamos carruseles profundos, fotos de tus instalaciones o platillos y diseño gráfico con IA para que tu perfil proyecte confianza y orden semana tras semana.',
+        ],
+        figure: {
+          photoKey: 'servicios-ia',
+          alt: 'Diseño de piezas gráficas editoriales asistidas por IA',
+          caption: 'Combinamos dirección de arte editorial con herramientas de IA para crear láminas únicas que destacan en el feed.',
+          badge: 'Plan B sin cámara',
+          callouts: [
+            'Adaptado a la personalidad de tu giro (sobrio para despachos y clínicas; vibrante para restaurantes y salones).',
+            'Redactado 100 % en español de México por nuestro equipo.',
+            'Cargado y programado en Metricool para tu autorización en 10 minutos.',
+          ],
+        },
+      },
+      {
+        id: 'guardados-y-conversion',
+        number: '04',
+        heading: 'Cómo los guardados de hoy se convierten en las citas de la próxima quincena',
+        lead: 'Muchas personas en México ven tu publicación entre semana y guardan el carrusel para escribirte por WhatsApp el fin de semana o en día de quincena.',
+        paragraphs: [
+          'Por eso en el reporte mensual de Metricool medimos con lupa qué carruseles generaron más guardados y compartidos, reforzando esos temas en el calendario del mes siguiente.',
+        ],
+      },
+    ],
+    comparisonTable: {
+      title: 'Flyer promocional vs. Carrusel consultivo de 7 láminas en México',
+      subtitle: 'Comparativa real de impacto en la cuenta de una pyme mexicana:',
+      headers: ['Aspecto clave', 'Flyer tradicional de oferta', 'Imagen suelta con texto largo', 'Carrusel de 7 láminas Feediasocial'],
+      rows: [
+        {
+          col1: 'Exposición en el feed',
+          col2: '1 sola oportunidad',
+          col3: '1 sola oportunidad',
+          col4: 'Doble exposición automática (lámina 1 y lámina 2)',
+        },
+        {
+          col1: 'Confianza que transmite',
+          col2: 'Baja (parece anuncio invasivo)',
+          col3: 'Media (cansa la vista en el celular)',
+          col4: 'Alta (educa y demuestra dominio de tu giro)',
+        },
+        {
+          col1: 'Guardados y envíos por DM',
+          col2: 'Casi nulos',
+          col3: 'Bajos',
+          col4: 'Altos gracias a la lámina 6 de resumen',
+        },
+        {
+          col1: 'Tiempo invertido por ti',
+          col2: 'Horas peleando con programas de diseño',
+          col3: '2 horas redactando y armando',
+          col4: '0 minutos (entregado listo en tu paquete mensual)',
+        },
+      ],
+    },
+    checklist: {
+      title: 'Checklist de 5 reglas para que un carrusel funcione en México',
+      subtitle: 'Los puntos que cuidamos en cada pieza de tu calendario:',
+      items: [
+        'Portada con titular directo que hable del problema o meta de tu cliente.',
+        'Segunda lámina diseñada para atrapar a quien no deslizó en el primer vistazo.',
+        'Tipografía clara con contraste verificado para leerse fácil en cualquier celular.',
+        'Lámina 6 con tabla, costos orientativos en MXN o pasos clave para guardar.',
+        'Lámina 7 con llamado directo a tu WhatsApp Business o enlace de perfil.',
+      ],
+    },
+    faqs: [
+      {
+        q: '¿Cuántos posts y carruseles incluye cada paquete mensual en México?',
+        a: 'El paquete Esencial ($3,900 MXN/mes) incluye 8 publicaciones de feed; y los paquetes Crecimiento ($7,500 MXN/mes) y Pro ($12,900 MXN/mes) incluyen 12 publicaciones mensuales.',
+      },
+      {
+        q: '¿Yo tengo que escribir el contenido de cada lámina o lo hacen ustedes?',
+        a: 'Lo investigamos y redactamos nosotros por completo en español de México. Tú únicamente revisas el resultado final en Metricool antes de que se programe.',
+      },
+      {
+        q: '¿Estos mismos carruseles sirven para TikTok y Facebook?',
+        a: 'Sí. En TikTok el formato de carrusel deslizable tiene excelente alcance orgánico en México, y en Facebook mantiene activa la página de tu negocio.',
+      },
+      {
+        q: '¿Respetan los colores y el logotipo de mi negocio?',
+        a: 'Claro. Desde el onboarding configuramos tu línea gráfica para que cada carrusel se vea 100 % propio de tu marca.',
+      },
+      {
+        q: '¿Puedo pedir una muestra de cómo enfocarían el contenido de mi cuenta?',
+        a: 'Sí: escríbenos por WhatsApp o llena el formulario de mini-auditoría gratuita y te enviamos 3 ideas aterrizadas a tu giro en menos de 24 horas hábiles.',
+      },
+    ],
+    relatedRoutes: ['intencionSinCamara', 'servicios', 'precios', 'nichoAbogados', 'nichoClinicas'],
+    waMessage:
+      'Hola, leí su guía de cómo hacer carruseles de Instagram en México y me gustaría ver cómo aplicarlo a mi negocio [REF:blog-carruseles-mx]',
+    waCta: 'Ver cómo aplicar carruseles a mi negocio por WhatsApp',
+  },
+  {
+    id: 'tiktok-vs-reels',
+    slug: 'tiktok-vs-instagram-reels-para-negocios-mexico',
+    routeKey: 'blogTiktokVsReels',
+    country: 'mx',
+    category: 'Estrategia en video',
+    eyebrow: 'Comparativa 2026 · México',
+    title: 'TikTok vs. Instagram Reels para negocios en México en 2026: cuál trae mejores clientes por WhatsApp',
+    metaTitle: 'TikTok vs Instagram Reels para Negocios en México | Feediasocial',
+    metaDescription:
+      'Comparativa práctica entre TikTok e Instagram Reels para pymes, consultorios y negocios en México: dónde está tu cliente y cómo cubrir ambas en 30 minutos.',
+    cardSummary:
+      'Analizamos cómo compra el consumidor mexicano en 2026 en Instagram y TikTok, y cómo aprovechar tus 30 minutos mensuales de celular para dominar las dos redes.',
+    intent: 'comparativa',
+    targetKeyword: 'tiktok vs instagram reels para negocios mexico',
+    author: 'Equipo Editorial Feediasocial',
+    authorRole: 'Estrategia y Crecimiento Orgánico (México)',
+    pubDate: '2026-10-24',
+    updatedDate: '2026-10-25',
+    readingTime: '7 min de lectura',
+    heroPhotoKey: 'contacto-chat',
+    heroPhotoAlt: 'Celular mostrando mensajes de clientes interesados en servicios de un negocio local en México',
+    heroPhotoCaption:
+      'Escena editorial ilustrativa: con un solo video vertical limpio en 9:16 cubres simultáneamente Instagram Reels y TikTok en México.',
+    heroSticker: '1 VIDEO · 2 REDES',
+    intro:
+      'Para un negocio, consultorio o despacho en México en 2026, no tienes que elegir entre TikTok o Instagram Reels ni grabar el doble de tiempo: TikTok es hoy el buscador local donde miles de personas en tu ciudad te descubren sin seguirte, mientras que Instagram es el catálogo de confianza donde revisan tus historias destacadas, tus carruseles y tocan el botón para escribirte por WhatsApp.',
+    tldrTitle: 'En 30 segundos · Qué aporta cada plataforma a tu negocio en México',
+    keyFacts: [
+      { label: 'Rol de Instagram en México', value: 'Validación de confianza, portafolio en carruseles y cierre por WhatsApp / DM' },
+      { label: 'Rol de TikTok en México', value: 'Alcance masivo en tu ciudad y búsquedas por giro + colonia o zona' },
+      { label: 'Tiempo adicional de rodaje', value: '0 minutos extra (el mismo video editado sin marcas de agua sirve en ambas)' },
+      { label: 'Público con poder de compra', value: 'Usuarios de 25 a 55 años activos a diario en ambas aplicaciones' },
+    ],
+    pullQuote: {
+      text: 'Hoy en CDMX, Monterrey, Guadalajara o Querétaro la gente busca en TikTok e Instagram desde dónde ir a cenar hasta qué dentista, abogado o inmobiliaria contratar.',
+      context: 'Hábitos de búsqueda social en México (2026)',
+    },
+    sections: [
+      {
+        id: 'como-compra-el-usuario-mexicano',
+        number: '01',
+        heading: 'Cómo se complementan TikTok e Instagram en el proceso de compra en México',
+        lead: 'Pensar que TikTok es solo para entretenimiento juvenil hace que muchos negocios en México dejen ir el canal de alcance orgánico más rápido que existe.',
+        paragraphs: [
+          'En TikTok, el algoritmo muestra tus videos a personas ubicadas en tu misma ciudad e interesadas en tu tema aunque tu cuenta sea nueva. Es el canal ideal para que un video de 25 segundos respondiendo una duda frecuente llegue a cientos de prospectos locales.',
+          'Por su parte, Instagram funciona como la recepción digital de tu negocio: quien te descubre en un Reel entra a tu perfil, revisa tus historias destacadas de precios o ubicación, lee un carrusel y te manda mensaje directo o WhatsApp.',
+        ],
+        bullets: [
+          'TikTok te pone frente a ojos nuevos de tu ciudad todas las semanas.',
+          'Instagram ordena tu oferta en carruseles e historias para cerrar la cita.',
+          'Ambas plataformas posicionan tus videos cuando alguien busca tu servicio más el nombre de tu ciudad.',
+        ],
+      },
+      {
+        id: 'una-sesion-dos-redes',
+        number: '02',
+        heading: 'Cómo publicar tus mismos Reels en TikTok sin perder calidad ni alcance',
+        lead: 'El error que frena las vistas de muchos negocios es subir a Instagram un video descargado con el sello de agua de TikTok (o al revés).',
+        paragraphs: [
+          'En Feediasocial editamos tus videos a partir de las tomas originales que subes desde tu celular y generamos un archivo maestro limpio en alta definición.',
+          'Así dejamos programado en Metricool tanto tu Instagram Reel (con portada editorial para tu feed) como tu publicación de TikTok (con palabras clave locales en el texto para aparecer en las búsquedas de tu zona en México).',
+        ],
+        figure: {
+          photoKey: 'restaurantes-mx',
+          alt: 'Grabación de video vertical con celular en un restaurante mexicano',
+          caption: 'Una sola sesión de 30 minutos al mes con tu celular alimenta al mismo tiempo tu perfil de Instagram y tu canal de TikTok.',
+          badge: 'Doble rendimiento mensual',
+          callouts: [
+            'Exportación en 1080p sin logos ni marcas de agua de otras aplicaciones.',
+            'Subtítulos centrados en zona segura para que se lean perfecto en ambas pantallas.',
+            'Textos descriptivos pensados para el buscador de Instagram y TikTok en México.',
+          ],
+        },
+      },
+      {
+        id: 'diferencias-por-giro-mexico',
+        number: '03',
+        heading: 'Qué plataforma genera más citas según el giro de tu negocio en México',
+        lead: 'Aunque publicar el video vertical en ambas redes no te toma ni un minuto extra, cada giro vive un comportamiento distinto.',
+        paragraphs: [
+          'En restaurantes, cafeterías, salones de belleza, spas y gimnasios, TikTok genera un flujo constante de visitas nuevas en sucursal gracias a lo visual del producto. En consultorios médicos/dentales, inmobiliarias y despachos contables o legales, Instagram suele concentrar el cierre de citas de mayor ticket.',
+        ],
+        figure: {
+          photoKey: 'belleza-mx',
+          alt: 'Especialista en salón de belleza en México grabando resultado en formato vertical',
+          caption: 'Mostrar resultados reales y explicar procesos en 25 segundos posiciona a tu negocio por encima de cuentas que solo suben flyers.',
+          badge: 'Posicionamiento por giro',
+          callouts: [
+            'Gastronomía y belleza: tomas dinámicas del proceso y resultado final con audio limpio.',
+            'Clínicas y despachos: explicaciones claras que resuelven las 3 dudas más comunes del cliente.',
+            'Inmobiliarias: recorridos verticales diciendo zona, metraje y monto de enganche en los primeros 3 segundos.',
+          ],
+        },
+      },
+      {
+        id: 'recomendacion-practica',
+        number: '04',
+        heading: 'La regla de oro: constancia mensual antes que complicarte la vida',
+        lead: 'No necesitas volverte creador de contenido de tiempo completo para tener presencia impecable en ambas redes.',
+        paragraphs: [
+          'Con nuestros paquetes mensuales en México (desde $3,900 MXN/mes) grabas una sola vez al mes durante 30 minutos con tu celular y recibes todo tu sistema de guiones, edición, carruseles y calendario programado.',
+        ],
+      },
+    ],
+    comparisonTable: {
+      title: 'Instagram Reels vs. TikTok para pymes y negocios en México (2026)',
+      subtitle: 'Comparativa directa para aprovechar las dos plataformas sin trabajar doble:',
+      headers: ['Criterio comercial', 'Instagram (Reels + Carruseles + Historias)', 'TikTok (Video vertical + Carrusel)', 'Sistema combinado Feediasocial'],
+      rows: [
+        {
+          col1: 'Descubrimiento de gente que no te sigue',
+          col2: 'Alto mediante Reels recomendados',
+          col3: 'Muy alto en tu ciudad desde la primera semana',
+          col4: 'Multiplicas alcance usando el mismo video limpio',
+        },
+        {
+          col1: 'Generación de mensajes a WhatsApp',
+          col2: 'Muy alta (perfil completo + historias destacadas)',
+          col3: 'Media-alta (impulsa búsquedas de tu marca)',
+          col4: 'Embudo completo desde la vista hasta el WhatsApp',
+        },
+        {
+          col1: 'Búsqueda local (ej. «dentista en…»)',
+          col2: 'Buena por nombre y biografía',
+          col3: 'Excelente motor de búsqueda por palabras clave',
+          col4: 'Copy optimizado con términos reales de tu giro en México',
+        },
+        {
+          col1: 'Tiempo requerido del dueño al mes',
+          col2: '30 minutos grabando con tu celular',
+          col3: '0 minutos adicionales',
+          col4: '30 minutos totales al mes + 10 min para aprobar en Metricool',
+        },
+      ],
+    },
+    checklist: {
+      title: 'Los 5 puntos clave para publicar el mismo video en Instagram y TikTok',
+      subtitle: 'Así cuidamos tus entregas mensuales en México:',
+      items: [
+        'Usar siempre el archivo original editado sin marcas de agua de otras aplicaciones.',
+        'Colocar los subtítulos en el área central segura para que no se tapen con los botones.',
+        'Cuidar que la música o el audio sea apto para cuentas comerciales.',
+        'Incluir el giro del negocio y la ciudad o colonia en la descripción del video.',
+        'Tener activo el enlace directo a tu WhatsApp con mensaje precargado en tu perfil.',
+      ],
+    },
+    faqs: [
+      {
+        q: '¿Tengo que hacer bailes o trends cómicos para que mi negocio funcione en TikTok México?',
+        a: 'Para nada. Los videos que atraen clientes reales que pagan son aquellos donde muestras tu trabajo, respondes dudas frecuentes en 30 segundos y hablas como experto en tu giro.',
+      },
+      {
+        q: '¿Tengo que grabar dos veces cada video para subirlo a Instagram y a TikTok?',
+        a: 'No. Grabas una sola toma en vertical (9:16) durante tu sesión de 30 minutos al mes y nosotros preparamos el archivo limpio para ambas redes.',
+      },
+      {
+        q: '¿Qué pasa si mi negocio apenas va a abrir su cuenta de TikTok desde cero?',
+        a: 'Es una excelente ventaja porque en TikTok no necesitas tener seguidores previos para que un buen video bien guionizado llegue a personas de tu ciudad.',
+      },
+      {
+        q: '¿En cuánto empiezan los paquetes mensuales en México?',
+        a: 'El paquete Esencial cuesta $3,900 MXN/mes, el paquete Crecimiento $7,500 MXN/mes y el paquete Pro $12,900 MXN/mes.',
+      },
+      {
+        q: '¿Cómo puedo recibir las 3 ideas de Reels gratuitas para mi cuenta?',
+        a: 'Mándanos un mensaje por WhatsApp o llena el formulario corto de mini-auditoría en la web y en menos de 24 horas hábiles te enviamos 3 ideas pensadas para tu negocio.',
+      },
+    ],
+    relatedRoutes: ['servicios', 'precios', 'intencionComparativa', 'nichoRestaurantes', 'nichoBelleza'],
+    waMessage:
+      'Hola, leí su comparativa de TikTok vs Instagram Reels en México y quiero ver qué estrategia me recomiendan para mi negocio [REF:blog-tiktok-reels-mx]',
+    waCta: 'Consultar estrategia para mi negocio por WhatsApp',
+  },
 ];

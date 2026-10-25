@@ -252,7 +252,7 @@ const crumbs = [
 
       <div class="grid gap-6 md:grid-cols-3">
         {
-          otherNiches.map((other) => (
+          otherNiches.slice(0, 3).map((other) => (
             <NicheCard
               title={other.shortTitle}
               text={other.cardSummary}
