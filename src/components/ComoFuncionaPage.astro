@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Card from '@/components/Card.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import BookCallButton from '@/components/BookCallButton.astro';
 import Button from '@/components/Button.astro';
 import Photo from '@/components/Photo.astro';
 import StripeBand from '@/components/StripeBand.astro';
@@ -12,7 +13,7 @@ import { linkTo, pathFor } from '@/lib/routes';
 import { breadcrumbJsonLd } from '@/lib/seo';
 
 import proceso01 from '@/assets/photos/proceso-01-onboarding.jpg';
-import proceso02 from '@/assets/photos/proceso-02-guiones-calendario.jpg';
+import proceso03 from '@/assets/photos/proceso-03-edicion.jpg';
 import sinCamara from '@/assets/photos/sin-camara.jpg';
 
 interface Props {
@@ -44,12 +45,12 @@ const crumbs = [
   <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
     <div class="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
       <div class="space-y-5">
-        <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
+        <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
           {copy.eyebrow}
         </p>
         <h1 class="text-display-hero">{copy.h1}</h1>
         <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
-        <div class="flex flex-wrap gap-3 pt-2">
+        <div class="flex flex-wrap items-center gap-3 pt-2">
           <WhatsAppButton
             message={copy.waMessage}
             label={copy.waCta}
@@ -59,18 +60,25 @@ const crumbs = [
             placement="hero"
             size="lg"
           />
-          <Button href={linkTo('precios', country)} variant="outline" size="lg">
+          <BookCallButton
+            country={country}
+            page="como-funciona"
+            placement="hero"
+            variant="light"
+            size="lg"
+          />
+          <Button href={linkTo('precios', country)} variant="outline" size="md">
             {ui.hero.ctaSecondary}
           </Button>
         </div>
       </div>
 
       <div class="grid grid-cols-2 gap-4">
-        <div class="overflow-hidden rounded-[28px] border-2 border-ink">
+        <div class="overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--coral)]">
           <Photo src={proceso01} alt={copy.processSteps[0].title} priority aspect="1/1" widths={[360, 540]} sizes="45vw" />
         </div>
-        <div class="overflow-hidden rounded-[28px] border-2 border-ink">
-          <Photo src={proceso02} alt={copy.processSteps[1].title} aspect="1/1" widths={[360, 540]} sizes="45vw" />
+        <div class="mt-6 overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--lemon)]">
+          <Photo src={proceso03} alt={copy.processSteps[3].title} aspect="1/1" widths={[360, 540]} sizes="45vw" />
         </div>
       </div>
     </div>
@@ -83,7 +91,7 @@ const crumbs = [
     <ol class="space-y-6">
       {
         copy.processSteps.map((step) => (
-          <li class="grid items-center gap-6 rounded-[32px] border-2 border-ink bg-cream-deep p-6 md:grid-cols-[auto_1fr_auto] md:p-8">
+          <li class="grid items-center gap-6 rounded-[32px] border-2 border-ink bg-cream-deep p-6 shadow-[6px_6px_0_0_var(--ink)] md:grid-cols-[auto_1fr_auto] md:p-8">
             <span class="font-display text-6xl leading-none text-coral-deep md:text-7xl" aria-hidden="true">
               {step.num}
             </span>
@@ -95,7 +103,7 @@ const crumbs = [
               <h2 class="text-3xl md:text-4xl">{step.title}</h2>
               <p class="text-ink-soft">{step.text}</p>
             </div>
-            <div class="rounded-2xl border-2 border-ink bg-cream p-4 text-sm font-bold md:max-w-xs">
+            <div class="rounded-2xl border-2 border-ink bg-cream p-4 text-sm font-bold shadow-[3px_3px_0_0_var(--ink)] md:max-w-xs">
               {step.deliverable}
             </div>
           </li>

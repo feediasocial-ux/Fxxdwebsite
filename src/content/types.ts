@@ -215,6 +215,27 @@ export type UiCopy = {
     feediaLabel: string;
     ctaLabel: string;
   };
+  bookCall: {
+    ctaShort: string;
+    ctaLabel: string;
+    a11yLabel: string;
+    badge: string;
+    durationTag: string;
+    cardTitle: string;
+    cardText: string;
+    bullets: [string, string, string];
+    pricingBannerTitle: string;
+    pricingBannerText: string;
+    pendingNote: string;
+  };
+  reelMockupUi: {
+    recBadge: string;
+    formatBadge: string;
+    hookLabel: string;
+    shotListLabel: string;
+    ctaBoxLabel: string;
+    audioBarLabel: string;
+  };
 };
 
 /** Contrato del copy para las páginas interiores de Fase 2 y 3. */

@@ -5,6 +5,7 @@
  */
 import Button from './Button.astro';
 import WhatsAppButton from './WhatsAppButton.astro';
+import BookCallButton from './BookCallButton.astro';
 import Sticker from './Sticker.astro';
 import Photo from './Photo.astro';
 import Placeholder from './Placeholder.astro';
@@ -27,7 +28,7 @@ const { copy, country, page, waMessage, waA11y, secondaryHref, image } = Astro.p
 <section class="hero relative overflow-hidden">
   <div class="container-site grid items-center gap-10 pt-8 pb-14 md:pt-12 lg:grid-cols-[1.15fr_1fr] lg:gap-12 lg:pb-20">
     <div class="relative z-10 flex flex-col gap-6">
-      <p class="inline-flex w-fit items-center gap-2 rounded-pill border-2 border-ink bg-sky px-4 py-1.5 text-sm font-bold">
+      <p class="inline-flex w-fit items-center gap-2 rounded-pill border-2 border-ink bg-sky px-4 py-1.5 text-sm font-bold shadow-[3px_3px_0_0_var(--ink)]">
         <span class="size-2.5 rounded-full bg-coral" aria-hidden="true"></span>
         {copy.eyebrow}
       </p>
@@ -36,9 +37,10 @@ const { copy, country, page, waMessage, waA11y, secondaryHref, image } = Astro.p
         <span class="hero__mark">{copy.titleHighlight}</span>
       </h1>
       <p class="max-w-xl text-lg md:text-xl">{copy.promise}</p>
-      <div class="flex flex-col gap-3 sm:flex-row">
+      <div class="flex flex-wrap items-center gap-3">
         <WhatsAppButton message={waMessage} label={copy.ctaPrimary} a11yLabel={waA11y} country={country} page={page} placement="hero" size="lg" />
-        <Button href={secondaryHref} variant="outline" size="lg">{copy.ctaSecondary}</Button>
+        <BookCallButton country={country} page={page} placement="hero" variant="light" size="lg" />
+        <Button href={secondaryHref} variant="outline" size="md">{copy.ctaSecondary}</Button>
       </div>
     </div>
 
@@ -50,6 +52,7 @@ const { copy, country, page, waMessage, waA11y, secondaryHref, image } = Astro.p
         <Placeholder label={copy.founderPlaceholder} aspect="16/10" tone="lemon" compact />
       </div>
       <Sticker color="coral" shape="circle" rotate={10} class="absolute top-0 right-0 z-10">{copy.stickers[1]}</Sticker>
+      <Sticker color="sky" rotate={-6} class="absolute top-6 left-0 z-10 hidden text-xs! sm:inline-flex">{copy.stickers[0]}</Sticker>
     </div>
   </div>
 </section>

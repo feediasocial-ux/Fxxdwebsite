@@ -268,6 +268,16 @@ const clarityId = import.meta.env.PUBLIC_CLARITY_ID || '';
             });
           }
 
+          var calBtn = t.closest('[data-calendly]');
+          if (calBtn) {
+            track('click_book_call', {
+              page: calBtn.getAttribute('data-calendly-page') || currentPage,
+              country: calBtn.getAttribute('data-calendly-country') || currentCountry,
+              niche: calBtn.getAttribute('data-calendly-niche') || '',
+              placement: calBtn.getAttribute('data-calendly-placement') || 'cta',
+            });
+          }
+
           if (t.closest('[data-cookie-accept-all]')) {
             saveConsent(true, true);
           } else if (t.closest('[data-cookie-reject]')) {

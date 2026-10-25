@@ -4,6 +4,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Card from '@/components/Card.astro';
 import AuditForm from '@/components/AuditForm.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import BookCallCard from '@/components/BookCallCard.astro';
 import Photo from '@/components/Photo.astro';
 import { getCorePages, getUi } from '@/content';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
@@ -41,17 +42,17 @@ const crumbs = [
 
   <section class="container-site pt-6 pb-20 md:pt-10 md:pb-24">
     <div class="max-w-3xl space-y-4">
-      <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase">
+      <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
         {copy.eyebrow}
       </p>
       <h1 class="text-display-hero">{copy.h1}</h1>
       <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
     </div>
 
-    <div class="mt-12 grid items-start gap-10 lg:grid-cols-[1fr_1.15fr]">
-      <!-- Columna izquierda: WhatsApp destacado + qué esperar + foto -->
+    <div class="mt-12 grid items-start gap-10 lg:grid-cols-[1.05fr_1.1fr]">
+      <!-- Columna izquierda: 1) WhatsApp directo + 2) Llamada 15 min en Calendly + 3) Qué esperar + foto -->
       <div class="space-y-8">
-        <Card color="lemon" bordered class="space-y-4 shadow-[0_6px_0_0_var(--ink)]">
+        <Card color="lemon" bordered class="space-y-4">
           <span class="inline-block rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold">
             WhatsApp · {waNumberDisplay(country)}
           </span>
@@ -71,6 +72,9 @@ const crumbs = [
           <p class="text-xs font-bold">{copy.responseGuarantee}</p>
         </Card>
 
+        <!-- Opción 2: Agendar llamada de 15 min (Calendly) -->
+        <BookCallCard country={country} page="contacto" placement="contacto-card" mode="card" />
+
         <Card color="cream-deep" bordered class="space-y-4">
           <h2 class="text-2xl">{copy.expectationsTitle}</h2>
           <ol class="space-y-2.5 text-sm md:text-base">
@@ -85,13 +89,15 @@ const crumbs = [
           </ol>
         </Card>
 
-        <div class="overflow-hidden rounded-[28px] border-2 border-ink">
+        <div class="overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--coral)]">
           <Photo src={contactoChat} alt={copy.photoAlt} aspect="4/3" widths={[360, 540, 720]} sizes="(min-width: 1024px) 42vw, 92vw" />
         </div>
       </div>
 
       <!-- Columna derecha: Formulario de mini-auditoría gratuita -->
-      <AuditForm country={country} page="contacto" />
+      <div class="lg:sticky lg:top-24">
+        <AuditForm country={country} page="contacto" />
+      </div>
     </div>
   </section>
 </BaseLayout>

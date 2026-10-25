@@ -5,6 +5,7 @@ import PackageCard from '@/components/PackageCard.astro';
 import Card from '@/components/Card.astro';
 import FAQ from '@/components/FAQ.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import BookCallCard from '@/components/BookCallCard.astro';
 import Photo from '@/components/Photo.astro';
 import StripeBand from '@/components/StripeBand.astro';
 import RoiCalculator from '@/components/RoiCalculator.astro';
@@ -55,7 +56,7 @@ const crumbs = [
 
   <section id="paquetes" class="container-site pt-6 pb-16 md:pt-10 md:pb-24">
     <div class="max-w-3xl space-y-4">
-      <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase">
+      <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
         {copy.eyebrow}
       </p>
       <h1 class="text-display-hero">{copy.h1}</h1>
@@ -69,6 +70,16 @@ const crumbs = [
     <div class="mt-8 space-y-1 text-sm text-ink-soft">
       <p>• {ui.pricing.adsNote}</p>
       <p>• {ui.pricing.taxNote}</p>
+    </div>
+
+    <div class="mt-10">
+      <BookCallCard
+        country={country}
+        page="precios"
+        placement="below-packages"
+        mode="banner"
+        waMessage={ui.whatsapp.defaultMessage}
+      />
     </div>
   </section>
 

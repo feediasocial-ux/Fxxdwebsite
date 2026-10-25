@@ -2,13 +2,18 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Card from '@/components/Card.astro';
+import Photo from '@/components/Photo.astro';
+import Sticker from '@/components/Sticker.astro';
 import Placeholder from '@/components/Placeholder.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import BookCallButton from '@/components/BookCallButton.astro';
 import StripeBand from '@/components/StripeBand.astro';
 import { getCorePages, getUi } from '@/content';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { pathFor } from '@/lib/routes';
 import { abs, breadcrumbJsonLd } from '@/lib/seo';
+
+import equipoRemoto from '@/assets/photos/equipo-remoto-estudio.jpg';
 
 interface Props {
   country: CountryKey;
@@ -46,12 +51,48 @@ const foundersJsonLd = copy.founders.map((f, i) => ({
   <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
 
   <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
-    <div class="max-w-3xl space-y-5">
-      <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase">
-        {copy.eyebrow}
-      </p>
-      <h1 class="text-display-hero">{copy.h1}</h1>
-      <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
+    <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
+      <div class="space-y-5">
+        <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
+          {copy.eyebrow}
+        </p>
+        <h1 class="text-display-hero">{copy.h1}</h1>
+        <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <WhatsAppButton
+            message={copy.waMessage}
+            label={copy.waCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page="sobre-nosotros"
+            placement="hero"
+            size="lg"
+          />
+          <BookCallButton
+            country={country}
+            page="sobre-nosotros"
+            placement="hero"
+            variant="light"
+            size="lg"
+          />
+        </div>
+      </div>
+
+      <div class="relative mx-auto w-full max-w-lg lg:max-w-none">
+        <Sticker color="coral" rotate={6} class="absolute -top-3 right-4 z-10 text-xs!">
+          ESPAÑA ↔ MÉXICO
+        </Sticker>
+        <div class="overflow-hidden rounded-[32px] border-2 border-ink shadow-[10px_12px_0_0_var(--coral)]">
+          <Photo
+            src={equipoRemoto}
+            alt={copy.h1}
+            priority
+            aspect="4/3"
+            widths={[360, 540, 720]}
+            sizes="(min-width: 1024px) 44vw, 92vw"
+          />
+        </div>
+      </div>
     </div>
   </section>
 
@@ -107,7 +148,7 @@ const foundersJsonLd = copy.founders.map((f, i) => ({
       }
     </div>
 
-    <div class="mt-12 flex justify-center">
+    <div class="mt-12 flex flex-wrap justify-center gap-4">
       <WhatsAppButton
         message={copy.waMessage}
         label={copy.waCta}
@@ -115,6 +156,13 @@ const foundersJsonLd = copy.founders.map((f, i) => ({
         country={country}
         page="sobre-nosotros"
         placement="bottom"
+        size="lg"
+      />
+      <BookCallButton
+        country={country}
+        page="sobre-nosotros"
+        placement="bottom"
+        variant="light"
         size="lg"
       />
     </div>

@@ -5,6 +5,7 @@
 ## 1. Identidad, contacto y negocio
 - [ ] `[PENDIENTE: logo definitivo]` Sustituir el logotipo tipográfico provisional (`src/components/Logo.astro`) cuando exista archivo vectorial definitivo.
 - [ ] `[PENDIENTE: número español]` Añadir un número de WhatsApp con prefijo `+34` en `PUBLIC_WA_NUMBER_ES` (actualmente usa `+52 55 3440 2921` para ambos países).
+- [ ] `[PENDIENTE: configurar URL definitiva de Calendly en PUBLIC_CALENDLY_URL]` Sustituir el enlace provisional (`https://calendly.com/feediasocial/15min`) en `.env` / GitHub Actions Variables (`PUBLIC_CALENDLY_URL`) cuando el usuario facilite su enlace definitivo de Calendly.
 - [ ] `[PENDIENTE: validar precios definitivos]` Confirmar los importes de Esencial (349 € / 3.900 MXN), Crecimiento (649 € / 7.500 MXN) y Pro (990 € / 12.900 MXN) en `src/content/pricing.ts`.
 - [ ] `[PENDIENTE: definir política de permanencia]` Confirmar si todos los paquetes son mes a mes sin permanencia/plazo forzoso.
 - [ ] `[PENDIENTE: perfiles de redes]` Añadir URLs reales de Instagram/TikTok/LinkedIn en `BRAND.sameAs` (`src/lib/seo.ts`).

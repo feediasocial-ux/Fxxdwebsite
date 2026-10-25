@@ -1,0 +1,70 @@
+---
+/**
+ * Botón para agendar llamada de descubrimiento de 15 minutos en Calendly.
+ * Usa `bookCallLink` (configurable vía `PUBLIC_CALENDLY_URL`) con parámetros UTM.
+ */
+import Button from './Button.astro';
+import { bookCallLink } from '@/lib/calendly';
+import { getUi } from '@/content';
+import type { CountryKey } from '@/lib/i18n';
+
+interface Props {
+  country: CountryKey;
+  page: string;
+  placement?: string;
+  niche?: string;
+  label?: string;
+  variant?: 'primary' | 'dark' | 'lemon' | 'outline' | 'light';
+  size?: 'md' | 'lg';
+  class?: string;
+}
+
+const {
+  country,
+  page,
+  placement = 'cta',
+  niche,
+  label,
+  variant = 'outline',
+  size = 'md',
+  class: cls = '',
+} = Astro.props;
+
+const ui = getUi(country);
+const finalLabel = label ?? ui.bookCall.ctaLabel;
+const href = bookCallLink({ country, page, placement, niche });
+---
+
+<Button
+  href={href}
+  external
+  variant={variant}
+  size={size}
+  class={cls}
+  aria-label={`${finalLabel}. ${ui.bookCall.a11yLabel}`}
+  data-calendly
+  data-calendly-page={page}
+  data-calendly-country={country}
+  data-calendly-niche={niche ?? ''}
+  data-calendly-placement={placement}
+>
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <rect x="3" y="4" width="18" height="18" rx="3"></rect>
+    <line x1="16" y1="2" x2="16" y2="6"></line>
+    <line x1="8" y1="2" x2="8" y2="6"></line>
+    <line x1="3" y1="10" x2="21" y2="10"></line>
+    <circle cx="12" cy="15.5" r="2.2"></circle>
+  </svg>
+  <span>{finalLabel}</span>
+</Button>

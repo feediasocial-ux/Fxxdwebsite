@@ -1,0 +1,119 @@
+---
+/**
+ * Mockup neo-brutalista de teléfono 9:16 que presenta un guion real como un storyboard visual de Reel.
+ */
+import { getUi } from '@/content';
+import type { CountryKey } from '@/lib/i18n';
+
+interface Props {
+  country: CountryKey;
+  badge: string;
+  duration?: string;
+  title: string;
+  hook: string;
+  shots: string[];
+  cta: string;
+  shotNote?: string;
+  accent?: 'coral' | 'lemon' | 'sky';
+}
+
+const {
+  country,
+  badge,
+  duration = '25–35 s',
+  title,
+  hook,
+  shots,
+  cta,
+  shotNote,
+  accent = 'lemon',
+} = Astro.props;
+
+const ui = getUi(country).reelMockupUi;
+
+const headerBg = {
+  coral: 'bg-coral text-ink',
+  lemon: 'bg-lemon text-ink',
+  sky: 'bg-sky text-ink',
+}[accent];
+---
+
+<article class="phone-reel group relative flex flex-col overflow-hidden rounded-[34px] border-2 border-ink bg-cream text-ink shadow-[8px_8px_0_0_var(--ink)] transition-transform duration-200 hover:-translate-y-1">
+  <!-- Barra superior de cámara / smartphone 9:16 -->
+  <div class="flex items-center justify-between border-b-2 border-ink bg-ink px-4 py-2.5 text-cream">
+    <div class="flex items-center gap-2">
+      <span class="size-2.5 animate-pulse rounded-full bg-coral" aria-hidden="true"></span>
+      <span class="text-[11px] font-bold tracking-wider uppercase">{ui.recBadge}</span>
+    </div>
+    <div class="h-1.5 w-12 rounded-full bg-cream/30" aria-hidden="true"></div>
+    <span class="rounded-pill border border-cream/40 bg-maroon px-2.5 py-0.5 text-[11px] font-bold text-lemon">
+      {ui.formatBadge} · {duration}
+    </span>
+  </div>
+
+  <!-- Cabecera de metadatos del Reel -->
+  <div class:list={['border-b-2 border-ink px-5 py-4', headerBg]}>
+    <span class="inline-block rounded-pill border border-ink bg-cream px-2.5 py-0.5 text-[11px] font-bold uppercase">
+      {badge}
+    </span>
+    <h3 class="mt-2 text-2xl leading-tight">{title}</h3>
+  </div>
+
+  <!-- Cuerpo del guion estilo teleprompter / storyboard -->
+  <div class="flex flex-1 flex-col gap-4 p-5">
+    <!-- Gancho 0-3s -->
+    <div class="rounded-2xl border-2 border-ink bg-lemon p-3.5 shadow-[3px_3px_0_0_var(--ink)]">
+      <span class="block text-[10px] font-extrabold tracking-wider uppercase text-maroon">
+        ⚡ {ui.hookLabel}
+      </span>
+      <p class="mt-1 text-sm font-bold leading-snug">{hook}</p>
+    </div>
+
+    <!-- Tomas / Planos -->
+    <div class="space-y-2">
+      <span class="block text-[11px] font-extrabold tracking-wider uppercase text-ink-soft">
+        🎥 {ui.shotListLabel}
+      </span>
+      <ul class="space-y-2 text-sm">
+        {
+          shots.map((line, i) => (
+            <li class="flex items-start gap-2.5 rounded-xl border border-ink/25 bg-cream-deep p-2.5">
+              <span class="inline-flex size-5 shrink-0 items-center justify-center rounded-full border border-ink bg-sky text-[11px] font-bold">
+                {i + 1}
+              </span>
+              <span class="leading-snug">{line}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Cierre / CTA -->
+    <div class="mt-auto rounded-2xl border-2 border-ink bg-ink p-3.5 text-cream">
+      <span class="block text-[10px] font-bold tracking-wider uppercase text-lemon">
+        💬 {ui.ctaBoxLabel}
+      </span>
+      <p class="mt-1 text-xs font-bold leading-snug">{cta}</p>
+    </div>
+
+    {
+      shotNote && (
+        <p class="border-t border-dashed border-ink/30 pt-2.5 text-xs text-ink-soft">
+          {shotNote}
+        </p>
+      )
+    }
+  </div>
+
+  <!-- Pie de reproductor de Reel (onda de audio decorativa) -->
+  <div class="flex items-center justify-between border-t-2 border-ink bg-cream-deep px-4 py-2 text-[11px] font-bold text-ink-soft">
+    <span class="truncate">♪ {ui.audioBarLabel}</span>
+    <span class="flex items-end gap-0.5" aria-hidden="true">
+      <span class="h-2 w-0.5 bg-ink"></span>
+      <span class="h-3.5 w-0.5 bg-coral-deep"></span>
+      <span class="h-2.5 w-0.5 bg-ink"></span>
+      <span class="h-4 w-0.5 bg-ink"></span>
+      <span class="h-2 w-0.5 bg-coral-deep"></span>
+    </span>
+  </div>
+</article>

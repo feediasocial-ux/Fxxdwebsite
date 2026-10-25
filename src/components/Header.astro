@@ -2,6 +2,7 @@
 import Logo from './Logo.astro';
 import CountrySwitcher from './CountrySwitcher.astro';
 import WhatsAppButton from './WhatsAppButton.astro';
+import BookCallButton from './BookCallButton.astro';
 import { getUi } from '@/content';
 import { ROUTES, linkTo, type RouteKey } from '@/lib/routes';
 import type { CountryKey } from '@/lib/i18n';
@@ -37,6 +38,14 @@ const nav = ui.header.nav.filter((n) => ROUTES[n.route].live);
     }
     <div class="flex items-center gap-2">
       <CountrySwitcher current={country} routeKey={routeKey} label={ui.countrySwitcher.label} a11yLabel={ui.a11y.countrySwitcher} />
+      <BookCallButton
+        country={country}
+        page={page}
+        placement="header"
+        label={ui.bookCall.ctaShort}
+        variant="light"
+        class="hidden min-h-11! px-3.5! text-xs! xl:inline-flex"
+      />
       <WhatsAppButton
         message={ui.whatsapp.defaultMessage}
         label={ui.header.waCtaShort}

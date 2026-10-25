@@ -11,6 +11,7 @@ import Sticker from '@/components/Sticker.astro';
 import GeoKeyFacts from '@/components/GeoKeyFacts.astro';
 import FAQ from '@/components/FAQ.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import BookCallButton from '@/components/BookCallButton.astro';
 import StripeBand from '@/components/StripeBand.astro';
 import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getUi } from '@/content';
@@ -172,7 +173,7 @@ const crumbs = [
             </div>
           </div>
 
-          <div class="rounded-[24px] border-2 border-ink bg-maroon p-5 text-cream space-y-3">
+          <div class="rounded-[24px] border-2 border-ink bg-maroon p-5 text-cream shadow-[5px_5px_0_0_var(--ink)] space-y-3">
             <span class="inline-block rounded-pill bg-lemon px-3 py-0.5 text-[11px] font-bold uppercase text-ink">
               {blogUi.sidebarWaBadge}
             </span>
@@ -189,6 +190,14 @@ const crumbs = [
               variant="lemon"
               size="md"
               class="w-full justify-center"
+            />
+            <BookCallButton
+              country={country}
+              page={pageId}
+              placement="sidebar"
+              variant="light"
+              size="md"
+              class="w-full justify-center text-xs!"
             />
           </div>
         </aside>
@@ -358,20 +367,29 @@ const crumbs = [
             )
           }
 
-          <!-- Cierre de conversión a WhatsApp -->
-          <footer class="rounded-[32px] border-2 border-ink bg-maroon p-7 text-cream md:p-10 space-y-5">
+          <!-- Cierre de conversión a WhatsApp + Llamada 15 min -->
+          <footer class="rounded-[32px] border-2 border-ink bg-maroon p-7 text-cream shadow-[8px_8px_0_0_var(--ink)] md:p-10 space-y-5">
             <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
             <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
-            <WhatsAppButton
-              message={article.waMessage}
-              label={article.waCta}
-              a11yLabel={ui.a11y.openWhatsApp}
-              country={country}
-              page={pageId}
-              placement="article-footer"
-              variant="lemon"
-              size="lg"
-            />
+            <div class="flex flex-wrap gap-3">
+              <WhatsAppButton
+                message={article.waMessage}
+                label={article.waCta}
+                a11yLabel={ui.a11y.openWhatsApp}
+                country={country}
+                page={pageId}
+                placement="article-footer"
+                variant="lemon"
+                size="lg"
+              />
+              <BookCallButton
+                country={country}
+                page={pageId}
+                placement="article-footer"
+                variant="light"
+                size="lg"
+              />
+            </div>
           </footer>
         </div>
       </div>

@@ -1,9 +1,12 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
-import Card from '@/components/Card.astro';
 import Button from '@/components/Button.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import BookCallButton from '@/components/BookCallButton.astro';
+import PhoneReelMockup from '@/components/PhoneReelMockup.astro';
+import Photo from '@/components/Photo.astro';
+import Sticker from '@/components/Sticker.astro';
 import AuditForm from '@/components/AuditForm.astro';
 import StripeBand from '@/components/StripeBand.astro';
 import { getPhase4, getUi } from '@/content';
@@ -11,6 +14,9 @@ import { getNichesByCountry } from '@/content/niches';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { linkTo, pathFor } from '@/lib/routes';
 import { breadcrumbJsonLd } from '@/lib/seo';
+
+import proceso02 from '@/assets/photos/proceso-02-guiones-calendario.jpg';
+import proceso03 from '@/assets/photos/proceso-03-edicion.jpg';
 
 interface Props {
   country: CountryKey;
@@ -41,30 +47,51 @@ const crumbs = [
   <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
 
   <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
-    <div class="max-w-3xl space-y-5">
-      <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase">
-        {copy.eyebrow}
-      </p>
-      <h1 class="text-display-hero">{copy.h1}</h1>
-      <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
-      <div class="flex flex-wrap gap-3 pt-2">
-        <WhatsAppButton
-          message={copy.waMessage}
-          label={copy.waCta}
-          a11yLabel={ui.a11y.openWhatsApp}
-          country={country}
-          page="como-trabajamos"
-          placement="hero"
-          size="lg"
-        />
-        <Button href={linkTo('comoFunciona', country)} variant="outline" size="lg">
-          {ui.stepsSection.ctaMore}
-        </Button>
+    <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
+      <div class="space-y-5">
+        <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
+          {copy.eyebrow}
+        </p>
+        <h1 class="text-display-hero">{copy.h1}</h1>
+        <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <WhatsAppButton
+            message={copy.waMessage}
+            label={copy.waCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page="como-trabajamos"
+            placement="hero"
+            size="lg"
+          />
+          <BookCallButton
+            country={country}
+            page="como-trabajamos"
+            placement="hero"
+            variant="light"
+            size="lg"
+          />
+          <Button href={linkTo('comoFunciona', country)} variant="outline" size="md">
+            {ui.stepsSection.ctaMore}
+          </Button>
+        </div>
+      </div>
+
+      <div class="relative grid grid-cols-2 gap-4 pt-4">
+        <Sticker color="lemon" rotate={-5} class="absolute -top-2 right-4 z-10 text-xs!">
+          {copy.honestyBanner.badge}
+        </Sticker>
+        <div class="overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--coral)]">
+          <Photo src={proceso02} alt={copy.samplesTitle} priority aspect="4/5" widths={[360, 540]} sizes="45vw" />
+        </div>
+        <div class="mt-6 overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--lemon)]">
+          <Photo src={proceso03} alt={copy.calendarShowcaseTitle} aspect="4/5" widths={[360, 540]} sizes="45vw" />
+        </div>
       </div>
     </div>
 
     <!-- Aviso de honestidad: cero casos inventados -->
-    <div class="mt-10 rounded-[28px] border-2 border-dashed border-ink bg-cream-deep p-6 md:p-8">
+    <div class="mt-12 rounded-[28px] border-2 border-dashed border-ink bg-cream-deep p-6 shadow-[6px_6px_0_0_var(--ink)] md:p-8">
       <span class="inline-block rounded-pill border border-ink bg-lemon px-3 py-1 text-xs font-bold uppercase">
         {copy.honestyBanner.badge}
       </span>
@@ -75,7 +102,7 @@ const crumbs = [
 
   <StripeBand colors={['var(--coral)', 'var(--cream)']} />
 
-  <!-- 3 muestras reales de guiones palabra por palabra -->
+  <!-- 3 muestras reales de guiones palabra por palabra en formato Mockup 9:16 -->
   <section class="container-site py-16 md:py-24">
     <div class="max-w-3xl space-y-3">
       <h2 class="text-display-lg">{copy.samplesTitle}</h2>
@@ -85,32 +112,17 @@ const crumbs = [
     <div class="mt-10 grid gap-8 lg:grid-cols-3">
       {
         copy.scriptSamples.map((s) => (
-          <Card color={s.color} bordered class="flex flex-col gap-4">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <span class="rounded-pill border border-ink bg-cream px-3 py-0.5 text-xs font-bold uppercase">
-                {s.nicheBadge}
-              </span>
-              <span class="text-xs font-bold">{s.duration}</span>
-            </div>
-            <h3 class="text-2xl">{s.title}</h3>
-            <div class="rounded-2xl border-2 border-ink bg-cream p-3.5 text-sm font-bold">
-              {s.hook}
-            </div>
-            <ul class="space-y-2 text-sm">
-              {s.body.map((line) => (
-                <li class="flex gap-2">
-                  <span class="font-bold" aria-hidden="true">→</span>
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-            <p class="rounded-2xl border border-ink bg-cream/90 p-3 text-xs font-bold">
-              {s.cta}
-            </p>
-            <p class="mt-auto border-t border-ink/20 pt-3 text-xs">
-              {s.shotNote}
-            </p>
-          </Card>
+          <PhoneReelMockup
+            country={country}
+            badge={s.nicheBadge}
+            duration={s.duration}
+            title={s.title}
+            hook={s.hook}
+            shots={s.body}
+            cta={s.cta}
+            shotNote={s.shotNote}
+            accent={s.color}
+          />
         ))
       }
     </div>
@@ -127,7 +139,7 @@ const crumbs = [
       <div class="grid gap-6 md:grid-cols-2">
         {
           copy.calendarWeeks.map((w) => (
-            <div class="rounded-[28px] border-2 border-cream bg-cream p-6 text-ink space-y-4">
+            <div class="rounded-[28px] border-2 border-cream bg-cream p-6 text-ink shadow-[8px_8px_0_0_var(--coral)] space-y-4">
               <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-ink/20 pb-3">
                 <h3 class="text-2xl">{w.week}</h3>
                 <span class="text-xs font-bold uppercase text-coral-deep">{w.goal}</span>
@@ -152,12 +164,12 @@ const crumbs = [
   <!-- Enlaces a muestras específicas por nicho -->
   <section class="container-site py-16">
     <h2 class="text-display-md">Ver calendarios y guiones específicos por sector en {ui.countryName}</h2>
-    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {
         niches.map((n) => (
           <a
             href={pathFor(n.routeKey, country)!}
-            class="rounded-2xl border-2 border-ink bg-cream-deep p-5 font-bold text-ink no-underline transition-colors hover:bg-lemon"
+            class="rounded-2xl border-2 border-ink bg-cream-deep p-5 font-bold text-ink no-underline shadow-[4px_4px_0_0_var(--ink)] transition-all hover:-translate-y-0.5 hover:bg-lemon"
           >
             <span class="font-display text-xl uppercase block">{n.shortTitle}</span>
             <span class="mt-1 block text-xs text-ink-soft">Ver 3 ideas de reels + calendario →</span>
@@ -169,20 +181,29 @@ const crumbs = [
 
   <!-- CTA final -->
   <section class="container-site pb-20">
-    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream md:p-10 lg:grid-cols-[1fr_1.15fr]">
+    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream shadow-[10px_10px_0_0_var(--ink)] md:p-10 lg:grid-cols-[1fr_1.15fr]">
       <div class="space-y-5">
         <h2 class="text-display-md text-cream">{copy.pilotCtaTitle}</h2>
         <p class="text-lg text-cream/85">{copy.pilotCtaText}</p>
-        <WhatsAppButton
-          message={copy.waMessage}
-          label={copy.waCta}
-          a11yLabel={ui.a11y.openWhatsApp}
-          country={country}
-          page="como-trabajamos"
-          placement="final-cta"
-          variant="lemon"
-          size="lg"
-        />
+        <div class="flex flex-wrap gap-3">
+          <WhatsAppButton
+            message={copy.waMessage}
+            label={copy.waCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page="como-trabajamos"
+            placement="final-cta"
+            variant="lemon"
+            size="lg"
+          />
+          <BookCallButton
+            country={country}
+            page="como-trabajamos"
+            placement="final-cta"
+            variant="light"
+            size="lg"
+          />
+        </div>
       </div>
       <AuditForm country={country} page="como-trabajamos" />
     </div>

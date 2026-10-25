@@ -33,7 +33,15 @@ const shapes: Record<Shape, string> = {
 };
 ---
 
-<Tag class:list={['relative p-6 md:p-8', colors[color], shapes[shape], bordered && 'border-2 border-ink', cls]}>
+<Tag
+  class:list={[
+    'relative p-6 md:p-8',
+    colors[color],
+    shapes[shape],
+    bordered && 'border-2 border-ink shadow-[6px_6px_0_0_var(--ink)]',
+    cls,
+  ]}
+>
   <slot />
 </Tag>
 

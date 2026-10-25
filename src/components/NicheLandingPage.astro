@@ -4,6 +4,9 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Card from '@/components/Card.astro';
 import Button from '@/components/Button.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import BookCallButton from '@/components/BookCallButton.astro';
+import BookCallCard from '@/components/BookCallCard.astro';
+import PhoneReelMockup from '@/components/PhoneReelMockup.astro';
 import PackageCard from '@/components/PackageCard.astro';
 import NicheCard from '@/components/NicheCard.astro';
 import FAQ from '@/components/FAQ.astro';
@@ -67,7 +70,7 @@ const crumbs = [
   <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
     <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
       <div class="space-y-6">
-        <p class="inline-block rounded-pill border-2 border-ink bg-accent-2 px-4 py-1.5 text-sm font-bold uppercase">
+        <p class="inline-block rounded-pill border-2 border-ink bg-accent-2 px-4 py-1.5 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
           {niche.eyebrow}
         </p>
         <h1 class="text-display-hero">{niche.h1}</h1>
@@ -83,7 +86,7 @@ const crumbs = [
           }
         </div>
 
-        <div class="flex flex-col gap-3 sm:flex-row">
+        <div class="flex flex-wrap items-center gap-3">
           <WhatsAppButton
             message={niche.waMessage}
             label={niche.waCta}
@@ -94,7 +97,15 @@ const crumbs = [
             placement="hero"
             size="lg"
           />
-          <Button href="#paquetes" variant="outline" size="lg">
+          <BookCallButton
+            country={country}
+            page={pageId}
+            niche={niche.id}
+            placement="hero"
+            variant="light"
+            size="lg"
+          />
+          <Button href="#paquetes" variant="outline" size="md">
             {ui.hero.ctaSecondary}
           </Button>
         </div>
@@ -155,31 +166,26 @@ const crumbs = [
     </div>
   </section>
 
-  <!-- Elemento único 1: 3 ideas de reels reales para este nicho -->
+  <!-- Elemento único 1: 3 ideas de reels reales para este nicho en formato Mockup 9:16 -->
   <section class="container-site py-16 md:py-24">
     <div class="max-w-3xl space-y-3">
       <h2 class="text-display-lg">{niche.reelIdeasTitle}</h2>
       <p class="text-lg text-ink-soft">{niche.reelIdeasSubtitle}</p>
     </div>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-3">
+    <div class="mt-10 grid gap-8 lg:grid-cols-3">
       {
         niche.reelIdeas.map((idea, idx) => (
-          <Card color={idx === 0 ? 'accent-2' : idx === 1 ? 'cream-deep' : 'accent-3'} bordered class="flex flex-col gap-4">
-            <span class="inline-block w-fit rounded-pill border border-ink bg-cream px-3 py-0.5 text-xs font-bold uppercase">
-              Idea de Reel 0{idx + 1}
-            </span>
-            <h3 class="text-2xl">{idea.title}</h3>
-            <div class="rounded-2xl border border-ink bg-cream p-3.5 text-sm font-bold">
-              {idea.hook}
-            </div>
-            <p class="text-sm text-ink-soft">
-              <strong>Plano con el {country === 'es' ? 'móvil' : 'celular'}:</strong> {idea.visual}
-            </p>
-            <p class="mt-auto border-t border-ink/20 pt-3 text-xs font-bold">
-              Objetivo: {idea.goal}
-            </p>
-          </Card>
+          <PhoneReelMockup
+            country={country}
+            badge={`Idea 0${idx + 1} · ${niche.shortTitle}`}
+            duration="25–35 s"
+            title={idea.title}
+            hook={idea.hook}
+            shots={[idea.visual]}
+            cta={`Objetivo: ${idea.goal}`}
+            accent={idx === 0 ? 'lemon' : idx === 1 ? 'coral' : 'sky'}
+          />
         ))
       }
     </div>
@@ -187,7 +193,7 @@ const crumbs = [
 
   <!-- Elemento único 2: Calendario mensual de muestra (4 semanas) -->
   <section class="container-site pb-16 md:pb-24">
-    <div class="rounded-[32px] border-2 border-ink bg-cream-deep p-6 md:p-10">
+    <div class="rounded-[32px] border-2 border-ink bg-cream-deep p-6 shadow-[8px_8px_0_0_var(--ink)] md:p-10">
       <div class="max-w-3xl space-y-3">
         <h2 class="text-display-lg">{niche.calendarTitle}</h2>
         <p class="text-lg text-ink-soft">{niche.calendarSubtitle}</p>
@@ -196,7 +202,7 @@ const crumbs = [
       <div class="mt-8 grid gap-6 md:grid-cols-2">
         {
           niche.sampleCalendar.map((w) => (
-            <div class="rounded-[24px] border-2 border-ink bg-cream p-6 space-y-3">
+            <div class="rounded-[24px] border-2 border-ink bg-cream p-6 shadow-[4px_4px_0_0_var(--ink)] space-y-3">
               <p class="font-display text-2xl uppercase">{w.week}</p>
               <p class="text-xs font-bold uppercase text-coral-deep">{w.focus}</p>
               <ul class="space-y-2 text-sm">
@@ -228,6 +234,17 @@ const crumbs = [
     <div class="mt-8 space-y-1 text-sm text-ink-soft">
       <p>• {ui.pricing.adsNote}</p>
       <p>• {ui.pricing.taxNote}</p>
+    </div>
+
+    <div class="mt-10">
+      <BookCallCard
+        country={country}
+        page={pageId}
+        niche={niche.id}
+        placement="below-packages"
+        mode="banner"
+        waMessage={niche.waMessage}
+      />
     </div>
   </section>
 
@@ -268,23 +285,33 @@ const crumbs = [
     </div>
   </section>
 
-  <!-- CTA final con formulario corto y WhatsApp -->
+  <!-- CTA final con formulario corto, WhatsApp y Llamada 15 min -->
   <section class="container-site pb-20">
-    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream md:p-10 lg:grid-cols-[1fr_1.15fr]">
+    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream shadow-[10px_10px_0_0_var(--ink)] md:p-10 lg:grid-cols-[1fr_1.15fr]">
       <div class="space-y-5">
         <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
         <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
-        <WhatsAppButton
-          message={niche.waMessage}
-          label={niche.waCta}
-          a11yLabel={ui.a11y.openWhatsApp}
-          country={country}
-          page={pageId}
-          niche={niche.id}
-          placement="final-cta"
-          variant="lemon"
-          size="lg"
-        />
+        <div class="flex flex-wrap gap-3">
+          <WhatsAppButton
+            message={niche.waMessage}
+            label={niche.waCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page={pageId}
+            niche={niche.id}
+            placement="final-cta"
+            variant="lemon"
+            size="lg"
+          />
+          <BookCallButton
+            country={country}
+            page={pageId}
+            niche={niche.id}
+            placement="final-cta"
+            variant="light"
+            size="lg"
+          />
+        </div>
       </div>
       <AuditForm country={country} page={pageId} />
     </div>

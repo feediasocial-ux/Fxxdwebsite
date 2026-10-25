@@ -4,6 +4,8 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Card from '@/components/Card.astro';
 import Button from '@/components/Button.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import BookCallButton from '@/components/BookCallButton.astro';
+import BookCallCard from '@/components/BookCallCard.astro';
 import PackageCard from '@/components/PackageCard.astro';
 import FAQ from '@/components/FAQ.astro';
 import Photo from '@/components/Photo.astro';
@@ -69,7 +71,7 @@ const crumbs = [
   <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
     <div class="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
       <div class="space-y-5">
-        <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1.5 text-sm font-bold uppercase">
+        <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1.5 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
           {intent.eyebrow}
         </p>
         <h1 class="text-display-hero">{intent.h1}</h1>
@@ -81,7 +83,7 @@ const crumbs = [
             </p>
           )
         }
-        <div class="flex flex-col gap-3 pt-2 sm:flex-row">
+        <div class="flex flex-wrap items-center gap-3 pt-2">
           <WhatsAppButton
             message={intent.waMessage}
             label={intent.waCta}
@@ -91,7 +93,14 @@ const crumbs = [
             placement="hero"
             size="lg"
           />
-          <Button href="#paquetes" variant="outline" size="lg">
+          <BookCallButton
+            country={country}
+            page={pageId}
+            placement="hero"
+            variant="light"
+            size="lg"
+          />
+          <Button href="#paquetes" variant="outline" size="md">
             {ui.hero.ctaSecondary}
           </Button>
         </div>
@@ -124,7 +133,7 @@ const crumbs = [
       <p class="text-lg text-ink-soft">{intent.comparisonTable.subtitle}</p>
     </div>
 
-    <div class="mt-8 overflow-x-auto rounded-[28px] border-2 border-ink bg-cream-deep">
+    <div class="mt-8 overflow-x-auto rounded-[28px] border-2 border-ink bg-cream-deep shadow-[6px_6px_0_0_var(--ink)]">
       <table class="w-full min-w-[680px] border-collapse text-left text-sm md:text-base">
         <thead>
           <tr class="border-b-2 border-ink bg-ink text-cream">
@@ -215,6 +224,16 @@ const crumbs = [
       <p>• {ui.pricing.adsNote}</p>
       <p>• {ui.pricing.taxNote}</p>
     </div>
+
+    <div class="mt-10">
+      <BookCallCard
+        country={country}
+        page={pageId}
+        placement="below-packages"
+        mode="banner"
+        waMessage={intent.waMessage}
+      />
+    </div>
   </section>
 
   {intent.id === 'precio' && <RoiCalculator country={country} pageId={pageId} />}
@@ -229,7 +248,7 @@ const crumbs = [
 
   <!-- Otras guías de decisión + enlaces internos -->
   <section class="container-site pb-16">
-    <div class="rounded-[32px] border-2 border-ink bg-cream-deep p-6 md:p-8">
+    <div class="rounded-[32px] border-2 border-ink bg-cream-deep p-6 shadow-[6px_6px_0_0_var(--ink)] md:p-8">
       <div class="flex flex-wrap items-center justify-between gap-4">
         <h2 class="text-display-md">Otras guías prácticas para {ui.countryName}</h2>
         <div class="flex flex-wrap gap-3">
@@ -242,7 +261,7 @@ const crumbs = [
           otherIntents.map((other) => (
             <a
               href={pathFor(other.routeKey, country)!}
-              class="group flex flex-col gap-2 rounded-[24px] border-2 border-ink bg-cream p-6 text-ink no-underline transition-colors hover:bg-lemon"
+              class="group flex flex-col gap-2 rounded-[24px] border-2 border-ink bg-cream p-6 text-ink no-underline shadow-[4px_4px_0_0_var(--ink)] transition-all hover:-translate-y-0.5 hover:bg-lemon"
             >
               <span class="text-xs font-bold uppercase text-coral-deep">{other.eyebrow}</span>
               <span class="font-display text-2xl uppercase">{other.shortTitle}</span>
@@ -256,20 +275,29 @@ const crumbs = [
 
   <!-- CTA final -->
   <section class="container-site pb-20">
-    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream md:p-10 lg:grid-cols-[1fr_1.15fr]">
+    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream shadow-[10px_10px_0_0_var(--ink)] md:p-10 lg:grid-cols-[1fr_1.15fr]">
       <div class="space-y-5">
         <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
         <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
-        <WhatsAppButton
-          message={intent.waMessage}
-          label={intent.waCta}
-          a11yLabel={ui.a11y.openWhatsApp}
-          country={country}
-          page={pageId}
-          placement="final-cta"
-          variant="lemon"
-          size="lg"
-        />
+        <div class="flex flex-wrap gap-3">
+          <WhatsAppButton
+            message={intent.waMessage}
+            label={intent.waCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page={pageId}
+            placement="final-cta"
+            variant="lemon"
+            size="lg"
+          />
+          <BookCallButton
+            country={country}
+            page={pageId}
+            placement="final-cta"
+            variant="light"
+            size="lg"
+          />
+        </div>
       </div>
       <AuditForm country={country} page={pageId} />
     </div>

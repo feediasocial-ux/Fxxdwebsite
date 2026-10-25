@@ -316,4 +316,31 @@ export const ui: UiCopy = {
     feediaLabel: 'Inversión mensual en Feediasocial',
     ctaLabel: 'Apartar este ritmo por WhatsApp',
   },
+  bookCall: {
+    ctaShort: 'Llamada 15 min',
+    ctaLabel: 'Agendar llamada de 15 min',
+    a11yLabel: 'Agendar videollamada gratuita de 15 minutos en Calendly (se abre en una pestaña nueva)',
+    badge: 'Videollamada sin costo · 15 min',
+    durationTag: '15 MIN · EN VIVO',
+    cardTitle: '¿Prefieres platicarlo en vivo? Agenda una llamada de 15 minutos',
+    cardText:
+      'Si prefieres platicarnos de tu negocio en una videollamada corta en lugar de textear por WhatsApp, aparta tu horario en nuestro Calendly. En 15 minutos revisamos tu perfil, resolvemos tus dudas y te decimos qué paquete te conviene.',
+    bullets: [
+      '15 minutos directo al grano por Google Meet (sin rollos de ventas)',
+      'Revisamos tu cuenta actual de Instagram o TikTok en pantalla',
+      'Sin compromiso: te llevas claridad total sobre qué ritmo mensual elegir',
+    ],
+    pricingBannerTitle: '¿No sabes si elegir Esencial, Crecimiento o Pro?',
+    pricingBannerText:
+      'Agenda una llamada de 15 minutos o mándanos WhatsApp. Revisamos tu giro en México y te recomendamos el paquete exacto según tus objetivos.',
+    pendingNote: '[PENDIENTE: configurar URL definitiva de Calendly en PUBLIC_CALENDLY_URL]',
+  },
+  reelMockupUi: {
+    recBadge: 'REC · GUION REAL',
+    formatBadge: 'REEL 9:16',
+    hookLabel: 'GANCHO (0–3 s)',
+    shotListLabel: 'TOMAS CON TU CELULAR',
+    ctaBoxLabel: 'CIERRE Y LLAMADO A LA ACCIÓN',
+    audioBarLabel: 'Audio original · Subtítulos dinámicos incluidos',
+  },
 };

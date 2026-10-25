@@ -1,0 +1,104 @@
+---
+/**
+ * Tarjeta destacada para agendar videollamada gratuita de 15 min (Calendly).
+ * Se usa en Contacto, Precios y secciones de conversión clave.
+ */
+import Card from './Card.astro';
+import Sticker from './Sticker.astro';
+import BookCallButton from './BookCallButton.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+import { getUi } from '@/content';
+import type { CountryKey } from '@/lib/i18n';
+
+interface Props {
+  country: CountryKey;
+  page: string;
+  placement?: string;
+  niche?: string;
+  mode?: 'card' | 'banner';
+  waMessage?: string;
+}
+
+const { country, page, placement = 'book-call-card', niche, mode = 'card', waMessage } = Astro.props;
+const ui = getUi(country);
+---
+
+{
+  mode === 'banner' ? (
+    <div class="relative overflow-hidden rounded-[32px] border-2 border-ink bg-lemon p-6 text-ink shadow-[8px_8px_0_0_var(--ink)] md:p-9">
+      <div class="grid items-center gap-6 lg:grid-cols-[1.35fr_auto]">
+        <div class="space-y-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 rounded-pill border-2 border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
+              <span class="size-2 rounded-full bg-coral" aria-hidden="true" />
+              {ui.bookCall.badge}
+            </span>
+            <span class="rounded-pill border border-dashed border-ink/60 bg-cream/80 px-2.5 py-0.5 text-[11px] font-bold">
+              {ui.bookCall.pendingNote}
+            </span>
+          </div>
+          <h3 class="text-2xl md:text-3xl">{ui.bookCall.pricingBannerTitle}</h3>
+          <p class="max-w-2xl text-sm text-ink-soft md:text-base">{ui.bookCall.pricingBannerText}</p>
+        </div>
+
+        <div class="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+          <BookCallButton
+            country={country}
+            page={page}
+            placement={placement}
+            niche={niche}
+            variant="dark"
+            size="lg"
+          />
+          {waMessage && (
+            <WhatsAppButton
+              message={waMessage}
+              label={ui.header.waCta}
+              a11yLabel={ui.a11y.openWhatsApp}
+              country={country}
+              page={page}
+              placement={`${placement}-wa`}
+              variant="light"
+              size="lg"
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  ) : (
+    <Card color="sky" bordered class="relative space-y-4">
+      <Sticker color="coral" rotate={4} class="absolute -top-3 right-4 z-10 text-xs!">
+        {ui.bookCall.durationTag}
+      </Sticker>
+
+      <span class="inline-flex items-center gap-1.5 rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
+        <span class="size-2 rounded-full bg-coral" aria-hidden="true" />
+        {ui.bookCall.badge}
+      </span>
+
+      <h2 class="text-2xl md:text-3xl">{ui.bookCall.cardTitle}</h2>
+      <p class="text-sm text-ink-soft md:text-base">{ui.bookCall.cardText}</p>
+
+      <ul class="space-y-2 rounded-2xl border-2 border-ink bg-cream p-4 text-xs font-bold md:text-sm">
+        {ui.bookCall.bullets.map((b) => (
+          <li class="flex items-start gap-2">
+            <span class="text-coral-deep" aria-hidden="true">✓</span>
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+
+      <BookCallButton
+        country={country}
+        page={page}
+        placement={placement}
+        niche={niche}
+        variant="dark"
+        size="lg"
+        class="w-full"
+      />
+
+      <p class="text-[11px] font-bold text-ink-soft">{ui.bookCall.pendingNote}</p>
+    </Card>
+  )
+}
