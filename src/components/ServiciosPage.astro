@@ -1,0 +1,166 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Card from '@/components/Card.astro';
+import NicheCard from '@/components/NicheCard.astro';
+import Button from '@/components/Button.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Photo from '@/components/Photo.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import { getCorePages, getUi } from '@/content';
+import { getNichesByCountry } from '@/content/niches';
+import { NICHE_PHOTOS } from '@/lib/niche-photos';
+import { COUNTRIES, type CountryKey } from '@/lib/i18n';
+import { linkTo, pathFor } from '@/lib/routes';
+import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo';
+
+import proceso02 from '@/assets/photos/proceso-02-guiones-calendario.jpg';
+import serviciosIa from '@/assets/photos/servicios-ia-graficos.jpg';
+import sinCamara from '@/assets/photos/sin-camara.jpg';
+
+interface Props {
+  country: CountryKey;
+}
+const { country } = Astro.props;
+const ui = getUi(country);
+const copy = getCorePages(country).servicios;
+const niches = getNichesByCountry(country);
+const path = pathFor('servicios', country)!;
+const crumbs = [
+  { name: ui.countryName, path: COUNTRIES[country].basePath },
+  { name: 'Servicios', path },
+];
+---
+
+<BaseLayout
+  pageId="servicios"
+  jsonLdNodes={[
+    breadcrumbJsonLd(crumbs),
+    ...serviceJsonLd({
+      name: copy.h1,
+      description: copy.metaDescription,
+      path,
+      country,
+      serviceType: 'Social Media Content Production & Management',
+    }),
+  ]}
+  seo={{
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    path,
+    routeKey: 'servicios',
+    country,
+  }}
+>
+  <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
+
+  <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
+    <div class="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
+      <div class="space-y-5">
+        <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
+          {copy.eyebrow}
+        </p>
+        <h1 class="text-display-xl">{copy.h1}</h1>
+        <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <WhatsAppButton
+            message={copy.waMessage}
+            label={copy.waCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page="servicios"
+            placement="hero"
+            size="lg"
+          />
+          <Button href={linkTo('precios', country)} variant="outline" size="lg">
+            {ui.hero.ctaSecondary}
+          </Button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="overflow-hidden rounded-[28px] border-2 border-ink">
+          <Photo src={proceso02} alt={copy.blocks[0].title} priority aspect="1/1" widths={[360, 540]} sizes="45vw" />
+        </div>
+        <div class="overflow-hidden rounded-[28px] border-2 border-ink">
+          <Photo src={serviciosIa} alt={copy.blocks[3].title} aspect="1/1" widths={[360, 540]} sizes="45vw" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
+
+  <!-- Los 5 bloques de servicio -->
+  <section class="container-site py-16 md:py-24">
+    <h2 class="text-display-lg">{copy.blocksTitle}</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {
+        copy.blocks.map((b) => (
+          <Card color={b.color} bordered class="flex flex-col gap-4">
+            <span class="inline-block w-fit rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
+              {b.badge}
+            </span>
+            <h3 class="text-3xl">{b.title}</h3>
+            <p>{b.text}</p>
+            <ul class="mt-auto space-y-2 pt-2 text-sm font-medium">
+              {b.bullets.map((item) => (
+                <li class="flex gap-2">
+                  <span class="font-bold" aria-hidden="true">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Plan B sin cámara -->
+  <section class="theme-dark py-16 md:py-24">
+    <div class="container-site grid items-center gap-8 md:grid-cols-[1.3fr_1fr]">
+      <div class="space-y-4">
+        <h2 class="text-display-md text-cream">{ui.pricing.planBTitle}</h2>
+        <p class="text-lg text-cream/85">{ui.pricing.planBText}</p>
+        <WhatsAppButton
+          message={ui.pricing.planBWaMessage}
+          label={ui.pricing.planBCta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page="servicios"
+          placement="plan-b"
+          variant="lemon"
+          size="lg"
+        />
+      </div>
+      <div class="overflow-hidden rounded-[28px] border-2 border-cream">
+        <Photo src={sinCamara} alt={ui.pricing.planBTitle} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 38vw, 90vw" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Enlazado a las 4 landings de nicho -->
+  <section class="container-site py-16 md:py-24">
+    <div class="max-w-3xl space-y-3">
+      <h2 class="text-display-lg">{copy.nichesTitle}</h2>
+      <p class="text-lg text-ink-soft">{copy.nichesSubtitle}</p>
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        niches.map((n, idx) => (
+          <NicheCard
+            title={n.shortTitle}
+            text={n.cardSummary}
+            href={pathFor(n.routeKey, country)!}
+            linkLabel={copy.nicheCtaLabel}
+            image={NICHE_PHOTOS[n.photoKey]}
+            imageAlt={n.photoAlt}
+            color={idx === 0 ? 'cream-deep' : idx === 1 ? 'coral' : idx === 2 ? 'sky' : 'lemon'}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

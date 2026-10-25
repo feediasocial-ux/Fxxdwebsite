@@ -1,6 +1,78 @@
 import type { CorePagesCopy } from '../types';
 
 export const pages: CorePagesCopy = {
+  servicios: {
+    metaTitle: 'Servicios de contenido para redes sociales | Feediasocial España',
+    metaDescription:
+      'Guiones, búsqueda de tendencias, edición de vídeo vertical, gráficos con IA y programación en Metricool para pymes en España.',
+    eyebrow: 'Servicios · España',
+    h1: 'Guiones, tendencias, edición de vídeo y calendario: tu sistema mensual de redes',
+    intro:
+      'No somos un community manager tradicional que sube frases motivacionales ni una productora cara que te obliga a cerrar el negocio toda la mañana. Somos tu equipo externo de contenido en España: diseñamos los guiones, editamos tus vídeos verticales, creamos carruseles con apoyo de IA y dejamos todo el mes programado en Metricool.',
+    blocksTitle: 'Los 5 bloques que incluye nuestro servicio cada mes',
+    blocks: [
+      {
+        badge: '01 · Estrategia y tendencias',
+        title: 'Búsqueda de tendencias aterrizadas a tu sector',
+        text: 'Filtramos cada mes qué formatos, ganchos y estructuras están funcionando en España dentro de tu actividad para que no pierdas horas haciendo scroll.',
+        bullets: [
+          'Selección mensual de ángulos y temas según tus prioridades de venta.',
+          'Adaptación a tu tono de marca (sin bailes ni formatos que no encajen contigo).',
+          'Calendario editorial previo para que apruebes el enfoque en 10 minutos.',
+        ],
+        color: 'lemon',
+      },
+      {
+        badge: '02 · Guiones y grabación',
+        title: 'Guiones palabra por palabra + lista de tomas de 30 minutos',
+        text: 'Redactamos cada reel con su gancho en los primeros 3 segundos, desarrollo claro y llamado a la acción.',
+        bullets: [
+          'Guiones listos para leer o explicar con tus palabras.',
+          'Hoja de grabación paso a paso para que grabes todo el mes con el móvil de una sola vez.',
+          'Indicaciones sencillas de encuadre, luz natural y sonido.',
+        ],
+        color: 'coral',
+      },
+      {
+        badge: '03 · Edición de vídeo',
+        title: 'Edición de reels con ritmo, subtítulos limpios y portadas',
+        text: 'Transformamos los brutos de tu móvil en piezas verticales ágiles que retienen la atención desde el primer segundo.',
+        bullets: [
+          'Recorte de silencios y tomas falsas para dar ritmo.',
+          'Subtítulos claros con la tipografía y colores de tu marca.',
+          'Portadas cuidadas para que el feed de Instagram se vea ordenado.',
+        ],
+        color: 'sky',
+      },
+      {
+        badge: '04 · Diseño e IA',
+        title: 'Carruseles educativos, stories y gráficos con IA',
+        text: 'Combinamos diseño editorial con herramientas de IA para ilustrar conceptos, crear portadas o activar el Plan B sin cámara cuando no puedas grabar.',
+        bullets: [
+          'Carruseles pensados para conseguir guardados y compartidos.',
+          'Stories semanales de cercanía, encuestas y recordatorio de citas o reservas.',
+          'Gráficos propios coherentes con tu identidad visual.',
+        ],
+        color: 'cream-deep',
+      },
+      {
+        badge: '05 · Metricool e informe',
+        title: 'Programación completa en Metricool e informe mensual',
+        text: 'Revisas todas las piezas montadas en un solo panel y, cuando nos das el visto bueno, quedan programadas automáticamente.',
+        bullets: [
+          'Redacción de textos (copy) y selección de ubicación/hashtags.',
+          'Programación automática en los mejores horarios de tu audiencia.',
+          'Informe mensual de una página con aprendizajes para el mes siguiente.',
+        ],
+        color: 'lemon',
+      },
+    ],
+    nichesTitle: 'Especialistas en 4 sectores clave en España',
+    nichesSubtitle: 'Elige tu sector para ver ideas reales de reels, ejemplos de calendario mensual y cómo trabajamos en tu caso:',
+    nicheCtaLabel: 'Ver propuesta y ejemplos',
+    waMessage: 'Hola, vengo de la página de Servicios (España) y quiero ver qué paquete encaja con mi negocio.',
+    waCta: 'Consultar por WhatsApp',
+  },
   precios: {
     metaTitle: 'Precios de gestión de redes sociales en España | Feediasocial',
     metaDescription:

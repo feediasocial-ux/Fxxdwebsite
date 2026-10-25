@@ -1,0 +1,18 @@
+---
+import NicheLandingPage from '@/components/NicheLandingPage.astro';
+import { getNichesByCountry, type NicheLandingData } from '@/content/niches';
+
+export function getStaticPaths() {
+  return getNichesByCountry('mx').map((niche) => ({
+    params: { niche: niche.slug },
+    props: { niche },
+  }));
+}
+
+interface Props {
+  niche: NicheLandingData;
+}
+const { niche } = Astro.props;
+---
+
+<NicheLandingPage niche={niche} />

@@ -51,8 +51,15 @@ export type UiCopy = {
   servicesSection: {
     eyebrow: string;
     title: string;
+    ctaMore: string;
   };
   services: { title: string; text: string; color: 'coral' | 'lemon' | 'sky' }[];
+  nichesSection: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    cardCta: string;
+  };
   pricing: {
     eyebrow: string;
     title: string;
@@ -147,8 +154,28 @@ export type UiCopy = {
   };
 };
 
-/** Contrato del copy para las páginas interiores de Fase 2. */
+/** Contrato del copy para las páginas interiores de Fase 2 y 3. */
 export type CorePagesCopy = {
+  servicios: {
+    metaTitle: string;
+    metaDescription: string;
+    eyebrow: string;
+    h1: string;
+    intro: string;
+    blocksTitle: string;
+    blocks: {
+      badge: string;
+      title: string;
+      text: string;
+      bullets: string[];
+      color: 'coral' | 'lemon' | 'sky' | 'cream-deep';
+    }[];
+    nichesTitle: string;
+    nichesSubtitle: string;
+    nicheCtaLabel: string;
+    waMessage: string;
+    waCta: string;
+  };
   precios: {
     metaTitle: string;
     metaDescription: string;

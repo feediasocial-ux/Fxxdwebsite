@@ -76,12 +76,19 @@ export const ui: UiCopy = {
   servicesSection: {
     eyebrow: 'Qué incluye el sistema',
     title: 'Todo lo que necesita tu cuenta para publicar con constancia',
+    ctaMore: 'Ver todos los servicios al detalle',
   },
   services: [
     { title: 'Guiones y tendencias', text: 'Ideas pensadas para tu sector y tu ciudad, con guion palabra por palabra.', color: 'coral' },
     { title: 'Edición y contenido con IA', text: 'Reels editados, carruseles y gráficos con IA que parecen de tu marca.', color: 'lemon' },
     { title: 'Calendario y programación', text: 'Todo el mes planificado y programado en Metricool. Tú lo revisas y listo.', color: 'sky' },
   ],
+  nichesSection: {
+    eyebrow: 'Especialistas por sector',
+    title: 'Guiones y calendarios adaptados a tu tipo de negocio en España',
+    subtitle: 'No escribimos igual para una clínica dental que para un bar de tapas o una inmobiliaria. Entra en tu sector para ver guiones y calendarios reales de muestra.',
+    cardCta: 'Ver sistema para este sector',
+  },
   pricing: {
     eyebrow: 'Paquetes y precios',
     title: 'Precios claros para España',

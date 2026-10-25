@@ -12,6 +12,7 @@ import Card from '@/components/Card.astro';
 import Button from '@/components/Button.astro';
 import StepCard from '@/components/StepCard.astro';
 import PackageCard from '@/components/PackageCard.astro';
+import NicheCard from '@/components/NicheCard.astro';
 import FAQ from '@/components/FAQ.astro';
 import StripeBand from '@/components/StripeBand.astro';
 import WavyLine from '@/components/WavyLine.astro';
@@ -20,8 +21,10 @@ import Photo from '@/components/Photo.astro';
 import Placeholder from '@/components/Placeholder.astro';
 import AuditForm from '@/components/AuditForm.astro';
 import { getUi } from '@/content';
+import { getNichesByCountry } from '@/content/niches';
 import { PACKAGES } from '@/content/pricing';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
+import { NICHE_PHOTOS } from '@/lib/niche-photos';
 import { linkTo } from '@/lib/routes';
 import type { ImageMetadata } from 'astro';
 
@@ -37,6 +40,7 @@ interface Props {
 
 const { country, heroImage } = Astro.props;
 const ui = getUi(country);
+const niches = getNichesByCountry(country);
 const path = COUNTRIES[country].basePath;
 ---
 
@@ -133,11 +137,16 @@ const path = COUNTRIES[country].basePath;
 
   <!-- 6. Servicios -->
   <section class="container-site py-16 md:py-24">
-    <div class="max-w-3xl space-y-4">
-      <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
-        {ui.servicesSection.eyebrow}
-      </p>
-      <h2 class="text-display-lg">{ui.servicesSection.title}</h2>
+    <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+      <div class="max-w-3xl space-y-4">
+        <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
+          {ui.servicesSection.eyebrow}
+        </p>
+        <h2 class="text-display-lg">{ui.servicesSection.title}</h2>
+      </div>
+      <Button href={linkTo('servicios', country)} variant="outline" size="md">
+        {ui.servicesSection.ctaMore}
+      </Button>
     </div>
 
     <div class="mt-10 grid gap-6 md:grid-cols-3">
@@ -147,6 +156,33 @@ const path = COUNTRIES[country].basePath;
             <h3 class="text-3xl">{srv.title}</h3>
             <p>{srv.text}</p>
           </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 6b. Sectores / Giros (enlazado interno a landings de nicho) -->
+  <section class="container-site pb-16 md:pb-24">
+    <div class="max-w-3xl space-y-4">
+      <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase">
+        {ui.nichesSection.eyebrow}
+      </p>
+      <h2 class="text-display-lg">{ui.nichesSection.title}</h2>
+      <p class="text-lg text-ink-soft">{ui.nichesSection.subtitle}</p>
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        niches.map((niche, idx) => (
+          <NicheCard
+            title={niche.shortTitle}
+            text={niche.cardSummary}
+            href={linkTo(niche.routeKey, country)}
+            linkLabel={ui.nichesSection.cardCta}
+            image={NICHE_PHOTOS[niche.photoKey]}
+            imageAlt={niche.photoAlt}
+            color={idx % 3 === 0 ? 'cream-deep' : idx % 3 === 1 ? 'lemon' : 'sky'}
+          />
         ))
       }
     </div>

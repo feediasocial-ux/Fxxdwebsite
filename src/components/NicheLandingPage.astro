@@ -1,0 +1,287 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Card from '@/components/Card.astro';
+import Button from '@/components/Button.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import PackageCard from '@/components/PackageCard.astro';
+import NicheCard from '@/components/NicheCard.astro';
+import FAQ from '@/components/FAQ.astro';
+import Photo from '@/components/Photo.astro';
+import AuditForm from '@/components/AuditForm.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import { getUi } from '@/content';
+import { PACKAGES } from '@/content/pricing';
+import { getNichesByCountry, type NicheLandingData } from '@/content/niches';
+import { NICHE_PHOTOS } from '@/lib/niche-photos';
+import { COUNTRIES } from '@/lib/i18n';
+import { linkTo, pathFor } from '@/lib/routes';
+import { breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd } from '@/lib/seo';
+
+interface Props {
+  niche: NicheLandingData;
+}
+
+const { niche } = Astro.props;
+const { country } = niche;
+const ui = getUi(country);
+const path = pathFor(niche.routeKey, country)!;
+const pageId = `nicho-${niche.id}`;
+const heroImg = NICHE_PHOTOS[niche.photoKey];
+const otherNiches = getNichesByCountry(country).filter((n) => n.id !== niche.id);
+
+const crumbs = [
+  { name: ui.countryName, path: COUNTRIES[country].basePath },
+  { name: 'Servicios', path: linkTo('servicios', country) },
+  { name: niche.shortTitle, path },
+];
+---
+
+<BaseLayout
+  pageId={pageId}
+  theme={niche.theme}
+  jsonLdNodes={[
+    breadcrumbJsonLd(crumbs),
+    ...serviceJsonLd({
+      name: niche.h1,
+      description: niche.metaDescription,
+      path,
+      country,
+      serviceType: `${niche.shortTitle} Social Media Content`,
+    }),
+    faqPageJsonLd(niche.faqs),
+  ]}
+  seo={{
+    title: niche.metaTitle,
+    description: niche.metaDescription,
+    path,
+    routeKey: niche.routeKey,
+    country,
+  }}
+>
+  <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
+
+  <!-- Hero del nicho -->
+  <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
+    <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
+      <div class="space-y-6">
+        <p class="inline-block rounded-pill border-2 border-ink bg-accent-2 px-4 py-1.5 text-sm font-bold uppercase">
+          {niche.eyebrow}
+        </p>
+        <h1 class="text-display-xl">{niche.h1}</h1>
+        <p class="text-lg text-ink-soft md:text-xl">{niche.intro}</p>
+
+        <div class="flex flex-wrap gap-2">
+          {
+            niche.nicheVocabulary.map((term) => (
+              <span class="rounded-pill border border-ink bg-cream-deep px-3 py-1 text-xs font-bold">
+                #{term}
+              </span>
+            ))
+          }
+        </div>
+
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <WhatsAppButton
+            message={niche.waMessage}
+            label={niche.waCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page={pageId}
+            niche={niche.id}
+            placement="hero"
+            size="lg"
+          />
+          <Button href="#paquetes" variant="outline" size="lg">
+            {ui.hero.ctaSecondary}
+          </Button>
+        </div>
+      </div>
+
+      <div class="mx-auto w-full max-w-md lg:max-w-none">
+        <div class="overflow-hidden rounded-[32px] border-2 border-ink shadow-[10px_12px_0_0_var(--accent-1)]">
+          <Photo
+            src={heroImg}
+            alt={niche.photoAlt}
+            priority
+            aspect="4/5"
+            widths={[360, 480, 640, 800]}
+            sizes="(min-width: 1024px) 42vw, 92vw"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <StripeBand colors={['var(--accent-1)', 'var(--cream)']} />
+
+  <!-- 3 dolores específicos del nicho -->
+  <section class="container-site py-16 md:py-24">
+    <h2 class="text-display-lg">{niche.painsTitle}</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        niche.pains.map((p, idx) => (
+          <Card color={idx === 1 ? 'accent-2' : 'cream-deep'} bordered class="flex flex-col gap-3">
+            <span class="font-display text-4xl text-coral-deep" aria-hidden="true">0{idx + 1}</span>
+            <h3 class="text-2xl">{p.title}</h3>
+            <p class="text-ink-soft">{p.text}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 3 objeciones reales con respuesta -->
+  <section class="theme-dark py-16 md:py-24">
+    <div class="container-site space-y-10">
+      <h2 class="text-display-lg text-cream">{niche.objectionsTitle}</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          niche.objections.map((obj) => (
+            <Card color="cream" bordered class="flex flex-col gap-3">
+              <h3 class="font-sans text-lg font-bold normal-case leading-snug text-coral-deep">
+                {obj.objection}
+              </h3>
+              <p class="text-sm text-ink-soft md:text-base">{obj.answer}</p>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Elemento único 1: 3 ideas de reels reales para este nicho -->
+  <section class="container-site py-16 md:py-24">
+    <div class="max-w-3xl space-y-3">
+      <h2 class="text-display-lg">{niche.reelIdeasTitle}</h2>
+      <p class="text-lg text-ink-soft">{niche.reelIdeasSubtitle}</p>
+    </div>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        niche.reelIdeas.map((idea, idx) => (
+          <Card color={idx === 0 ? 'accent-2' : idx === 1 ? 'cream-deep' : 'accent-3'} bordered class="flex flex-col gap-4">
+            <span class="inline-block w-fit rounded-pill border border-ink bg-cream px-3 py-0.5 text-xs font-bold uppercase">
+              Idea de Reel 0{idx + 1}
+            </span>
+            <h3 class="text-2xl">{idea.title}</h3>
+            <div class="rounded-2xl border border-ink bg-cream p-3.5 text-sm font-bold">
+              {idea.hook}
+            </div>
+            <p class="text-sm text-ink-soft">
+              <strong>Plano con el {country === 'es' ? 'móvil' : 'celular'}:</strong> {idea.visual}
+            </p>
+            <p class="mt-auto border-t border-ink/20 pt-3 text-xs font-bold">
+              Objetivo: {idea.goal}
+            </p>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Elemento único 2: Calendario mensual de muestra (4 semanas) -->
+  <section class="container-site pb-16 md:pb-24">
+    <div class="rounded-[32px] border-2 border-ink bg-cream-deep p-6 md:p-10">
+      <div class="max-w-3xl space-y-3">
+        <h2 class="text-display-lg">{niche.calendarTitle}</h2>
+        <p class="text-lg text-ink-soft">{niche.calendarSubtitle}</p>
+      </div>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {
+          niche.sampleCalendar.map((w) => (
+            <div class="rounded-[24px] border-2 border-ink bg-cream p-6 space-y-3">
+              <p class="font-display text-2xl uppercase">{w.week}</p>
+              <p class="text-xs font-bold uppercase text-coral-deep">{w.focus}</p>
+              <ul class="space-y-2 text-sm">
+                {w.pieces.map((piece) => (
+                  <li class="flex gap-2">
+                    <span class="font-bold" aria-hidden="true">→</span>
+                    <span>{piece}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Paquetes con precio del país -->
+  <section id="paquetes" class="container-site py-16 md:py-24">
+    <div class="max-w-3xl space-y-4">
+      <h2 class="text-display-lg">{ui.pricing.title}</h2>
+      <p class="text-lg text-ink-soft">{ui.pricing.subtitle}</p>
+    </div>
+
+    <div class="mt-12 grid gap-8 md:grid-cols-3">
+      {PACKAGES.map((pkg) => <PackageCard pkg={pkg} country={country} page={pageId} />)}
+    </div>
+
+    <div class="mt-8 space-y-1 text-sm text-ink-soft">
+      <p>• {ui.pricing.adsNote}</p>
+      <p>• {ui.pricing.taxNote}</p>
+    </div>
+  </section>
+
+  <!-- FAQ propias del nicho -->
+  <section class="container-site py-16 md:py-24">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
+      <h2 class="text-display-lg">{niche.faqTitle}</h2>
+      <FAQ items={niche.faqs} />
+    </div>
+  </section>
+
+  <!-- Bloque Relacionados (otros nichos + servicios + cómo funciona) -->
+  <section class="container-site pb-16">
+    <div class="space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <h2 class="text-display-md">Otros sectores con los que trabajamos en {ui.countryName}</h2>
+        <div class="flex flex-wrap gap-3">
+          <Button href={linkTo('servicios', country)} variant="outline">Ver todos los servicios</Button>
+          <Button href={linkTo('comoFunciona', country)} variant="outline">Cómo funciona el proceso</Button>
+        </div>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          otherNiches.map((other) => (
+            <NicheCard
+              title={other.shortTitle}
+              text={other.cardSummary}
+              href={pathFor(other.routeKey, country)!}
+              linkLabel="Ver propuesta"
+              image={NICHE_PHOTOS[other.photoKey]}
+              imageAlt={other.photoAlt}
+              color="cream-deep"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final con formulario corto y WhatsApp -->
+  <section class="container-site pb-20">
+    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream md:p-10 lg:grid-cols-[1fr_1.15fr]">
+      <div class="space-y-5">
+        <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
+        <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
+        <WhatsAppButton
+          message={niche.waMessage}
+          label={niche.waCta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page={pageId}
+          niche={niche.id}
+          placement="final-cta"
+          variant="lemon"
+          size="lg"
+        />
+      </div>
+      <AuditForm country={country} page={pageId} />
+    </div>
+  </section>
+</BaseLayout>

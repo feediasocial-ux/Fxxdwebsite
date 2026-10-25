@@ -102,6 +102,54 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
+/**
+ * ProfessionalService + Service JSON-LD para páginas de servicios y landings de nicho.
+ * NUNCA usa LocalBusiness con dirección inventada (opera 100 % en remoto).
+ */
+export function serviceJsonLd(opts: {
+  name: string;
+  description: string;
+  path: string;
+  country: CountryKey;
+  serviceType: string;
+}) {
+  const area = opts.country === 'es' ? { '@type': 'Country', name: 'Spain' } : { '@type': 'Country', name: 'Mexico' };
+  return [
+    {
+      '@type': 'ProfessionalService',
+      '@id': abs(`${opts.path}#professional-service`),
+      name: `${BRAND.name} (${opts.country === 'es' ? 'España' : 'México'})`,
+      url: abs(opts.path),
+      areaServed: area,
+      parentOrganization: { '@id': abs('/#organization') },
+    },
+    {
+      '@type': 'Service',
+      '@id': abs(`${opts.path}#service`),
+      name: opts.name,
+      description: opts.description,
+      serviceType: opts.serviceType,
+      provider: { '@id': abs('/#organization') },
+      areaServed: area,
+      url: abs(opts.path),
+    },
+  ];
+}
+
+export function faqPageJsonLd(faqs: { q: string; a: string }[]) {
+  return {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a,
+      },
+    })),
+  };
+}
+
 /** Une nodos en un único @graph. */
 export function graph(...nodes: object[]) {
   return { '@context': 'https://schema.org', '@graph': nodes };

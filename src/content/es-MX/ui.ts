@@ -76,12 +76,19 @@ export const ui: UiCopy = {
   servicesSection: {
     eyebrow: 'Qué incluye el sistema',
     title: 'Todo lo que necesita tu cuenta para publicar sin fallar',
+    ctaMore: 'Ver todos los servicios a detalle',
   },
   services: [
     { title: 'Guiones y tendencias', text: 'Ideas hechas para tu giro y tu ciudad, con guion listo para leer.', color: 'coral' },
     { title: 'Edición y contenido con IA', text: 'Reels editados, carruseles y gráficos con IA con la imagen de tu marca.', color: 'lemon' },
     { title: 'Calendario y programación', text: 'Todo el mes planeado y programado en Metricool. Tú lo revisas y ya.', color: 'sky' },
   ],
+  nichesSection: {
+    eyebrow: 'Especialistas por giro',
+    title: 'Guiones y calendarios pensados para tu giro en México',
+    subtitle: 'No hablamos igual para un consultorio dental que para un restaurante o una inmobiliaria. Entra a tu giro para ver guiones y calendarios reales de ejemplo.',
+    cardCta: 'Ver sistema para este giro',
+  },
   pricing: {
     eyebrow: 'Paquetes y precios',
     title: 'Precios claros para México',

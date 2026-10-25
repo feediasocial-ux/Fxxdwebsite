@@ -1,6 +1,78 @@
 import type { CorePagesCopy } from '../types';
 
 export const pages: CorePagesCopy = {
+  servicios: {
+    metaTitle: 'Servicios de manejo de redes sociales | Feediasocial México',
+    metaDescription:
+      'Guiones, tendencias, edición de video vertical, gráficos con IA y programación en Metricool para negocios en México.',
+    eyebrow: 'Servicios · México',
+    h1: 'Guiones, tendencias, edición de video y calendario: tu sistema mensual de redes',
+    intro:
+      'No somos la agencia tradicional que sube efemérides con fotos de stock ni una productora costosa que te pide parar tu sucursal todo el día. Somos tu equipo externo de contenido en México: armamos los guiones, editamos tus videos verticales, diseñamos carruseles con apoyo de IA y dejamos todo el mes programado en Metricool.',
+    blocksTitle: 'Los 5 bloques que incluye nuestro servicio cada mes',
+    blocks: [
+      {
+        badge: '01 · Estrategia y tendencias',
+        title: 'Búsqueda de tendencias aterrizadas a tu giro',
+        text: 'Revisamos cada mes qué formatos, ganchos y estructuras están funcionando en México dentro de tu giro para que no pierdas horas buscando ideas.',
+        bullets: [
+          'Selección mensual de temas según los servicios o productos que más te interesa mover.',
+          'Adaptación real al tono de tu negocio (sin bailes ni formatos forzados).',
+          'Propuesta de calendario para que des tu visto bueno en 10 minutos.',
+        ],
+        color: 'lemon',
+      },
+      {
+        badge: '02 · Guiones y grabación',
+        title: 'Guiones listos para leer + lista de tomas de 30 minutos',
+        text: 'Escribimos cada reel con su gancho en los primeros 3 segundos, desarrollo directo y llamado a la acción hacia tu WhatsApp.',
+        bullets: [
+          'Guiones claros en español de México.',
+          'Checklist paso a paso para grabar todo el mes con tu celular en una sola sesión.',
+          'Guía rápida de encuadre, iluminación natural y audio.',
+        ],
+        color: 'coral',
+      },
+      {
+        badge: '03 · Edición de video',
+        title: 'Edición de reels con ritmo, subtítulos claros y portadas',
+        text: 'Convertimos los clips en bruto de tu celular en videos verticales dinámicos que mantienen la atención.',
+        bullets: [
+          'Limpieza de silencios y tropiezos para dar agilidad.',
+          'Subtítulos dinámicos con los colores y tipografía de tu marca.',
+          'Portadas diseñadas para que tu perfil se vea limpio y confiable.',
+        ],
+        color: 'sky',
+      },
+      {
+        badge: '04 · Diseño e IA',
+        title: 'Carruseles educativos, historias y gráficos con IA',
+        text: 'Sumamos diseño editorial con herramientas de IA para explicar procesos, ilustrar ideas o activar el Plan B sin cámara cuando no puedas grabar.',
+        bullets: [
+          'Carruseles pensados para que tus clientes los guarden y compartan.',
+          'Historias semanales de cercanía, preguntas y enlace directo a tu WhatsApp.',
+          'Gráficos propios alineados con la imagen de tu negocio.',
+        ],
+        color: 'cream-deep',
+      },
+      {
+        badge: '05 · Metricool y reporte',
+        title: 'Programación completa en Metricool y reporte mensual',
+        text: 'Revisas todas las publicaciones armadas en un solo lugar y, con tu aprobación, quedan programadas para todo el mes.',
+        bullets: [
+          'Redacción de textos (copy) pensados para conversión.',
+          'Programación automática en los horarios clave de tu audiencia en México.',
+          'Reporte mensual sencillo en una sola página con recomendaciones.',
+        ],
+        color: 'lemon',
+      },
+    ],
+    nichesTitle: 'Especialistas en 4 giros clave en México',
+    nichesSubtitle: 'Elige tu giro para ver ideas reales de reels, ejemplos de calendario mensual y cómo trabajamos en tu caso:',
+    nicheCtaLabel: 'Ver propuesta y ejemplos',
+    waMessage: 'Hola, vengo de la página de Servicios (México) y quiero saber qué paquete le conviene a mi negocio.',
+    waCta: 'Platicar por WhatsApp',
+  },
   precios: {
     metaTitle: 'Precios de manejo de redes sociales en México | Feediasocial',
     metaDescription:
