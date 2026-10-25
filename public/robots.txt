@@ -2,6 +2,31 @@ User-agent: *
 Allow: /
 Disallow: /styleguide/
 
+# Motores de búsqueda generativos y respuesta IA (GEO)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemaps e índice LLM
 Sitemap: https://feediasocial.com/sitemap-index.xml
 Sitemap: https://feediasocial.com/es/sitemap.xml
 Sitemap: https://feediasocial.com/mx/sitemap.xml
+# LLMs: https://feediasocial.com/llms.txt
+# LLMs-Full: https://feediasocial.com/llms-full.txt

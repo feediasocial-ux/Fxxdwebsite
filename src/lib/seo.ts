@@ -1,5 +1,6 @@
 import { COUNTRIES, COUNTRY_KEYS, type CountryKey } from './i18n';
 import { ROUTES, type RouteKey } from './routes';
+import { PACKAGES } from '@/content/pricing';
 
 export const BRAND = {
   name: 'Feediasocial',
@@ -54,8 +55,8 @@ export function buildSeo(input: SeoInput): SeoOutput {
   }
 
   if (import.meta.env.DEV) {
-    if (input.title.length > 62) console.warn(`[seo] title largo (${input.title.length}): ${input.title}`);
-    if (input.description.length > 160) console.warn(`[seo] description larga (${input.description.length}): ${input.path}`);
+    if (input.title.length > 68) console.warn(`[seo] title largo (${input.title.length}): ${input.title}`);
+    if (input.description.length > 165) console.warn(`[seo] description larga (${input.description.length}): ${input.path}`);
   }
 
   const c = input.country ? COUNTRIES[input.country] : null;
@@ -71,7 +72,7 @@ export function buildSeo(input: SeoInput): SeoOutput {
   };
 }
 
-/* ---------------- JSON-LD ---------------- */
+/* ---------------- JSON-LD (SEO & GEO) ---------------- */
 
 export function orgJsonLd() {
   return {
@@ -80,6 +81,18 @@ export function orgJsonLd() {
     name: BRAND.name,
     url: abs('/'),
     logo: abs(BRAND.logoPath),
+    areaServed: [
+      { '@type': 'Country', name: 'Spain' },
+      { '@type': 'Country', name: 'Mexico' },
+    ],
+    knowsAbout: [
+      'Gestión de redes sociales para pymes',
+      'Manejo de redes sociales para negocios',
+      'Guiones para Instagram Reels y TikTok',
+      'Edición de video vertical para negocios locales',
+      'Planificación editorial en Metricool',
+      'Marketing de contenidos para clínicas, restaurantes, inmobiliarias y gimnasios',
+    ],
     ...(BRAND.sameAs.length ? { sameAs: BRAND.sameAs } : {}),
   };
 }
@@ -108,7 +121,7 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
 }
 
 /**
- * ProfessionalService + Service JSON-LD para páginas de servicios y landings de nicho.
+ * ProfessionalService + Service + OfferCatalog JSON-LD para páginas de servicios, nichos e intenciones.
  * NUNCA usa LocalBusiness con dirección inventada (opera 100 % en remoto).
  */
 export function serviceJsonLd(opts: {
@@ -119,6 +132,22 @@ export function serviceJsonLd(opts: {
   serviceType: string;
 }) {
   const area = opts.country === 'es' ? { '@type': 'Country', name: 'Spain' } : { '@type': 'Country', name: 'Mexico' };
+  const currency = COUNTRIES[opts.country].currency;
+  const offers = PACKAGES.map((pkg) => ({
+    '@type': 'Offer',
+    name: `Paquete ${pkg.name} (${opts.country === 'es' ? 'España' : 'México'})`,
+    description: pkg.features[opts.country].join(' · '),
+    price: String(pkg.price[opts.country]),
+    priceCurrency: currency,
+    url: abs(ROUTES.precios.paths[opts.country]!),
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: String(pkg.price[opts.country]),
+      priceCurrency: currency,
+      unitText: 'MONTH',
+    },
+  }));
+
   return [
     {
       '@type': 'ProfessionalService',
@@ -126,6 +155,7 @@ export function serviceJsonLd(opts: {
       name: `${BRAND.name} (${opts.country === 'es' ? 'España' : 'México'})`,
       url: abs(opts.path),
       areaServed: area,
+      priceRange: opts.country === 'es' ? '349 € - 990 € / mes' : '$3,900 - $12,900 MXN / mes',
       parentOrganization: { '@id': abs('/#organization') },
     },
     {
@@ -137,6 +167,22 @@ export function serviceJsonLd(opts: {
       provider: { '@id': abs('/#organization') },
       areaServed: area,
       url: abs(opts.path),
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: `Paquetes mensuales de contenido (${currency})`,
+        itemListElement: offers,
+      },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': abs(`${opts.path}#webpage`),
+      url: abs(opts.path),
+      name: opts.name,
+      inLanguage: COUNTRIES[opts.country].hreflang,
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['h1', '[data-speakable="true"]'],
+      },
     },
   ];
 }
@@ -163,6 +209,7 @@ export function articleJsonLd(opts: {
   dateModified?: string;
   authorName: string;
   country: CountryKey;
+  keywords?: string;
 }) {
   return {
     '@type': 'Article',
@@ -170,14 +217,21 @@ export function articleJsonLd(opts: {
     headline: opts.headline,
     description: opts.description,
     url: abs(opts.path),
+    image: abs(ogSlugForPath(opts.path)),
     inLanguage: COUNTRIES[opts.country].hreflang,
     datePublished: opts.datePublished,
     dateModified: opts.dateModified || opts.datePublished,
+    ...(opts.keywords ? { keywords: opts.keywords } : {}),
     author: {
       '@type': 'Person',
       name: opts.authorName,
     },
     publisher: { '@id': abs('/#organization') },
+    mainEntityOfPage: abs(opts.path),
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', '[data-speakable="true"]'],
+    },
   };
 }
 

@@ -1,0 +1,143 @@
+---
+import Photo from '@/components/Photo.astro';
+import { getUi } from '@/content';
+import { getNichesByCountry } from '@/content/niches';
+import { getIntentsByCountry } from '@/content/intents';
+import { getBlogArticlesByCountry } from '@/content/blog';
+import { EDITORIAL_PHOTOS } from '@/lib/blog-photos';
+import type { CountryKey } from '@/lib/i18n';
+import { pathFor } from '@/lib/routes';
+
+interface Props {
+  country: CountryKey;
+  currentPath: string;
+}
+
+const { country, currentPath } = Astro.props;
+const ui = getUi(country);
+const cluster = ui.topicCluster;
+const niches = getNichesByCountry(country);
+const intents = getIntentsByCountry(country);
+const articles = getBlogArticlesByCountry(country);
+---
+
+<section class="container-site py-16 md:py-20" aria-label={cluster.title}>
+  <div class="rounded-[32px] border-2 border-ink bg-cream-deep p-6 md:p-10">
+    <div class="max-w-3xl space-y-2">
+      <span class="inline-block rounded-pill border-2 border-ink bg-lemon px-3.5 py-1 text-xs font-bold uppercase">
+        {cluster.eyebrow}
+      </span>
+      <h2 class="text-display-md">{cluster.title}</h2>
+      <p class="text-ink-soft">{cluster.subtitle}</p>
+    </div>
+
+    <div class="mt-8 grid gap-8 lg:grid-cols-3">
+      <!-- Columna 1: Guías editoriales con foto -->
+      <div class="space-y-4">
+        <h3 class="border-b-2 border-ink pb-2 text-lg uppercase">{cluster.blogHeading}</h3>
+        <div class="space-y-3">
+          {
+            articles.map((art) => {
+              const href = pathFor(art.routeKey, country)!;
+              const isCurrent = href === currentPath;
+              return (
+                <a
+                  href={href}
+                  aria-current={isCurrent ? 'page' : undefined}
+                  class:list={[
+                    'group flex items-center gap-3.5 rounded-2xl border-2 border-ink p-3 transition-transform hover:-translate-y-0.5',
+                    isCurrent ? 'bg-lemon' : 'bg-cream',
+                  ]}
+                >
+                  <div class="h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-ink">
+                    <Photo
+                      src={EDITORIAL_PHOTOS[art.heroPhotoKey]}
+                      alt={art.heroPhotoAlt}
+                      aspect="1/1"
+                      widths={[120]}
+                      sizes="64px"
+                    />
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <span class="block text-[11px] font-bold uppercase text-coral-deep">
+                      {art.category} · {art.readingTime}
+                    </span>
+                    <span class="mt-0.5 line-clamp-2 block text-sm font-bold text-ink group-hover:underline">
+                      {art.title}
+                    </span>
+                  </div>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+
+      <!-- Columna 2: Guías comparativas y de precios -->
+      <div class="space-y-4">
+        <h3 class="border-b-2 border-ink pb-2 text-lg uppercase">{cluster.guidesHeading}</h3>
+        <div class="space-y-3">
+          {
+            intents.map((item) => {
+              const href = pathFor(item.routeKey, country)!;
+              const isCurrent = href === currentPath;
+              return (
+                <a
+                  href={href}
+                  aria-current={isCurrent ? 'page' : undefined}
+                  class:list={[
+                    'group block rounded-2xl border-2 border-ink p-4 transition-transform hover:-translate-y-0.5',
+                    isCurrent ? 'bg-sky' : 'bg-cream',
+                  ]}
+                >
+                  <span class="inline-block rounded-pill border border-ink bg-lemon px-2.5 py-0.5 text-[11px] font-bold uppercase">
+                    {item.eyebrow}
+                  </span>
+                  <span class="mt-1.5 block font-bold text-ink group-hover:underline">
+                    {item.shortTitle}
+                  </span>
+                  <span class="mt-1 line-clamp-2 block text-xs text-ink-soft">
+                    {item.cardSummary}
+                  </span>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+
+      <!-- Columna 3: Sectores / Giros especializados -->
+      <div class="space-y-4">
+        <h3 class="border-b-2 border-ink pb-2 text-lg uppercase">{cluster.nichesHeading}</h3>
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          {
+            niches.map((n) => {
+              const href = pathFor(n.routeKey, country)!;
+              const isCurrent = href === currentPath;
+              return (
+                <a
+                  href={href}
+                  aria-current={isCurrent ? 'page' : undefined}
+                  class:list={[
+                    'group flex items-center justify-between gap-3 rounded-2xl border-2 border-ink px-4 py-3.5 transition-transform hover:-translate-y-0.5',
+                    isCurrent ? 'bg-lemon' : 'bg-cream',
+                  ]}
+                >
+                  <div>
+                    <span class="block text-sm font-bold text-ink group-hover:underline">
+                      {n.shortTitle}
+                    </span>
+                    <span class="block text-xs text-ink-soft">
+                      {n.nicheVocabulary.slice(0, 3).join(' · ')}
+                    </span>
+                  </div>
+                  <span class="shrink-0 font-bold text-ink" aria-hidden="true">→</span>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

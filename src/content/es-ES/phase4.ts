@@ -127,10 +127,10 @@ export const phase4ES: Phase4Copy = {
     ],
     guidesSectionTitle: 'Guías a fondo ya disponibles en España',
     guidesSectionSubtitle: 'Comparativas y análisis completos listos para leer:',
-    upcomingBadge: 'En preparación editorial',
-    upcomingTitle: 'Próximos artículos en revisión',
+    upcomingBadge: 'Revista práctica · España',
+    upcomingTitle: 'Artículos editoriales paso a paso con ejemplos reales',
     upcomingText:
-      'Estos son los próximos temas prácticos que estamos documentando con ejemplos reales antes de publicarlos:',
+      'Guías visuales con fotografía editorial, plantillas de guiones y listas de control listas para aplicar en tu pyme:',
     upcomingTopics: [
       {
         category: 'Grabación con móvil',

@@ -1,0 +1,215 @@
+---
+import { getUi } from '@/content';
+import type { CountryKey } from '@/lib/i18n';
+import { waLink } from '@/lib/whatsapp';
+
+interface Props {
+  country: CountryKey;
+  pageId: string;
+}
+
+const { country, pageId } = Astro.props;
+const ui = getUi(country);
+const calc = ui.roiCalculator;
+const defaultOpt = calc.options[1]; // Crecimiento por defecto
+
+const optionsWithUrls = calc.options.map((opt) => ({
+  ...opt,
+  waUrlCamera: waLink(`${opt.waMessage} (${calc.modeCamera})`, {
+    country,
+    page: pageId,
+    placement: `calc-${opt.id}-cam`,
+  }),
+  waUrlNoCamera: waLink(`${opt.waMessage} (${calc.modeNoCamera})`, {
+    country,
+    page: pageId,
+    placement: `calc-${opt.id}-nocam`,
+  }),
+}));
+---
+
+<section class="container-site py-14 md:py-20" aria-labelledby="roi-calc-title">
+  <div
+    data-roi-calc
+    data-options={JSON.stringify(optionsWithUrls)}
+    class="rounded-[32px] border-2 border-ink bg-cream-deep p-6 shadow-[10px_12px_0_0_var(--ink)] md:p-10"
+  >
+    <div class="max-w-3xl space-y-3">
+      <span class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-xs font-bold uppercase">
+        {calc.eyebrow}
+      </span>
+      <h2 id="roi-calc-title" class="text-display-md">{calc.title}</h2>
+      <p class="text-lg text-ink-soft">{calc.subtitle}</p>
+    </div>
+
+    <div class="mt-8 grid gap-8 lg:grid-cols-[1.15fr_1fr]">
+      <!-- Controles interactivos -->
+      <div class="space-y-6">
+        <div class="space-y-3">
+          <p class="text-sm font-bold uppercase tracking-wide text-ink">{calc.step1Label}</p>
+          <div class="grid gap-3" role="radiogroup" aria-label={calc.step1Label}>
+            {
+              optionsWithUrls.map((opt, idx) => (
+                <button
+                  type="button"
+                  data-tier-btn={opt.id}
+                  aria-pressed={idx === 1 ? 'true' : 'false'}
+                  class:list={[
+                    'flex w-full items-center justify-between gap-4 rounded-2xl border-2 border-ink p-4 text-left transition-all cursor-pointer',
+                    idx === 1 ? 'bg-lemon shadow-[4px_4px_0_0_var(--ink)]' : 'bg-cream hover:bg-cream-deep',
+                  ]}
+                >
+                  <div>
+                    <span class="block font-bold text-ink">{opt.label}</span>
+                    <span class="mt-0.5 block text-xs text-ink-soft">{opt.deliverables}</span>
+                  </div>
+                  <span class="shrink-0 rounded-pill border border-ink bg-cream px-3 py-1 text-sm font-bold text-ink">
+                    {opt.feediaPrice}
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <p class="text-sm font-bold uppercase tracking-wide text-ink">{calc.step2Label}</p>
+          <div class="grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label={calc.step2Label}>
+            <button
+              type="button"
+              data-mode-btn="camera"
+              aria-pressed="true"
+              class="rounded-2xl border-2 border-ink bg-sky p-4 text-left shadow-[4px_4px_0_0_var(--ink)] transition-all cursor-pointer"
+            >
+              <span class="block font-bold text-ink">{calc.modeCamera}</span>
+              <span class="mt-1 block text-xs text-ink-soft">{calc.modeCameraDesc}</span>
+            </button>
+            <button
+              type="button"
+              data-mode-btn="nocamera"
+              aria-pressed="false"
+              class="rounded-2xl border-2 border-ink bg-cream p-4 text-left transition-all cursor-pointer"
+            >
+              <span class="block font-bold text-ink">{calc.modeNoCamera}</span>
+              <span class="mt-1 block text-xs text-ink-soft">{calc.modeNoCameraDesc}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel de resultado en vivo -->
+      <div class="flex flex-col justify-between rounded-[28px] border-2 border-ink bg-maroon p-6 text-cream md:p-8">
+        <div class="space-y-5">
+          <span class="inline-block rounded-pill border border-cream bg-ink px-3.5 py-1 text-xs font-bold uppercase text-lemon">
+            {calc.resultBadge}
+          </span>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl border border-cream/30 bg-ink p-4">
+              <span class="block text-xs uppercase text-cream/75">{calc.hoursSavedLabel}</span>
+              <strong data-out-hours class="mt-1 block font-display text-2xl text-lemon uppercase">
+                {defaultOpt.hoursSaved}
+              </strong>
+            </div>
+            <div class="rounded-2xl border border-cream/30 bg-ink p-4">
+              <span class="block text-xs uppercase text-cream/75">{calc.feediaLabel}</span>
+              <strong data-out-price class="mt-1 block font-display text-2xl text-coral uppercase">
+                {defaultOpt.feediaPrice}
+              </strong>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-cream/30 bg-ink/70 p-4 space-y-1">
+            <span class="block text-xs uppercase text-cream/75">{calc.inHouseLabel}</span>
+            <p data-out-inhouse class="font-bold text-cream line-through decoration-coral decoration-2">
+              {defaultOpt.inHouseCost}
+            </p>
+          </div>
+
+          <p data-out-note class="text-sm text-cream/90 leading-relaxed">
+            {defaultOpt.savingsNote}
+          </p>
+        </div>
+
+        <div class="pt-6">
+          <a
+            data-out-wa
+            href={optionsWithUrls[1].waUrlCamera}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="whatsapp_click"
+            data-country={country}
+            data-page={pageId}
+            data-placement="roi-calculator"
+            class="btn btn--lemon btn--lg w-full justify-center"
+          >
+            <span>{calc.ctaLabel}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const roots = document.querySelectorAll('[data-roi-calc]');
+    roots.forEach((root) => {
+      const raw = root.getAttribute('data-options');
+      if (!raw) return;
+      const options = JSON.parse(raw);
+      let currentTier = options[1]?.id || 'crecimiento';
+      let currentMode = 'camera';
+
+      const tierBtns = root.querySelectorAll('[data-tier-btn]');
+      const modeBtns = root.querySelectorAll('[data-mode-btn]');
+      const outHours = root.querySelector('[data-out-hours]');
+      const outPrice = root.querySelector('[data-out-price]');
+      const outInhouse = root.querySelector('[data-out-inhouse]');
+      const outNote = root.querySelector('[data-out-note]');
+      const outWa = root.querySelector('[data-out-wa]');
+
+      function render() {
+        const opt = options.find((o) => o.id === currentTier) || options[0];
+        if (!opt) return;
+        if (outHours) outHours.textContent = opt.hoursSaved;
+        if (outPrice) outPrice.textContent = opt.feediaPrice;
+        if (outInhouse) outInhouse.textContent = opt.inHouseCost;
+        if (outNote) outNote.textContent = opt.savingsNote;
+        if (outWa) {
+          outWa.setAttribute('href', currentMode === 'camera' ? opt.waUrlCamera : opt.waUrlNoCamera);
+        }
+
+        tierBtns.forEach((btn) => {
+          const active = btn.getAttribute('data-tier-btn') === currentTier;
+          btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+          btn.classList.toggle('bg-lemon', active);
+          btn.classList.toggle('shadow-[4px_4px_0_0_var(--ink)]', active);
+          btn.classList.toggle('bg-cream', !active);
+        });
+
+        modeBtns.forEach((btn) => {
+          const active = btn.getAttribute('data-mode-btn') === currentMode;
+          btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+          btn.classList.toggle('bg-sky', active);
+          btn.classList.toggle('shadow-[4px_4px_0_0_var(--ink)]', active);
+          btn.classList.toggle('bg-cream', !active);
+        });
+      }
+
+      tierBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          currentTier = btn.getAttribute('data-tier-btn') || currentTier;
+          render();
+        });
+      });
+
+      modeBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          currentMode = btn.getAttribute('data-mode-btn') || currentMode;
+          render();
+        });
+      });
+    });
+  })();
+</script>

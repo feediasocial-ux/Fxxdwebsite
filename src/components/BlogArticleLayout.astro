@@ -1,123 +1,385 @@
 ---
 /**
- * Plantilla reutilizable para artículos del blog (con JSON-LD Article + FAQPage + BreadcrumbList).
- * Lista para renderizar cualquier entrada BlogArticleData cuando se publiquen los artículos.
+ * Plantilla de revista editorial para artículos del blog (con fotografía editorial,
+ * cápsula GEO TL;DR, índice lateral sticky, tarjetas visuales paso a paso,
+ * tabla comparativa semántica y JSON-LD Article + FAQPage + BreadcrumbList).
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Photo from '@/components/Photo.astro';
+import Sticker from '@/components/Sticker.astro';
+import GeoKeyFacts from '@/components/GeoKeyFacts.astro';
 import FAQ from '@/components/FAQ.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import StripeBand from '@/components/StripeBand.astro';
+import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getUi } from '@/content';
-import type { BlogArticleData } from '@/content/phase4-types';
+import type { EditorialBlogArticle } from '@/content/blog';
+import { EDITORIAL_PHOTOS } from '@/lib/blog-photos';
 import { COUNTRIES } from '@/lib/i18n';
 import { linkTo, pathFor } from '@/lib/routes';
 import { articleJsonLd, breadcrumbJsonLd, faqPageJsonLd } from '@/lib/seo';
 
 interface Props {
-  article: BlogArticleData;
+  article: EditorialBlogArticle;
 }
 
 const { article } = Astro.props;
 const { country } = article;
 const ui = getUi(country);
-const path = `${COUNTRIES[country].basePath}blog/${article.slug}/`;
+const blogUi = ui.editorialBlogUi;
+const path = pathFor(article.routeKey, country)!;
+const pageId = `blog-${article.id}`;
+const heroImg = EDITORIAL_PHOTOS[article.heroPhotoKey];
+
 const crumbs = [
   { name: ui.countryName, path: COUNTRIES[country].basePath },
-  { name: 'Blog', path: linkTo('blog', country) },
-  { name: article.title, path },
+  { name: 'Blog y recursos', path: linkTo('blog', country) },
+  { name: article.category, path },
 ];
 ---
 
 <BaseLayout
-  pageId={`blog-${article.slug}`}
+  pageId={pageId}
   jsonLdNodes={[
     breadcrumbJsonLd(crumbs),
     articleJsonLd({
       headline: article.title,
-      description: article.description,
+      description: article.metaDescription,
       path,
       datePublished: article.pubDate,
       dateModified: article.updatedDate,
       authorName: article.author,
       country,
+      keywords: article.targetKeyword,
     }),
     ...(article.faqs.length ? [faqPageJsonLd(article.faqs)] : []),
   ]}
   seo={{
-    title: article.title,
-    description: article.description,
+    title: article.metaTitle,
+    description: article.metaDescription,
     path,
+    routeKey: article.routeKey,
     country,
   }}
 >
   <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
 
-  <article class="container-site py-10 md:py-16">
-    <header class="mx-auto max-w-3xl space-y-4">
-      <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-xs font-bold uppercase">
-        {article.intent} · {article.readingTime}
-      </p>
-      <h1 class="text-display-hero">{article.title}</h1>
-      <p class="text-sm text-ink-soft">
-        Por <strong>{article.author}</strong> · Publicado el {article.pubDate}
-      </p>
-      <p class="rounded-2xl border-2 border-ink bg-cream-deep p-5 text-lg font-medium">
-        {article.intro}
-      </p>
+  <article>
+    <!-- Hero Editorial estilo revista con foto protagonista -->
+    <header class="container-site pt-6 pb-12 md:pt-10 md:pb-16">
+      <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
+        <div class="space-y-5">
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="rounded-pill border-2 border-ink bg-lemon px-3.5 py-1 text-xs font-bold uppercase">
+              {article.eyebrow}
+            </span>
+            <span class="rounded-pill border border-ink bg-cream-deep px-3 py-1 text-xs font-bold">
+              {article.readingTime}
+            </span>
+          </div>
+
+          <h1 class="text-display-hero">{article.title}</h1>
+
+          <p class="text-lg text-ink-soft md:text-xl leading-relaxed" data-speakable="true">
+            {article.intro}
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 border-t-2 border-ink/15 pt-4 text-sm">
+            <div class="flex items-center gap-3">
+              <span
+                class="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink bg-coral font-display text-sm text-ink"
+                aria-hidden="true"
+              >
+                FS
+              </span>
+              <div>
+                <strong class="block text-ink">{article.author}</strong>
+                <span class="block text-xs text-ink-soft">{article.authorRole} · {article.updatedDate}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <figure class="relative mx-auto w-full max-w-lg lg:max-w-none">
+          <div class="overflow-hidden rounded-[32px] border-2 border-ink bg-cream-deep shadow-[10px_12px_0_0_var(--coral)]">
+            <Photo
+              src={heroImg}
+              alt={article.heroPhotoAlt}
+              priority
+              aspect="4/3"
+              widths={[400, 600, 800]}
+              sizes="(min-width: 1024px) 44vw, 92vw"
+            />
+          </div>
+          <div class="absolute -top-4 -right-2 z-10 sm:right-4">
+            <Sticker color="lemon" rotate={6}>{article.heroSticker}</Sticker>
+          </div>
+          <figcaption class="mt-3 rounded-2xl border border-ink bg-cream-deep px-4 py-2.5 text-xs text-ink-soft">
+            {article.heroPhotoCaption}
+          </figcaption>
+        </figure>
+      </div>
     </header>
 
-    <div class="mx-auto mt-10 max-w-3xl space-y-10">
-      {
-        article.sections.map((sec) => (
-          <section class="space-y-4">
-            <h2 class="text-display-md">{sec.heading}</h2>
-            {sec.paragraphs.map((p) => (
-              <p class="text-ink-soft">{p}</p>
-            ))}
-            {sec.bullets && (
-              <ul class="space-y-2 pl-4">
-                {sec.bullets.map((b) => (
-                  <li class="list-disc">{b}</li>
-                ))}
-              </ul>
-            )}
-          </section>
-        ))
-      }
-    </div>
+    <!-- Cápsula GEO TL;DR (Answer Capsule para Google AI Overviews / Perplexity / ChatGPT) -->
+    <GeoKeyFacts country={country} customTitle={article.tldrTitle} facts={article.keyFacts} />
 
-    {
-      article.faqs.length > 0 && (
-        <section class="mx-auto mt-14 max-w-3xl space-y-6">
-          <h2 class="text-display-md">Preguntas frecuentes</h2>
-          <FAQ items={article.faqs} />
-        </section>
-      )
-    }
+    <StripeBand colors={['var(--coral)', 'var(--cream)']} />
 
-    <footer class="mx-auto mt-14 max-w-3xl rounded-[28px] border-2 border-ink bg-maroon p-6 text-cream md:p-8 space-y-4">
-      <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
-      <p class="text-cream/85">{ui.finalCta.subtitle}</p>
-      <WhatsAppButton
-        message={article.waMessage}
-        label={article.waCta}
-        a11yLabel={ui.a11y.openWhatsApp}
-        country={country}
-        page={`blog-${article.slug}`}
-        placement="article-footer"
-        variant="lemon"
-      />
-      {
-        article.relatedRoutes.length > 0 && (
-          <div class="flex flex-wrap gap-3 pt-2 text-sm">
-            {article.relatedRoutes.map((r) => (
-              <a href={pathFor(r, country) || linkTo(r, country)} class="underline text-lemon">
-                {pathFor(r, country)}
-              </a>
-            ))}
+    <!-- Cuerpo de revista en 2 columnas (Sidebar sticky + Columna editorial rica) -->
+    <div class="container-site py-14 md:py-20">
+      <div class="grid items-start gap-10 lg:grid-cols-[270px_1fr] xl:gap-14">
+        <!-- Columna lateral sticky (Índice + Ficha + CTA rápido) -->
+        <aside class="space-y-6 lg:sticky lg:top-24">
+          <nav
+            aria-label={blogUi.tocTitle}
+            class="rounded-[24px] border-2 border-ink bg-cream-deep p-5 shadow-[5px_5px_0_0_var(--ink)]"
+          >
+            <p class="border-b-2 border-ink pb-2.5 font-display text-lg uppercase">{blogUi.tocTitle}</p>
+            <ol class="mt-3.5 space-y-2.5 text-sm">
+              {
+                article.sections.map((sec) => (
+                  <li>
+                    <a
+                      href={`#${sec.id}`}
+                      class="group flex items-start gap-2.5 font-bold text-ink hover:text-coral-deep"
+                    >
+                      <span class="mt-0.5 inline-flex h-5 w-6 shrink-0 items-center justify-center rounded border border-ink bg-lemon text-[11px] font-bold">
+                        {sec.number}
+                      </span>
+                      <span class="leading-snug group-hover:underline">{sec.heading}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ol>
+          </nav>
+
+          <div class="rounded-[24px] border-2 border-ink bg-cream p-5 space-y-2.5 text-xs">
+            <p class="font-display text-base uppercase text-ink">{blogUi.specsTitle}</p>
+            <div class="flex justify-between border-b border-ink/15 pb-1.5">
+              <span class="text-ink-soft">{blogUi.specReading}:</span>
+              <strong class="text-ink">{article.readingTime}</strong>
+            </div>
+            <div class="flex justify-between border-b border-ink/15 pb-1.5">
+              <span class="text-ink-soft">{blogUi.specUpdated}:</span>
+              <strong class="text-ink">{article.updatedDate}</strong>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-ink-soft">{blogUi.specMarket}:</span>
+              <strong class="text-ink">{ui.countryName}</strong>
+            </div>
           </div>
-        )
-      }
-    </footer>
+
+          <div class="rounded-[24px] border-2 border-ink bg-maroon p-5 text-cream space-y-3">
+            <span class="inline-block rounded-pill bg-lemon px-3 py-0.5 text-[11px] font-bold uppercase text-ink">
+              {blogUi.sidebarWaBadge}
+            </span>
+            <p class="font-display text-xl uppercase leading-tight text-cream">
+              {blogUi.sidebarWaTitle}
+            </p>
+            <WhatsAppButton
+              message={article.waMessage}
+              label={blogUi.sidebarWaCta}
+              a11yLabel={ui.a11y.openWhatsApp}
+              country={country}
+              page={pageId}
+              placement="sidebar"
+              variant="lemon"
+              size="md"
+              class="w-full justify-center"
+            />
+          </div>
+        </aside>
+
+        <!-- Columna principal de contenido editorial -->
+        <div class="space-y-14">
+          {
+            article.sections.map((sec, idx) => (
+              <section id={sec.id} class="scroll-mt-28 space-y-6">
+                <div class="flex items-center gap-3">
+                  <span class="inline-flex h-10 w-12 items-center justify-center rounded-2xl border-2 border-ink bg-lemon font-display text-xl text-ink">
+                    {sec.number}
+                  </span>
+                  <h2 class="text-display-md">{sec.heading}</h2>
+                </div>
+
+                <p class="rounded-2xl border-l-4 border-coral bg-cream-deep px-5 py-4 text-lg font-bold text-ink">
+                  {sec.lead}
+                </p>
+
+                <div class="space-y-4 text-base text-ink-soft md:text-lg leading-relaxed">
+                  {sec.paragraphs.map((p) => (
+                    <p>{p}</p>
+                  ))}
+                </div>
+
+                {sec.bullets && (
+                  <ul class="grid gap-3 sm:grid-cols-3">
+                    {sec.bullets.map((b) => (
+                      <li class="flex gap-2.5 rounded-2xl border-2 border-ink bg-cream-deep p-4 text-sm font-bold text-ink">
+                        <span class="text-coral-deep" aria-hidden="true">✓</span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {/* Tarjeta visual con fotografía editorial incrustada */}
+                {sec.figure && (
+                  <figure class="overflow-hidden rounded-[28px] border-2 border-ink bg-cream-deep shadow-[7px_8px_0_0_var(--ink)]">
+                    <div class="grid items-center gap-6 p-5 md:grid-cols-[0.95fr_1.05fr] md:p-7">
+                      <div class="overflow-hidden rounded-2xl border-2 border-ink bg-cream">
+                        <Photo
+                          src={EDITORIAL_PHOTOS[sec.figure.photoKey]}
+                          alt={sec.figure.alt}
+                          aspect="4/3"
+                          widths={[360, 540]}
+                          sizes="(min-width: 768px) 320px, 88vw"
+                        />
+                      </div>
+                      <div class="space-y-3.5">
+                        <span class="inline-block rounded-pill border border-ink bg-sky px-3 py-1 text-xs font-bold uppercase text-ink">
+                          {sec.figure.badge}
+                        </span>
+                        <figcaption class="font-bold text-ink leading-snug">
+                          {sec.figure.caption}
+                        </figcaption>
+                        <ul class="space-y-2 border-t border-ink/20 pt-3 text-sm text-ink-soft">
+                          {sec.figure.callouts.map((c) => (
+                            <li class="flex items-start gap-2">
+                              <span class="mt-0.5 font-bold text-coral-deep" aria-hidden="true">→</span>
+                              <span>{c}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </figure>
+                )}
+
+                {/* Caja de guion / ajustes técnicos */}
+                {sec.scriptBox && (
+                  <div class="rounded-[28px] border-2 border-ink bg-sky p-6 shadow-[6px_6px_0_0_var(--ink)] md:p-7 space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <h3 class="text-xl md:text-2xl">{sec.scriptBox.title}</h3>
+                      <span class="rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
+                        {sec.scriptBox.badge}
+                      </span>
+                    </div>
+                    <div class="grid gap-3 md:grid-cols-3">
+                      {sec.scriptBox.items.map((it) => (
+                        <div class="rounded-2xl border-2 border-ink bg-cream p-4 space-y-1.5">
+                          <strong class="block text-xs font-bold uppercase text-coral-deep">{it.label}</strong>
+                          <p class="text-sm font-medium text-ink">{it.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Pull-quote editorial después de la sección 02 */}
+                {idx === 1 && (
+                  <blockquote class="rounded-[28px] border-2 border-ink bg-maroon p-6 text-cream shadow-[8px_8px_0_0_var(--coral)] md:p-8 space-y-3">
+                    <p class="font-display text-2xl uppercase leading-snug text-lemon md:text-3xl">
+                      «{article.pullQuote.text}»
+                    </p>
+                    <footer class="text-xs font-bold uppercase tracking-wider text-cream/80">
+                      — {article.pullQuote.context}
+                    </footer>
+                  </blockquote>
+                )}
+              </section>
+            ))
+          }
+
+          <!-- Tabla comparativa semántica (Featured Snippet & GEO) -->
+          <section class="space-y-5 pt-4">
+            <div class="space-y-2">
+              <h2 class="text-display-md">{article.comparisonTable.title}</h2>
+              <p class="text-ink-soft">{article.comparisonTable.subtitle}</p>
+            </div>
+
+            <div class="overflow-x-auto rounded-[28px] border-2 border-ink bg-cream shadow-[7px_8px_0_0_var(--ink)]">
+              <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+                <thead>
+                  <tr class="border-b-2 border-ink bg-lemon text-ink">
+                    {
+                      article.comparisonTable.headers.map((h) => (
+                        <th class="p-4 font-display text-base uppercase">{h}</th>
+                      ))
+                    }
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-ink/20">
+                  {
+                    article.comparisonTable.rows.map((row) => (
+                      <tr class="hover:bg-cream-deep/60">
+                        <td class="p-4 font-bold text-ink">{row.col1}</td>
+                        <td class="p-4 text-ink-soft">{row.col2}</td>
+                        <td class="p-4 text-ink-soft">{row.col3}</td>
+                        <td class="bg-sky/35 p-4 font-bold text-ink">{row.col4}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Checklist práctica de control -->
+          <section class="rounded-[28px] border-2 border-ink bg-lemon p-6 shadow-[7px_8px_0_0_var(--ink)] md:p-8 space-y-5">
+            <div class="space-y-1.5">
+              <h2 class="text-display-md">{article.checklist.title}</h2>
+              <p class="text-sm font-medium text-ink-soft">{article.checklist.subtitle}</p>
+            </div>
+            <ul class="grid gap-3 md:grid-cols-2">
+              {
+                article.checklist.items.map((item, i) => (
+                  <li class="flex items-start gap-3 rounded-2xl border-2 border-ink bg-cream p-4 text-sm font-bold text-ink">
+                    <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-ink bg-coral text-xs font-bold text-ink">
+                      {i + 1}
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+
+          <!-- Preguntas frecuentes del artículo -->
+          {
+            article.faqs.length > 0 && (
+              <section class="space-y-6 pt-4">
+                <h2 class="text-display-md">{blogUi.faqTitle}</h2>
+                <FAQ items={article.faqs} />
+              </section>
+            )
+          }
+
+          <!-- Cierre de conversión a WhatsApp -->
+          <footer class="rounded-[32px] border-2 border-ink bg-maroon p-7 text-cream md:p-10 space-y-5">
+            <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
+            <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
+            <WhatsAppButton
+              message={article.waMessage}
+              label={article.waCta}
+              a11yLabel={ui.a11y.openWhatsApp}
+              country={country}
+              page={pageId}
+              placement="article-footer"
+              variant="lemon"
+              size="lg"
+            />
+          </footer>
+        </div>
+      </div>
+    </div>
   </article>
+
+  <StripeBand colors={['var(--lemon)', 'var(--ink)']} />
+
+  <!-- Matriz de cluster semántico -->
+  <TopicClusterLinks country={country} currentPath={path} />
 </BaseLayout>

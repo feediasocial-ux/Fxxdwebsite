@@ -16,6 +16,27 @@ export const ROUTES = {
   sobreNosotros: { live: true, paths: { es: '/es/sobre-nosotros/', mx: '/mx/sobre-nosotros/' } },
   contacto: { live: true, paths: { es: '/es/contacto/', mx: '/mx/contacto/' } },
   blog: { live: true, paths: { es: '/es/blog/', mx: '/mx/blog/' } },
+  blogGrabacion: {
+    live: true,
+    paths: {
+      es: '/es/blog/como-grabar-reels-en-30-minutos-con-movil/',
+      mx: '/mx/blog/como-grabar-reels-en-30-minutos-con-celular/',
+    },
+  },
+  blogGuiones: {
+    live: true,
+    paths: {
+      es: '/es/blog/estructura-guiones-reels-negocios-locales/',
+      mx: '/mx/blog/estructura-guiones-reels-negocios-locales/',
+    },
+  },
+  blogMetricool: {
+    live: true,
+    paths: {
+      es: '/es/blog/como-organizar-calendario-redes-metricool/',
+      mx: '/mx/blog/como-organizar-calendario-redes-metricool/',
+    },
+  },
   nichoClinicas: { live: true, paths: { es: '/es/redes-sociales-clinicas/', mx: '/mx/manejo-redes-sociales-clinicas/' } },
   nichoRestaurantes: { live: true, paths: { es: '/es/redes-sociales-restaurantes/', mx: '/mx/manejo-redes-sociales-restaurantes/' } },
   nichoInmobiliarias: { live: true, paths: { es: '/es/redes-sociales-inmobiliarias/', mx: '/mx/manejo-redes-sociales-inmobiliarias/' } },

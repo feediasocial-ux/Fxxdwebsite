@@ -127,10 +127,10 @@ export const phase4MX: Phase4Copy = {
     ],
     guidesSectionTitle: 'Guías completas ya disponibles para México',
     guidesSectionSubtitle: 'Análisis de precios, comparativas y sistemas sin cámara listos para consultar:',
-    upcomingBadge: 'Próximas guías en edición',
-    upcomingTitle: 'Temas que estamos preparando',
+    upcomingBadge: 'Revista práctica · México',
+    upcomingTitle: 'Artículos editoriales paso a paso con ejemplos reales',
     upcomingText:
-      'Estamos documentando estas guías paso a paso con ejemplos reales para negocios mexicanos:',
+      'Guías visuales con fotografía editorial, plantillas de guiones y checklists listos para aplicar en tu negocio:',
     upcomingTopics: [
       {
         category: 'Grabación con celular',

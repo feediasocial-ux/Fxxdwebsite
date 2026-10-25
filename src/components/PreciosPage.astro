@@ -7,11 +7,13 @@ import FAQ from '@/components/FAQ.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import Photo from '@/components/Photo.astro';
 import StripeBand from '@/components/StripeBand.astro';
+import RoiCalculator from '@/components/RoiCalculator.astro';
+import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getCorePages, getUi } from '@/content';
 import { PACKAGES } from '@/content/pricing';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { pathFor } from '@/lib/routes';
-import { breadcrumbJsonLd, faqPageJsonLd } from '@/lib/seo';
+import { breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd } from '@/lib/seo';
 
 import sinCamara from '@/assets/photos/sin-camara.jpg';
 
@@ -30,7 +32,17 @@ const crumbs = [
 
 <BaseLayout
   pageId="precios"
-  jsonLdNodes={[breadcrumbJsonLd(crumbs), faqPageJsonLd(copy.faqs)]}
+  jsonLdNodes={[
+    breadcrumbJsonLd(crumbs),
+    ...serviceJsonLd({
+      name: copy.h1,
+      description: copy.metaDescription,
+      path,
+      country,
+      serviceType: 'Social Media Content Management Packages',
+    }),
+    faqPageJsonLd(copy.faqs),
+  ]}
   seo={{
     title: copy.metaTitle,
     description: copy.metaDescription,
@@ -91,6 +103,9 @@ const crumbs = [
     </div>
   </section>
 
+  <!-- Calculadora interactiva de ahorro de tiempo y costes -->
+  <RoiCalculator country={country} pageId="precios" />
+
   <!-- Qué incluye siempre + Plan B sin cámara -->
   <section class="theme-dark py-16 md:py-24">
     <div class="container-site space-y-12">
@@ -134,4 +149,6 @@ const crumbs = [
       <FAQ items={copy.faqs} />
     </div>
   </section>
+
+  <TopicClusterLinks country={country} currentPath={path} />
 </BaseLayout>

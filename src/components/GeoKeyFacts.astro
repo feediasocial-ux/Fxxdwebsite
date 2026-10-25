@@ -1,0 +1,53 @@
+---
+import { getUi } from '@/content';
+import type { CountryKey } from '@/lib/i18n';
+
+interface Props {
+  country: CountryKey;
+  customTitle?: string;
+  facts?: { label: string; value: string }[];
+}
+
+const { country, customTitle, facts } = Astro.props;
+const ui = getUi(country).geoCapsule;
+
+const items = facts ?? [
+  { label: ui.priceLabel, value: ui.priceValue },
+  { label: ui.timeLabel, value: ui.timeValue },
+  { label: ui.deliverablesLabel, value: ui.deliverablesValue },
+  { label: ui.toolLabel, value: ui.toolValue },
+];
+---
+
+<aside
+  aria-label={customTitle || ui.title}
+  data-speakable="true"
+  class="container-site my-8"
+>
+  <div class="rounded-[28px] border-2 border-ink bg-cream-deep p-6 shadow-[6px_6px_0_0_var(--ink)] md:p-8">
+    <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-ink/15 pb-4">
+      <div class="flex items-center gap-3">
+        <span class="inline-block rounded-pill border-2 border-ink bg-lemon px-3 py-1 text-xs font-bold uppercase text-ink">
+          {ui.badge}
+        </span>
+        <h2 class="text-xl md:text-2xl">{customTitle || ui.title}</h2>
+      </div>
+    </div>
+
+    <dl class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        items.map((item, idx) => (
+          <div class="rounded-2xl border-2 border-ink bg-cream p-4">
+            <dt class="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-ink-soft">
+              <span class="inline-flex h-5 w-5 items-center justify-center rounded-full border border-ink bg-sky text-[11px] font-bold text-ink">
+                0{idx + 1}
+              </span>
+              {item.label}
+            </dt>
+            <dd class="mt-2 font-bold text-ink leading-snug">{item.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</aside>

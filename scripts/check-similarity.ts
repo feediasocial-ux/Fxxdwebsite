@@ -6,6 +6,7 @@
  */
 import { ALL_NICHES, type NicheLandingData } from '../src/content/niches/index.ts';
 import { ALL_INTENTS, type IntentLandingData } from '../src/content/intents/index.ts';
+import { ALL_BLOG_ARTICLES, type EditorialBlogArticle } from '../src/content/blog/index.ts';
 import { CITY_LANDINGS, CITY_LANDINGS_ENABLED } from '../src/content/cities.ts';
 
 const MAX_SIMILARITY = 0.4; // 40 % máximo permitido
@@ -55,6 +56,23 @@ function extractIntentCorpus(i: IntentLandingData): string {
   return parts.join(' ');
 }
 
+function extractBlogCorpus(b: EditorialBlogArticle): string {
+  const parts: string[] = [
+    b.metaTitle,
+    b.metaDescription,
+    b.title,
+    b.intro,
+    b.pullQuote.text,
+    ...b.keyFacts.flatMap((k) => [k.label, k.value]),
+    ...b.sections.flatMap((s) => [s.heading, s.lead, ...s.paragraphs, ...(s.bullets ?? [])]),
+    b.comparisonTable.title,
+    ...b.comparisonTable.rows.flatMap((r) => [r.col1, r.col2, r.col3, r.col4]),
+    ...b.checklist.items,
+    ...b.faqs.flatMap((f) => [f.q, f.a]),
+  ];
+  return parts.join(' ');
+}
+
 function tokenize(text: string): string[] {
   return text
     .toLowerCase()
@@ -88,7 +106,7 @@ function similarity(a: Set<string>, b: Set<string>): number {
 }
 
 let errors = 0;
-console.log('--- Validación de landings de nicho e intención (campos obligatorios + similitud <= 40 %) ---');
+console.log('--- Validación de landings de nicho, intención y artículos editoriales (campos + similitud <= 40 %) ---');
 
 if (ALL_NICHES.length < 8) {
   console.error(`❌ Se esperaban al menos 8 landings de nicho (4 nichos × 2 países), encontradas: ${ALL_NICHES.length}`);
@@ -96,6 +114,10 @@ if (ALL_NICHES.length < 8) {
 }
 if (ALL_INTENTS.length < 6) {
   console.error(`❌ Se esperaban al menos 6 landings de intención (3 × 2 países), encontradas: ${ALL_INTENTS.length}`);
+  errors++;
+}
+if (ALL_BLOG_ARTICLES.length < 6) {
+  console.error(`❌ Se esperaban al menos 6 artículos editoriales (3 × 2 países), encontrados: ${ALL_BLOG_ARTICLES.length}`);
   errors++;
 }
 
@@ -151,6 +173,14 @@ for (const intent of ALL_INTENTS) {
   }
 }
 
+for (const art of ALL_BLOG_ARTICLES) {
+  const label = `${art.country}/blog/${art.slug}`;
+  if (!art.title || !art.intro || !art.heroPhotoKey || art.sections.length < 4 || art.faqs.length < 5) {
+    console.error(`❌ [${label}] Faltan secciones, foto hero o FAQs obligatorias en artículo editorial`);
+    errors++;
+  }
+}
+
 const shingleMap = [
   ...ALL_NICHES.map((n) => ({
     label: `${n.country}/${n.slug}`,
@@ -159,6 +189,10 @@ const shingleMap = [
   ...ALL_INTENTS.map((i) => ({
     label: `${i.country}/${i.slug}`,
     shingles: buildShingles(tokenize(extractIntentCorpus(i)), 3),
+  })),
+  ...ALL_BLOG_ARTICLES.map((b) => ({
+    label: `${b.country}/blog/${b.slug}`,
+    shingles: buildShingles(tokenize(extractBlogCorpus(b)), 3),
   })),
 ];
 

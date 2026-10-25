@@ -9,6 +9,9 @@ import FAQ from '@/components/FAQ.astro';
 import Photo from '@/components/Photo.astro';
 import AuditForm from '@/components/AuditForm.astro';
 import StripeBand from '@/components/StripeBand.astro';
+import GeoKeyFacts from '@/components/GeoKeyFacts.astro';
+import RoiCalculator from '@/components/RoiCalculator.astro';
+import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getUi } from '@/content';
 import { PACKAGES } from '@/content/pricing';
 import { getIntentsByCountry, type IntentLandingData } from '@/content/intents';
@@ -108,6 +111,9 @@ const crumbs = [
       </div>
     </div>
   </section>
+
+  <!-- Cápsula GEO verificable -->
+  <GeoKeyFacts country={country} />
 
   <StripeBand colors={['var(--coral)', 'var(--cream)']} />
 
@@ -211,6 +217,8 @@ const crumbs = [
     </div>
   </section>
 
+  {intent.id === 'precio' && <RoiCalculator country={country} pageId={pageId} />}
+
   <!-- FAQ con JSON-LD FAQPage -->
   <section class="container-site py-16 md:py-20">
     <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
@@ -266,4 +274,6 @@ const crumbs = [
       <AuditForm country={country} page={pageId} />
     </div>
   </section>
+
+  <TopicClusterLinks country={country} currentPath={path} />
 </BaseLayout>

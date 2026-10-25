@@ -154,6 +154,67 @@ export type UiCopy = {
     label: string;
     suggestion: string;
   };
+  editorialBlogUi: {
+    tocTitle: string;
+    specsTitle: string;
+    specReading: string;
+    specUpdated: string;
+    specMarket: string;
+    sidebarWaBadge: string;
+    sidebarWaTitle: string;
+    sidebarWaCta: string;
+    readArticleCta: string;
+    readGuideCta: string;
+    faqTitle: string;
+    relatedClusterTitle: string;
+    relatedClusterSubtitle: string;
+  };
+  geoCapsule: {
+    badge: string;
+    title: string;
+    priceLabel: string;
+    priceValue: string;
+    timeLabel: string;
+    timeValue: string;
+    deliverablesLabel: string;
+    deliverablesValue: string;
+    toolLabel: string;
+    toolValue: string;
+  };
+  topicCluster: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    nichesHeading: string;
+    guidesHeading: string;
+    blogHeading: string;
+  };
+  roiCalculator: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    step1Label: string;
+    step2Label: string;
+    modeCamera: string;
+    modeCameraDesc: string;
+    modeNoCamera: string;
+    modeNoCameraDesc: string;
+    options: {
+      id: 'esencial' | 'crecimiento' | 'pro';
+      label: string;
+      deliverables: string;
+      hoursSaved: string;
+      inHouseCost: string;
+      feediaPrice: string;
+      savingsNote: string;
+      waMessage: string;
+    }[];
+    resultBadge: string;
+    hoursSavedLabel: string;
+    inHouseLabel: string;
+    feediaLabel: string;
+    ctaLabel: string;
+  };
 };
 
 /** Contrato del copy para las páginas interiores de Fase 2 y 3. */

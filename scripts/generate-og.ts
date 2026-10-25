@@ -11,6 +11,7 @@ import { COUNTRIES, COUNTRY_KEYS, type CountryKey } from '../src/lib/i18n.ts';
 import { getCorePages, getPhase4, getUi, rootCopy } from '../src/content/index.ts';
 import { getNichesByCountry } from '../src/content/niches/index.ts';
 import { getIntentsByCountry } from '../src/content/intents/index.ts';
+import { getBlogArticlesByCountry } from '../src/content/blog/index.ts';
 
 const ROOT = process.cwd();
 const OG_DIR = path.join(ROOT, 'public', 'og');
@@ -200,6 +201,17 @@ async function run() {
         badge: `${ui.countryName} · Guía práctica`,
         title: intent.h1,
         subtitle: intent.cardSummary,
+        accent: '#FF5A36',
+      });
+    }
+
+    for (const article of getBlogArticlesByCountry(country)) {
+      const p = ROUTES[article.routeKey].paths[country]!;
+      cards.push({
+        file: slugFile(p),
+        badge: `${ui.countryName} · ${article.category}`,
+        title: article.title,
+        subtitle: article.cardSummary,
         accent: '#FF5A36',
       });
     }

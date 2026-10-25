@@ -1,0 +1,20 @@
+---
+import BlogArticleLayout from '@/components/BlogArticleLayout.astro';
+import { getBlogArticlesByCountry, type EditorialBlogArticle } from '@/content/blog';
+
+export function getStaticPaths() {
+  const articles = getBlogArticlesByCountry('es');
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: EditorialBlogArticle;
+}
+
+const { article } = Astro.props;
+---
+
+<BlogArticleLayout article={article} />

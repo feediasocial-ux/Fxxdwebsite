@@ -1,11 +1,15 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
-import Card from '@/components/Card.astro';
+import Photo from '@/components/Photo.astro';
+import Sticker from '@/components/Sticker.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import StripeBand from '@/components/StripeBand.astro';
+import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getPhase4, getUi } from '@/content';
 import { getIntentsByCountry } from '@/content/intents';
+import { getBlogArticlesByCountry } from '@/content/blog';
+import { EDITORIAL_PHOTOS } from '@/lib/blog-photos';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { pathFor } from '@/lib/routes';
 import { breadcrumbJsonLd } from '@/lib/seo';
@@ -16,13 +20,23 @@ interface Props {
 
 const { country } = Astro.props;
 const ui = getUi(country);
+const blogUi = ui.editorialBlogUi;
 const copy = getPhase4(country).blog;
 const intents = getIntentsByCountry(country);
+const articles = getBlogArticlesByCountry(country);
+const featuredArticle = articles[0];
+const restArticles = articles.slice(1);
 const path = pathFor('blog', country)!;
 const crumbs = [
   { name: ui.countryName, path: COUNTRIES[country].basePath },
   { name: 'Blog y recursos', path },
 ];
+
+const intentPhotos = {
+  precio: EDITORIAL_PHOTOS['proceso-02'],
+  comparativa: EDITORIAL_PHOTOS['servicios-ia'],
+  'sin-camara': EDITORIAL_PHOTOS['sin-camara'],
+} as const;
 ---
 
 <BaseLayout
@@ -38,87 +52,217 @@ const crumbs = [
 >
   <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
 
-  <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
-    <div class="max-w-3xl space-y-5">
-      <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
-        {copy.eyebrow}
-      </p>
-      <h1 class="text-display-hero">{copy.h1}</h1>
-      <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
-    </div>
+  <!-- Cabecera de Revista Editorial -->
+  <section class="container-site pt-6 pb-14 md:pt-10 md:pb-16">
+    <div class="grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+      <div class="space-y-4">
+        <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
+          {copy.eyebrow}
+        </p>
+        <h1 class="text-display-hero">{copy.h1}</h1>
+        <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
+      </div>
 
-    <div class="mt-10 rounded-[28px] border-2 border-ink bg-cream-deep p-6 md:p-8">
-      <h2 class="text-2xl md:text-3xl">{copy.editorialPromiseTitle}</h2>
-      <p class="mt-2 text-ink-soft">{copy.editorialPromiseText}</p>
-      <ul class="mt-4 grid gap-3 md:grid-cols-3">
-        {
-          copy.editorialRules.map((rule) => (
-            <li class="flex gap-2 rounded-2xl border border-ink bg-cream p-3.5 text-sm font-bold">
-              <span class="text-coral-deep" aria-hidden="true">✓</span>
-              <span>{rule}</span>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="rounded-[28px] border-2 border-ink bg-cream-deep p-6 shadow-[6px_6px_0_0_var(--ink)]">
+        <h2 class="text-xl">{copy.editorialPromiseTitle}</h2>
+        <p class="mt-1.5 text-sm text-ink-soft">{copy.editorialPromiseText}</p>
+        <ul class="mt-4 space-y-2">
+          {
+            copy.editorialRules.map((rule) => (
+              <li class="flex gap-2 rounded-xl border border-ink bg-cream px-3 py-2 text-xs font-bold">
+                <span class="text-coral-deep" aria-hidden="true">✓</span>
+                <span>{rule}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </section>
 
   <StripeBand colors={['var(--coral)', 'var(--cream)']} />
 
-  <!-- Guías completas ya publicadas (landings de intención comercial y comparativa) -->
+  <!-- Artículos Editoriales con Fotografía (Layout Magazine) -->
   <section class="container-site py-16 md:py-24">
     <div class="max-w-3xl space-y-2">
-      <h2 class="text-display-lg">{copy.guidesSectionTitle}</h2>
-      <p class="text-lg text-ink-soft">{copy.guidesSectionSubtitle}</p>
+      <span class="inline-block rounded-pill border-2 border-ink bg-lemon px-3.5 py-1 text-xs font-bold uppercase">
+        {copy.upcomingBadge}
+      </span>
+      <h2 class="text-display-lg">{copy.upcomingTitle}</h2>
+      <p class="text-lg text-ink-soft">{copy.upcomingText}</p>
     </div>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-3">
+    <!-- Artículo protagonista (2 columnas estilo portada de revista) -->
+    {
+      featuredArticle && (
+        <article class="relative mt-10 overflow-hidden rounded-[32px] border-2 border-ink bg-cream-deep shadow-[10px_12px_0_0_var(--ink)]">
+          <div class="grid items-center gap-8 p-6 md:p-10 lg:grid-cols-[1.05fr_1fr]">
+            <div class="relative overflow-hidden rounded-[24px] border-2 border-ink bg-cream">
+              <a href={pathFor(featuredArticle.routeKey, country)!} class="block">
+                <Photo
+                  src={EDITORIAL_PHOTOS[featuredArticle.heroPhotoKey]}
+                  alt={featuredArticle.heroPhotoAlt}
+                  priority
+                  aspect="4/3"
+                  widths={[400, 640, 820]}
+                  sizes="(min-width: 1024px) 46vw, 90vw"
+                />
+              </a>
+              <div class="absolute top-3 left-3">
+                <Sticker color="lemon" rotate={-4}>{featuredArticle.heroSticker}</Sticker>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase">
+                <span class="rounded-pill border border-ink bg-coral px-3 py-1 text-ink">
+                  {featuredArticle.category}
+                </span>
+                <span class="rounded-pill border border-ink bg-cream px-3 py-1 text-ink-soft">
+                  {featuredArticle.readingTime}
+                </span>
+              </div>
+
+              <h3 class="text-2xl md:text-4xl leading-tight">
+                <a href={pathFor(featuredArticle.routeKey, country)!} class="hover:underline">
+                  {featuredArticle.title}
+                </a>
+              </h3>
+
+              <p class="text-base text-ink-soft leading-relaxed">
+                {featuredArticle.cardSummary}
+              </p>
+
+              <div class="grid grid-cols-2 gap-3 pt-1">
+                {featuredArticle.keyFacts.slice(0, 2).map((fact) => (
+                  <div class="rounded-2xl border border-ink bg-cream p-3">
+                    <span class="block text-[11px] font-bold uppercase text-ink-soft">{fact.label}</span>
+                    <strong class="mt-0.5 block text-xs text-ink">{fact.value}</strong>
+                  </div>
+                ))}
+              </div>
+
+              <div class="pt-2">
+                <a
+                  href={pathFor(featuredArticle.routeKey, country)!}
+                  class="btn btn--primary btn--md"
+                >
+                  <span>{blogUi.readArticleCta}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+      )
+    }
+
+    <!-- Tarjetas de artículos editoriales 2 y 3 con foto -->
+    <div class="mt-8 grid gap-8 md:grid-cols-2">
       {
-        intents.map((item, idx) => (
-          <Card color={idx === 0 ? 'lemon' : idx === 1 ? 'sky' : 'cream-deep'} bordered class="flex flex-col gap-4">
-            <span class="inline-block w-fit rounded-pill border border-ink bg-cream px-3 py-0.5 text-xs font-bold uppercase">
-              {item.eyebrow}
-            </span>
-            <h3 class="text-2xl">{item.shortTitle}</h3>
-            <p class="text-sm text-ink-soft">{item.cardSummary}</p>
-            <a
-              href={pathFor(item.routeKey, country)!}
-              class="mt-auto inline-flex items-center gap-2 pt-2 font-bold text-ink underline underline-offset-4"
-            >
-              Leer guía completa →
-            </a>
-          </Card>
-        ))
+        restArticles.map((art, idx) => {
+          const href = pathFor(art.routeKey, country)!;
+          return (
+            <article class="flex flex-col overflow-hidden rounded-[28px] border-2 border-ink bg-cream shadow-[8px_8px_0_0_var(--ink)]">
+              <a href={href} class="relative block overflow-hidden border-b-2 border-ink bg-cream-deep">
+                <Photo
+                  src={EDITORIAL_PHOTOS[art.heroPhotoKey]}
+                  alt={art.heroPhotoAlt}
+                  aspect="16/10"
+                  widths={[360, 560, 720]}
+                  sizes="(min-width: 768px) 45vw, 92vw"
+                />
+                <span
+                  class:list={[
+                    'absolute top-3 left-3 rounded-pill border-2 border-ink px-3 py-1 text-xs font-bold uppercase text-ink',
+                    idx === 0 ? 'bg-lemon' : 'bg-sky',
+                  ]}
+                >
+                  {art.heroSticker}
+                </span>
+              </a>
+
+              <div class="flex flex-1 flex-col gap-3 p-6 md:p-7">
+                <div class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase text-ink-soft">
+                  <span class="text-coral-deep">{art.category}</span>
+                  <span>·</span>
+                  <span>{art.readingTime}</span>
+                </div>
+
+                <h3 class="text-2xl leading-snug">
+                  <a href={href} class="hover:underline">
+                    {art.title}
+                  </a>
+                </h3>
+
+                <p class="text-sm text-ink-soft leading-relaxed">{art.cardSummary}</p>
+
+                <a
+                  href={href}
+                  class="mt-auto inline-flex items-center gap-2 pt-3 font-bold text-ink underline underline-offset-4 hover:text-coral-deep"
+                >
+                  {blogUi.readArticleCta}
+                </a>
+              </div>
+            </article>
+          );
+        })
       }
     </div>
   </section>
 
-  <!-- Próximos artículos en preparación (sin publicar páginas vacías) -->
+  <!-- Guías comparativas y de intención comercial (con foto editorial) -->
   <section class="theme-dark py-16 md:py-24">
-    <div class="container-site space-y-8">
-      <div class="max-w-3xl space-y-3">
-        <span class="inline-block rounded-pill border border-cream bg-maroon px-3 py-1 text-xs font-bold uppercase text-lemon">
-          {copy.upcomingBadge}
-        </span>
-        <h2 class="text-display-lg text-cream">{copy.upcomingTitle}</h2>
-        <p class="text-lg text-cream/85">{copy.upcomingText}</p>
+    <div class="container-site space-y-10">
+      <div class="max-w-3xl space-y-2">
+        <h2 class="text-display-lg text-cream">{copy.guidesSectionTitle}</h2>
+        <p class="text-lg text-cream/85">{copy.guidesSectionSubtitle}</p>
       </div>
 
       <div class="grid gap-6 md:grid-cols-3">
         {
-          copy.upcomingTopics.map((topic) => (
-            <div class="rounded-[28px] border-2 border-dashed border-cream/60 bg-ink p-6 text-cream space-y-3">
-              <span class="inline-block rounded-pill bg-lemon px-3 py-0.5 text-xs font-bold uppercase text-ink">
-                {topic.category}
-              </span>
-              <h3 class="text-2xl text-cream">{topic.title}</h3>
-              <p class="text-sm text-cream/80">{topic.summary}</p>
-            </div>
-          ))
+          intents.map((item, idx) => {
+            const href = pathFor(item.routeKey, country)!;
+            const img = intentPhotos[item.id] || EDITORIAL_PHOTOS['proceso-02'];
+            return (
+              <article class="flex flex-col overflow-hidden rounded-[28px] border-2 border-cream bg-ink text-cream">
+                <a href={href} class="block overflow-hidden border-b-2 border-cream/30">
+                  <Photo
+                    src={img}
+                    alt={item.shortTitle}
+                    aspect="16/10"
+                    widths={[320, 480]}
+                    sizes="(min-width: 768px) 30vw, 90vw"
+                  />
+                </a>
+                <div class="flex flex-1 flex-col gap-3 p-6">
+                  <span
+                    class:list={[
+                      'inline-block w-fit rounded-pill border border-ink px-3 py-0.5 text-xs font-bold uppercase text-ink',
+                      idx === 0 ? 'bg-lemon' : idx === 1 ? 'bg-sky' : 'bg-coral',
+                    ]}
+                  >
+                    {item.eyebrow}
+                  </span>
+                  <h3 class="text-2xl text-cream">
+                    <a href={href} class="hover:underline">
+                      {item.shortTitle}
+                    </a>
+                  </h3>
+                  <p class="text-sm text-cream/80">{item.cardSummary}</p>
+                  <a
+                    href={href}
+                    class="mt-auto inline-flex items-center gap-2 pt-3 font-bold text-lemon underline underline-offset-4"
+                  >
+                    {blogUi.readGuideCta}
+                  </a>
+                </div>
+              </article>
+            );
+          })
         }
       </div>
 
-      <div class="pt-4">
+      <div class="pt-2">
         <WhatsAppButton
           message={copy.waMessage}
           label={copy.waCta}
@@ -132,4 +276,7 @@ const crumbs = [
       </div>
     </div>
   </section>
+
+  <!-- Cluster semántico completo -->
+  <TopicClusterLinks country={country} currentPath={path} />
 </BaseLayout>

@@ -103,7 +103,7 @@ for (const file of files) {
   console.log(`✅ ${rel} (${isNoindex ? 'noindex' : 'indexable'}): 1×H1, title/meta únicos, canonical, hreflang, ${imgs.length} imgs con alt`);
 }
 
-// 6. Sitemaps
+// 6. Sitemaps y archivos GEO (llms.txt / llms-full.txt)
 for (const sm of ['sitemap-index.xml', 'es/sitemap.xml', 'mx/sitemap.xml']) {
   const p = path.join(DIST, sm);
   if (!fs.existsSync(p)) {
@@ -119,8 +119,23 @@ for (const sm of ['sitemap-index.xml', 'es/sitemap.xml', 'mx/sitemap.xml']) {
   }
 }
 
+for (const geoFile of ['llms.txt', 'llms-full.txt']) {
+  const p = path.join(DIST, geoFile);
+  if (!fs.existsSync(p)) {
+    console.error(`❌ Falta archivo GEO: /${geoFile}`);
+    errors++;
+  } else {
+    const content = fs.readFileSync(p, 'utf8');
+    if (!content.includes('349 €') || !content.includes('3,900 MXN')) {
+      console.error(`❌ /${geoFile} no incluye la tabla completa de precios EUR/MXN`);
+      errors++;
+    }
+    console.log(`✅ Archivo GEO válido: /${geoFile} (${(Buffer.byteLength(content) / 1024).toFixed(1)} KB)`);
+  }
+}
+
 if (errors > 0) {
   console.error(`\n❌ Fallaron ${errors} comprobaciones.`);
   process.exit(1);
 }
-console.log(`\n✅ Todas las ${files.length} páginas y sitemaps pasaron las comprobaciones de SEO, hreflang y accesibilidad.`);
+console.log(`\n✅ Todas las ${files.length} páginas, sitemaps y archivos GEO pasaron las comprobaciones de SEO, hreflang y accesibilidad.`);
