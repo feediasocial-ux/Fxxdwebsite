@@ -5,17 +5,11 @@ import Card from '@/components/Card.astro';
 import Button from '@/components/Button.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallButton from '@/components/BookCallButton.astro';
-import BookCallCard from '@/components/BookCallCard.astro';
 import PackageCard from '@/components/PackageCard.astro';
 import FAQ from '@/components/FAQ.astro';
 import Photo from '@/components/Photo.astro';
-import AuditForm from '@/components/AuditForm.astro';
-import StripeBand from '@/components/StripeBand.astro';
-import GeoKeyFacts from '@/components/GeoKeyFacts.astro';
 import RoiCalculator from '@/components/RoiCalculator.astro';
 import CarouselPreviewMockup from '@/components/CarouselPreviewMockup.astro';
-import EeatMethodologyBox from '@/components/EeatMethodologyBox.astro';
-import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getUi } from '@/content';
 import { PACKAGES } from '@/content/pricing';
 import { getIntentsByCountry, type IntentLandingData } from '@/content/intents';
@@ -69,8 +63,8 @@ const crumbs = [
 >
   <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
 
-  <!-- Hero con respuesta directa en las primeras 100 palabras -->
-  <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
+  <!-- 1. Hero focalizada -->
+  <section class="container-site pt-6 pb-14 md:pt-10 md:pb-16">
     <div class="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
       <div class="space-y-5">
         <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1.5 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
@@ -78,13 +72,6 @@ const crumbs = [
         </p>
         <h1 class="text-display-hero">{intent.h1}</h1>
         <p class="text-lg text-ink-soft md:text-xl">{intent.intro}</p>
-        {
-          intent.pendingNote && (
-            <p class="inline-block rounded-xl border-2 border-dashed border-ink bg-cream-deep px-3 py-1.5 text-xs font-bold">
-              {intent.pendingNote}
-            </p>
-          )
-        }
         <div class="flex flex-wrap items-center gap-3 pt-2">
           <WhatsAppButton
             message={intent.waMessage}
@@ -95,14 +82,7 @@ const crumbs = [
             placement="hero"
             size="lg"
           />
-          <BookCallButton
-            country={country}
-            page={pageId}
-            placement="hero"
-            variant="light"
-            size="lg"
-          />
-          <Button href="#paquetes" variant="outline" size="md">
+          <Button href="#paquetes" variant="outline" size="lg">
             {ui.hero.ctaSecondary}
           </Button>
         </div>
@@ -123,13 +103,8 @@ const crumbs = [
     </div>
   </section>
 
-  <!-- Cápsula GEO verificable -->
-  <GeoKeyFacts country={country} />
-
-  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
-
-  <!-- Tabla comparativa de mercado / opciones -->
-  <section class="container-site py-16 md:py-24">
+  <!-- 2. Tabla comparativa clara -->
+  <section class="container-site py-12 md:py-16">
     <div class="max-w-3xl space-y-3">
       <h2 class="text-display-lg">{intent.comparisonTable.title}</h2>
       <p class="text-lg text-ink-soft">{intent.comparisonTable.subtitle}</p>
@@ -164,8 +139,8 @@ const crumbs = [
     </div>
   </section>
 
-  <!-- 3 pilares de análisis -->
-  <section class="theme-dark py-16 md:py-24">
+  <!-- 3. Los 3 pilares clave -->
+  <section class="theme-dark py-16 md:py-20">
     <div class="container-site space-y-10">
       <h2 class="text-display-lg text-cream">{intent.pillarsTitle}</h2>
       <div class="grid gap-6 md:grid-cols-3">
@@ -192,28 +167,9 @@ const crumbs = [
     </div>
   </section>
 
-  <!-- Veredicto honesto: cuándo elegir cada opción -->
-  <section class="container-site py-16 md:py-24">
-    <h2 class="text-display-lg">{intent.whenToChooseTitle}</h2>
-    <div class="mt-10 grid gap-6 md:grid-cols-3">
-      {
-        intent.whenToChoose.map((item, idx) => (
-          <Card color={idx === 1 ? 'lemon' : 'cream-deep'} bordered class="flex flex-col gap-3">
-            <span class="text-xs font-bold uppercase tracking-wider text-coral-deep">Caso 0{idx + 1}</span>
-            <h3 class="text-2xl">{item.profile}</h3>
-            <p class="rounded-2xl border border-ink bg-cream p-3.5 text-sm font-bold">
-              Recomendación: {item.recommendation}
-            </p>
-            <p class="text-sm text-ink-soft">{item.honestVerdict}</p>
-          </Card>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- Nuestros paquetes claros -->
-  <section id="paquetes" class="container-site pb-16 md:pb-24">
-    <div class="max-w-3xl space-y-4">
+  <!-- 4. Paquetes claros + herramienta interactiva específica -->
+  <section id="paquetes" class="container-site py-16 md:py-20">
+    <div class="max-w-3xl space-y-3">
       <h2 class="text-display-lg">{ui.pricing.title}</h2>
       <p class="text-lg text-ink-soft">{ui.pricing.subtitle}</p>
     </div>
@@ -226,96 +182,71 @@ const crumbs = [
       <p>• {ui.pricing.adsNote}</p>
       <p>• {ui.pricing.taxNote}</p>
     </div>
-
-    <div class="mt-10">
-      <BookCallCard
-        country={country}
-        page={pageId}
-        placement="below-packages"
-        mode="banner"
-        waMessage={intent.waMessage}
-      />
-    </div>
   </section>
 
   {intent.id === 'precio' && <RoiCalculator country={country} pageId={pageId} />}
   {
     intent.id === 'sin-camara' && (
-      <section class="container-site pb-12">
-        <CarouselPreviewMockup country={country} />
+      <section class="container-site pb-10">
+        <CarouselPreviewMockup country={country} compact />
       </section>
     )
   }
 
-  <!-- FAQ con JSON-LD FAQPage -->
-  <section class="container-site py-16 md:py-20">
+  <!-- 5. FAQ -->
+  <section class="container-site py-14 md:py-16">
     <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
       <h2 class="text-display-lg">{intent.faqTitle}</h2>
       <FAQ items={intent.faqs} />
     </div>
   </section>
 
-  <!-- Sello de metodología verificable E-E-A-T -->
-  <section class="container-site pb-14">
-    <EeatMethodologyBox country={country} />
-  </section>
-
-  <!-- Otras guías de decisión + enlaces internos -->
-  <section class="container-site pb-16">
-    <div class="rounded-[32px] border-2 border-ink bg-cream-deep p-6 shadow-[6px_6px_0_0_var(--ink)] md:p-8">
-      <div class="flex flex-wrap items-center justify-between gap-4">
-        <h2 class="text-display-md">Otras guías prácticas para {ui.countryName}</h2>
-        <div class="flex flex-wrap gap-3">
-          <Button href={linkTo('servicios', country)} variant="outline">Ver servicios</Button>
-          <Button href={linkTo('comoTrabajamos', country)} variant="outline">Ver guiones de muestra</Button>
-        </div>
-      </div>
-      <div class="mt-6 grid gap-6 md:grid-cols-2">
-        {
-          otherIntents.map((other) => (
-            <a
-              href={pathFor(other.routeKey, country)!}
-              class="group flex flex-col gap-2 rounded-[24px] border-2 border-ink bg-cream p-6 text-ink no-underline shadow-[4px_4px_0_0_var(--ink)] transition-all hover:-translate-y-0.5 hover:bg-lemon"
-            >
-              <span class="text-xs font-bold uppercase text-coral-deep">{other.eyebrow}</span>
-              <span class="font-display text-2xl uppercase">{other.shortTitle}</span>
-              <span class="text-sm text-ink-soft">{other.cardSummary}</span>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA final -->
-  <section class="container-site pb-20">
-    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream shadow-[10px_10px_0_0_var(--ink)] md:p-10 lg:grid-cols-[1fr_1.15fr]">
-      <div class="space-y-5">
+  <!-- 6. CTA final limpio + enlaces compactos -->
+  <section class="container-site pb-20 space-y-10">
+    <div class="flex flex-col items-start justify-between gap-6 rounded-[32px] border-2 border-ink bg-maroon p-8 text-cream shadow-[8px_8px_0_0_var(--ink)] lg:flex-row lg:items-center md:p-10">
+      <div class="max-w-2xl space-y-2">
         <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
-        <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
-        <div class="flex flex-wrap gap-3">
-          <WhatsAppButton
-            message={intent.waMessage}
-            label={intent.waCta}
-            a11yLabel={ui.a11y.openWhatsApp}
-            country={country}
-            page={pageId}
-            placement="final-cta"
-            variant="lemon"
-            size="lg"
-          />
-          <BookCallButton
-            country={country}
-            page={pageId}
-            placement="final-cta"
-            variant="light"
-            size="lg"
-          />
-        </div>
+        <p class="text-base text-cream/85 md:text-lg">{ui.finalCta.subtitle}</p>
       </div>
-      <AuditForm country={country} page={pageId} />
+      <div class="flex flex-wrap gap-3 shrink-0">
+        <WhatsAppButton
+          message={intent.waMessage}
+          label={intent.waCta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page={pageId}
+          placement="final-cta"
+          variant="lemon"
+          size="lg"
+        />
+        <BookCallButton
+          country={country}
+          page={pageId}
+          placement="final-cta"
+          variant="light"
+          size="lg"
+        />
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3 text-sm">
+      <span class="font-bold text-ink-soft">Otras guías:</span>
+      {
+        otherIntents.map((other) => (
+          <a
+            href={pathFor(other.routeKey, country)!}
+            class="rounded-pill border border-ink bg-cream-deep px-3.5 py-1.5 font-bold text-ink no-underline hover:bg-lemon"
+          >
+            {other.shortTitle} →
+          </a>
+        ))
+      }
+      <a
+        href={linkTo('comoTrabajamos', country)}
+        class="rounded-pill border border-ink bg-cream-deep px-3.5 py-1.5 font-bold text-ink no-underline hover:bg-lemon"
+      >
+        Ver casos y guiones →
+      </a>
     </div>
   </section>
-
-  <TopicClusterLinks country={country} currentPath={path} />
 </BaseLayout>

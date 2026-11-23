@@ -264,18 +264,18 @@ export const intentsMX: IntentLandingData[] = [
     slug: 'contenido-redes-sin-salir-en-camara',
     routeKey: 'intencionSinCamara',
     shortTitle: 'Contenido para redes sin salir a cuadro',
-    cardSummary: 'Nuestro Plan B en México para dueños de negocio que prefieren no aparecer en video: carruseles educativos, tomas de detalle y gráficos con IA.',
+    cardSummary: 'Nuestro Plan B en México sin grabarte cada mes: Reels con tu gemelo digital (AI Twin), avatar fotorrealista a la medida, B-roll de producto y carruseles con IA.',
     metaTitle: 'Contenido para Redes Sociales Sin Salir en Cámara | México',
     metaDescription:
-      '¿No te gusta salir a cuadro en Reels o TikTok? Así armamos el contenido mensual de tu negocio en México con carruseles, tomas de producto y diseño con IA.',
+      '¿No quieres grabarte cada mes? Producimos tus Reels y publicaciones en México con tu gemelo digital (AI Twin), avatar fotorrealista de marca, B-roll y diseño con IA.',
     eyebrow: 'Plan B sin salir a cuadro · México',
-    h1: 'Contenido para redes sociales sin salir en cámara: publica cada mes sin tener que aparecer a cuadro',
+    h1: 'Contenido para redes sociales sin salir en cámara: publica cada mes sin grabarte',
     intro:
-      'No tienes que bailar en TikTok ni hablarle de frente al celular si no te sientes cómodo frente a la cámara. En México hay muchísimos médicos, restauranteros, asesores y dueños de pymes que tienen un gran servicio, pero dejan sus redes abandonadas porque les da pena salir a cuadro. Con nuestro Plan B sin cámara armamos todo tu calendario mensual combinando carruseles que la gente guarda, videos cortos de detalle o manos trabajando (B-roll) y diseño gráfico editorial con IA.',
+      'No tienes que grabarte frente al celular cada semana si te incomoda la cámara o andas a tope de trabajo. Con nuestro Plan B sin cámara mantenemos tus redes activas combinando Reels hablados con tu gemelo digital (AI Twin) o con un avatar fotorrealista creado a la medida para tu marca, además de videos B-roll de producto y carruseles editoriales con IA.',
     comparisonTable: {
-      title: 'Cómo transformamos el contenido hablado en piezas sin salir a cuadro',
-      subtitle: 'Mantienes tus redes activas y profesionales todas las semanas sin exponer tu rostro:',
-      headers: ['Qué queremos lograr', 'Formato tradicional (a cuadro)', 'Formato Plan B sin cámara', 'Qué necesitamos de ti'],
+      title: 'Cómo transformamos el contenido hablado en piezas sin grabarte cada mes',
+      subtitle: 'Mantienes tus redes activas y profesionales todas las semanas sin depender de grabaciones constantes:',
+      headers: ['Qué queremos lograr', 'Formato tradicional (grabándote)', 'Formato Plan B sin cámara', 'Qué necesitamos de ti'],
       rows: [
         {
           label: 'Explicar tu servicio y generar confianza',
@@ -285,9 +285,9 @@ export const intentsMX: IntentLandingData[] = [
         },
         {
           label: 'Tener alcance en Reels',
-          col1: 'Reel hablando con micrófono en mano',
-          col2: 'Reel dinámico de manos preparando tu producto, recorrido del lugar o texto animado en pantalla',
-          col3: 'Clips de 5 segundos de tu producto o espacio con el celular (sin que salga nadie hablando).',
+          col1: 'Reel grabado cada mes con micrófono en mano',
+          col2: 'Reel hablado con tu gemelo digital (AI Twin) o avatar fotorrealista de marca, o Reel B-roll de producto y proceso con subtítulos dinámicos',
+          col3: 'Cero grabación mensual (o clips cortos de tu producto/sucursal si prefieres B-roll).',
         },
         {
           label: 'Destacar visualmente en el feed',
@@ -306,37 +306,37 @@ export const intentsMX: IntentLandingData[] = [
     pillarsTitle: 'Los 3 motores de nuestro Plan B sin salir a cuadro',
     pillars: [
       {
-        badge: 'Motor 01 · Carruseles que venden',
-        title: 'Carruseles claros que resuelven las dudas de tu cliente antes de que te escriba',
-        text: 'Cuando alguien en México busca un tratamiento, un departamento o un servicio para su empresa, guarda las publicaciones que le explican precios, pasos y comparativas con claridad. Diseñamos carruseles que trabajan como vendedores silenciosos.',
+        badge: 'Motor 01 · Reels con AI Twin o Avatar',
+        title: 'Reels hablados con tu gemelo digital o un avatar fotorrealista propio',
+        text: 'Elegimos contigo el formato ideal: tu gemelo digital (AI Twin) entrenado una sola vez para hablar sin grabarte cada mes, un avatar fotorrealista creado a la medida para tu marca, o Reels B-roll de tu producto y espacio.',
+        bullets: [
+          'AI Twin con tu propia voz e imagen sin volver a grabarte cada mes.',
+          'Avatar fotorrealista diseñado a la medida si prefieres no mostrar tu cara.',
+          'Opción B-roll de producto o proceso con edición dinámica y textos grandes.',
+        ],
+        color: 'coral',
+      },
+      {
+        badge: 'Motor 02 · Carruseles que venden',
+        title: 'Carruseles claros que resuelven dudas antes de que te escriban',
+        text: 'Diseñamos carruseles educativos con el vocabulario real de tu giro en México para que tus prospectos guarden el contenido y te escriban directo por WhatsApp.',
         bullets: [
           'Primera lámina con gancho directo para detener el scroll.',
-          'Explicación sencilla con el vocabulario real de tu giro en México.',
-          'Cierre pensado para que te manden mensaje directo o WhatsApp.',
+          'Explicación clara sin texto saturado.',
+          'Cierre pensado para generar mensajes por DM o WhatsApp.',
         ],
         color: 'lemon',
       },
       {
-        badge: 'Motor 02 · Diseño con IA a la medida',
-        title: 'Imagen de marca impecable sin caer en fotos falsas de banco de imágenes',
-        text: 'Generamos y editamos piezas gráficas con apoyo de inteligencia artificial siguiendo la paleta de colores de tu negocio, para que tu perfil se vea moderno, propio y 100 % coherente.',
+        badge: 'Motor 03 · Diseño con IA a la medida',
+        title: 'Imagen de marca impecable sin caer en fotos genéricas de banco',
+        text: 'Generamos y retocamos piezas gráficas con apoyo de IA siguiendo la paleta de tu negocio para que tu perfil se vea moderno, propio y coherente todo el mes.',
         bullets: [
-          'Cero fotos de archivo gringas que nadie se cree.',
-          'Composición visual adaptada a si tu negocio es serio (salud) o cálido (alimentos).',
+          'Cero fotos de archivo genéricas que nadie se cree.',
+          'Estilo visual adaptado a tu giro (salud, alimentos, servicios).',
           'Listo para publicar en feed e historias.',
         ],
         color: 'sky',
-      },
-      {
-        badge: 'Motor 03 · Reels de detalle (B-roll)',
-        title: 'Videos cortos donde el protagonista es tu producto o tu espacio, no tu cara',
-        text: 'Te mandamos una lista súper sencilla de tomas de 5 segundos: servir un platillo, abrir el consultorio en la mañana o mostrar el acabado de un trabajo. Nosotros le ponemos ritmo, textos grandes y edición profesional.',
-        bullets: [
-          'Lo graba cualquier persona de tu equipo en 15 minutos con el celular.',
-          'Nadie tiene que memorizar diálogos ni hablar frente al lente.',
-          'Funciona excelente en Reels porque va directo a lo visual.',
-        ],
-        color: 'coral',
       },
     ],
     whenToChooseTitle: '¿En qué giros funciona mejor el Plan B sin cámara en México?',
@@ -365,15 +365,15 @@ export const intentsMX: IntentLandingData[] = [
       },
       {
         q: '¿El Plan B sin cámara tiene el mismo precio que los paquetes normales?',
-        a: 'Exactamente el mismo: Esencial ($6,300 MXN/mes), Crecimiento ($9,450 MXN/mes) y Pro ($13,650 MXN/mes). Adaptamos los entregables para que todo el mes salga sin necesidad de videos hablados.',
+        a: 'Exactamente el mismo: Esencial ($6,300 MXN/mes), Crecimiento ($9,450 MXN/mes) y Pro ($13,650 MXN/mes). Adaptamos los Reels a tu gemelo digital (AI Twin), avatar fotorrealista de marca o B-roll con carruseles editoriales.',
       },
       {
         q: '¿Puedo combinar un mes sin cámara y otro mes con algún video hablado?',
-        a: 'Claro. Nuestro sistema es flexible: si un mes tú o alguien de tu equipo se anima a grabar un reel hablando a cuadro, te preparamos el guion; si al mes siguiente andas a tope de chamba, sacamos el mes con Plan B.',
+        a: 'Claro. Nuestro sistema es flexible: puedes usar AI Twin, avatar fotorrealista o B-roll, y cuando quieras combinarlo con videos grabados con tu celular.',
       },
       {
-        q: '¿Usan clones o avatares de IA fingiendo ser doctores o clientes?',
-        a: 'Nunca. Tenemos prohibido inventar testimonios o usar caras falsas hechas con IA porque destruyen la confianza de tus clientes. Usamos IA para diseño gráfico, fondos editoriales e ilustraciones honestas de marca.',
+        q: '¿Cómo funcionan el gemelo digital (AI Twin) y el avatar fotorrealista?',
+        a: 'Con el AI Twin entrenamos tu gemelo digital con un solo video corto para producir Reels hablados cada mes sin volverte a grabar. Si prefieres no aparecer a cuadro, diseñamos un avatar fotorrealista a la medida como presentador de tu marca (siempre con información real y sin inventar testimonios falsos).',
       },
       {
         q: '¿Qué necesito entregarles para arrancar con el Plan B?',

@@ -264,18 +264,18 @@ export const intentsES: IntentLandingData[] = [
     slug: 'contenido-redes-sin-salir-en-camara',
     routeKey: 'intencionSinCamara',
     shortTitle: 'Contenido para redes sin salir en cámara',
-    cardSummary: 'Nuestro Plan B para negocios en España donde nadie quiere hablar a cámara: carruseles educativos, vídeo de detalle (B-roll) y diseño con IA.',
+    cardSummary: 'Nuestro Plan B para negocios en España sin grabar cada mes: Reels con tu gemelo digital (AI Twin), avatar fotorrealista a medida, B-roll y carruseles con IA.',
     metaTitle: 'Contenido para Redes Sociales Sin Salir en Cámara | España',
     metaDescription:
-      '¿No quieres aparecer en vídeo ni bailar en Reels? Así creamos el contenido mensual de tu negocio en España con carruseles, B-roll de móvil y gráficos con IA.',
-    eyebrow: 'Plan B sin rostro · España',
-    h1: 'Contenido para redes sociales sin salir en cámara: el sistema para publicar sin exponer tu cara',
+      '¿No quieres grabarte cada mes? Creamos tus Reels y posts en España con tu gemelo digital (AI Twin), avatar fotorrealista de marca, B-roll y carruseles con IA.',
+    eyebrow: 'Plan B sin cámara · España',
+    h1: 'Contenido para redes sociales sin salir en cámara: publica cada mes sin grabarte',
     intro:
-      'No hace falta señalarse cartelitos en el aire ni hablar frente al móvil si te incomoda la cámara. Muchos dueños de clínicas, despachos, restaurantes e inmobiliarias en España retrasan sus redes porque creen que hoy solo funciona salir hablando en primer plano. Con nuestro Plan B sin cámara mantenemos tu cuenta activa y profesional cada mes combinando carruseles de alto guardado, vídeos cortos de manos o producto (B-roll), locución opcional y gráficos editoriales con IA.',
+      'No hace falta ponerse frente al móvil cada semana si te incomoda la cámara o no tienes tiempo. Con nuestro Plan B sin cámara mantenemos tus redes activas combinando Reels hablados con tu gemelo digital (AI Twin) o con un avatar fotorrealista creado a medida para tu marca, además de Reels B-roll de producto y carruseles editoriales con IA.',
     comparisonTable: {
-      title: 'Cómo sustituimos cada formato con cámara por uno sin rostro',
-      subtitle: 'Misma constancia mensual y mismos objetivos de negocio, sin que nadie tenga que hablar a cámara:',
-      headers: ['Objetivo de la pieza', 'Versión clásica (hablando a cámara)', 'Versión Plan B sin cámara (lo que hacemos)', 'Qué aportas tú'],
+      title: 'Cómo sustituimos cada formato con cámara por el Plan B',
+      subtitle: 'Misma constancia mensual y mismos objetivos de negocio, sin tener que grabarte cada mes:',
+      headers: ['Objetivo de la pieza', 'Versión clásica (grabándote)', 'Versión Plan B sin cámara (lo que hacemos)', 'Qué aportas tú'],
       rows: [
         {
           label: 'Resolver dudas de compra o precio',
@@ -285,9 +285,9 @@ export const intentsES: IntentLandingData[] = [
         },
         {
           label: 'Conseguir alcance orgánico en Reels',
-          col1: 'Vídeo hablado en vertical con subtítulos',
-          col2: 'Reel dinámico de manos trabajando, detalle del local o antes/después con rótulos en pantalla',
-          col3: '5 clips de 6 segundos del espacio o producto con el móvil (sin caras).',
+          col1: 'Vídeo grabado cada mes frente al móvil',
+          col2: 'Reel hablado con tu gemelo digital (AI Twin) o avatar fotorrealista de marca, o Reel B-roll de manos y producto con subtítulos dinámicos',
+          col3: 'Cero grabación mensual (o 5 clips cortos de tu local/producto si prefieres B-roll).',
         },
         {
           label: 'Diferenciar tu marca de la competencia',
@@ -306,37 +306,37 @@ export const intentsES: IntentLandingData[] = [
     pillarsTitle: 'Las 3 piezas clave de nuestro Plan B sin cámara',
     pillars: [
       {
-        badge: 'Pieza 01 · Carruseles de guardado',
-        title: 'Carruseles que explican tu servicio mejor que un folleto',
-        text: 'En Instagram, los carruseles de varias diapositivas tienen una tasa altísima de guardados y envíos por privado. Transformamos las preguntas reales de tus clientes en guías visuales limpias y directas.',
+        badge: 'Pieza 01 · Reels con AI Twin o Avatar',
+        title: 'Reels hablados sin ponerte frente a la cámara cada mes',
+        text: 'Puedes elegir entre crear tu gemelo digital (AI Twin) a partir de una sola muestra o diseñar un avatar fotorrealista propio para tu marca, además de combinarlo con Reels B-roll de manos, local y producto.',
         bullets: [
-          'Portada con titular potente para frenar el dedo al hacer scroll.',
+          'AI Twin entrenado con tu imagen y voz para publicar Reels sin grabar.',
+          'Avatar fotorrealista creado a medida si prefieres no mostrar tu rostro.',
+          'Opción B-roll de producto/local con subtítulos dinámicos y ritmo editorial.',
+        ],
+        color: 'coral',
+      },
+      {
+        badge: 'Pieza 02 · Carruseles de guardado',
+        title: 'Carruseles que explican tu servicio mejor que un folleto',
+        text: 'Transformamos las preguntas reales de tus clientes en guías visuales limpias y directas pensadas para generar guardados y mensajes por privado.',
+        bullets: [
+          'Portada con titular potente para frenar el scroll.',
           'Desarrollo claro sin párrafos eternos ni letra diminuta.',
-          'Última diapositiva orientada a que te escriban por privado o WhatsApp.',
+          'Última diapositiva orientada a que te escriban por WhatsApp.',
         ],
         color: 'lemon',
       },
       {
-        badge: 'Pieza 02 · Gráficos editoriales con IA',
-        title: 'Dirección de arte propia (nada de bancos de imágenes vistos mil veces)',
-        text: 'Usamos herramientas de IA entrenadas sobre la paleta y el estilo de tu marca, retocadas manualmente por nuestro equipo de diseño para crear portadas, fondos y escenas conceptuales únicas.',
+        badge: 'Pieza 03 · Gráficos editoriales con IA',
+        title: 'Dirección de arte propia (nada de bancos de imágenes genéricos)',
+        text: 'Creamos portadas, fondos y composiciones visuales con IA retocadas por nuestro equipo de diseño siguiendo la paleta y el tono de tu negocio.',
         bullets: [
-          'Coherencia visual mes tras mes en tu cuadrícula de perfil.',
-          'Sin fotos de stock estadounidenses con sonrisas falsas.',
-          'Adaptado al tono de tu sector (sobrio en salud, vibrante en hostelería).',
+          'Coherencia visual mes tras mes en toda tu cuadrícula.',
+          'Sin fotos de stock artificiales ni plantillas repetidas.',
+          'Adaptado al sector (sobrio en salud/legal, vibrante en hostelería).',
         ],
         color: 'sky',
-      },
-      {
-        badge: 'Pieza 03 · Vídeo B-roll sin caras',
-        title: 'Reels de manos, procesos y detalles grabados en 15 minutos',
-        text: 'Para no renunciar al alcance de los Reels, te enviamos una lista de planos donde solo se ven manos preparando un plato, una sala lista antes de abrir o un detalle técnico, y nosotros montamos la historia con ritmo y rótulos.',
-        bullets: [
-          'Planos facilísimos de grabar con el móvil sin que nadie hable.',
-          'Montaje con tipografía animada que guía la lectura en silencio.',
-          'Opción de añadir voz en off profesional si algún mes lo deseas.',
-        ],
-        color: 'coral',
       },
     ],
     whenToChooseTitle: '¿Para quién funciona especialmente bien el Plan B sin cámara?',
@@ -365,15 +365,15 @@ export const intentsES: IntentLandingData[] = [
       },
       {
         q: '¿El Plan B sin cámara cuesta más caro que los paquetes normales?',
-        a: 'No. Se aplica sobre nuestros mismos paquetes (Esencial 300 €/mes, Crecimiento 450 €/mes y Pro 650 €/mes), sustituyendo los reels hablados por reels de recurso visual, animaciones tipográficas y carruseles con IA.',
+        a: 'No. Se aplica sobre nuestros mismos paquetes (Esencial 300 €/mes, Crecimiento 450 €/mes y Pro 650 €/mes), adaptando los Reels a tu gemelo digital (AI Twin), avatar fotorrealista de marca o B-roll con carruseles editoriales.',
       },
       {
         q: '¿Puedo empezar con el Plan B sin cámara y más adelante animarme a grabar algún vídeo hablado?',
-        a: 'Por supuesto. Muchos clientes empiezan los dos primeros meses sin salir en cámara y, cuando ven el sistema en marcha, se animan a grabar un reel corto al mes.',
+        a: 'Por supuesto. Muchos clientes empiezan con AI Twin, avatar fotorrealista o B-roll y, cuando ven el sistema en marcha, combinan también vídeos grabados con el móvil.',
       },
       {
-        q: '¿Usáis avatares hablantes generados con IA para sustituir a personas?',
-        a: 'No. Los avatares sintéticos que imitan a personas hablando generan rechazo y restan credibilidad a una pyme real. Usamos IA para diseño gráfico, fondos editoriales e ilustración de marca, nunca para fingir testimonios o médicos falsos.',
+        q: '¿Cómo funcionan el gemelo digital (AI Twin) y el avatar fotorrealista?',
+        a: 'Con el AI Twin entrenamos tu réplica digital a partir de un único vídeo corto para generar Reels hablados sin tener que grabarte cada mes. Si prefieres no mostrar tu cara, creamos un avatar fotorrealista a medida como portavoz visual de tu marca (siempre con guiones reales y sin fingir reseñas falsas).',
       },
       {
         q: '¿Qué material os tengo que mandar si elijo no grabar absolutamente nada?',
