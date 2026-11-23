@@ -23,10 +23,9 @@ export const ui: UiCopy = {
     nav: [
       { label: 'Servicios', route: 'servicios' },
       { label: 'Precios', route: 'precios' },
+      { label: 'Casos', route: 'comoTrabajamos' },
       { label: 'Cómo funciona', route: 'comoFunciona' },
-      { label: 'Recursos', route: 'blog' },
       { label: 'Nosotros', route: 'sobreNosotros' },
-      { label: 'Contacto', route: 'contacto' },
     ],
   },
   whatsapp: {

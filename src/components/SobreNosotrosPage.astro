@@ -3,10 +3,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Card from '@/components/Card.astro';
 import Photo from '@/components/Photo.astro';
-import Sticker from '@/components/Sticker.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallButton from '@/components/BookCallButton.astro';
-import StripeBand from '@/components/StripeBand.astro';
 import { getCorePages, getUi } from '@/content';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { pathFor } from '@/lib/routes';
@@ -72,20 +70,10 @@ const foundersJsonLd = [
             placement="hero"
             size="lg"
           />
-          <BookCallButton
-            country={country}
-            page="sobre-nosotros"
-            placement="hero"
-            variant="light"
-            size="lg"
-          />
         </div>
       </div>
 
-      <div class="relative mx-auto w-full max-w-lg lg:max-w-none">
-        <Sticker color="coral" rotate={6} class="absolute -top-3 right-4 z-10 text-xs!">
-          ESPAÑA ↔ MÉXICO
-        </Sticker>
+      <div class="mx-auto w-full max-w-lg lg:max-w-none">
         <div class="overflow-hidden rounded-[32px] border-2 border-ink shadow-[10px_12px_0_0_var(--coral)]">
           <Photo
             src={equipoEscritorio}
@@ -99,8 +87,6 @@ const foundersJsonLd = [
       </div>
     </div>
   </section>
-
-  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
 
   <!-- Daniela (Fundadora) y el estudio de producción -->
   <section class="container-site py-16 md:py-24">

@@ -1,44 +1,30 @@
 ---
 /**
- * Estructura completa de la Home (12 bloques según brief):
- * 1. Header · 2. Hero · 3. Cinta en movimiento · 4. Problema · 5. Cómo funciona ·
- * 6. Servicios · 7. Paquetes + Plan B · 8. Prueba (guion + calendario de muestra) ·
- * 9. Quiénes somos · 10. FAQ · 11. CTA final (mini-auditoría + WhatsApp) · 12. Footer
+ * Home focalizzata (7 blocchi essenziali):
+ * 1. Hero + Marquee · 2. Antes / Después del Feed · 3. Cómo funciona (3 pasos) ·
+ * 4. Casos reales (4 muestras) · 5. Paquetes + Plan B compacto ·
+ * 6. Sectores (enlaces limpios) + Quiénes somos · 7. FAQ esenciales (5) + CTA final
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/Hero.astro';
 import Marquee from '@/components/Marquee.astro';
-import Card from '@/components/Card.astro';
 import Button from '@/components/Button.astro';
 import StepCard from '@/components/StepCard.astro';
 import PackageCard from '@/components/PackageCard.astro';
-import NicheCard from '@/components/NicheCard.astro';
 import FAQ from '@/components/FAQ.astro';
-import StripeBand from '@/components/StripeBand.astro';
-import WavyLine from '@/components/WavyLine.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallButton from '@/components/BookCallButton.astro';
-import BookCallCard from '@/components/BookCallCard.astro';
-import PhoneReelMockup from '@/components/PhoneReelMockup.astro';
-import CarouselPreviewMockup from '@/components/CarouselPreviewMockup.astro';
 import FeedBeforeAfter from '@/components/FeedBeforeAfter.astro';
 import Photo from '@/components/Photo.astro';
-import AuditForm from '@/components/AuditForm.astro';
 import { getUi } from '@/content';
 import { getNichesByCountry } from '@/content/niches';
 import { PACKAGES } from '@/content/pricing';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
-import { NICHE_PHOTOS } from '@/lib/niche-photos';
 import { linkTo } from '@/lib/routes';
 import { faqPageJsonLd, serviceJsonLd } from '@/lib/seo';
 import type { ImageMetadata } from 'astro';
 
-import equipoEscritorio from '@/assets/photos/feediasocial-equipo-escritorio.webp';
-import mesaTrabajo from '@/assets/photos/feediasocial-mesa-trabajo-pantone.webp';
-import estudioEdicion from '@/assets/photos/feediasocial-estudio-edicion.webp';
 import fundadoraDaniela from '@/assets/photos/feediasocial-fundadora-daniela.webp';
-import resultadosPorton from '@/assets/photos/feediasocial-resultados-porton-maya.webp';
-import resultadosCedres from '@/assets/photos/feediasocial-resultados-cedres.webp';
 import casoCopimax from '@/assets/photos/feediasocial-caso-copimax.webp';
 import casoDolorfin from '@/assets/photos/feediasocial-caso-dolorfin-clinica.webp';
 import casoMudra from '@/assets/photos/feediasocial-caso-mudra-pilates.webp';
@@ -53,6 +39,7 @@ const { country, heroImage } = Astro.props;
 const ui = getUi(country);
 const niches = getNichesByCountry(country);
 const path = COUNTRIES[country].basePath;
+const homeFaqs = ui.faqSection.items.slice(0, 5);
 ---
 
 <BaseLayout
@@ -65,7 +52,7 @@ const path = COUNTRIES[country].basePath;
       country,
       serviceType: 'Social Media Content Agency',
     }),
-    faqPageJsonLd(ui.faqSection.items),
+    faqPageJsonLd(homeFaqs),
   ]}
   seo={{
     title: ui.meta.homeTitle,
@@ -76,7 +63,7 @@ const path = COUNTRIES[country].basePath;
     xDefault: true,
   }}
 >
-  <!-- 2. Hero -->
+  <!-- 1. Hero + Marquee -->
   <Hero
     copy={ui.hero}
     country={country}
@@ -87,36 +74,12 @@ const path = COUNTRIES[country].basePath;
     image={heroImage}
   />
 
-  <!-- 3. Cinta con texto en movimiento -->
   <Marquee items={ui.marquee} label={ui.a11y.marqueePaused} tone="ink" />
 
-  <!-- 4. Problema -->
-  <section class="container-site py-16 md:py-24">
-    <div class="max-w-3xl space-y-4">
-      <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase">
-        {ui.problem.eyebrow}
-      </p>
-      <h2 class="text-display-lg">{ui.problem.title}</h2>
-    </div>
-    <div class="mt-10 grid gap-6 md:grid-cols-3">
-      {
-        ui.problem.points.map((pt, idx) => (
-          <Card color={idx === 1 ? 'sky' : 'cream-deep'} bordered class="flex flex-col gap-3">
-            <span class="font-display text-4xl text-coral-deep" aria-hidden="true">0{idx + 1}</span>
-            <h3 class="text-2xl">{pt.title}</h3>
-            <p class="text-ink-soft">{pt.text}</p>
-          </Card>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- 4b. Comparador visual Antes / Después del Feed -->
+  <!-- 2. Problema → Solución: Comparador visual Antes / Después del Feed -->
   <FeedBeforeAfter country={country} />
 
-  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
-
-  <!-- 5. Cómo funciona -->
+  <!-- 3. Cómo funciona (3 pasos limpios) -->
   <section class="theme-dark py-16 md:py-24">
     <div class="container-site">
       <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
@@ -144,77 +107,53 @@ const path = COUNTRIES[country].basePath;
           ))
         }
       </ol>
-
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
-        <div class="overflow-hidden rounded-[28px] border-2 border-cream shadow-[6px_6px_0_0_var(--coral)]">
-          <Photo src={equipoEscritorio} alt={ui.steps[0].title} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
-        </div>
-        <div class="overflow-hidden rounded-[28px] border-2 border-cream shadow-[6px_6px_0_0_var(--lemon)]">
-          <Photo src={mesaTrabajo} alt={ui.steps[1].title} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
-        </div>
-        <div class="overflow-hidden rounded-[28px] border-2 border-cream shadow-[6px_6px_0_0_var(--sky)]">
-          <Photo src={estudioEdicion} alt={ui.steps[2].title} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- 6. Servicios -->
+  <!-- 4. Casos reales (4 muestras concretas + enlace a Casos y guiones) -->
   <section class="container-site py-16 md:py-24">
     <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
       <div class="max-w-3xl space-y-4">
-        <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
-          {ui.servicesSection.eyebrow}
+        <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase">
+          {ui.proofSection.eyebrow}
         </p>
-        <h2 class="text-display-lg">{ui.servicesSection.title}</h2>
+        <h2 class="text-display-lg">{ui.proofSection.title}</h2>
+        <p class="text-lg text-ink-soft">{ui.proofSection.subtitle}</p>
       </div>
-      <Button href={linkTo('servicios', country)} variant="outline" size="md">
-        {ui.servicesSection.ctaMore}
+      <Button href={linkTo('comoTrabajamos', country)} variant="outline">
+        {ui.proofSection.ctaMore}
       </Button>
     </div>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-3">
-      {
-        ui.services.map((srv) => (
-          <Card color={srv.color} bordered class="flex flex-col gap-4">
-            <h3 class="text-3xl">{srv.title}</h3>
-            <p>{srv.text}</p>
-          </Card>
-        ))
-      }
+    <div class="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoCopimax} alt="Perfil de Instagram de Copimax con reels de 1,2 M y 12,4 M de reproducciones" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2.5 text-xs font-bold text-ink">Copimax · Reels orgánicos con guion</p>
+      </div>
+      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoDolorfin} alt="Perfil de Instagram de clínicas Dolorfin Quiroprácticos (22 sucursales)" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2.5 text-xs font-bold text-ink">Clínicas Dolorfin · Divulgación sanitaria</p>
+      </div>
+      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoMudra} alt="Perfil de Instagram de estudio Mudra Pilates Reformer" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2.5 text-xs font-bold text-ink">Mudra Pilates · Estética editorial y reservas</p>
+      </div>
+      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoCedres} alt="Perfil de Instagram de Cedres con serie de Reels y 19,1 mil seguidores" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2.5 text-xs font-bold text-ink">Cedres · Serie de Reels con identidad</p>
+      </div>
     </div>
   </section>
 
-  <!-- 6b. Sectores / Giros (enlazado interno a landings de nicho) -->
-  <section class="container-site pb-16 md:pb-24">
-    <div class="max-w-3xl space-y-4">
-      <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase">
-        {ui.nichesSection.eyebrow}
-      </p>
-      <h2 class="text-display-lg">{ui.nichesSection.title}</h2>
-      <p class="text-lg text-ink-soft">{ui.nichesSection.subtitle}</p>
-    </div>
-
-    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {
-        niches.map((niche, idx) => (
-          <NicheCard
-            title={niche.shortTitle}
-            text={niche.cardSummary}
-            href={linkTo(niche.routeKey, country)}
-            linkLabel={ui.nichesSection.cardCta}
-            image={NICHE_PHOTOS[niche.photoKey]}
-            imageAlt={niche.photoAlt}
-            color={idx % 3 === 0 ? 'cream-deep' : idx % 3 === 1 ? 'lemon' : 'sky'}
-          />
-        ))
-      }
-    </div>
-  </section>
-
-  <WavyLine text={ui.marquee.join(' · ')} />
-
-  <!-- 7. Paquetes con precio del país + Llamada 15 min + Plan B sin cámara -->
+  <!-- 5. Paquetes con precio del país + Plan B compacto -->
   <section id="paquetes" class="container-site py-16 md:py-24">
     <div class="max-w-3xl space-y-4">
       <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase">
@@ -233,163 +172,44 @@ const path = COUNTRIES[country].basePath;
       <p>• {ui.pricing.taxNote}</p>
     </div>
 
-    <!-- Banner de llamada de 15 min para resolver dudas de paquetes -->
-    <div class="mt-10">
-      <BookCallCard
-        country={country}
-        page="home"
-        placement="pricing-banner"
-        mode="banner"
-        waMessage={ui.whatsapp.defaultMessage}
-      />
-    </div>
-
-    <!-- Plan B sin cámara con Mockup interactivo de Carrusel 4:5 -->
-    <div class="mt-10 grid items-center gap-8 rounded-[32px] border-2 border-ink bg-sky p-6 shadow-[8px_8px_0_0_var(--ink)] lg:grid-cols-[1.1fr_1fr] md:p-10">
-      <div class="space-y-4">
-        <h3 class="text-3xl md:text-4xl">{ui.pricing.planBTitle}</h3>
-        <p class="text-ink-soft">{ui.pricing.planBText}</p>
-        <div class="flex flex-wrap gap-3">
-          <WhatsAppButton
-            message={ui.pricing.planBWaMessage}
-            label={ui.pricing.planBCta}
-            a11yLabel={ui.a11y.openWhatsApp}
-            country={country}
-            page="home"
-            placement="plan-b"
-            variant="dark"
-          />
-          <Button href={linkTo('intencionSinCamara', country)} variant="outline">
-            {ui.pricing.planBGuideCta}
-          </Button>
-        </div>
+    <!-- Plan B sin cámara compacto -->
+    <div class="mt-10 flex flex-col items-start justify-between gap-5 rounded-[28px] border-2 border-ink bg-sky p-6 shadow-[6px_6px_0_0_var(--ink)] md:flex-row md:items-center md:p-8">
+      <div class="max-w-2xl space-y-1.5">
+        <h3 class="text-2xl md:text-3xl">{ui.pricing.planBTitle}</h3>
+        <p class="text-sm text-ink-soft md:text-base">{ui.pricing.planBText}</p>
       </div>
-      <CarouselPreviewMockup country={country} compact />
-    </div>
-  </section>
-
-  <!-- 8. Prueba: ejemplos reales de guiones (Mockup 9:16) y calendarios propios -->
-  <section class="container-site py-16 md:py-24">
-    <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-      <div class="max-w-3xl space-y-4">
-        <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase">
-          {ui.proofSection.eyebrow}
-        </p>
-        <h2 class="text-display-lg">{ui.proofSection.title}</h2>
-        <p class="text-lg text-ink-soft">{ui.proofSection.subtitle}</p>
-        <p class="inline-block rounded-xl border-2 border-dashed border-ink bg-cream-deep px-3 py-1.5 text-xs font-bold">
-          {ui.proofSection.pendingBadge}
-        </p>
-      </div>
-      <Button href={linkTo('comoTrabajamos', country)} variant="outline">
-        {ui.proofSection.ctaMore}
+      <Button href={linkTo('intencionSinCamara', country)} variant="dark" size="md" class="shrink-0">
+        {ui.pricing.planBGuideCta}
       </Button>
     </div>
+  </section>
 
-    <!-- Galería real de Antes/Después y cuentas gestionadas -->
-    <div class="mt-10 grid gap-6 lg:grid-cols-2">
-      <div class="overflow-hidden rounded-[28px] border-2 border-ink bg-cream-deep p-4 shadow-[6px_6px_0_0_var(--ink)]">
-        <div class="overflow-hidden rounded-[20px] border-2 border-ink">
-          <Photo
-            src={resultadosPorton}
-            alt="Antes y después real de cuenta de restaurante gestionada por Feediasocial: Portón Maya"
-            aspect="9/16"
-            widths={[360, 540, 720]}
-            sizes="(min-width: 1024px) 44vw, 92vw"
-          />
-        </div>
-        <p class="mt-3 text-sm font-bold text-ink">
-          Restauración · Portón Maya: orden visual en el feed, historias destacadas y reels de cocina real.
-        </p>
-      </div>
-      <div class="overflow-hidden rounded-[28px] border-2 border-ink bg-cream-deep p-4 shadow-[6px_6px_0_0_var(--ink)]">
-        <div class="overflow-hidden rounded-[20px] border-2 border-ink">
-          <Photo
-            src={resultadosCedres}
-            alt="Antes y después real de cuenta gestionada por Feediasocial: de 1.455 a 19,1 mil seguidores con sistema de Reels"
-            aspect="9/16"
-            widths={[360, 540, 720]}
-            sizes="(min-width: 1024px) 44vw, 92vw"
-          />
-        </div>
-        <p class="mt-3 text-sm font-bold text-ink">
-          Marca personal · Cedres: portadas coherentes, serie fija de Reels y crecimiento orgánico sostenido.
-        </p>
-      </div>
+  <!-- 6. Sectores (enlaces compactos) + Quiénes somos -->
+  <section class="container-site pb-16 md:pb-20">
+    <div class="max-w-3xl space-y-3">
+      <p class="inline-block rounded-pill border-2 border-ink bg-cream-deep px-4 py-1 text-sm font-bold uppercase">
+        {ui.nichesSection.eyebrow}
+      </p>
+      <h2 class="text-display-md">{ui.nichesSection.title}</h2>
     </div>
 
-    <div class="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
-        <div class="overflow-hidden rounded-2xl border border-ink">
-          <Photo src={casoCopimax} alt="Perfil de Instagram de Copimax con reels de 1,2 M y 12,4 M de reproducciones" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
-        </div>
-        <p class="mt-2 text-xs font-bold text-ink">Copimax · Reels orgánicos con guion</p>
-      </div>
-      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
-        <div class="overflow-hidden rounded-2xl border border-ink">
-          <Photo src={casoDolorfin} alt="Perfil de Instagram de clínicas Dolorfin Quiroprácticos (22 sucursales)" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
-        </div>
-        <p class="mt-2 text-xs font-bold text-ink">Clínicas Dolorfin · Divulgación sanitaria</p>
-      </div>
-      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
-        <div class="overflow-hidden rounded-2xl border border-ink">
-          <Photo src={casoMudra} alt="Perfil de Instagram de estudio Mudra Pilates Reformer" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
-        </div>
-        <p class="mt-2 text-xs font-bold text-ink">Mudra Pilates · Estética editorial y reservas</p>
-      </div>
-      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
-        <div class="overflow-hidden rounded-2xl border border-ink">
-          <Photo src={casoCedres} alt="Perfil de Instagram de Cedres con serie de Reels y 19,1 mil seguidores" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
-        </div>
-        <p class="mt-2 text-xs font-bold text-ink">Cedres · Serie de Reels con identidad</p>
-      </div>
-    </div>
-
-    <div class="mt-10 grid items-start gap-8 lg:grid-cols-[1fr_1.1fr]">
-      <!-- Muestra de guion en formato Mockup de Smartphone 9:16 -->
-      <PhoneReelMockup
-        country={country}
-        badge={ui.proofSection.sampleScriptMeta}
-        duration="25 s"
-        title={ui.proofSection.sampleScriptTitle}
-        hook={ui.proofSection.sampleScriptHook}
-        shots={ui.proofSection.sampleScriptBody}
-        cta={ui.proofSection.sampleScriptCta}
-        accent="coral"
-      />
-
-      <!-- Muestra de calendario visual en Metricool -->
-      <Card color="cream-deep" bordered class="space-y-5">
-        <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink pb-3">
-          <h3 class="text-3xl">{ui.proofSection.sampleCalendarTitle}</h3>
-          <span class="rounded-pill border border-ink bg-lemon px-3 py-1 text-xs font-bold uppercase">
-            Metricool · 4 piezas/sem
-          </span>
-        </div>
-        <ul class="space-y-3">
-          {
-            ui.proofSection.sampleCalendarItems.map((item) => (
-              <li class="flex flex-col gap-1 rounded-2xl border-2 border-ink bg-cream p-4 shadow-[3px_3px_0_0_var(--ink)] sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <span class:list={['inline-block rounded-pill border border-ink px-2.5 py-0.5 text-xs font-bold uppercase', item.color === 'coral' ? 'bg-coral' : item.color === 'lemon' ? 'bg-lemon' : 'bg-sky']}>
-                    {item.day} · {item.format}
-                  </span>
-                  <p class="mt-1.5 font-bold">{item.topic}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-        <div class="overflow-hidden rounded-[22px] border-2 border-ink">
-          <Photo src={mesaTrabajo} alt={ui.proofSection.sampleCalendarTitle} aspect="16/9" widths={[360, 640]} sizes="(min-width: 1024px) 45vw, 92vw" />
-        </div>
-      </Card>
+    <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        niches.map((niche) => (
+          <a
+            href={linkTo(niche.routeKey, country)}
+            class="group flex items-center justify-between gap-3 rounded-2xl border-2 border-ink bg-cream-deep px-5 py-4 text-ink no-underline shadow-[4px_4px_0_0_var(--ink)] transition-transform hover:-translate-y-0.5 hover:bg-lemon"
+          >
+            <span class="font-display text-lg uppercase">{niche.shortTitle}</span>
+            <span class="text-sm font-extrabold text-coral-deep transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+          </a>
+        ))
+      }
     </div>
   </section>
 
-  <!-- 9. Quiénes somos -->
   <section class="theme-dark py-16 md:py-24">
-    <div class="container-site grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+    <div class="container-site grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
       <div class="space-y-5">
         <p class="inline-block rounded-pill border-2 border-cream bg-maroon px-4 py-1 text-sm font-bold uppercase text-lemon">
           {ui.aboutTeaser.eyebrow}
@@ -406,35 +226,20 @@ const path = COUNTRIES[country].basePath;
             ))
           }
         </ul>
-        <div class="flex flex-wrap gap-3 pt-2">
+        <div class="pt-2">
           <Button href={linkTo('sobreNosotros', country)} variant="lemon" size="lg">
             {ui.aboutTeaser.cta}
           </Button>
-          <BookCallButton country={country} page="home" placement="about-teaser" variant="light" size="lg" />
         </div>
       </div>
 
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div class="overflow-hidden rounded-[28px] border-2 border-cream shadow-[8px_8px_0_0_var(--coral)]">
-          <Photo src={fundadoraDaniela} alt={ui.aboutTeaser.founder1Placeholder} aspect="3/4" widths={[360, 540]} sizes="(min-width: 1024px) 22vw, 46vw" />
-        </div>
-        <div class="overflow-hidden rounded-[28px] border-2 border-cream bg-ink shadow-[8px_8px_0_0_var(--lemon)]">
-          <video
-            src="/videos/feediasocial-estudio-hero.mp4"
-            controls
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            aria-label={ui.aboutTeaser.founder2Placeholder}
-            class="aspect-[3/4] h-full w-full object-cover"
-          ></video>
-        </div>
+      <div class="mx-auto w-full max-w-sm overflow-hidden rounded-[28px] border-2 border-cream shadow-[8px_8px_0_0_var(--coral)]">
+        <Photo src={fundadoraDaniela} alt={ui.aboutTeaser.founder1Placeholder} aspect="3/4" widths={[360, 540]} sizes="(min-width: 1024px) 28vw, 85vw" />
       </div>
     </div>
   </section>
 
-  <!-- 10. FAQ localizada -->
+  <!-- 7. FAQ esenciales (5) + CTA final limpio -->
   <section class="container-site py-16 md:py-24">
     <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
       <div class="space-y-4">
@@ -443,37 +248,35 @@ const path = COUNTRIES[country].basePath;
         </p>
         <h2 class="text-display-lg">{ui.faqSection.title}</h2>
       </div>
-      <FAQ items={ui.faqSection.items} />
+      <FAQ items={homeFaqs} />
     </div>
   </section>
 
-  <!-- 11. CTA final: mini-auditoría gratuita (formulario + WhatsApp + Llamada 15 min) -->
   <section id="mini-auditoria" class="container-site pb-20">
-    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream shadow-[10px_10px_0_0_var(--ink)] md:p-10 lg:grid-cols-[1fr_1.15fr]">
-      <div class="space-y-5">
+    <div class="flex flex-col items-start justify-between gap-8 rounded-[36px] border-2 border-ink bg-maroon p-8 text-cream shadow-[10px_10px_0_0_var(--ink)] lg:flex-row lg:items-center md:p-12">
+      <div class="max-w-2xl space-y-4">
         <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
         <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
-        <div class="flex flex-wrap gap-3">
-          <WhatsAppButton
-            message={ui.finalCta.waMessage}
-            label={ui.finalCta.cta}
-            a11yLabel={ui.a11y.openWhatsApp}
-            country={country}
-            page="home"
-            placement="final-cta"
-            variant="lemon"
-            size="lg"
-          />
-          <BookCallButton
-            country={country}
-            page="home"
-            placement="final-cta"
-            variant="light"
-            size="lg"
-          />
-        </div>
       </div>
-      <AuditForm country={country} page="home" />
+      <div class="flex flex-wrap gap-3 shrink-0">
+        <WhatsAppButton
+          message={ui.finalCta.waMessage}
+          label={ui.finalCta.cta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page="home"
+          placement="final-cta"
+          variant="lemon"
+          size="lg"
+        />
+        <BookCallButton
+          country={country}
+          page="home"
+          placement="final-cta"
+          variant="light"
+          size="lg"
+        />
+      </div>
     </div>
   </section>
 </BaseLayout>

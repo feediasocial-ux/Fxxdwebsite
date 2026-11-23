@@ -47,7 +47,7 @@ const optionsWithUrls = calc.options.map((opt) => ({
       <div class="space-y-6">
         <div class="space-y-3">
           <p class="text-sm font-bold uppercase tracking-wide text-ink">{calc.step1Label}</p>
-          <div class="grid gap-3" role="radiogroup" aria-label={calc.step1Label}>
+          <div class="grid gap-3" role="group" aria-label={calc.step1Label}>
             {
               optionsWithUrls.map((opt, idx) => (
                 <button
@@ -74,7 +74,7 @@ const optionsWithUrls = calc.options.map((opt) => ({
 
         <div class="space-y-3">
           <p class="text-sm font-bold uppercase tracking-wide text-ink">{calc.step2Label}</p>
-          <div class="grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label={calc.step2Label}>
+          <div class="grid gap-3 sm:grid-cols-2" role="group" aria-label={calc.step2Label}>
             <button
               type="button"
               data-mode-btn="camera"

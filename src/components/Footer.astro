@@ -13,6 +13,11 @@ interface Props {
 const { country, routeKey } = Astro.props;
 const ui = getUi(country);
 const nav = ui.header.nav.filter((n) => ROUTES[n.route].live);
+const extraNav = [
+  { label: 'Recursos', route: 'blog' as RouteKey },
+  { label: 'Contacto', route: 'contacto' as RouteKey },
+].filter((n) => ROUTES[n.route].live && !nav.some((item) => item.route === n.route));
+const footerNav = [...nav, ...extraNav];
 const legal = ui.footer.legal.filter((l) => ROUTES[l.route].live);
 const year = new Date().getFullYear();
 ---
@@ -27,10 +32,10 @@ const year = new Date().getFullYear();
 
     <div class="space-y-4">
       {
-        nav.length > 0 && (
+        footerNav.length > 0 && (
           <nav aria-label={ui.a11y.mainNav}>
             <ul class="space-y-2 font-bold">
-              {nav.map((n) => (
+              {footerNav.map((n) => (
                 <li>
                   <a href={linkTo(n.route, country)} class="underline underline-offset-4 hover:text-lemon">
                     {n.label}

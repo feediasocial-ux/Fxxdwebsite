@@ -4,19 +4,13 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import PackageCard from '@/components/PackageCard.astro';
 import Card from '@/components/Card.astro';
 import FAQ from '@/components/FAQ.astro';
-import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallCard from '@/components/BookCallCard.astro';
-import Photo from '@/components/Photo.astro';
-import StripeBand from '@/components/StripeBand.astro';
 import RoiCalculator from '@/components/RoiCalculator.astro';
-import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getCorePages, getUi } from '@/content';
 import { PACKAGES } from '@/content/pricing';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { pathFor } from '@/lib/routes';
 import { breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd } from '@/lib/seo';
-
-import sinCamara from '@/assets/photos/sin-camara.jpg';
 
 interface Props {
   country: CountryKey;
@@ -54,7 +48,7 @@ const crumbs = [
 >
   <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
 
-  <section id="paquetes" class="container-site pt-6 pb-16 md:pt-10 md:pb-24">
+  <section id="paquetes" class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
     <div class="max-w-3xl space-y-4">
       <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
         {copy.eyebrow}
@@ -71,22 +65,10 @@ const crumbs = [
       <p>• {ui.pricing.adsNote}</p>
       <p>• {ui.pricing.taxNote}</p>
     </div>
-
-    <div class="mt-10">
-      <BookCallCard
-        country={country}
-        page="precios"
-        placement="below-packages"
-        mode="banner"
-        waMessage={ui.whatsapp.defaultMessage}
-      />
-    </div>
   </section>
 
-  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
-
   <!-- Tabla comparativa detallada (elemento único de la página) -->
-  <section class="container-site py-16 md:py-24">
+  <section class="container-site py-12 md:py-20">
     <h2 class="text-display-lg">{copy.comparisonTitle}</h2>
     <div class="mt-8 overflow-x-auto rounded-[28px] border-2 border-ink bg-cream-deep">
       <table class="w-full min-w-[640px] border-collapse text-left text-sm md:text-base">
@@ -117,9 +99,9 @@ const crumbs = [
   <!-- Calculadora interactiva de ahorro de tiempo y costes -->
   <RoiCalculator country={country} pageId="precios" />
 
-  <!-- Qué incluye siempre + Plan B sin cámara -->
+  <!-- Qué incluye siempre -->
   <section class="theme-dark py-16 md:py-24">
-    <div class="container-site space-y-12">
+    <div class="container-site space-y-10">
       <h2 class="text-display-lg text-cream">{copy.includedTitle}</h2>
       <div class="grid gap-6 md:grid-cols-3">
         {
@@ -131,35 +113,24 @@ const crumbs = [
           ))
         }
       </div>
-
-      <div class="grid items-center gap-8 rounded-[32px] border-2 border-cream bg-maroon p-6 text-cream md:grid-cols-[1.3fr_1fr] md:p-10">
-        <div class="space-y-4">
-          <h2 class="text-display-md text-cream">{ui.pricing.planBTitle}</h2>
-          <p class="text-cream/85">{ui.pricing.planBText}</p>
-          <WhatsAppButton
-            message={ui.pricing.planBWaMessage}
-            label={ui.pricing.planBCta}
-            a11yLabel={ui.a11y.openWhatsApp}
-            country={country}
-            page="precios"
-            placement="plan-b"
-            variant="lemon"
-          />
-        </div>
-        <div class="overflow-hidden rounded-[24px] border-2 border-cream">
-          <Photo src={sinCamara} alt={ui.pricing.planBTitle} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 38vw, 90vw" />
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- FAQ de precios -->
+  <!-- FAQ de precios + CTA cierre -->
   <section class="container-site py-16 md:py-24">
     <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
       <h2 class="text-display-lg">{copy.faqTitle}</h2>
       <FAQ items={copy.faqs} />
     </div>
-  </section>
 
-  <TopicClusterLinks country={country} currentPath={path} />
+    <div class="mt-14">
+      <BookCallCard
+        country={country}
+        page="precios"
+        placement="below-faq"
+        mode="banner"
+        waMessage={ui.whatsapp.defaultMessage}
+      />
+    </div>
+  </section>
 </BaseLayout>

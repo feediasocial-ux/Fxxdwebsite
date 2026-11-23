@@ -3,16 +3,9 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Button from '@/components/Button.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
-import BookCallButton from '@/components/BookCallButton.astro';
 import PhoneReelMockup from '@/components/PhoneReelMockup.astro';
-import CarouselPreviewMockup from '@/components/CarouselPreviewMockup.astro';
 import Photo from '@/components/Photo.astro';
-import Sticker from '@/components/Sticker.astro';
-import AuditForm from '@/components/AuditForm.astro';
-import StripeBand from '@/components/StripeBand.astro';
-import GeoKeyFacts from '@/components/GeoKeyFacts.astro';
 import { getPhase4, getUi } from '@/content';
-import { getNichesByCountry } from '@/content/niches';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { linkTo, pathFor } from '@/lib/routes';
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo';
@@ -33,12 +26,12 @@ interface Props {
 const { country } = Astro.props;
 const ui = getUi(country);
 const copy = getPhase4(country).comoTrabajamos;
-const niches = getNichesByCountry(country);
 const path = pathFor('comoTrabajamos', country)!;
 const crumbs = [
   { name: ui.countryName, path: COUNTRIES[country].basePath },
-  { name: 'Cómo trabajamos', path },
+  { name: 'Casos', path },
 ];
+const featuredScript = copy.scriptSamples[0];
 ---
 
 <BaseLayout
@@ -63,7 +56,7 @@ const crumbs = [
 >
   <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
 
-  <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
+  <section class="container-site pt-6 pb-14 md:pt-10 md:pb-16">
     <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
       <div class="space-y-5">
         <p class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
@@ -81,23 +74,13 @@ const crumbs = [
             placement="hero"
             size="lg"
           />
-          <BookCallButton
-            country={country}
-            page="como-trabajamos"
-            placement="hero"
-            variant="light"
-            size="lg"
-          />
-          <Button href={linkTo('comoFunciona', country)} variant="outline" size="md">
-            {ui.stepsSection.ctaMore}
+          <Button href={linkTo('precios', country)} variant="outline" size="lg">
+            {ui.hero.ctaSecondary}
           </Button>
         </div>
       </div>
 
-      <div class="relative grid grid-cols-2 gap-4 pt-4">
-        <Sticker color="lemon" rotate={-5} class="absolute -top-2 right-4 z-10 text-xs!">
-          {copy.honestyBanner.badge}
-        </Sticker>
+      <div class="grid grid-cols-2 gap-4">
         <div class="overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--coral)]">
           <Photo src={mesaTrabajo} alt={copy.samplesTitle} priority aspect="4/5" widths={[360, 540]} sizes="45vw" />
         </div>
@@ -106,23 +89,10 @@ const crumbs = [
         </div>
       </div>
     </div>
-
-    <!-- Aviso de honestidad y muestras verificables -->
-    <div class="mt-12 rounded-[28px] border-2 border-ink bg-cream-deep p-6 shadow-[6px_6px_0_0_var(--ink)] md:p-8">
-      <span class="inline-block rounded-pill border border-ink bg-lemon px-3 py-1 text-xs font-bold uppercase">
-        {copy.honestyBanner.badge}
-      </span>
-      <h2 class="mt-3 text-2xl md:text-3xl">{copy.honestyBanner.title}</h2>
-      <p class="mt-2 max-w-3xl text-ink-soft">{copy.honestyBanner.text}</p>
-    </div>
   </section>
 
-  <GeoKeyFacts country={country} />
-
-  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
-
   <!-- Casos reales: Antes / Después y cuentas trabajadas desde el estudio -->
-  <section class="container-site pt-16 md:pt-24">
+  <section class="container-site py-12 md:py-20">
     <div class="max-w-3xl space-y-3">
       <span class="inline-block rounded-pill border-2 border-ink bg-lemon px-3.5 py-1 text-xs font-bold uppercase">
         Portfolio real · Antes y después
@@ -202,114 +172,77 @@ const crumbs = [
     </div>
   </section>
 
-  <!-- 3 muestras reales de guiones palabra por palabra en formato Mockup 9:16 -->
-  <section class="container-site py-16 md:py-24">
-    <div class="max-w-3xl space-y-3">
-      <h2 class="text-display-lg">{copy.samplesTitle}</h2>
-      <p class="text-lg text-ink-soft">{copy.samplesSubtitle}</p>
-    </div>
+  <!-- Ejemplo de entregable: 1 guion real + calendario mensual -->
+  <section class="theme-dark py-16 md:py-24">
+    <div class="container-site space-y-12">
+      <div class="max-w-3xl space-y-3">
+        <h2 class="text-display-lg text-cream">{copy.samplesTitle}</h2>
+        <p class="text-lg text-cream/85">{copy.samplesSubtitle}</p>
+      </div>
 
-    <div class="mt-10 grid gap-8 lg:grid-cols-3">
-      {
-        copy.scriptSamples.map((s) => (
+      <div class="grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <div class="text-ink">
           <PhoneReelMockup
             country={country}
-            badge={s.nicheBadge}
-            duration={s.duration}
-            title={s.title}
-            hook={s.hook}
-            shots={s.body}
-            cta={s.cta}
-            shotNote={s.shotNote}
-            accent={s.color}
-          />
-        ))
-      }
-    </div>
-
-    <div class="mt-16">
-      <CarouselPreviewMockup country={country} />
-    </div>
-  </section>
-
-  <!-- Calendario mensual completo de muestra (4 semanas) -->
-  <section class="theme-dark py-16 md:py-24">
-    <div class="container-site space-y-10">
-      <div class="max-w-3xl space-y-3">
-        <h2 class="text-display-lg text-cream">{copy.calendarShowcaseTitle}</h2>
-        <p class="text-lg text-cream/85">{copy.calendarShowcaseSubtitle}</p>
-      </div>
-
-      <div class="grid gap-6 md:grid-cols-2">
-        {
-          copy.calendarWeeks.map((w) => (
-            <div class="rounded-[28px] border-2 border-cream bg-cream p-6 text-ink shadow-[8px_8px_0_0_var(--coral)] space-y-4">
-              <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-ink/20 pb-3">
-                <h3 class="text-2xl">{w.week}</h3>
-                <span class="text-xs font-bold uppercase text-coral-deep">{w.goal}</span>
-              </div>
-              <ul class="space-y-3">
-                {w.deliverables.map((d) => (
-                  <li class="rounded-2xl border border-ink bg-cream-deep p-3.5">
-                    <span class="inline-block rounded-pill border border-ink bg-lemon px-2.5 py-0.5 text-xs font-bold uppercase">
-                      {d.day} · {d.format}
-                    </span>
-                    <p class="mt-1.5 text-sm font-bold">{d.piece}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Enlaces a muestras específicas por nicho -->
-  <section class="container-site py-16">
-    <h2 class="text-display-md">Ver calendarios y guiones específicos por sector en {ui.countryName}</h2>
-    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        niches.map((n) => (
-          <a
-            href={pathFor(n.routeKey, country)!}
-            class="rounded-2xl border-2 border-ink bg-cream-deep p-5 font-bold text-ink no-underline shadow-[4px_4px_0_0_var(--ink)] transition-all hover:-translate-y-0.5 hover:bg-lemon"
-          >
-            <span class="font-display text-xl uppercase block">{n.shortTitle}</span>
-            <span class="mt-1 block text-xs text-ink-soft">Ver 3 ideas de reels + calendario →</span>
-          </a>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- CTA final -->
-  <section class="container-site pb-20">
-    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream shadow-[10px_10px_0_0_var(--ink)] md:p-10 lg:grid-cols-[1fr_1.15fr]">
-      <div class="space-y-5">
-        <h2 class="text-display-md text-cream">{copy.pilotCtaTitle}</h2>
-        <p class="text-lg text-cream/85">{copy.pilotCtaText}</p>
-        <div class="flex flex-wrap gap-3">
-          <WhatsAppButton
-            message={copy.waMessage}
-            label={copy.waCta}
-            a11yLabel={ui.a11y.openWhatsApp}
-            country={country}
-            page="como-trabajamos"
-            placement="final-cta"
-            variant="lemon"
-            size="lg"
-          />
-          <BookCallButton
-            country={country}
-            page="como-trabajamos"
-            placement="final-cta"
-            variant="light"
-            size="lg"
+            badge={featuredScript.nicheBadge}
+            duration={featuredScript.duration}
+            title={featuredScript.title}
+            hook={featuredScript.hook}
+            shots={featuredScript.body}
+            cta={featuredScript.cta}
+            shotNote={featuredScript.shotNote}
+            accent={featuredScript.color}
           />
         </div>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          {
+            copy.calendarWeeks.map((w) => (
+              <div class="space-y-3 rounded-[24px] border-2 border-cream bg-cream p-5 text-ink shadow-[6px_6px_0_0_var(--coral)]">
+                <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-ink/20 pb-2">
+                  <h3 class="text-xl">{w.week}</h3>
+                  <span class="text-[11px] font-bold uppercase text-coral-deep">{w.goal}</span>
+                </div>
+                <ul class="space-y-2.5">
+                  {w.deliverables.map((d) => (
+                    <li class="rounded-xl border border-ink bg-cream-deep p-3">
+                      <span class="inline-block rounded-pill border border-ink bg-lemon px-2 py-0.5 text-[10px] font-bold uppercase">
+                        {d.day} · {d.format}
+                      </span>
+                      <p class="mt-1 text-xs font-bold">{d.piece}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
       </div>
-      <AuditForm country={country} page="como-trabajamos" />
+    </div>
+  </section>
+
+  <!-- CTA final limpio -->
+  <section class="container-site py-16 md:py-20">
+    <div class="flex flex-col items-start justify-between gap-6 rounded-[32px] border-2 border-ink bg-maroon p-8 text-cream shadow-[8px_8px_0_0_var(--ink)] lg:flex-row lg:items-center md:p-10">
+      <div class="max-w-2xl space-y-2">
+        <h2 class="text-display-md text-cream">{copy.pilotCtaTitle}</h2>
+        <p class="text-base text-cream/85 md:text-lg">{copy.pilotCtaText}</p>
+      </div>
+      <div class="flex flex-wrap gap-3 shrink-0">
+        <WhatsAppButton
+          message={copy.waMessage}
+          label={copy.waCta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page="como-trabajamos"
+          placement="final-cta"
+          variant="lemon"
+          size="lg"
+        />
+        <Button href={linkTo('precios', country)} variant="outline" size="lg" class="border-cream! text-cream! hover:bg-cream! hover:text-ink!">
+          {ui.hero.ctaSecondary}
+        </Button>
+      </div>
     </div>
   </section>
 </BaseLayout>

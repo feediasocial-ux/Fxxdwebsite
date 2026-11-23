@@ -3,13 +3,10 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Card from '@/components/Card.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
-import BookCallButton from '@/components/BookCallButton.astro';
 import BookCallCard from '@/components/BookCallCard.astro';
 import RecordingTimeline30m from '@/components/RecordingTimeline30m.astro';
-import GeoKeyFacts from '@/components/GeoKeyFacts.astro';
 import Button from '@/components/Button.astro';
 import Photo from '@/components/Photo.astro';
-import StripeBand from '@/components/StripeBand.astro';
 import { getCorePages, getUi } from '@/content';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { linkTo, pathFor } from '@/lib/routes';
@@ -17,7 +14,6 @@ import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo';
 
 import equipoEscritorio from '@/assets/photos/feediasocial-equipo-escritorio.webp';
 import estudioEdicion from '@/assets/photos/feediasocial-estudio-edicion.webp';
-import sinCamara from '@/assets/photos/sin-camara.jpg';
 
 interface Props {
   country: CountryKey;
@@ -72,15 +68,8 @@ const crumbs = [
             placement="hero"
             size="lg"
           />
-          <BookCallButton
-            country={country}
-            page="como-funciona"
-            placement="hero"
-            variant="light"
-            size="lg"
-          />
-          <Button href={linkTo('precios', country)} variant="outline" size="md">
-            {ui.hero.ctaSecondary}
+          <Button href={linkTo('comoTrabajamos', country)} variant="outline" size="lg">
+            {ui.proofSection.ctaMore}
           </Button>
         </div>
       </div>
@@ -96,12 +85,8 @@ const crumbs = [
     </div>
   </section>
 
-  <GeoKeyFacts country={country} />
-
-  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
-
   <!-- Los 5 pasos del proceso real -->
-  <section class="container-site py-16 md:py-24">
+  <section class="container-site py-12 md:py-20">
     <ol class="space-y-6">
       {
         copy.processSteps.map((step) => (
@@ -157,52 +142,11 @@ const crumbs = [
     </div>
   </section>
 
-  <!-- Ejemplo único: Lista de tomas real para grabar en 30 minutos -->
+  <!-- Timeline 30 minutos + CTA cierre -->
   <section class="container-site py-16 md:py-24">
-    <div class="max-w-3xl space-y-3">
-      <h2 class="text-display-lg">{copy.shotListTitle}</h2>
-      <p class="text-lg text-ink-soft">{copy.shotListSubtitle}</p>
-    </div>
-
-    <div class="mt-8 grid gap-6 md:grid-cols-3">
-      {
-        copy.shotListItems.map((shot) => (
-          <Card color="cream-deep" bordered class="space-y-3">
-            <span class="inline-block rounded-pill border border-ink bg-sky px-3 py-0.5 text-xs font-bold">
-              {shot.duration}
-            </span>
-            <h3 class="text-2xl">{shot.clip}</h3>
-            <p class="text-sm text-ink-soft">{shot.instruction}</p>
-          </Card>
-        ))
-      }
-    </div>
+    <RecordingTimeline30m country={country} />
 
     <div class="mt-14">
-      <RecordingTimeline30m country={country} />
-    </div>
-
-    <!-- Plan B sin cámara -->
-    <div class="mt-14 grid items-center gap-8 rounded-[32px] border-2 border-ink bg-sky p-6 md:grid-cols-[1.3fr_1fr] md:p-10">
-      <div class="space-y-4">
-        <h2 class="text-display-md">{copy.planBTitle}</h2>
-        <p class="text-ink-soft">{copy.planBText}</p>
-        <WhatsAppButton
-          message={ui.pricing.planBWaMessage}
-          label={ui.pricing.planBCta}
-          a11yLabel={ui.a11y.openWhatsApp}
-          country={country}
-          page="como-funciona"
-          placement="plan-b"
-          variant="dark"
-        />
-      </div>
-      <div class="overflow-hidden rounded-[24px] border-2 border-ink">
-        <Photo src={sinCamara} alt={copy.planBTitle} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 38vw, 90vw" />
-      </div>
-    </div>
-
-    <div class="mt-12">
       <BookCallCard
         country={country}
         page="como-funciona"

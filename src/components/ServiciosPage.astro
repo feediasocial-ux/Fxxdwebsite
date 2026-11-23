@@ -2,18 +2,12 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Card from '@/components/Card.astro';
-import NicheCard from '@/components/NicheCard.astro';
 import Button from '@/components/Button.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
-import BookCallButton from '@/components/BookCallButton.astro';
-import FeedBeforeAfter from '@/components/FeedBeforeAfter.astro';
 import CarouselPreviewMockup from '@/components/CarouselPreviewMockup.astro';
-import AuditForm from '@/components/AuditForm.astro';
 import Photo from '@/components/Photo.astro';
-import StripeBand from '@/components/StripeBand.astro';
 import { getCorePages, getUi } from '@/content';
 import { getNichesByCountry } from '@/content/niches';
-import { NICHE_PHOTOS } from '@/lib/niche-photos';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { linkTo, pathFor } from '@/lib/routes';
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo';
@@ -75,14 +69,7 @@ const crumbs = [
             placement="hero"
             size="lg"
           />
-          <BookCallButton
-            country={country}
-            page="servicios"
-            placement="hero"
-            variant="light"
-            size="lg"
-          />
-          <Button href={linkTo('precios', country)} variant="outline" size="md">
+          <Button href={linkTo('precios', country)} variant="outline" size="lg">
             {ui.hero.ctaSecondary}
           </Button>
         </div>
@@ -99,10 +86,8 @@ const crumbs = [
     </div>
   </section>
 
-  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
-
   <!-- Los 5 bloques de servicio -->
-  <section class="container-site py-16 md:py-24">
+  <section class="container-site py-12 md:py-20">
     <h2 class="text-display-lg">{copy.blocksTitle}</h2>
     <div class="mt-10 grid gap-6 md:grid-cols-2">
       {
@@ -125,19 +110,15 @@ const crumbs = [
         ))
       }
     </div>
-
-    <div class="mt-16">
-      <FeedBeforeAfter country={country} />
-    </div>
   </section>
 
-  <!-- Plan B sin cámara -->
+  <!-- Plan B sin cámara + Carrusel interactivo -->
   <section class="theme-dark py-16 md:py-24">
     <div class="container-site grid items-center gap-8 md:grid-cols-[1.15fr_1fr]">
       <div class="space-y-4">
         <h2 class="text-display-md text-cream">{ui.pricing.planBTitle}</h2>
         <p class="text-lg text-cream/85">{ui.pricing.planBText}</p>
-        <div class="flex flex-wrap gap-3">
+        <div class="flex flex-wrap gap-3 pt-2">
           <WhatsAppButton
             message={ui.pricing.planBWaMessage}
             label={ui.pricing.planBCta}
@@ -148,13 +129,9 @@ const crumbs = [
             variant="lemon"
             size="lg"
           />
-          <BookCallButton
-            country={country}
-            page="servicios"
-            placement="plan-b"
-            variant="light"
-            size="lg"
-          />
+          <Button href={linkTo('intencionSinCamara', country)} variant="outline" size="lg" class="border-cream! text-cream! hover:bg-cream! hover:text-ink!">
+            {ui.pricing.planBGuideCta}
+          </Button>
         </div>
       </div>
       <div class="text-ink">
@@ -163,57 +140,47 @@ const crumbs = [
     </div>
   </section>
 
-  <!-- Enlazado a las 4 landings de nicho -->
-  <section class="container-site py-16 md:py-24">
-    <div class="max-w-3xl space-y-3">
-      <h2 class="text-display-lg">{copy.nichesTitle}</h2>
-      <p class="text-lg text-ink-soft">{copy.nichesSubtitle}</p>
+  <!-- Sectores (enlaces compactos) + CTA final limpio -->
+  <section class="container-site py-16 md:py-20">
+    <div class="max-w-3xl space-y-2">
+      <h2 class="text-display-md">{copy.nichesTitle}</h2>
+      <p class="text-base text-ink-soft">{copy.nichesSubtitle}</p>
     </div>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {
-        niches.map((n, idx) => (
-          <NicheCard
-            title={n.shortTitle}
-            text={n.cardSummary}
+        niches.map((n) => (
+          <a
             href={pathFor(n.routeKey, country)!}
-            linkLabel={copy.nicheCtaLabel}
-            image={NICHE_PHOTOS[n.photoKey]}
-            imageAlt={n.photoAlt}
-            color={idx % 3 === 0 ? 'cream-deep' : idx % 3 === 1 ? 'lemon' : 'sky'}
-          />
+            class="group flex items-center justify-between gap-3 rounded-2xl border-2 border-ink bg-cream-deep px-5 py-4 text-ink no-underline shadow-[4px_4px_0_0_var(--ink)] transition-transform hover:-translate-y-0.5 hover:bg-lemon"
+          >
+            <span class="font-display text-lg uppercase">{n.shortTitle}</span>
+            <span class="text-sm font-extrabold text-coral-deep transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+          </a>
         ))
       }
     </div>
-  </section>
 
-  <!-- CTA final de conversión -->
-  <section class="container-site pb-20">
-    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream shadow-[10px_10px_0_0_var(--ink)] md:p-10 lg:grid-cols-[1fr_1.15fr]">
-      <div class="space-y-5">
+    <div class="mt-14 flex flex-col items-start justify-between gap-6 rounded-[32px] border-2 border-ink bg-maroon p-8 text-cream shadow-[8px_8px_0_0_var(--ink)] lg:flex-row lg:items-center md:p-10">
+      <div class="max-w-2xl space-y-2">
         <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
-        <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
-        <div class="flex flex-wrap gap-3">
-          <WhatsAppButton
-            message={copy.waMessage}
-            label={ui.finalCta.cta}
-            a11yLabel={ui.a11y.openWhatsApp}
-            country={country}
-            page="servicios"
-            placement="final-cta"
-            variant="lemon"
-            size="lg"
-          />
-          <BookCallButton
-            country={country}
-            page="servicios"
-            placement="final-cta"
-            variant="light"
-            size="lg"
-          />
-        </div>
+        <p class="text-base text-cream/85 md:text-lg">{ui.finalCta.subtitle}</p>
       </div>
-      <AuditForm country={country} page="servicios" />
+      <div class="flex flex-wrap gap-3 shrink-0">
+        <WhatsAppButton
+          message={copy.waMessage}
+          label={ui.finalCta.cta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page="servicios"
+          placement="final-cta"
+          variant="lemon"
+          size="lg"
+        />
+        <Button href={linkTo('precios', country)} variant="outline" size="lg" class="border-cream! text-cream! hover:bg-cream! hover:text-ink!">
+          {ui.hero.ctaSecondary}
+        </Button>
+      </div>
     </div>
   </section>
 </BaseLayout>
