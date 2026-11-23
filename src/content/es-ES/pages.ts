@@ -76,16 +76,16 @@ export const pages: CorePagesCopy = {
   precios: {
     metaTitle: 'Precios de gestión de redes sociales en España | Feediasocial',
     metaDescription:
-      'Paquetes claros desde 349 €/mes: guiones, edición de vídeo, gráficos con IA y calendario en Metricool. Tú solo grabas con el móvil.',
+      'Paquetes claros desde 300 €/mes: guiones, edición de vídeo, gráficos con IA y calendario en Metricool. Tú solo grabas con el móvil.',
     eyebrow: 'Paquetes y precios · España',
     h1: 'Precios claros para tener tus redes listas cada mes',
     intro:
-      'En España un paquete mensual de contenido para redes con guiones, edición de vídeo y programación en Metricool empieza en 349 €/mes. Sin presupuestos ocultos: eliges el volumen de reels y publicaciones que encaja con tu pyme.',
+      'En España un paquete mensual de contenido para redes con guiones, edición de vídeo y programación en Metricool empieza en 300 €/mes. Sin presupuestos ocultos: eliges el volumen de reels y publicaciones que encaja con tu pyme.',
     comparisonTitle: '¿Qué incluye exactamente cada paquete?',
     comparisonRows: [
-      { feature: 'Posts mensuales en el feed (carrusel o imagen)', esencial: '8 al mes', crecimiento: '12 al mes', pro: '12 al mes' },
-      { feature: 'Stories con diseño y copy', esencial: '8 al mes', crecimiento: '12 al mes', pro: '12 al mes' },
-      { feature: 'Reels con guion palabra por palabra y edición', esencial: '2 al mes', crecimiento: '4 al mes', pro: '8 al mes' },
+      { feature: 'Posts y/o carruseles mensuales en el feed', esencial: '9 al mes', crecimiento: '12 al mes', pro: '15 al mes (publicación diaria)' },
+      { feature: 'Stories con diseño y copy', esencial: '15–20 al mes', crecimiento: '20–25 al mes', pro: '30 al mes (diarias)' },
+      { feature: 'Reels con guion palabra por palabra y edición', esencial: '4 al mes', crecimiento: '8 al mes', pro: '15 al mes' },
       { feature: 'Búsqueda de tendencias y audios de tu sector', esencial: 'Incluida', crecimiento: 'Incluida', pro: 'Incluida' },
       { feature: 'Calendario y programación en Metricool', esencial: 'Incluido', crecimiento: 'Incluido', pro: 'Incluido' },
       { feature: 'Informe mensual con recomendaciones', esencial: 'Resumen básico', crecimiento: 'Completo + 1 llamada/mes', pro: 'Completo + 1 llamada/mes' },

@@ -14,7 +14,7 @@ export const intentsES: IntentLandingData[] = [
     eyebrow: 'Guía de precios · España',
     h1: '¿Cuánto cuesta un community manager o servicio de gestión de redes en España?',
     intro:
-      'En España, contratar la gestión de redes sociales para una pyme cuesta de media entre 300 €/mes y 1.200 €/mes (más IVA) cuando trabajas con un profesional autónomo o una agencia especializada. Si decides incorporar a una persona en plantilla a jornada completa, el coste empresa supera los 2.100 €/mes contando sueldo bruto y Seguridad Social. En Feediasocial trabajamos con paquetes cerrados desde 349 €/mes donde tú solo grabas 30 minutos al mes con tu móvil y nosotros entregamos guiones, edición de vídeo, diseño con IA y programación en Metricool.',
+      'En España, contratar la gestión de redes sociales para una pyme cuesta de media entre 300 €/mes y 1.200 €/mes (más IVA) cuando trabajas con un profesional autónomo o una agencia especializada. Si decides incorporar a una persona en plantilla a jornada completa, el coste empresa supera los 2.100 €/mes contando sueldo bruto y Seguridad Social. En Feediasocial trabajamos con paquetes cerrados desde 300 €/mes donde tú solo grabas 30 minutos al mes con tu móvil y nosotros entregamos guiones, edición de vídeo, diseño con IA y programación en Metricool.',
     pendingNote: 'Rangos orientativos del mercado español según modalidad de contratación y volumen mensual de vídeo.',
     comparisonTable: {
       title: 'Tabla orientativa de precios en el mercado español',
@@ -28,7 +28,7 @@ export const intentsES: IntentLandingData[] = [
           col3: 'Tu cuenta parece un catálogo frío; cero alcance orgánico en Reels y abandono a los dos meses.',
         },
         {
-          label: '349 € – 649 €/mes',
+          label: '300 € – 450 €/mes',
           col1: 'Agencia especializada por sistema (tramo Esencial / Crecimiento)',
           col2: 'Guiones palabra por palabra, edición de reels verticales, carruseles con IA y programación en Metricool',
           col3: 'Requiere que alguien del negocio dedique 30 minutos al mes a grabar brutos con el móvil (o usar Plan B sin cámara).',
@@ -74,7 +74,7 @@ export const intentsES: IntentLandingData[] = [
       {
         badge: 'Factor 03 · Sistema y continuidad',
         title: 'Herramientas, programación en Metricool y respaldo de equipo',
-        text: 'En nuestras cuotas de 349 €/mes, 649 €/mes y 990 €/mes ya están incluidas las licencias de diseño, herramientas de IA y programación en Metricool, además de un equipo que no deja tu cuenta parada en agosto o por una baja.',
+        text: 'En nuestras cuotas de 300 €/mes, 450 €/mes y 650 €/mes ya están incluidas las licencias de diseño, herramientas de IA y programación en Metricool, además de un equipo que no deja tu cuenta parada en agosto o por una baja.',
         bullets: [
           'Calendario mensual completo revisado antes de publicar.',
           'Programación automática en tus horas de mayor actividad.',
@@ -92,7 +92,7 @@ export const intentsES: IntentLandingData[] = [
       },
       {
         profile: 'Clínica, restaurante, inmobiliaria o gimnasio con clientes activos y cero tiempo',
-        recommendation: 'Paquete Esencial (349 €/mes) o Crecimiento (649 €/mes) con grabación guiada de 30 minutos.',
+        recommendation: 'Paquete Esencial (300 €/mes) o Crecimiento (450 €/mes) con grabación guiada de 30 minutos.',
         honestVerdict: 'Es el punto óptimo entre coste e impacto: mantienes la cara real de tu negocio y delegas el 90 % del trabajo técnico.',
       },
       {
@@ -105,7 +105,7 @@ export const intentsES: IntentLandingData[] = [
     faqs: [
       {
         q: '¿Los precios de vuestros paquetes incluyen el IVA en España?',
-        a: 'Nuestros paquetes (349 €/mes, 649 €/mes y 990 €/mes) se muestran antes de impuestos aplicables y se abonan mensualmente con factura oficial.',
+        a: 'Nuestros paquetes (300 €/mes, 450 €/mes y 650 €/mes) se muestran antes de impuestos aplicables y se abonan mensualmente con factura oficial.',
       },
       {
         q: '¿Por qué hay ofertas de gestión de redes por 90 € al mes?',
@@ -140,7 +140,7 @@ export const intentsES: IntentLandingData[] = [
     eyebrow: 'Comparativa para pymes · España',
     h1: 'Agencia vs community manager en plantilla vs freelancer: ¿qué compensa más en España?',
     intro:
-      'Para la mayoría de las pymes españolas de entre 2 y 25 empleados, contratar un community manager en nómina resulta desproporcionado en costes fijos, mientras que depender de un único freelancer autónomo suele fallar cuando esa persona acumula picos de trabajo o coge una baja. Una agencia de contenido por sistema te da guionistas, editores de vídeo y diseñadores por una fracción de una nómina (desde 349 €/mes), pero exige que dediques 30 minutos al mes con tu móvil. Aquí comparamos las tres opciones sin barrer para casa.',
+      'Para la mayoría de las pymes españolas de entre 2 y 25 empleados, contratar un community manager en nómina resulta desproporcionado en costes fijos, mientras que depender de un único freelancer autónomo suele fallar cuando esa persona acumula picos de trabajo o coge una baja. Una agencia de contenido por sistema te da guionistas, editores de vídeo y diseñadores por una fracción de una nómina (desde 300 €/mes), pero exige que dediques 30 minutos al mes con tu móvil. Aquí comparamos las tres opciones sin barrer para casa.',
     comparisonTable: {
       title: 'Comparativa directa de las 3 opciones en España',
       subtitle: 'Analizamos coste real, continuidad, perfiles incluidos y rapidez de arranque:',
@@ -150,7 +150,7 @@ export const intentsES: IntentLandingData[] = [
           label: 'Coste mensual aproximado',
           col1: '2.100 € – 2.800 €/mes (sueldo + Seguridad Social)',
           col2: '300 € – 700 €/mes + IVA',
-          col3: '349 € – 990 €/mes (según paquete)',
+          col3: '300 € – 650 €/mes (según paquete)',
         },
         {
           label: 'Perfiles que trabajan tu cuenta',
@@ -365,7 +365,7 @@ export const intentsES: IntentLandingData[] = [
       },
       {
         q: '¿El Plan B sin cámara cuesta más caro que los paquetes normales?',
-        a: 'No. Se aplica sobre nuestros mismos paquetes (Esencial 349 €/mes, Crecimiento 649 €/mes y Pro 990 €/mes), sustituyendo los reels hablados por reels de recurso visual, animaciones tipográficas y carruseles con IA.',
+        a: 'No. Se aplica sobre nuestros mismos paquetes (Esencial 300 €/mes, Crecimiento 450 €/mes y Pro 650 €/mes), sustituyendo los reels hablados por reels de recurso visual, animaciones tipográficas y carruseles con IA.',
       },
       {
         q: '¿Puedo empezar con el Plan B sin cámara y más adelante animarme a grabar algún vídeo hablado?',

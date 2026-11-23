@@ -76,16 +76,16 @@ export const pages: CorePagesCopy = {
   precios: {
     metaTitle: 'Precios de manejo de redes sociales en México | Feediasocial',
     metaDescription:
-      'Paquetes claros desde 3,900 MXN/mes: guiones, edición de video, gráficos con IA y calendario en Metricool. Tú solo grabas con tu celular.',
+      'Paquetes claros desde $6,300 MXN/mes: guiones, edición de video, gráficos con IA y calendario en Metricool. Tú solo grabas con tu celular.',
     eyebrow: 'Paquetes y precios · México',
     h1: 'Precios claros en pesos para tener tus redes listas cada mes',
     intro:
-      'En México un paquete mensual de manejo de contenido para redes con guiones, edición de video y programación en Metricool empieza en 3,900 MXN/mes. Sin cotizaciones eternas: eliges el volumen de reels y publicaciones que necesita tu negocio.',
+      'En México un paquete mensual de manejo de contenido para redes con guiones, edición de video y programación en Metricool empieza en $6,300 MXN/mes. Sin cotizaciones eternas: eliges el volumen de reels y publicaciones que necesita tu negocio.',
     comparisonTitle: '¿Qué incluye exactamente cada paquete?',
     comparisonRows: [
-      { feature: 'Posts mensuales en el feed (carrusel o imagen)', esencial: '8 al mes', crecimiento: '12 al mes', pro: '12 al mes' },
-      { feature: 'Historias con diseño y textos', esencial: '8 al mes', crecimiento: '12 al mes', pro: '12 al mes' },
-      { feature: 'Reels con guion listo para leer y edición', esencial: '2 al mes', crecimiento: '4 al mes', pro: '8 al mes' },
+      { feature: 'Posts y/o carruseles mensuales en el feed', esencial: '9 al mes', crecimiento: '12 al mes', pro: '15 al mes (publicación diaria)' },
+      { feature: 'Historias con diseño y textos', esencial: '15–20 al mes', crecimiento: '20–25 al mes', pro: '30 al mes (diarias)' },
+      { feature: 'Reels con guion listo para leer y edición', esencial: '4 al mes', crecimiento: '8 al mes', pro: '15 al mes' },
       { feature: 'Búsqueda de tendencias y audios de tu giro', esencial: 'Incluida', crecimiento: 'Incluida', pro: 'Incluida' },
       { feature: 'Calendario y programación en Metricool', esencial: 'Incluido', crecimiento: 'Incluido', pro: 'Incluido' },
       { feature: 'Reporte mensual con recomendaciones', esencial: 'Resumen básico', crecimiento: 'Completo + 1 llamada/mes', pro: 'Completo + 1 llamada/mes' },

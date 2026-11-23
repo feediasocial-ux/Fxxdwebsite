@@ -33,7 +33,7 @@ export const BLOG_ES: EditorialBlogArticle[] = [
       { label: 'Tiempo total de rodaje', value: '25 a 30 min al mes (en una sola mañana)' },
       { label: 'Equipo necesario', value: 'Tu móvil actual (1080p a 30 fps) + ventana lateral' },
       { label: 'Piezas obtenidas', value: '4 Reels hablados + 12 clips cortos de recurso (B-roll)' },
-      { label: 'Coste si lo delegas en Feediasocial', value: 'Incluido desde 349 €/mes (Esencial) o 649 €/mes (Crecimiento)' },
+      { label: 'Coste si lo delegas en Feediasocial', value: 'Incluido desde 300 €/mes (Esencial) o 450 €/mes (Crecimiento)' },
     ],
     pullQuote: {
       text: 'El problema nunca es la cámara de tu móvil; es intentar escribir el guion en la cabeza mientras el piloto rojo ya está parpadeando.',
@@ -120,7 +120,7 @@ export const BLOG_ES: EditorialBlogArticle[] = [
     comparisonTable: {
       title: 'Improvisar cada semana vs. Rodaje mensual por bloques (España)',
       subtitle: 'Comparativa real de horas invertidas por el dueño del negocio para publicar 4 Reels al mes:',
-      headers: ['Fase del trabajo', 'Improvisando cada semana', 'Método por bloques (tú solo)', 'Con Feediasocial (desde 349 €/mes)'],
+      headers: ['Fase del trabajo', 'Improvisando cada semana', 'Método por bloques (tú solo)', 'Con Feediasocial (desde 300 €/mes)'],
       rows: [
         {
           col1: 'Pensar temas y escribir guiones',
@@ -350,7 +350,7 @@ export const BLOG_ES: EditorialBlogArticle[] = [
       },
       {
         q: '¿Cuántos guiones de Reels incluís en los paquetes de España?',
-        a: 'El paquete Esencial (349 €/mes) incluye 2 Reels con guion y edición; Crecimiento (649 €/mes) incluye 4 Reels; y Pro (990 €/mes) incluye 8 Reels completos cada mes.',
+        a: 'El paquete Esencial (300 €/mes) incluye 4 Reels con guion y edición; Crecimiento (450 €/mes) incluye 8 Reels; y Pro (650 €/mes) incluye 15 Reels completos cada mes.',
       },
       {
         q: '¿Puedo pedir cambios en los guiones antes de mi sesión de grabación?',
@@ -477,7 +477,7 @@ export const BLOG_ES: EditorialBlogArticle[] = [
       },
     ],
     comparisonTable: {
-      title: 'Estructura tipo de una semana en el paquete Crecimiento (España · 649 €/mes)',
+      title: 'Estructura tipo de una semana en el paquete Crecimiento (España · 450 €/mes)',
       subtitle: 'Así se reparten las 12 publicaciones de feed, 12 stories y 4 Reels a lo largo de cada semana:',
       headers: ['Día de la semana', 'Formato programado', 'Objetivo de la pieza', 'Intervención del cliente'],
       rows: [
@@ -706,7 +706,7 @@ export const BLOG_ES: EditorialBlogArticle[] = [
     faqs: [
       {
         q: '¿Cuántos posts y carruseles incluís al mes en los paquetes de España?',
-        a: 'El paquete Esencial (349 €/mes) incluye 8 publicaciones de feed; y los paquetes Crecimiento (649 €/mes) y Pro (990 €/mes) incluyen 12 publicaciones mensuales combinando carruseles y posts.',
+        a: 'El paquete Esencial (300 €/mes) incluye 9 posts/carruseles; Crecimiento (450 €/mes) incluye 12; y Pro (650 €/mes) incluye 15 publicaciones mensuales combinando carruseles y posts.',
       },
       {
         q: '¿Tenéis que enviarme vosotros el texto de cada lámina o lo redactáis en la agencia?',
@@ -831,7 +831,7 @@ export const BLOG_ES: EditorialBlogArticle[] = [
         heading: 'La regla práctica: prioriza el sistema mensual antes que abrir cinco redes a medias',
         lead: 'Es infinitamente más rentable tener Instagram al 100 % y replicar tus vídeos limpios en TikTok que abrir cinco perfiles y abandonarlos a las tres semanas.',
         paragraphs: [
-          'Con cualquiera de nuestros paquetes en España (desde 349 €/mes) dejas cubierta la columna vertebral de tu presencia digital con una sola sesión de 30 minutos al mes.',
+          'Con cualquiera de nuestros paquetes en España (desde 300 €/mes) dejas cubierta la columna vertebral de tu presencia digital con una sola sesión de 30 minutos al mes.',
         ],
       },
     ],

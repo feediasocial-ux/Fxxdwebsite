@@ -898,7 +898,7 @@ export const nichesES: NicheLandingData[] = [
       },
       {
         q: '¿Hay permanencia obligatoria?',
-        a: 'No. Trabajamos mes a mes con tarifas claras desde 349 €/mes en España.',
+        a: 'No. Trabajamos mes a mes con tarifas claras desde 300 €/mes en España.',
       },
     ],
     waMessage: 'Hola, vengo de la página de peluquerías y salones en España y quiero ver los paquetes.',

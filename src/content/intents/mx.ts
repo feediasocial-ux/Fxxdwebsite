@@ -14,7 +14,7 @@ export const intentsMX: IntentLandingData[] = [
     eyebrow: 'Guía de precios en MXN · México',
     h1: '¿Cuánto cuesta el manejo de redes sociales en México y qué incluye realmente cada precio?',
     intro:
-      'En México, contratar el manejo profesional de redes sociales para un negocio o consultorio cuesta entre $3,500 MXN y $15,000 MXN al mes trabajando con una agencia especializada o un estudio de contenido. Si contratas a una persona de planta dentro de tu empresa, el gasto mensual sube por encima de los $16,000 a $24,000 MXN sumando sueldo, IMSS, INFONavit, aguinaldo y equipo de trabajo. En Feediasocial manejamos paquetes fijos desde $3,900 MXN/mes donde tú solo grabas 30 minutos al mes con tu celular y nosotros armamos guiones, edición de video, diseño con IA y programación en Metricool.',
+      'En México, contratar el manejo profesional de redes sociales para un negocio o consultorio cuesta entre $3,500 MXN y $15,000 MXN al mes trabajando con una agencia especializada o un estudio de contenido. Si contratas a una persona de planta dentro de tu empresa, el gasto mensual sube por encima de los $16,000 a $24,000 MXN sumando sueldo, IMSS, INFONavit, aguinaldo y equipo de trabajo. En Feediasocial manejamos paquetes fijos desde $6,300 MXN/mes donde tú solo grabas 30 minutos al mes con tu celular y nosotros armamos guiones, edición de video, diseño con IA y programación en Metricool.',
     pendingNote: 'Rangos orientativos del mercado mexicano en MXN según modalidad de contratación y volumen mensual de video.',
     comparisonTable: {
       title: 'Rangos reales de precios de manejo de redes en México',
@@ -28,7 +28,7 @@ export const intentsMX: IntentLandingData[] = [
           col3: 'Tus redes se ven genéricas, nadie escribe por WhatsApp y pierdes meses valiosos.',
         },
         {
-          label: '$3,900 – $7,500 MXN/mes',
+          label: '$6,300 – $9,450 MXN/mes',
           col1: 'Agencia de contenido por sistema (Paquetes Esencial y Crecimiento)',
           col2: 'Guiones listos para leer, edición de reels verticales, carruseles con IA y calendario en Metricool',
           col3: 'Necesitas dedicar media hora al mes para grabar tomas con tu celular (o pedir nuestro Plan B sin cámara).',
@@ -74,7 +74,7 @@ export const intentsMX: IntentLandingData[] = [
       {
         badge: 'Punto 03 · Orden y constancia',
         title: 'Tu calendario mensual programado en Metricool sin atrasos',
-        text: 'En nuestros paquetes ($3,900, $7,500 y $12,900 MXN/mes) ya tienes incluido el diseño asistido con IA, la redacción de textos (copy) y la programación completa en Metricool para que no tengas que estar subiendo cosas a mano en la noche.',
+        text: 'En nuestros paquetes ($6,300, $9,450 y $13,650 MXN/mes) ya tienes incluido el diseño asistido con IA, la redacción de textos (copy) y la programación completa en Metricool para que no tengas que estar subiendo cosas a mano en la noche.',
         bullets: [
           'Apruebas todo tu calendario antes de que se publique.',
           'Publicación puntual semana tras semana.',
@@ -92,12 +92,12 @@ export const intentsMX: IntentLandingData[] = [
       },
       {
         profile: 'Consultorio, restaurante, inmobiliaria o gimnasio en marcha que quiere constancia',
-        recommendation: 'Paquete Esencial ($3,900 MXN/mes) o Crecimiento ($7,500 MXN/mes).',
+        recommendation: 'Paquete Esencial ($6,300 MXN/mes) o Crecimiento ($9,450 MXN/mes).',
         honestVerdict: 'Por una fracción de lo que cuesta un sueldo interno tienes guiones, edición de video, diseño y programación cada mes.',
       },
       {
         profile: 'Marca en expansión que además va a meter pauta constante en Meta Ads',
-        recommendation: 'Paquete Pro ($12,900 MXN/mes) con 8 reels, estrategia de anuncios y manejo de comentarios.',
+        recommendation: 'Paquete Pro ($13,650 MXN/mes) con publicación diaria, 15 reels, estrategia de anuncios y manejo de comentarios.',
         honestVerdict: 'Ideal cuando necesitas creativos nuevos cada semana para alimentar tus campañas hacia WhatsApp.',
       },
     ],
@@ -105,7 +105,7 @@ export const intentsMX: IntentLandingData[] = [
     faqs: [
       {
         q: '¿Los precios en pesos mexicanos ya incluyen IVA y factura?',
-        a: 'Nuestros precios ($3,900, $7,500 y $12,900 MXN/mes) están fijos en pesos mexicanos con pago mensual por tarjeta o transferencia.',
+        a: 'Nuestros precios ($6,300, $9,450 y $13,650 MXN/mes) están fijos en pesos mexicanos con pago mensual por tarjeta o transferencia.',
       },
       {
         q: '¿El gasto de pauta en Facebook e Instagram Ads viene incluido en el paquete?',
@@ -150,7 +150,7 @@ export const intentsMX: IntentLandingData[] = [
           label: 'Costo mensual en México',
           col1: '$16,000 – $24,000+ MXN (sueldo + IMSS + aguinaldo + equipo)',
           col2: '$3,500 – $8,000 MXN/mes',
-          col3: '$3,900 – $12,900 MXN/mes (paquete cerrado)',
+          col3: '$6,300 – $13,650 MXN/mes (paquete cerrado)',
         },
         {
           label: 'Especialidades incluidas',
@@ -228,7 +228,7 @@ export const intentsMX: IntentLandingData[] = [
       },
       {
         profile: 'Quieres publicar reels, carruseles e historias cada semana sin perder tus tardes',
-        recommendation: 'Delega en nuestro sistema mensual (desde $3,900 MXN/mes).',
+        recommendation: 'Delega en nuestro sistema mensual (desde $6,300 MXN/mes).',
         honestVerdict: 'Obtienes guionistas, editores de video y diseñadores por menos de la cuarta parte de un puesto interno.',
       },
     ],
@@ -365,7 +365,7 @@ export const intentsMX: IntentLandingData[] = [
       },
       {
         q: '¿El Plan B sin cámara tiene el mismo precio que los paquetes normales?',
-        a: 'Exactamente el mismo: Esencial ($3,900 MXN/mes), Crecimiento ($7,500 MXN/mes) y Pro ($12,900 MXN/mes). Adaptamos los entregables para que todo el mes salga sin necesidad de videos hablados.',
+        a: 'Exactamente el mismo: Esencial ($6,300 MXN/mes), Crecimiento ($9,450 MXN/mes) y Pro ($13,650 MXN/mes). Adaptamos los entregables para que todo el mes salga sin necesidad de videos hablados.',
       },
       {
         q: '¿Puedo combinar un mes sin cámara y otro mes con algún video hablado?',

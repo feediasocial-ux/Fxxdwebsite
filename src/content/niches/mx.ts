@@ -748,7 +748,7 @@ export const nichesMX: NicheLandingData[] = [
       },
       {
         q: '¿Los precios están fijos en pesos mexicanos?',
-        a: 'Sí: Esencial ($3,900 MXN/mes), Crecimiento ($7,500 MXN/mes) y Pro ($12,900 MXN/mes), con pago mensual por transferencia o tarjeta.',
+        a: 'Sí: Esencial ($6,300 MXN/mes), Crecimiento ($9,450 MXN/mes) y Pro ($13,650 MXN/mes), con pago mensual por transferencia o tarjeta.',
       },
     ],
     waMessage: 'Hola, vengo de la página de abogados y contadores en México y quiero ver los paquetes.',
@@ -898,7 +898,7 @@ export const nichesMX: NicheLandingData[] = [
       },
       {
         q: '¿Hay plazo forzoso al contratar?',
-        a: 'No. Trabajamos mes a mes con precios claros en pesos mexicanos desde $3,900 MXN/mes.',
+        a: 'No. Trabajamos mes a mes con precios claros en pesos mexicanos desde $6,300 MXN/mes.',
       },
     ],
     waMessage: 'Hola, vengo de la página de salones de belleza y spas en México y quiero ver los paquetes.',

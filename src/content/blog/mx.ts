@@ -33,7 +33,7 @@ export const BLOG_MX: EditorialBlogArticle[] = [
       { label: 'Tiempo invertido por ti', value: '25 a 30 minutos una sola vez al mes' },
       { label: 'Equipo requerido', value: 'Tu celular actual (cámara trasera en 1080p) + luz de ventana' },
       { label: 'Material que obtienes', value: '4 Reels hablados + 10 a 12 tomas cortas de apoyo (B-roll)' },
-      { label: 'Inversión si delegas en Feediasocial', value: 'Desde $3,900 MXN/mes (Esencial) o $7,500 MXN/mes (Crecimiento)' },
+      { label: 'Inversión si delegas en Feediasocial', value: 'Desde $6,300 MXN/mes (Esencial) o $9,450 MXN/mes (Crecimiento)' },
     ],
     pullQuote: {
       text: 'Lo que te quita tres horas no es grabar con el celular: es querer inventar el tema, acomodar el tripié y editar el video el mismo día.',
@@ -120,7 +120,7 @@ export const BLOG_MX: EditorialBlogArticle[] = [
     comparisonTable: {
       title: 'Hacerlo tú solo cada semana vs. Sistema por bloques en México',
       subtitle: 'Comparativa real de tiempo mensual para mantener activo el Instagram y TikTok de tu negocio:',
-      headers: ['Etapa del mes', 'Grabando al día sin plan', 'Por bloques por tu cuenta', 'Con Feediasocial (desde $3,900 MXN/mes)'],
+      headers: ['Etapa del mes', 'Grabando al día sin plan', 'Por bloques por tu cuenta', 'Con Feediasocial (desde $6,300 MXN/mes)'],
       rows: [
         {
           col1: 'Búsqueda de tendencias y guiones',
@@ -350,7 +350,7 @@ export const BLOG_MX: EditorialBlogArticle[] = [
       },
       {
         q: '¿Cuántos guiones mensuales incluye cada paquete en México?',
-        a: 'El paquete Esencial ($3,900 MXN/mes) incluye 2 Reels con guion y edición; Crecimiento ($7,500 MXN/mes) incluye 4 Reels; y Pro ($12,900 MXN/mes) incluye 8 Reels completos al mes.',
+        a: 'El paquete Esencial ($6,300 MXN/mes) incluye 4 Reels con guion y edición; Crecimiento ($9,450 MXN/mes) incluye 8 Reels; y Pro ($13,650 MXN/mes) incluye 15 Reels completos al mes.',
       },
       {
         q: '¿Puedo revisar y ajustar los guiones antes de mi sesión de grabación?',
@@ -476,7 +476,7 @@ export const BLOG_MX: EditorialBlogArticle[] = [
       },
     ],
     comparisonTable: {
-      title: 'Ejemplo de semana programada en el paquete Crecimiento (México · $7,500 MXN/mes)',
+      title: 'Ejemplo de semana programada en el paquete Crecimiento (México · $9,450 MXN/mes)',
       subtitle: 'Distribución semanal de los 12 posts, 12 stories y 4 Reels incluidos en el paquete:',
       headers: ['Día', 'Pieza programada', 'Función dentro del embudo', 'Tiempo requerido de tu parte'],
       rows: [
@@ -705,7 +705,7 @@ export const BLOG_MX: EditorialBlogArticle[] = [
     faqs: [
       {
         q: '¿Cuántos posts y carruseles incluye cada paquete mensual en México?',
-        a: 'El paquete Esencial ($3,900 MXN/mes) incluye 8 publicaciones de feed; y los paquetes Crecimiento ($7,500 MXN/mes) y Pro ($12,900 MXN/mes) incluyen 12 publicaciones mensuales.',
+        a: 'El paquete Esencial ($6,300 MXN/mes) incluye 9 posts/carruseles; Crecimiento ($9,450 MXN/mes) incluye 12; y Pro ($13,650 MXN/mes) incluye 15 publicaciones mensuales.',
       },
       {
         q: '¿Yo tengo que escribir el contenido de cada lámina o lo hacen ustedes?',
@@ -830,7 +830,7 @@ export const BLOG_MX: EditorialBlogArticle[] = [
         heading: 'La regla de oro: constancia mensual antes que complicarte la vida',
         lead: 'No necesitas volverte creador de contenido de tiempo completo para tener presencia impecable en ambas redes.',
         paragraphs: [
-          'Con nuestros paquetes mensuales en México (desde $3,900 MXN/mes) grabas una sola vez al mes durante 30 minutos con tu celular y recibes todo tu sistema de guiones, edición, carruseles y calendario programado.',
+          'Con nuestros paquetes mensuales en México (desde $6,300 MXN/mes) grabas una sola vez al mes durante 30 minutos con tu celular y recibes todo tu sistema de guiones, edición, carruseles y calendario programado.',
         ],
       },
     ],
@@ -891,7 +891,7 @@ export const BLOG_MX: EditorialBlogArticle[] = [
       },
       {
         q: '¿En cuánto empiezan los paquetes mensuales en México?',
-        a: 'El paquete Esencial cuesta $3,900 MXN/mes, el paquete Crecimiento $7,500 MXN/mes y el paquete Pro $12,900 MXN/mes.',
+        a: 'El paquete Esencial cuesta $6,300 MXN/mes, el paquete Crecimiento $9,450 MXN/mes y el paquete Pro $13,650 MXN/mes.',
       },
       {
         q: '¿Cómo puedo recibir las 3 ideas de Reels gratuitas para mi cuenta?',

@@ -161,7 +161,7 @@ export function serviceJsonLd(opts: {
       name: `${BRAND.name} (${opts.country === 'es' ? 'España' : 'México'})`,
       url: abs(opts.path),
       areaServed: area,
-      priceRange: opts.country === 'es' ? '349 € - 990 € / mes' : '$3,900 - $12,900 MXN / mes',
+      priceRange: opts.country === 'es' ? '300 € - 650 € / mes' : '$6,300 - $13,650 MXN / mes',
       parentOrganization: { '@id': abs('/#organization') },
     },
     {

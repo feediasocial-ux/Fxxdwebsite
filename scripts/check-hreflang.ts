@@ -126,7 +126,7 @@ for (const geoFile of ['llms.txt', 'llms-full.txt']) {
     errors++;
   } else {
     const content = fs.readFileSync(p, 'utf8');
-    if (!content.includes('349 €') || !content.includes('3,900 MXN')) {
+    if (!content.includes('300 €') || !content.includes('6,300 MXN')) {
       console.error(`❌ /${geoFile} no incluye la tabla completa de precios EUR/MXN`);
       errors++;
     }
