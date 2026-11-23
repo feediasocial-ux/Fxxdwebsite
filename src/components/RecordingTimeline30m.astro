@@ -1,0 +1,66 @@
+---
+/**
+ * Cronómetro visual minuto a minuto de la sesión mensual de grabación (30 minutos).
+ * Hace 100 % tangible la promesa de «solo grabas 30 minutos al mes con tu móvil/celular».
+ */
+import Card from './Card.astro';
+import { getUi } from '@/content';
+import type { CountryKey } from '@/lib/i18n';
+
+interface Props {
+  country: CountryKey;
+}
+
+const { country } = Astro.props;
+const copy = getUi(country).recordingTimeline;
+---
+
+<section class="container-site py-16 md:py-24">
+  <div class="rounded-[36px] border-2 border-ink bg-cream-deep p-6 shadow-[10px_10px_0_0_var(--ink)] md:p-10">
+    <div class="flex flex-wrap items-end justify-between gap-4 border-b-2 border-ink pb-6">
+      <div class="max-w-3xl space-y-3">
+        <span class="inline-block rounded-pill border-2 border-ink bg-coral px-4 py-1 text-xs font-extrabold uppercase shadow-[3px_3px_0_0_var(--ink)]">
+          ⏱ {copy.eyebrow}
+        </span>
+        <h2 class="text-display-lg">{copy.title}</h2>
+        <p class="text-base text-ink-soft md:text-lg">{copy.subtitle}</p>
+      </div>
+      <span class="rounded-2xl border-2 border-ink bg-ink px-4 py-2.5 font-display text-xl uppercase text-lemon">
+        {copy.totalBadge}
+      </span>
+    </div>
+
+    <!-- Barra visual proporcional de 30 minutos (16% · 50% · 34%) -->
+    <div class="mt-6 grid grid-cols-6 overflow-hidden rounded-2xl border-2 border-ink bg-cream text-xs font-extrabold uppercase shadow-[4px_4px_0_0_var(--ink)]">
+      <div class="col-span-1 border-r-2 border-ink bg-lemon px-2.5 py-2 text-center text-ink">
+        5 min
+      </div>
+      <div class="col-span-3 border-r-2 border-ink bg-coral px-3 py-2 text-center text-ink">
+        15 min · 4 Reels hablados
+      </div>
+      <div class="col-span-2 bg-sky px-2.5 py-2 text-center text-ink">
+        10 min · B-roll
+      </div>
+    </div>
+
+    <div class="mt-8 grid gap-6 lg:grid-cols-3">
+      {
+        copy.blocks.map((block, idx) => (
+          <Card color={block.color} bordered class="flex flex-col gap-3">
+            <div class="flex items-center justify-between gap-2">
+              <span class="rounded-pill border-2 border-ink bg-cream px-3 py-1 text-xs font-extrabold uppercase">
+                {block.timeRange}
+              </span>
+              <span class="font-display text-2xl">0{idx + 1}</span>
+            </div>
+            <h3 class="text-2xl leading-tight">{block.title}</h3>
+            <p class="text-sm leading-relaxed">{block.desc}</p>
+            <p class="mt-auto rounded-xl border border-ink bg-cream/90 p-3 text-xs font-bold">
+              💡 {block.tip}
+            </p>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

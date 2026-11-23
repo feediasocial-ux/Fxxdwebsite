@@ -6,6 +6,9 @@ import NicheCard from '@/components/NicheCard.astro';
 import Button from '@/components/Button.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallButton from '@/components/BookCallButton.astro';
+import FeedBeforeAfter from '@/components/FeedBeforeAfter.astro';
+import CarouselPreviewMockup from '@/components/CarouselPreviewMockup.astro';
+import AuditForm from '@/components/AuditForm.astro';
 import Photo from '@/components/Photo.astro';
 import StripeBand from '@/components/StripeBand.astro';
 import { getCorePages, getUi } from '@/content';
@@ -15,9 +18,8 @@ import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { linkTo, pathFor } from '@/lib/routes';
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo';
 
-import proceso02 from '@/assets/photos/proceso-02-guiones-calendario.jpg';
-import serviciosIa from '@/assets/photos/servicios-ia-graficos.jpg';
-import sinCamara from '@/assets/photos/sin-camara.jpg';
+import mesaTrabajo from '@/assets/photos/feediasocial-mesa-trabajo-pantone.webp';
+import estudioEdicion from '@/assets/photos/feediasocial-estudio-edicion.webp';
 
 interface Props {
   country: CountryKey;
@@ -88,10 +90,10 @@ const crumbs = [
 
       <div class="grid grid-cols-2 gap-4">
         <div class="overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--coral)]">
-          <Photo src={proceso02} alt={copy.blocks[0].title} priority aspect="1/1" widths={[360, 540]} sizes="45vw" />
+          <Photo src={mesaTrabajo} alt={copy.blocks[0].title} priority aspect="1/1" widths={[360, 540]} sizes="45vw" />
         </div>
         <div class="mt-6 overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--lemon)]">
-          <Photo src={serviciosIa} alt={copy.blocks[3].title} aspect="1/1" widths={[360, 540]} sizes="45vw" />
+          <Photo src={estudioEdicion} alt={copy.blocks[3].title} aspect="1/1" widths={[360, 540]} sizes="45vw" />
         </div>
       </div>
     </div>
@@ -104,8 +106,8 @@ const crumbs = [
     <h2 class="text-display-lg">{copy.blocksTitle}</h2>
     <div class="mt-10 grid gap-6 md:grid-cols-2">
       {
-        copy.blocks.map((b) => (
-          <Card color={b.color} bordered class="flex flex-col gap-4">
+        copy.blocks.map((b, idx) => (
+          <Card color={b.color} bordered class:list={['flex flex-col gap-4', idx === 4 && 'md:col-span-2']}>
             <span class="inline-block w-fit rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
               {b.badge}
             </span>
@@ -123,27 +125,40 @@ const crumbs = [
         ))
       }
     </div>
+
+    <div class="mt-16">
+      <FeedBeforeAfter country={country} />
+    </div>
   </section>
 
   <!-- Plan B sin cámara -->
   <section class="theme-dark py-16 md:py-24">
-    <div class="container-site grid items-center gap-8 md:grid-cols-[1.3fr_1fr]">
+    <div class="container-site grid items-center gap-8 md:grid-cols-[1.15fr_1fr]">
       <div class="space-y-4">
         <h2 class="text-display-md text-cream">{ui.pricing.planBTitle}</h2>
         <p class="text-lg text-cream/85">{ui.pricing.planBText}</p>
-        <WhatsAppButton
-          message={ui.pricing.planBWaMessage}
-          label={ui.pricing.planBCta}
-          a11yLabel={ui.a11y.openWhatsApp}
-          country={country}
-          page="servicios"
-          placement="plan-b"
-          variant="lemon"
-          size="lg"
-        />
+        <div class="flex flex-wrap gap-3">
+          <WhatsAppButton
+            message={ui.pricing.planBWaMessage}
+            label={ui.pricing.planBCta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page="servicios"
+            placement="plan-b"
+            variant="lemon"
+            size="lg"
+          />
+          <BookCallButton
+            country={country}
+            page="servicios"
+            placement="plan-b"
+            variant="light"
+            size="lg"
+          />
+        </div>
       </div>
-      <div class="overflow-hidden rounded-[28px] border-2 border-cream">
-        <Photo src={sinCamara} alt={ui.pricing.planBTitle} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 38vw, 90vw" />
+      <div class="text-ink">
+        <CarouselPreviewMockup country={country} compact />
       </div>
     </div>
   </section>
@@ -169,6 +184,36 @@ const crumbs = [
           />
         ))
       }
+    </div>
+  </section>
+
+  <!-- CTA final de conversión -->
+  <section class="container-site pb-20">
+    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream shadow-[10px_10px_0_0_var(--ink)] md:p-10 lg:grid-cols-[1fr_1.15fr]">
+      <div class="space-y-5">
+        <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
+        <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
+        <div class="flex flex-wrap gap-3">
+          <WhatsAppButton
+            message={copy.waMessage}
+            label={ui.finalCta.cta}
+            a11yLabel={ui.a11y.openWhatsApp}
+            country={country}
+            page="servicios"
+            placement="final-cta"
+            variant="lemon"
+            size="lg"
+          />
+          <BookCallButton
+            country={country}
+            page="servicios"
+            placement="final-cta"
+            variant="light"
+            size="lg"
+          />
+        </div>
+      </div>
+      <AuditForm country={country} page="servicios" />
     </div>
   </section>
 </BaseLayout>

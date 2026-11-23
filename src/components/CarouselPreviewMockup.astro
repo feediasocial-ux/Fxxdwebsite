@@ -1,0 +1,191 @@
+---
+/**
+ * Mockup interactivo de Carrusel de Instagram 4:5 (5 láminas deslizables).
+ * Muestra cómo luce el Plan B sin cámara y nuestros carruseles educativos orientados a guardados.
+ */
+import { getUi } from '@/content';
+import type { CountryKey } from '@/lib/i18n';
+
+interface Props {
+  country: CountryKey;
+  compact?: boolean;
+}
+
+const { country, compact = false } = Astro.props;
+const copy = getUi(country).carouselMockup;
+
+const slideStyles = {
+  lemon: 'bg-lemon text-ink',
+  'cream-deep': 'bg-cream-deep text-ink',
+  sky: 'bg-sky text-ink',
+  coral: 'bg-coral text-ink',
+  maroon: 'bg-maroon text-cream',
+} as const;
+---
+
+<div class="carousel-mockup space-y-5" data-carousel-mockup>
+  {
+    !compact && (
+      <div class="max-w-2xl space-y-2">
+        <span class="inline-block rounded-pill border-2 border-ink bg-lemon px-3.5 py-1 text-xs font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
+          {copy.badge}
+        </span>
+        <h3 class="text-display-md">{copy.title}</h3>
+        <p class="text-sm text-ink-soft md:text-base">{copy.subtitle}</p>
+      </div>
+    )
+  }
+
+  <div class="mx-auto w-full max-w-xl overflow-hidden rounded-[32px] border-2 border-ink bg-cream text-ink shadow-[8px_8px_0_0_var(--ink)]">
+    <!-- Cabecera tipo publicación de Instagram 4:5 -->
+    <div class="flex items-center justify-between border-b-2 border-ink bg-ink px-4 py-3 text-cream">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-flex size-7 items-center justify-center rounded-full border border-cream bg-coral font-display text-xs text-ink">
+          FS
+        </span>
+        <span class="text-xs font-bold tracking-wide">CARRUSEL 4:5 · PLAN B SIN CÁMARA</span>
+      </div>
+      <span
+        data-carousel-counter
+        class="rounded-pill border border-cream/40 bg-maroon px-2.5 py-0.5 text-xs font-extrabold text-lemon"
+      >
+        01 / 05
+      </span>
+    </div>
+
+    <!-- Área de lámina activa -->
+    <div class="relative min-h-[280px] md:min-h-[310px]">
+      {
+        copy.slides.map((slide, idx) => (
+          <div
+            data-carousel-slide={idx}
+            hidden={idx !== 0}
+            class:list={[
+              'flex min-h-[280px] flex-col justify-between gap-5 p-6 md:min-h-[310px] md:p-8',
+              slideStyles[slide.color],
+            ]}
+          >
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="rounded-pill border-2 border-ink bg-cream px-3 py-1 text-[11px] font-extrabold uppercase text-ink">
+                {slide.tag}
+              </span>
+              <span class="font-display text-2xl opacity-80">{slide.num}</span>
+            </div>
+
+            <div class="space-y-3 my-auto">
+              <p class="font-display text-2xl uppercase leading-tight md:text-3xl">
+                {slide.headline}
+              </p>
+              <p class="text-sm font-medium leading-relaxed opacity-90 md:text-base">
+                {slide.body}
+              </p>
+            </div>
+
+            <div class="rounded-2xl border-2 border-ink bg-cream px-4 py-2.5 text-xs font-extrabold text-ink shadow-[3px_3px_0_0_var(--ink)]">
+              ★ {slide.highlight}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Barra inferior de controles del carrusel (botones + puntos + icono guardar) -->
+    <div class="flex flex-wrap items-center justify-between gap-3 border-t-2 border-ink bg-cream-deep px-4 py-3">
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          data-carousel-prev
+          aria-label={copy.prevLabel}
+          class="inline-flex size-9 items-center justify-center rounded-full border-2 border-ink bg-cream font-bold text-ink shadow-[2px_2px_0_0_var(--ink)] hover:bg-lemon"
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          data-carousel-next
+          aria-label={copy.nextLabel}
+          class="inline-flex size-9 items-center justify-center rounded-full border-2 border-ink bg-coral font-bold text-ink shadow-[2px_2px_0_0_var(--ink)] hover:bg-lemon"
+        >
+          →
+        </button>
+      </div>
+
+      <div class="flex items-center gap-1.5" role="tablist" aria-label={copy.badge}>
+        {
+          copy.slides.map((s, idx) => (
+            <button
+              type="button"
+              data-carousel-dot={idx}
+              aria-label={`Slide ${idx + 1}: ${s.tag}`}
+              class:list={[
+                'h-2.5 rounded-full border border-ink transition-all',
+                idx === 0 ? 'w-6 bg-coral' : 'w-2.5 bg-cream',
+              ]}
+            />
+          ))
+        }
+      </div>
+
+      <span class="inline-flex items-center gap-1.5 rounded-pill border border-ink bg-cream px-2.5 py-1 text-[11px] font-bold text-ink">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M6 2h12a2 2 0 0 1 2 2v18l-8-4-8 4V4a2 2 0 0 1 2-2z"></path>
+        </svg>
+        <span>{copy.saveTag}</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var mockups = document.querySelectorAll('[data-carousel-mockup]');
+    for (var i = 0; i < mockups.length; i++) {
+      (function (root) {
+        if (root.hasAttribute('data-bound')) return;
+        root.setAttribute('data-bound', 'true');
+        var slides = root.querySelectorAll('[data-carousel-slide]');
+        var dots = root.querySelectorAll('[data-carousel-dot]');
+        var counter = root.querySelector('[data-carousel-counter]');
+        var prevBtn = root.querySelector('[data-carousel-prev]');
+        var nextBtn = root.querySelector('[data-carousel-next]');
+        var current = 0;
+        var total = slides.length;
+
+        function goTo(index) {
+          current = (index + total) % total;
+          for (var s = 0; s < total; s++) {
+            if (s === current) slides[s].removeAttribute('hidden');
+            else slides[s].setAttribute('hidden', '');
+          }
+          for (var d = 0; d < dots.length; d++) {
+            dots[d].className =
+              d === current
+                ? 'h-2.5 w-6 rounded-full border border-ink bg-coral transition-all'
+                : 'h-2.5 w-2.5 rounded-full border border-ink bg-cream transition-all';
+          }
+          if (counter) {
+            counter.textContent = '0' + (current + 1) + ' / 0' + total;
+          }
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function () {
+            goTo(current - 1);
+          });
+        }
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function () {
+            goTo(current + 1);
+          });
+        }
+        for (var k = 0; k < dots.length; k++) {
+          (function (idx) {
+            dots[idx].addEventListener('click', function () {
+              goTo(idx);
+            });
+          })(k);
+        }
+      })(mockups[i]);
+    }
+  })();
+</script>

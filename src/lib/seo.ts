@@ -4,10 +4,11 @@ import { PACKAGES } from '@/content/pricing';
 
 export const BRAND = {
   name: 'Feediasocial',
-  legalName: '[PENDIENTE: razón social]',
+  legalName: 'Feediasocial',
+  founderName: 'Daniela',
   url: import.meta.env.SITE || 'https://feediasocial.com',
   logoPath: '/favicon.svg',
-  sameAs: [] as string[], // [PENDIENTE: perfiles de redes]
+  sameAs: [] as string[],
 };
 
 export type Alternate = { hreflang: string; href: string };
@@ -81,6 +82,11 @@ export function orgJsonLd() {
     name: BRAND.name,
     url: abs('/'),
     logo: abs(BRAND.logoPath),
+    founder: {
+      '@type': 'Person',
+      name: BRAND.founderName,
+      jobTitle: 'Fundadora · Especialista en Social Media, SEO, Branding, Foto y Video',
+    },
     areaServed: [
       { '@type': 'Country', name: 'Spain' },
       { '@type': 'Country', name: 'Mexico' },

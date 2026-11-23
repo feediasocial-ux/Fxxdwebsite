@@ -12,6 +12,9 @@ import GeoKeyFacts from '@/components/GeoKeyFacts.astro';
 import FAQ from '@/components/FAQ.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallButton from '@/components/BookCallButton.astro';
+import CarouselPreviewMockup from '@/components/CarouselPreviewMockup.astro';
+import RecordingTimeline30m from '@/components/RecordingTimeline30m.astro';
+import EeatMethodologyBox from '@/components/EeatMethodologyBox.astro';
 import StripeBand from '@/components/StripeBand.astro';
 import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getUi } from '@/content';
@@ -357,6 +360,10 @@ const crumbs = [
             </ul>
           </section>
 
+          <!-- Demostración interactiva según el tema del artículo -->
+          {article.id === 'carruseles' && <CarouselPreviewMockup country={country} compact />}
+          {article.id === 'grabacion' && <RecordingTimeline30m country={country} />}
+
           <!-- Preguntas frecuentes del artículo -->
           {
             article.faqs.length > 0 && (
@@ -366,6 +373,9 @@ const crumbs = [
               </section>
             )
           }
+
+          <!-- Sello de metodología editorial verificable E-E-A-T -->
+          <EeatMethodologyBox country={country} updatedDate={article.updatedDate} />
 
           <!-- Cierre de conversión a WhatsApp + Llamada 15 min -->
           <footer class="rounded-[32px] border-2 border-ink bg-maroon p-7 text-cream shadow-[8px_8px_0_0_var(--ink)] md:p-10 space-y-5">

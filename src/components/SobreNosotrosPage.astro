@@ -4,7 +4,6 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Card from '@/components/Card.astro';
 import Photo from '@/components/Photo.astro';
 import Sticker from '@/components/Sticker.astro';
-import Placeholder from '@/components/Placeholder.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallButton from '@/components/BookCallButton.astro';
 import StripeBand from '@/components/StripeBand.astro';
@@ -13,7 +12,10 @@ import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { pathFor } from '@/lib/routes';
 import { abs, breadcrumbJsonLd } from '@/lib/seo';
 
-import equipoRemoto from '@/assets/photos/equipo-remoto-estudio.jpg';
+import equipoEscritorio from '@/assets/photos/feediasocial-equipo-escritorio.webp';
+import fundadoraDaniela from '@/assets/photos/feediasocial-fundadora-daniela.webp';
+import mesaTrabajo from '@/assets/photos/feediasocial-mesa-trabajo-pantone.webp';
+import estudioEdicion from '@/assets/photos/feediasocial-estudio-edicion.webp';
 
 interface Props {
   country: CountryKey;
@@ -27,14 +29,16 @@ const crumbs = [
   { name: 'Sobre nosotros', path },
 ];
 
-// JSON-LD Person para las dos personas fundadoras (con marcadores pendientes reales)
-const foundersJsonLd = copy.founders.map((f, i) => ({
-  '@type': 'Person',
-  '@id': abs(`${path}#founder-${i + 1}`),
-  name: f.name,
-  jobTitle: f.role,
-  worksFor: { '@id': abs('/#organization') },
-}));
+// JSON-LD Person para la fundadora Daniela
+const foundersJsonLd = [
+  {
+    '@type': 'Person',
+    '@id': abs(`${path}#founder-daniela`),
+    name: copy.founders[0].name,
+    jobTitle: copy.founders[0].role,
+    worksFor: { '@id': abs('/#organization') },
+  },
+];
 ---
 
 <BaseLayout
@@ -84,7 +88,7 @@ const foundersJsonLd = copy.founders.map((f, i) => ({
         </Sticker>
         <div class="overflow-hidden rounded-[32px] border-2 border-ink shadow-[10px_12px_0_0_var(--coral)]">
           <Photo
-            src={equipoRemoto}
+            src={equipoEscritorio}
             alt={copy.h1}
             priority
             aspect="4/3"
@@ -98,14 +102,22 @@ const foundersJsonLd = copy.founders.map((f, i) => ({
 
   <StripeBand colors={['var(--coral)', 'var(--cream)']} />
 
-  <!-- Las dos personas fundadoras -->
+  <!-- Daniela (Fundadora) y el estudio de producción -->
   <section class="container-site py-16 md:py-24">
     <h2 class="text-display-lg">{copy.foundersTitle}</h2>
     <div class="mt-10 grid gap-8 md:grid-cols-2">
       {
-        copy.founders.map((f) => (
-          <Card color="cream-deep" bordered class="grid gap-6 sm:grid-cols-[0.85fr_1.15fr] sm:items-center">
-            <Placeholder label={f.placeholder} aspect="4/5" tone={f.color} />
+        copy.founders.map((f, idx) => (
+          <Card color="cream-deep" bordered class="grid gap-6 sm:grid-cols-[0.88fr_1.12fr] sm:items-center">
+            <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream shadow-[5px_5px_0_0_var(--ink)]">
+              <Photo
+                src={idx === 0 ? fundadoraDaniela : mesaTrabajo}
+                alt={f.placeholder}
+                aspect="3/4"
+                widths={[320, 480]}
+                sizes="(min-width: 768px) 220px, 85vw"
+              />
+            </div>
             <div class="space-y-3">
               <span class="inline-block rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
                 {f.role}
@@ -119,18 +131,44 @@ const foundersJsonLd = copy.founders.map((f, i) => ({
     </div>
   </section>
 
-  <!-- Nuestra historia y por qué hablamos su idioma -->
+  <!-- Nuestra historia + Vídeo del estudio por dentro -->
   <section class="theme-dark py-16 md:py-24">
-    <div class="container-site grid gap-12 lg:grid-cols-2">
-      <div class="space-y-4">
-        <h2 class="text-display-md text-cream">{copy.storyTitle}</h2>
-        {copy.storyParagraphs.map((p) => <p class="text-lg text-cream/85">{p}</p>)}
+    <div class="container-site grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+      <div class="space-y-6">
+        <div class="space-y-4">
+          <h2 class="text-display-md text-cream">{copy.storyTitle}</h2>
+          {copy.storyParagraphs.map((p) => <p class="text-lg text-cream/85">{p}</p>)}
+        </div>
+
+        <Card color="lemon" bordered class="space-y-3">
+          <h2 class="text-display-md">{copy.whyTwoCountriesTitle}</h2>
+          <p>{copy.whyTwoCountriesText}</p>
+        </Card>
       </div>
 
-      <Card color="lemon" bordered class="space-y-4 self-center">
-        <h2 class="text-display-md">{copy.whyTwoCountriesTitle}</h2>
-        <p>{copy.whyTwoCountriesText}</p>
-      </Card>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div class="overflow-hidden rounded-[28px] border-2 border-cream bg-ink shadow-[8px_8px_0_0_var(--coral)]">
+          <video
+            src="/videos/feediasocial-estudio-hero.mp4"
+            controls
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-label="Daniela trabajando en el estudio de Feediasocial: guiones, color y edición de Reels"
+            class="aspect-[3/4] h-full w-full object-cover"
+          ></video>
+        </div>
+        <div class="overflow-hidden rounded-[28px] border-2 border-cream shadow-[8px_8px_0_0_var(--lemon)]">
+          <Photo
+            src={estudioEdicion}
+            alt="Daniela editando y estructurando contenido mensual en el estudio de Feediasocial"
+            aspect="3/4"
+            widths={[360, 540]}
+            sizes="(min-width: 640px) 22vw, 90vw"
+          />
+        </div>
+      </div>
     </div>
   </section>
 

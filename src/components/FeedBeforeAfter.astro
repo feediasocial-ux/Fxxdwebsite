@@ -1,0 +1,122 @@
+---
+/**
+ * Comparador visual 3×2 de Feed: «Sin sistema (improvisando)» vs. «Con el sistema Feediasocial».
+ * 100 % honesto: compara estructura editorial, constancia y claridad visual (sin métricas falsas).
+ */
+import { getUi } from '@/content';
+import type { CountryKey } from '@/lib/i18n';
+
+interface Props {
+  country: CountryKey;
+}
+
+const { country } = Astro.props;
+const copy = getUi(country).feedComparison;
+
+const cellColors = {
+  coral: 'bg-coral text-ink',
+  lemon: 'bg-lemon text-ink',
+  sky: 'bg-sky text-ink',
+} as const;
+---
+
+<section class="container-site py-16 md:py-24">
+  <div class="max-w-3xl space-y-3">
+    <p class="inline-block rounded-pill border-2 border-ink bg-lemon px-4 py-1 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
+      {copy.eyebrow}
+    </p>
+    <h2 class="text-display-lg">{copy.title}</h2>
+    <p class="text-lg text-ink-soft">{copy.subtitle}</p>
+  </div>
+
+  <div class="mt-10 grid gap-8 lg:grid-cols-2">
+    <!-- Columna Izquierda: Sin sistema (improvisando) -->
+    <div class="flex flex-col justify-between rounded-[32px] border-2 border-dashed border-ink bg-cream-deep p-6 text-ink shadow-[6px_6px_0_0_var(--ink)] md:p-8">
+      <div class="space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-extrabold uppercase text-coral-deep">
+            ✕ {copy.beforeBadge}
+          </span>
+          <span class="text-xs font-bold text-ink-soft">{copy.beforeHandle}</span>
+        </div>
+
+        <h3 class="text-2xl md:text-3xl">{copy.beforeTitle}</h3>
+        <p class="rounded-xl border border-ink/25 bg-cream p-3 text-xs text-ink-soft">
+          {copy.beforeBio}
+        </p>
+
+        <!-- Cuadrícula 3×2 desordenada -->
+        <div class="grid grid-cols-3 gap-2.5">
+          {
+            copy.beforeGrid.map((cell) => (
+              <div class="flex aspect-square flex-col justify-between rounded-2xl border border-dashed border-ink/45 bg-cream/70 p-2.5 opacity-80">
+                <span class="rounded bg-ink/10 px-1.5 py-0.5 text-[10px] font-bold text-ink-soft w-fit">
+                  {cell.issue}
+                </span>
+                <p class="text-xs font-bold leading-snug text-ink-soft">{cell.label}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <ul class="mt-6 space-y-2 border-t-2 border-ink/15 pt-4 text-sm text-ink-soft">
+        {
+          copy.beforePains.map((pain) => (
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-coral-deep" aria-hidden="true">✕</span>
+              <span>{pain}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Columna Derecha: Con el sistema Feediasocial -->
+    <div class="flex flex-col justify-between rounded-[32px] border-2 border-ink bg-ink p-6 text-cream shadow-[10px_10px_0_0_var(--coral)] md:p-8">
+      <div class="space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="rounded-pill border-2 border-ink bg-lemon px-3 py-1 text-xs font-extrabold uppercase text-ink">
+            ✓ {copy.afterBadge}
+          </span>
+          <span class="text-xs font-bold text-lemon">{copy.afterHandle}</span>
+        </div>
+
+        <h3 class="text-2xl text-cream md:text-3xl">{copy.afterTitle}</h3>
+        <p class="rounded-xl border border-cream/30 bg-maroon p-3 text-xs font-bold text-cream">
+          {copy.afterBio}
+        </p>
+
+        <!-- Cuadrícula 3×2 editorial con sistema -->
+        <div class="grid grid-cols-3 gap-2.5">
+          {
+            copy.afterGrid.map((cell) => (
+              <div
+                class:list={[
+                  'flex aspect-square flex-col justify-between rounded-2xl border-2 border-cream p-3 shadow-[3px_3px_0_0_var(--cream)]',
+                  cellColors[cell.color],
+                ]}
+              >
+                <span class="w-fit rounded-pill border border-ink bg-cream px-2 py-0.5 text-[9px] font-extrabold uppercase text-ink">
+                  {cell.format}
+                </span>
+                <p class="text-xs font-extrabold leading-tight">{cell.title}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <ul class="mt-6 space-y-2 border-t-2 border-cream/20 pt-4 text-sm text-cream/90">
+        {
+          copy.afterWins.map((win) => (
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-lemon" aria-hidden="true">✓</span>
+              <span>{win}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

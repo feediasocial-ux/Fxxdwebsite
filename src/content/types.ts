@@ -236,6 +236,65 @@ export type UiCopy = {
     ctaBoxLabel: string;
     audioBarLabel: string;
   };
+  mobileMenu: {
+    openLabel: string;
+    closeLabel: string;
+    sectionsLabel: string;
+    nichesLabel: string;
+  };
+  carouselMockup: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    prevLabel: string;
+    nextLabel: string;
+    saveTag: string;
+    slides: {
+      num: string;
+      tag: string;
+      headline: string;
+      body: string;
+      highlight: string;
+      color: 'lemon' | 'coral' | 'sky' | 'cream-deep' | 'maroon';
+    }[];
+  };
+  recordingTimeline: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    totalBadge: string;
+    blocks: {
+      timeRange: string;
+      duration: string;
+      title: string;
+      desc: string;
+      tip: string;
+      color: 'lemon' | 'coral' | 'sky';
+    }[];
+  };
+  feedComparison: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    beforeBadge: string;
+    beforeTitle: string;
+    beforeHandle: string;
+    beforeBio: string;
+    beforeGrid: { label: string; issue: string }[];
+    beforePains: string[];
+    afterBadge: string;
+    afterTitle: string;
+    afterHandle: string;
+    afterBio: string;
+    afterGrid: { format: string; title: string; color: 'coral' | 'lemon' | 'sky' }[];
+    afterWins: string[];
+  };
+  eeatBox: {
+    badge: string;
+    title: string;
+    text: string;
+    pillars: { label: string; value: string }[];
+  };
 };
 
 /** Contrato del copy para las páginas interiores de Fase 2 y 3. */

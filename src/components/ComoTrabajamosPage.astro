@@ -5,18 +5,26 @@ import Button from '@/components/Button.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallButton from '@/components/BookCallButton.astro';
 import PhoneReelMockup from '@/components/PhoneReelMockup.astro';
+import CarouselPreviewMockup from '@/components/CarouselPreviewMockup.astro';
 import Photo from '@/components/Photo.astro';
 import Sticker from '@/components/Sticker.astro';
 import AuditForm from '@/components/AuditForm.astro';
 import StripeBand from '@/components/StripeBand.astro';
+import GeoKeyFacts from '@/components/GeoKeyFacts.astro';
 import { getPhase4, getUi } from '@/content';
 import { getNichesByCountry } from '@/content/niches';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { linkTo, pathFor } from '@/lib/routes';
-import { breadcrumbJsonLd } from '@/lib/seo';
+import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo';
 
-import proceso02 from '@/assets/photos/proceso-02-guiones-calendario.jpg';
-import proceso03 from '@/assets/photos/proceso-03-edicion.jpg';
+import mesaTrabajo from '@/assets/photos/feediasocial-mesa-trabajo-pantone.webp';
+import estudioEdicion from '@/assets/photos/feediasocial-estudio-edicion.webp';
+import resultadosPorton from '@/assets/photos/feediasocial-resultados-porton-maya.webp';
+import resultadosCedres from '@/assets/photos/feediasocial-resultados-cedres.webp';
+import casoCopimax from '@/assets/photos/feediasocial-caso-copimax.webp';
+import casoDolorfin from '@/assets/photos/feediasocial-caso-dolorfin-clinica.webp';
+import casoMudra from '@/assets/photos/feediasocial-caso-mudra-pilates.webp';
+import casoCedres from '@/assets/photos/feediasocial-caso-cedres-musica.webp';
 
 interface Props {
   country: CountryKey;
@@ -35,7 +43,16 @@ const crumbs = [
 
 <BaseLayout
   pageId="como-trabajamos"
-  jsonLdNodes={[breadcrumbJsonLd(crumbs)]}
+  jsonLdNodes={[
+    breadcrumbJsonLd(crumbs),
+    ...serviceJsonLd({
+      name: copy.h1,
+      description: copy.metaDescription,
+      path,
+      country,
+      serviceType: 'Social Media Scriptwriting, Editing & Content Calendar',
+    }),
+  ]}
   seo={{
     title: copy.metaTitle,
     description: copy.metaDescription,
@@ -82,16 +99,16 @@ const crumbs = [
           {copy.honestyBanner.badge}
         </Sticker>
         <div class="overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--coral)]">
-          <Photo src={proceso02} alt={copy.samplesTitle} priority aspect="4/5" widths={[360, 540]} sizes="45vw" />
+          <Photo src={mesaTrabajo} alt={copy.samplesTitle} priority aspect="4/5" widths={[360, 540]} sizes="45vw" />
         </div>
         <div class="mt-6 overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--lemon)]">
-          <Photo src={proceso03} alt={copy.calendarShowcaseTitle} aspect="4/5" widths={[360, 540]} sizes="45vw" />
+          <Photo src={estudioEdicion} alt={copy.calendarShowcaseTitle} aspect="4/5" widths={[360, 540]} sizes="45vw" />
         </div>
       </div>
     </div>
 
-    <!-- Aviso de honestidad: cero casos inventados -->
-    <div class="mt-12 rounded-[28px] border-2 border-dashed border-ink bg-cream-deep p-6 shadow-[6px_6px_0_0_var(--ink)] md:p-8">
+    <!-- Aviso de honestidad y muestras verificables -->
+    <div class="mt-12 rounded-[28px] border-2 border-ink bg-cream-deep p-6 shadow-[6px_6px_0_0_var(--ink)] md:p-8">
       <span class="inline-block rounded-pill border border-ink bg-lemon px-3 py-1 text-xs font-bold uppercase">
         {copy.honestyBanner.badge}
       </span>
@@ -100,7 +117,90 @@ const crumbs = [
     </div>
   </section>
 
+  <GeoKeyFacts country={country} />
+
   <StripeBand colors={['var(--coral)', 'var(--cream)']} />
+
+  <!-- Casos reales: Antes / Después y cuentas trabajadas desde el estudio -->
+  <section class="container-site pt-16 md:pt-24">
+    <div class="max-w-3xl space-y-3">
+      <span class="inline-block rounded-pill border-2 border-ink bg-lemon px-3.5 py-1 text-xs font-bold uppercase">
+        Portfolio real · Antes y después
+      </span>
+      <h2 class="text-display-lg">Cuentas reales que gestionamos y evolución visual del feed</h2>
+      <p class="text-lg text-ink-soft">
+        Capturas directas de perfiles reales trabajados por Daniela y el estudio: estructura de biografía, historias destacadas, portadas coherentes y Reels con retención.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-8 lg:grid-cols-2">
+      <div class="rounded-[32px] border-2 border-ink bg-cream-deep p-5 shadow-[8px_8px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-[22px] border-2 border-ink">
+          <Photo
+            src={resultadosPorton}
+            alt="Antes y después real del perfil de restaurante Portón Maya gestionado por Feediasocial"
+            aspect="9/16"
+            widths={[360, 540, 720]}
+            sizes="(min-width: 1024px) 44vw, 92vw"
+          />
+        </div>
+        <h3 class="mt-4 text-2xl">Restauración · Portón Maya</h3>
+        <p class="mt-1 text-sm text-ink-soft">
+          De un perfil desordenado a una identidad clara con historias destacadas por categoría, vídeo gastronómico real y crecimiento constante de seguidores y clientes.
+        </p>
+      </div>
+
+      <div class="rounded-[32px] border-2 border-ink bg-cream-deep p-5 shadow-[8px_8px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-[22px] border-2 border-ink">
+          <Photo
+            src={resultadosCedres}
+            alt="Antes y después real de @cedresmusica: de 1.455 a 19,1 mil seguidores con sistema de Reels"
+            aspect="9/16"
+            widths={[360, 540, 720]}
+            sizes="(min-width: 1024px) 44vw, 92vw"
+          />
+        </div>
+        <h3 class="mt-4 text-2xl">Marca personal · Cedres (19,1 mil seguidores)</h3>
+        <p class="mt-1 text-sm text-ink-soft">
+          Definición de formato propio en vídeo vertical («Misceláneas Musicales»), portadas unificadas y salto de 374 visualizaciones a Reels de 62,6 mil y 97,5 mil reproducciones.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-8 grid grid-cols-2 gap-5 lg:grid-cols-4">
+      <div class="rounded-[24px] border-2 border-ink bg-cream-deep p-3.5 shadow-[5px_5px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoCopimax} alt="Perfil de Instagram de Copimax Iztacalco con Reels de 1,2 M y 12,4 M de visualizaciones" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2.5 text-xs font-extrabold uppercase text-coral-deep">Negocio local · Copimax</p>
+        <p class="mt-0.5 text-xs font-bold text-ink">Reels orgánicos de 42,5 mil, 1,2 M y 12,4 M de visualizaciones.</p>
+      </div>
+
+      <div class="rounded-[24px] border-2 border-ink bg-cream-deep p-3.5 shadow-[5px_5px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoDolorfin} alt="Perfil de Instagram de Dolorfin Quiroprácticos con 22 sucursales" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2.5 text-xs font-extrabold uppercase text-coral-deep">Salud · Dolorfin Clínicas</p>
+        <p class="mt-0.5 text-xs font-bold text-ink">22 clínicas · Carruseles educativos y divulgación sanitaria rigurosa.</p>
+      </div>
+
+      <div class="rounded-[24px] border-2 border-ink bg-cream-deep p-3.5 shadow-[5px_5px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoMudra} alt="Perfil de Instagram de estudio Mudra Pilates Reformer" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2.5 text-xs font-extrabold uppercase text-coral-deep">Fitness y Bienestar · Mudra Pilates</p>
+        <p class="mt-0.5 text-xs font-bold text-ink">Dirección de arte limpia, portadas editoriales y agenda por DM/WhatsApp.</p>
+      </div>
+
+      <div class="rounded-[24px] border-2 border-ink bg-cream-deep p-3.5 shadow-[5px_5px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoCedres} alt="Perfil de Instagram de Cedres con serie de Reels" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2.5 text-xs font-extrabold uppercase text-coral-deep">Identidad visual · Cedres</p>
+        <p class="mt-0.5 text-xs font-bold text-ink">Cuadrícula ordenada por series y retención constante en Reels.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- 3 muestras reales de guiones palabra por palabra en formato Mockup 9:16 -->
   <section class="container-site py-16 md:py-24">
@@ -125,6 +225,10 @@ const crumbs = [
           />
         ))
       }
+    </div>
+
+    <div class="mt-16">
+      <CarouselPreviewMockup country={country} />
     </div>
   </section>
 

@@ -1,14 +1,12 @@
 import type { CountryKey } from './i18n';
+import { BUSINESS_CONFIG } from '@/content/business-config';
 
 /**
  * Enlace centralizado para agendar llamada de descubrimiento de 15 min (Calendly).
- * Se configura mediante `PUBLIC_CALENDLY_URL` en `.env` (fallback limpio hasta recibir el enlace definitivo).
+ * Se configura mediante `PUBLIC_CALENDLY_URL` o en `src/content/business-config.ts`.
  */
-const DEFAULT_CALENDLY_URL = 'https://calendly.com/feediasocial/15min';
-
 export function getCalendlyBaseUrl(): string {
-  const envUrl = import.meta.env.PUBLIC_CALENDLY_URL as string | undefined;
-  return envUrl && envUrl.trim().length > 0 ? envUrl.trim() : DEFAULT_CALENDLY_URL;
+  return BUSINESS_CONFIG.calendlyUrl;
 }
 
 export interface BookCallLinkOpts {

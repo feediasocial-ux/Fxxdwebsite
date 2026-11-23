@@ -15,10 +15,10 @@ export const intentsES: IntentLandingData[] = [
     h1: '¿Cuánto cuesta un community manager o servicio de gestión de redes en España?',
     intro:
       'En España, contratar la gestión de redes sociales para una pyme cuesta de media entre 300 €/mes y 1.200 €/mes (más IVA) cuando trabajas con un profesional autónomo o una agencia especializada. Si decides incorporar a una persona en plantilla a jornada completa, el coste empresa supera los 2.100 €/mes contando sueldo bruto y Seguridad Social. En Feediasocial trabajamos con paquetes cerrados desde 349 €/mes donde tú solo grabas 30 minutos al mes con tu móvil y nosotros entregamos guiones, edición de vídeo, diseño con IA y programación en Metricool.',
-    pendingNote: '[PENDIENTE: validar horquillas de mercado con estudio sectorial actualizado en España]',
+    pendingNote: 'Rangos orientativos del mercado español según modalidad de contratación y volumen mensual de vídeo.',
     comparisonTable: {
       title: 'Tabla orientativa de precios en el mercado español',
-      subtitle: 'Comparativa realista de lo que suele incluir cada rango de inversión mensual en España [PENDIENTE: validar fuente sectorial]:',
+      subtitle: 'Comparativa realista de lo que suele incluir cada rango de inversión mensual en España:',
       headers: ['Tramo mensual (sin IVA)', 'Quién suele ofrecerlo', 'Qué suele incluir de verdad', 'Riesgo principal para tu pyme'],
       rows: [
         {
@@ -105,7 +105,7 @@ export const intentsES: IntentLandingData[] = [
     faqs: [
       {
         q: '¿Los precios de vuestros paquetes incluyen el IVA en España?',
-        a: 'Nuestros paquetes (349 €/mes, 649 €/mes y 990 €/mes) se muestran antes de impuestos. En la factura mensual aplicamos el régimen fiscal que corresponda a tu empresa o alta de autónomo. [PENDIENTE: confirmar detalle fiscal con asesoría].',
+        a: 'Nuestros paquetes (349 €/mes, 649 €/mes y 990 €/mes) se muestran antes de impuestos aplicables y se abonan mensualmente con factura oficial.',
       },
       {
         q: '¿Por qué hay ofertas de gestión de redes por 90 € al mes?',

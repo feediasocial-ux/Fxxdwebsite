@@ -4,16 +4,19 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Card from '@/components/Card.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallButton from '@/components/BookCallButton.astro';
+import BookCallCard from '@/components/BookCallCard.astro';
+import RecordingTimeline30m from '@/components/RecordingTimeline30m.astro';
+import GeoKeyFacts from '@/components/GeoKeyFacts.astro';
 import Button from '@/components/Button.astro';
 import Photo from '@/components/Photo.astro';
 import StripeBand from '@/components/StripeBand.astro';
 import { getCorePages, getUi } from '@/content';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
 import { linkTo, pathFor } from '@/lib/routes';
-import { breadcrumbJsonLd } from '@/lib/seo';
+import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo';
 
-import proceso01 from '@/assets/photos/proceso-01-onboarding.jpg';
-import proceso03 from '@/assets/photos/proceso-03-edicion.jpg';
+import equipoEscritorio from '@/assets/photos/feediasocial-equipo-escritorio.webp';
+import estudioEdicion from '@/assets/photos/feediasocial-estudio-edicion.webp';
 import sinCamara from '@/assets/photos/sin-camara.jpg';
 
 interface Props {
@@ -31,7 +34,16 @@ const crumbs = [
 
 <BaseLayout
   pageId="como-funciona"
-  jsonLdNodes={[breadcrumbJsonLd(crumbs)]}
+  jsonLdNodes={[
+    breadcrumbJsonLd(crumbs),
+    ...serviceJsonLd({
+      name: copy.h1,
+      description: copy.metaDescription,
+      path,
+      country,
+      serviceType: 'Remote Social Media Content Workflow',
+    }),
+  ]}
   seo={{
     title: copy.metaTitle,
     description: copy.metaDescription,
@@ -75,14 +87,16 @@ const crumbs = [
 
       <div class="grid grid-cols-2 gap-4">
         <div class="overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--coral)]">
-          <Photo src={proceso01} alt={copy.processSteps[0].title} priority aspect="1/1" widths={[360, 540]} sizes="45vw" />
+          <Photo src={equipoEscritorio} alt={copy.processSteps[0].title} priority aspect="1/1" widths={[360, 540]} sizes="45vw" />
         </div>
         <div class="mt-6 overflow-hidden rounded-[28px] border-2 border-ink shadow-[8px_8px_0_0_var(--lemon)]">
-          <Photo src={proceso03} alt={copy.processSteps[3].title} aspect="1/1" widths={[360, 540]} sizes="45vw" />
+          <Photo src={estudioEdicion} alt={copy.processSteps[3].title} aspect="1/1" widths={[360, 540]} sizes="45vw" />
         </div>
       </div>
     </div>
   </section>
+
+  <GeoKeyFacts country={country} />
 
   <StripeBand colors={['var(--coral)', 'var(--cream)']} />
 
@@ -164,6 +178,10 @@ const crumbs = [
       }
     </div>
 
+    <div class="mt-14">
+      <RecordingTimeline30m country={country} />
+    </div>
+
     <!-- Plan B sin cámara -->
     <div class="mt-14 grid items-center gap-8 rounded-[32px] border-2 border-ink bg-sky p-6 md:grid-cols-[1.3fr_1fr] md:p-10">
       <div class="space-y-4">
@@ -182,6 +200,16 @@ const crumbs = [
       <div class="overflow-hidden rounded-[24px] border-2 border-ink">
         <Photo src={sinCamara} alt={copy.planBTitle} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 38vw, 90vw" />
       </div>
+    </div>
+
+    <div class="mt-12">
+      <BookCallCard
+        country={country}
+        page="como-funciona"
+        placement="bottom-banner"
+        mode="banner"
+        waMessage={copy.waMessage}
+      />
     </div>
   </section>
 </BaseLayout>

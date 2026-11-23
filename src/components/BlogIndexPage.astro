@@ -4,6 +4,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Photo from '@/components/Photo.astro';
 import Sticker from '@/components/Sticker.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import BookCallButton from '@/components/BookCallButton.astro';
 import StripeBand from '@/components/StripeBand.astro';
 import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getPhase4, getUi } from '@/content';
@@ -262,7 +263,7 @@ const intentPhotos = {
         }
       </div>
 
-      <div class="pt-2">
+      <div class="flex flex-wrap gap-3 pt-2">
         <WhatsAppButton
           message={copy.waMessage}
           label={copy.waCta}
@@ -271,6 +272,13 @@ const intentPhotos = {
           page="blog"
           placement="bottom"
           variant="lemon"
+          size="lg"
+        />
+        <BookCallButton
+          country={country}
+          page="blog"
+          placement="bottom"
+          variant="light"
           size="lg"
         />
       </div>

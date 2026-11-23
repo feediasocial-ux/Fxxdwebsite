@@ -27,6 +27,7 @@ const { src, alt, widths = [360, 540, 720, 960], sizes = '(min-width: 1024px) 40
   widths={widths.filter((w) => w <= src.width)}
   sizes={sizes}
   formats={['avif', 'webp']}
+  fallbackFormat="jpg"
   quality={quality}
   loading={priority ? 'eager' : 'lazy'}
   decoding={priority ? 'sync' : 'async'}

@@ -8,7 +8,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
 import BookCallButton from './BookCallButton.astro';
 import Sticker from './Sticker.astro';
 import Photo from './Photo.astro';
-import Placeholder from './Placeholder.astro';
+import fundadoraDaniela from '@/assets/photos/feediasocial-fundadora-daniela.webp';
 import type { ImageMetadata } from 'astro';
 import type { CountryKey } from '@/lib/i18n';
 import type { UiCopy } from '@/content/types';
@@ -48,8 +48,14 @@ const { copy, country, page, waMessage, waA11y, secondaryHref, image } = Astro.p
       <div class="hero__photo overflow-hidden rounded-[32px] border-2 border-ink">
         <Photo src={image} alt={copy.photoAlt} priority aspect="4/5" widths={[360, 480, 640, 800]} sizes="(min-width: 1024px) 42vw, 92vw" />
       </div>
-      <div class="absolute bottom-2 left-0 z-10 w-44 rotate-[-4deg] sm:w-48">
-        <Placeholder label={copy.founderPlaceholder} aspect="16/10" tone="lemon" compact />
+      <div class=" (founder-badge) absolute bottom-2 left-0 z-10 flex items-center gap-2.5 rounded-2xl border-2 border-ink bg-lemon p-2 pr-3.5 text-ink shadow-[4px_4px_0_0_var(--ink)] rotate-[-3deg]">
+        <div class="size-12 shrink-0 overflow-hidden rounded-xl border-2 border-ink bg-cream">
+          <Photo src={fundadoraDaniela} alt={copy.founderPlaceholder} aspect="3/4" widths={[120]} sizes="48px" />
+        </div>
+        <div class="text-left leading-tight">
+          <strong class="block font-display text-sm uppercase">Daniela · Fundadora</strong>
+          <span class="block text-[11px] font-bold text-ink-soft">Trato directo · España y México</span>
+        </div>
       </div>
       <Sticker color="coral" shape="circle" rotate={10} class="absolute top-0 right-0 z-10">{copy.stickers[1]}</Sticker>
       <Sticker color="sky" rotate={-6} class="absolute top-6 left-0 z-10 hidden text-xs! sm:inline-flex">{copy.stickers[0]}</Sticker>

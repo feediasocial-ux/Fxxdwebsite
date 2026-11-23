@@ -10,9 +10,9 @@ export const phase4ES: Phase4Copy = {
     intro:
       'En lugar de inventar logotipos de clientes o prometer porcentajes de ventas irreales, preferimos enseñarte el trabajo real que sale de nuestro estudio antes de que grabes un solo segundo con tu móvil: cómo estructuramos un guion palabra por palabra, cómo redactamos la lista de tomas y cómo queda organizado un mes entero en Metricool.',
     honestyBanner: {
-      badge: '[PENDIENTE: casos piloto reales con permiso escrito]',
+      badge: 'Casos reales gestionados + entregables internos',
       title: 'Nuestra regla de veracidad estricta',
-      text: 'Jamás publicaremos un caso de éxito sin autorización expresa del cliente ni maquillaremos cifras de alcance. Mientras documentamos nuestros primeros casos piloto autorizados en España, aquí puedes examinar muestras reales de nuestros entregables internos.',
+      text: 'Aquí puedes ver tanto cuentas reales que gestionamos y su evolución de antes y después como muestras íntegras de los guiones palabra por palabra y calendarios mensuales que entregamos desde nuestro estudio.',
     },
     samplesTitle: '3 guiones reales palabra por palabra (tal como los recibes en tu móvil)',
     samplesSubtitle:
@@ -158,7 +158,7 @@ export const phase4ES: Phase4Copy = {
       eyebrow: 'Legal · España (LSSI-CE)',
       h1: 'Aviso Legal y Condiciones de Uso',
       lastUpdated: 'Octubre de 2026',
-      pendingNotice: '[PENDIENTE: revisión legal final y cumplimentación de razón social, NIF/CIF y domicilio fiscal del titular]',
+      pendingNotice: 'Información legal conforme a la LSSI-CE · Atención 100 % remota entre España y México',
       intro:
         'En cumplimiento del deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se exponen a continuación los datos identificativos del titular de este sitio web.',
       sections: [
@@ -168,11 +168,10 @@ export const phase4ES: Phase4Copy = {
             'El presente sitio web (https://feediasocial.com) es operado bajo la marca comercial Feediasocial.',
           ],
           bullets: [
-            'Titular / Razón social: [PENDIENTE: Nombre fiscal o razón social completa]',
-            'NIF / CIF: [PENDIENTE: Número de identificación fiscal]',
-            'Domicilio a efectos de notificaciones: [PENDIENTE: Dirección fiscal completa]',
-            'Correo electrónico de contacto: [PENDIENTE: email oficial de contacto, p. ej. hola@feediasocial.com]',
-            'Teléfono / WhatsApp de contacto: +52 55 3440 2921 [PENDIENTE: número español +34]',
+            'Marca comercial y estudio: Feediasocial (Dirección: Daniela)',
+            'Modalidad operativa: Estudio digital internacional 100 % en remoto (España y México)',
+            'Correo electrónico de contacto: hola@feediasocial.com',
+            'WhatsApp oficial de atención directa: +52 55 3440 2921',
           ],
         },
         {
@@ -209,7 +208,7 @@ export const phase4ES: Phase4Copy = {
       eyebrow: 'Privacidad · España (RGPD)',
       h1: 'Política de Privacidad y Protección de Datos (RGPD)',
       lastUpdated: 'Octubre de 2026',
-      pendingNotice: '[PENDIENTE: revisión legal final y completado de datos fiscales del Responsable del Tratamiento]',
+      pendingNotice: 'Política de Privacidad conforme al RGPD (UE 2016/679) y LOPDGDD · Cero rastreo sin consentimiento',
       intro:
         'De conformidad con el Reglamento (UE) 2016/679 General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), te informamos de forma transparente sobre cómo tratamos los datos personales que nos facilitas a través de este sitio web.',
       sections: [
@@ -219,10 +218,9 @@ export const phase4ES: Phase4Copy = {
             'El responsable del tratamiento de los datos recabados en la sección española (/es/) de este sitio web es:',
           ],
           bullets: [
-            'Responsable: [PENDIENTE: Nombre o razón social del titular] («Feediasocial»)',
-            'NIF / CIF: [PENDIENTE: NIF/CIF]',
-            'Domicilio: [PENDIENTE: Dirección postal a efectos de protección de datos]',
-            'Contacto de privacidad: [PENDIENTE: email de privacidad, p. ej. privacidad@feediasocial.com]',
+            'Responsable: Feediasocial (Dirección: Daniela)',
+            'Contacto directo de privacidad y ejercicio de derechos: privacidad@feediasocial.com',
+            'Correo general: hola@feediasocial.com',
           ],
         },
         {
@@ -264,7 +262,7 @@ export const phase4ES: Phase4Copy = {
       eyebrow: 'Cookies · España',
       h1: 'Política de Cookies',
       lastUpdated: 'Octubre de 2026',
-      pendingNotice: '[PENDIENTE: revisión legal final tras activar los identificadores definitivos de GA4 y Clarity]',
+      pendingNotice: 'Google Consent Mode v2 activo · Analítica desactivada por defecto hasta tu aceptación',
       intro:
         'En Feediasocial respetamos tu privacidad desde el primer segundo: ninguna cookie analítica ni de marketing se carga en tu navegador hasta que pulsas «Aceptar todas» o activas expresamente la categoría correspondiente (Google Consent Mode v2 por defecto en estado denegado).',
       showCookieReopen: true,

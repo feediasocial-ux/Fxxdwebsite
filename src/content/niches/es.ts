@@ -748,7 +748,7 @@ export const nichesES: NicheLandingData[] = [
       },
       {
         q: '¿Cómo se factura el servicio en España?',
-        a: 'Emitimos factura mensual por servicios profesionales de comunicación y marketing. [PENDIENTE: confirmar detalles fiscales con asesoría].',
+        a: 'Emitimos factura mensual oficial por servicios profesionales de comunicación, producción audiovisual y gestión de redes sociales.',
       },
     ],
     waMessage: 'Hola, vengo de la página de abogados y asesorías en España y quiero ver los paquetes.',

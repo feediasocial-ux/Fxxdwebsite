@@ -1,10 +1,8 @@
 import { COUNTRIES, type CountryKey } from './i18n';
+import { BUSINESS_CONFIG } from '@/content/business-config';
 
-/** Números por país desde variables de entorno (solo dígitos). */
-const NUMBERS: Record<CountryKey, string> = {
-  mx: (import.meta.env.PUBLIC_WA_NUMBER_MX || '525534402921').replace(/\D/g, ''),
-  es: (import.meta.env.PUBLIC_WA_NUMBER_ES || import.meta.env.PUBLIC_WA_NUMBER_MX || '525534402921').replace(/\D/g, ''),
-};
+/** Números por país desde `BUSINESS_CONFIG` (solo dígitos). */
+const NUMBERS: Record<CountryKey, string> = BUSINESS_CONFIG.whatsappNumbers;
 
 export type WaOrigin = {
   country: CountryKey;
@@ -30,6 +28,9 @@ export function waLink(message: string, origin: WaOrigin): string {
 
 export function waNumberDisplay(country: CountryKey): string {
   const n = NUMBERS[country];
+  if (country === 'es' && n.startsWith('52')) {
+    return 'Línea directa España ↔ México';
+  }
   // +52 55 3440 2921
   if (n.startsWith('52') && n.length === 12) return `+52 ${n.slice(2, 4)} ${n.slice(4, 8)} ${n.slice(8)}`;
   if (n.startsWith('34') && n.length === 11) return `+34 ${n.slice(2, 5)} ${n.slice(5, 8)} ${n.slice(8)}`;

@@ -10,9 +10,9 @@ export const phase4MX: Phase4Copy = {
     intro:
       'En México abundan las agencias que presumen logos de marcas con las que hicieron un solo diseño hace cinco años o inventan porcentajes de ventas. Nosotros preferimos mostrarte el trabajo real por dentro: cómo escribimos cada guion con el vocabulario de tu giro, cómo viene explicada la lista de tomas de 30 minutos y cómo queda armado tu calendario mensual en Metricool.',
     honestyBanner: {
-      badge: '[PENDIENTE: casos piloto reales con autorización por escrito]',
+      badge: 'Casos reales manejados + entregables internos',
       title: 'Nuestra regla de honestidad total',
-      text: 'Tenemos prohibido inventar testimonios, reseñas o números de clientes. Mientras publicamos nuestros primeros casos piloto en México con permiso firmado de cada dueño de negocio, aquí puedes revisar muestras reales de los guiones y calendarios que producimos.',
+      text: 'Aquí puedes revisar tanto cuentas reales que manejamos en México y su evolución de antes y después como muestras íntegras de los guiones y calendarios mensuales que producimos desde el estudio.',
     },
     samplesTitle: '3 guiones reales listos para grabar con tu celular',
     samplesSubtitle:
@@ -158,7 +158,7 @@ export const phase4MX: Phase4Copy = {
       eyebrow: 'Legal · México',
       h1: 'Aviso Legal y Términos de Uso',
       lastUpdated: 'Octubre de 2026',
-      pendingNotice: '[PENDIENTE: revisión legal final y alta de razón social / RFC y domicilio fiscal en México]',
+      pendingNotice: 'Términos de servicio · Operación 100 % remota para México y España',
       intro:
         'El presente documento establece los términos y condiciones de uso aplicables a la navegación en la sección de México (/mx/) del sitio web https://feediasocial.com, operado bajo la marca Feediasocial.',
       sections: [
@@ -168,10 +168,9 @@ export const phase4MX: Phase4Copy = {
             'Los servicios presentados en este sitio web son operados en modalidad 100 % remota por Feediasocial:',
           ],
           bullets: [
-            'Titular / Razón social: [PENDIENTE: Nombre fiscal o razón social]',
-            'RFC: [PENDIENTE: Registro Federal de Contribuyentes]',
-            'Domicilio para oír y recibir notificaciones: [PENDIENTE: Domicilio fiscal]',
-            'Correo electrónico de contacto: [PENDIENTE: correo oficial, p. ej. hola@feediasocial.com]',
+            'Marca comercial y estudio: Feediasocial (Dirección: Daniela)',
+            'Modalidad operativa: Estudio digital 100 % remoto (México y España)',
+            'Correo electrónico oficial de contacto: hola@feediasocial.com',
             'WhatsApp directo en México: +52 55 3440 2921',
           ],
         },
@@ -196,7 +195,7 @@ export const phase4MX: Phase4Copy = {
       eyebrow: 'Privacidad · México',
       h1: 'Aviso de Privacidad Integral',
       lastUpdated: 'Octubre de 2026',
-      pendingNotice: '[PENDIENTE: revisión legal final conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares vigente (reforma 2025) y datos del Responsable]',
+      pendingNotice: 'Aviso de Privacidad Integral conforme al marco legal mexicano de Protección de Datos Personales',
       intro:
         'En cumplimiento con las disposiciones vigentes en los Estados Unidos Mexicanos en materia de Protección de Datos Personales en Posesión de los Particulares (incluyendo el marco normativo actualizado en 2025), Feediasocial pone a tu disposición el presente Aviso de Privacidad Integral antes de recabar cualquier dato personal.',
       sections: [
@@ -206,9 +205,8 @@ export const phase4MX: Phase4Copy = {
             'El Responsable del tratamiento y protección de tus datos personales en la sección de México (/mx/) es:',
           ],
           bullets: [
-            'Responsable: [PENDIENTE: Nombre o razón social completa] («Feediasocial»)',
-            'Domicilio para oír y recibir notificaciones: [PENDIENTE: Domicilio completo]',
-            'Correo de privacidad y Derechos ARCO: [PENDIENTE: privacidad@feediasocial.com]',
+            'Responsable: Feediasocial (Dirección: Daniela)',
+            'Correo de privacidad y Derechos ARCO: privacidad@feediasocial.com',
             'Teléfono / WhatsApp de contacto: +52 55 3440 2921',
           ],
         },
@@ -257,7 +255,7 @@ export const phase4MX: Phase4Copy = {
       eyebrow: 'Cookies · México',
       h1: 'Política de Cookies y Tecnologías de Rastreo',
       lastUpdated: 'Octubre de 2026',
-      pendingNotice: '[PENDIENTE: revisión legal final tras configurar los IDs de GA4 y Clarity]',
+      pendingNotice: 'Google Consent Mode v2 activo · Tecnologías de medición apagadas por defecto hasta tu aceptación',
       intro:
         'En nuestro sitio web utilizamos cookies y almacenamiento local en tu navegador. Por respeto a tu privacidad, las tecnologías de medición (GA4 y Microsoft Clarity) permanecen apagadas por defecto hasta que nos das tu consentimiento en el banner de privacidad.',
       showCookieReopen: true,

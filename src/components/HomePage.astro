@@ -20,8 +20,9 @@ import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallButton from '@/components/BookCallButton.astro';
 import BookCallCard from '@/components/BookCallCard.astro';
 import PhoneReelMockup from '@/components/PhoneReelMockup.astro';
+import CarouselPreviewMockup from '@/components/CarouselPreviewMockup.astro';
+import FeedBeforeAfter from '@/components/FeedBeforeAfter.astro';
 import Photo from '@/components/Photo.astro';
-import Placeholder from '@/components/Placeholder.astro';
 import AuditForm from '@/components/AuditForm.astro';
 import { getUi } from '@/content';
 import { getNichesByCountry } from '@/content/niches';
@@ -32,11 +33,16 @@ import { linkTo } from '@/lib/routes';
 import { faqPageJsonLd, serviceJsonLd } from '@/lib/seo';
 import type { ImageMetadata } from 'astro';
 
-import proceso01 from '@/assets/photos/proceso-01-onboarding.jpg';
-import proceso02 from '@/assets/photos/proceso-02-guiones-calendario.jpg';
-import proceso03 from '@/assets/photos/proceso-03-edicion.jpg';
-import equipoRemoto from '@/assets/photos/equipo-remoto-estudio.jpg';
-import sinCamara from '@/assets/photos/sin-camara.jpg';
+import equipoEscritorio from '@/assets/photos/feediasocial-equipo-escritorio.webp';
+import mesaTrabajo from '@/assets/photos/feediasocial-mesa-trabajo-pantone.webp';
+import estudioEdicion from '@/assets/photos/feediasocial-estudio-edicion.webp';
+import fundadoraDaniela from '@/assets/photos/feediasocial-fundadora-daniela.webp';
+import resultadosPorton from '@/assets/photos/feediasocial-resultados-porton-maya.webp';
+import resultadosCedres from '@/assets/photos/feediasocial-resultados-cedres.webp';
+import casoCopimax from '@/assets/photos/feediasocial-caso-copimax.webp';
+import casoDolorfin from '@/assets/photos/feediasocial-caso-dolorfin-clinica.webp';
+import casoMudra from '@/assets/photos/feediasocial-caso-mudra-pilates.webp';
+import casoCedres from '@/assets/photos/feediasocial-caso-cedres-musica.webp';
 
 interface Props {
   country: CountryKey;
@@ -105,6 +111,9 @@ const path = COUNTRIES[country].basePath;
     </div>
   </section>
 
+  <!-- 4b. Comparador visual Antes / Después del Feed -->
+  <FeedBeforeAfter country={country} />
+
   <StripeBand colors={['var(--coral)', 'var(--cream)']} />
 
   <!-- 5. Cómo funciona -->
@@ -138,13 +147,13 @@ const path = COUNTRIES[country].basePath;
 
       <div class="mt-10 grid gap-6 md:grid-cols-3">
         <div class="overflow-hidden rounded-[28px] border-2 border-cream shadow-[6px_6px_0_0_var(--coral)]">
-          <Photo src={proceso01} alt={ui.steps[0].title} aspect="1/1" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
+          <Photo src={equipoEscritorio} alt={ui.steps[0].title} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
         </div>
         <div class="overflow-hidden rounded-[28px] border-2 border-cream shadow-[6px_6px_0_0_var(--lemon)]">
-          <Photo src={proceso02} alt={ui.steps[1].title} aspect="1/1" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
+          <Photo src={mesaTrabajo} alt={ui.steps[1].title} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
         </div>
         <div class="overflow-hidden rounded-[28px] border-2 border-cream shadow-[6px_6px_0_0_var(--sky)]">
-          <Photo src={proceso03} alt={ui.steps[2].title} aspect="1/1" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
+          <Photo src={estudioEdicion} alt={ui.steps[2].title} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 30vw, 92vw" />
         </div>
       </div>
     </div>
@@ -235,8 +244,8 @@ const path = COUNTRIES[country].basePath;
       />
     </div>
 
-    <!-- Plan B sin cámara -->
-    <div class="mt-10 grid items-center gap-8 rounded-[32px] border-2 border-ink bg-sky p-6 shadow-[8px_8px_0_0_var(--ink)] md:grid-cols-[1.3fr_1fr] md:p-10">
+    <!-- Plan B sin cámara con Mockup interactivo de Carrusel 4:5 -->
+    <div class="mt-10 grid items-center gap-8 rounded-[32px] border-2 border-ink bg-sky p-6 shadow-[8px_8px_0_0_var(--ink)] lg:grid-cols-[1.1fr_1fr] md:p-10">
       <div class="space-y-4">
         <h3 class="text-3xl md:text-4xl">{ui.pricing.planBTitle}</h3>
         <p class="text-ink-soft">{ui.pricing.planBText}</p>
@@ -255,9 +264,7 @@ const path = COUNTRIES[country].basePath;
           </Button>
         </div>
       </div>
-      <div class="overflow-hidden rounded-[24px] border-2 border-ink">
-        <Photo src={sinCamara} alt={ui.pricing.planBTitle} aspect="4/3" widths={[360, 540]} sizes="(min-width: 768px) 38vw, 90vw" />
-      </div>
+      <CarouselPreviewMockup country={country} compact />
     </div>
   </section>
 
@@ -277,6 +284,65 @@ const path = COUNTRIES[country].basePath;
       <Button href={linkTo('comoTrabajamos', country)} variant="outline">
         {ui.proofSection.ctaMore}
       </Button>
+    </div>
+
+    <!-- Galería real de Antes/Después y cuentas gestionadas -->
+    <div class="mt-10 grid gap-6 lg:grid-cols-2">
+      <div class="overflow-hidden rounded-[28px] border-2 border-ink bg-cream-deep p-4 shadow-[6px_6px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-[20px] border-2 border-ink">
+          <Photo
+            src={resultadosPorton}
+            alt="Antes y después real de cuenta de restaurante gestionada por Feediasocial: Portón Maya"
+            aspect="9/16"
+            widths={[360, 540, 720]}
+            sizes="(min-width: 1024px) 44vw, 92vw"
+          />
+        </div>
+        <p class="mt-3 text-sm font-bold text-ink">
+          Restauración · Portón Maya: orden visual en el feed, historias destacadas y reels de cocina real.
+        </p>
+      </div>
+      <div class="overflow-hidden rounded-[28px] border-2 border-ink bg-cream-deep p-4 shadow-[6px_6px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-[20px] border-2 border-ink">
+          <Photo
+            src={resultadosCedres}
+            alt="Antes y después real de cuenta gestionada por Feediasocial: de 1.455 a 19,1 mil seguidores con sistema de Reels"
+            aspect="9/16"
+            widths={[360, 540, 720]}
+            sizes="(min-width: 1024px) 44vw, 92vw"
+          />
+        </div>
+        <p class="mt-3 text-sm font-bold text-ink">
+          Marca personal · Cedres: portadas coherentes, serie fija de Reels y crecimiento orgánico sostenido.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoCopimax} alt="Perfil de Instagram de Copimax con reels de 1,2 M y 12,4 M de reproducciones" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2 text-xs font-bold text-ink">Copimax · Reels orgánicos con guion</p>
+      </div>
+      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoDolorfin} alt="Perfil de Instagram de clínicas Dolorfin Quiroprácticos (22 sucursales)" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2 text-xs font-bold text-ink">Clínicas Dolorfin · Divulgación sanitaria</p>
+      </div>
+      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoMudra} alt="Perfil de Instagram de estudio Mudra Pilates Reformer" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2 text-xs font-bold text-ink">Mudra Pilates · Estética editorial y reservas</p>
+      </div>
+      <div class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep p-3 shadow-[4px_4px_0_0_var(--ink)]">
+        <div class="overflow-hidden rounded-2xl border border-ink">
+          <Photo src={casoCedres} alt="Perfil de Instagram de Cedres con serie de Reels y 19,1 mil seguidores" aspect="9/16" widths={[280, 420]} sizes="(min-width: 1024px) 22vw, 45vw" />
+        </div>
+        <p class="mt-2 text-xs font-bold text-ink">Cedres · Serie de Reels con identidad</p>
+      </div>
     </div>
 
     <div class="mt-10 grid items-start gap-8 lg:grid-cols-[1fr_1.1fr]">
@@ -315,7 +381,7 @@ const path = COUNTRIES[country].basePath;
           }
         </ul>
         <div class="overflow-hidden rounded-[22px] border-2 border-ink">
-          <Photo src={proceso02} alt={ui.proofSection.sampleCalendarTitle} aspect="16/9" widths={[360, 640]} sizes="(min-width: 1024px) 45vw, 92vw" />
+          <Photo src={mesaTrabajo} alt={ui.proofSection.sampleCalendarTitle} aspect="16/9" widths={[360, 640]} sizes="(min-width: 1024px) 45vw, 92vw" />
         </div>
       </Card>
     </div>
@@ -348,13 +414,21 @@ const path = COUNTRIES[country].basePath;
         </div>
       </div>
 
-      <div class="space-y-5">
+      <div class="grid gap-4 sm:grid-cols-2">
         <div class="overflow-hidden rounded-[28px] border-2 border-cream shadow-[8px_8px_0_0_var(--coral)]">
-          <Photo src={equipoRemoto} alt={ui.aboutTeaser.title} aspect="4/3" widths={[360, 640]} sizes="(min-width: 1024px) 42vw, 92vw" />
+          <Photo src={fundadoraDaniela} alt={ui.aboutTeaser.founder1Placeholder} aspect="3/4" widths={[360, 540]} sizes="(min-width: 1024px) 22vw, 46vw" />
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <Placeholder label={ui.aboutTeaser.founder1Placeholder} aspect="16/10" tone="lemon" class="text-ink" compact />
-          <Placeholder label={ui.aboutTeaser.founder2Placeholder} aspect="16/10" tone="sky" class="text-ink" compact />
+        <div class="overflow-hidden rounded-[28px] border-2 border-cream bg-ink shadow-[8px_8px_0_0_var(--lemon)]">
+          <video
+            src="/videos/feediasocial-estudio-hero.mp4"
+            controls
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-label={ui.aboutTeaser.founder2Placeholder}
+            class="aspect-[3/4] h-full w-full object-cover"
+          ></video>
         </div>
       </div>
     </div>

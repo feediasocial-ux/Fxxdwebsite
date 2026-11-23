@@ -376,14 +376,20 @@ const clarityId = import.meta.env.PUBLIC_CLARITY_ID || '';
                 '-' +
                 pg +
                 '-form)';
+              var waHref = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(waMsg);
               if (waFallback) {
-                waFallback.setAttribute('href', 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(waMsg));
+                waFallback.setAttribute('href', waHref);
               }
 
-              function finish() {
+              function finish(openWa) {
                 track('form_submit', { page: pg, country: selCountry });
                 form.setAttribute('hidden', '');
                 if (successBox) successBox.removeAttribute('hidden');
+                if (openWa) {
+                  try {
+                    window.open(waHref, '_blank', 'noopener');
+                  } catch (_e) {}
+                }
               }
 
               if (endpoint) {
@@ -393,13 +399,13 @@ const clarityId = import.meta.env.PUBLIC_CLARITY_ID || '';
                   headers: { Accept: 'application/json' },
                 })
                   .then(function () {
-                    finish();
+                    finish(false);
                   })
                   .catch(function () {
-                    finish();
+                    finish(true);
                   });
               } else {
-                finish();
+                finish(true);
               }
             });
           })(wrappers[w]);

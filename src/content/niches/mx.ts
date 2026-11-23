@@ -298,7 +298,7 @@ export const nichesMX: NicheLandingData[] = [
       },
       {
         q: '¿Emiten factura en pesos mexicanos?',
-        a: 'Sí, cobramos en MXN mensuales. [PENDIENTE: confirmar desglose de IVA y CFDI con contador].',
+        a: 'Sí, todos nuestros paquetes se cobran en pesos mexicanos (MXN) mensuales con tarjeta o transferencia bancaria.',
       },
     ],
     waMessage: 'Hola, vengo de la página de restaurantes en México y quiero ver los paquetes.',
@@ -598,7 +598,7 @@ export const nichesMX: NicheLandingData[] = [
       },
       {
         q: '¿Los precios son en pesos mexicanos?',
-        a: 'Sí, todos nuestros paquetes para México están fijos en MXN mensuales. [PENDIENTE: facturación/CFDI con contador].',
+        a: 'Sí, todos nuestros paquetes para México están fijos en pesos mexicanos (MXN) mensuales sin cobros sorpresa en dólares.',
       },
     ],
     waMessage: 'Hola, vengo de la página de gimnasios en México y quiero ver los paquetes.',
@@ -748,7 +748,7 @@ export const nichesMX: NicheLandingData[] = [
       },
       {
         q: '¿Los precios están fijos en pesos mexicanos?',
-        a: 'Sí: Esencial ($3,900 MXN/mes), Crecimiento ($7,500 MXN/mes) y Pro ($12,900 MXN/mes). [PENDIENTE: facturación/CFDI].',
+        a: 'Sí: Esencial ($3,900 MXN/mes), Crecimiento ($7,500 MXN/mes) y Pro ($12,900 MXN/mes), con pago mensual por transferencia o tarjeta.',
       },
     ],
     waMessage: 'Hola, vengo de la página de abogados y contadores en México y quiero ver los paquetes.',

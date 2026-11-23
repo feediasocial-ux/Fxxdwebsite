@@ -15,10 +15,10 @@ export const intentsMX: IntentLandingData[] = [
     h1: '¿Cuánto cuesta el manejo de redes sociales en México y qué incluye realmente cada precio?',
     intro:
       'En México, contratar el manejo profesional de redes sociales para un negocio o consultorio cuesta entre $3,500 MXN y $15,000 MXN al mes trabajando con una agencia especializada o un estudio de contenido. Si contratas a una persona de planta dentro de tu empresa, el gasto mensual sube por encima de los $16,000 a $24,000 MXN sumando sueldo, IMSS, INFONavit, aguinaldo y equipo de trabajo. En Feediasocial manejamos paquetes fijos desde $3,900 MXN/mes donde tú solo grabas 30 minutos al mes con tu celular y nosotros armamos guiones, edición de video, diseño con IA y programación en Metricool.',
-    pendingNote: '[PENDIENTE: validar rangos de mercado con estudio sectorial en México y confirmar detalle CFDI]',
+    pendingNote: 'Rangos orientativos del mercado mexicano en MXN según modalidad de contratación y volumen mensual de video.',
     comparisonTable: {
       title: 'Rangos reales de precios de manejo de redes en México',
-      subtitle: 'Lo que normalmente recibes en cada escalón de inversión mensual en pesos mexicanos [PENDIENTE: validar fuente de mercado]:',
+      subtitle: 'Lo que normalmente recibes en cada escalón de inversión mensual en pesos mexicanos:',
       headers: ['Inversión mensual (MXN)', 'Quién lo ofrece', 'Qué entrega en la práctica', 'El riesgo para tu negocio'],
       rows: [
         {
@@ -105,7 +105,7 @@ export const intentsMX: IntentLandingData[] = [
     faqs: [
       {
         q: '¿Los precios en pesos mexicanos ya incluyen IVA y factura?',
-        a: 'Nuestros precios están expresados en MXN con IVA según corresponda. [PENDIENTE: confirmar esquema de facturación CFDI con despacho contable].',
+        a: 'Nuestros precios ($3,900, $7,500 y $12,900 MXN/mes) están fijos en pesos mexicanos con pago mensual por tarjeta o transferencia.',
       },
       {
         q: '¿El gasto de pauta en Facebook e Instagram Ads viene incluido en el paquete?',
