@@ -3,8 +3,15 @@
  * Comparador visual 3×2 de Feed: «Sin sistema (improvisando)» vs. «Con el sistema Feediasocial».
  * 100 % honesto: compara estructura editorial, constancia y claridad visual (sin métricas falsas).
  */
+import Photo from '@/components/Photo.astro';
 import { getUi } from '@/content';
 import type { CountryKey } from '@/lib/i18n';
+import fundadoraDaniela from '@/assets/photos/feediasocial-fundadora-daniela.webp';
+import mesaTrabajo from '@/assets/photos/feediasocial-mesa-trabajo-pantone.webp';
+import casoDolorfin from '@/assets/photos/feediasocial-caso-dolorfin-clinica.webp';
+import casoMudra from '@/assets/photos/feediasocial-caso-mudra-pilates.webp';
+import estudioEdicion from '@/assets/photos/feediasocial-estudio-edicion.webp';
+import casoCopimax from '@/assets/photos/feediasocial-caso-copimax.webp';
 
 interface Props {
   country: CountryKey;
@@ -12,6 +19,15 @@ interface Props {
 
 const { country } = Astro.props;
 const copy = getUi(country).feedComparison;
+
+const afterPhotos = [
+  fundadoraDaniela,
+  mesaTrabajo,
+  casoDolorfin,
+  casoMudra,
+  estudioEdicion,
+  casoCopimax,
+];
 
 const cellColors = {
   coral: 'bg-coral text-ink',
@@ -90,17 +106,32 @@ const cellColors = {
         <!-- Cuadrícula 3×2 editorial con sistema -->
         <div class="grid grid-cols-3 gap-2.5">
           {
-            copy.afterGrid.map((cell) => (
-              <div
-                class:list={[
-                  'flex aspect-square flex-col justify-between rounded-2xl border-2 border-cream p-3 shadow-[3px_3px_0_0_var(--cream)]',
-                  cellColors[cell.color],
-                ]}
-              >
-                <span class="w-fit rounded-pill border border-ink bg-cream px-2 py-0.5 text-[9px] font-extrabold uppercase text-ink">
+            copy.afterGrid.map((cell, idx) => (
+              <div class="group relative flex aspect-square flex-col justify-between overflow-hidden rounded-2xl border-2 border-cream bg-ink p-2.5 shadow-[3px_3px_0_0_var(--cream)] sm:p-3">
+                <Photo
+                  src={afterPhotos[idx % afterPhotos.length]}
+                  alt={cell.title}
+                  widths={[240, 360]}
+                  sizes="(min-width: 1024px) 14vw, 30vw"
+                  quality={65}
+                  class="pointer-events-none absolute inset-0 h-full w-full"
+                  imgClass="transition-transform duration-300 group-hover:scale-105"
+                />
+                <div
+                  class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/35 to-ink/20"
+                  aria-hidden="true"
+                />
+                <span
+                  class:list={[
+                    'relative z-10 w-fit rounded-pill border border-ink px-2 py-0.5 text-[9px] font-extrabold uppercase',
+                    cellColors[cell.color],
+                  ]}
+                >
                   {cell.format}
                 </span>
-                <p class="text-xs font-extrabold leading-tight">{cell.title}</p>
+                <p class="relative z-10 text-xs font-extrabold leading-tight text-cream">
+                  {cell.title}
+                </p>
               </div>
             ))
           }
