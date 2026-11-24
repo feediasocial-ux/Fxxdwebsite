@@ -1,0 +1,50 @@
+---
+/**
+ * Espacio reservado 9:16 para vídeos verticales reales del estudio (Showreel / Demo AI Twin).
+ * Cumple la regla de veracidad: muestra un marcador limpio [PENDIENTE: ...] hasta subir el MP4 definitivo.
+ */
+interface Props {
+  badge: string;
+  title: string;
+  subtitle: string;
+  pendingTag: string;
+  accent?: 'coral' | 'lemon' | 'sky';
+}
+
+const { badge, title, subtitle, pendingTag, accent = 'lemon' } = Astro.props;
+const accentBg = {
+  coral: 'bg-coral text-ink',
+  lemon: 'bg-lemon text-ink',
+  sky: 'bg-sky text-ink',
+}[accent];
+---
+
+<div class="mx-auto flex aspect-[9/16] w-full max-w-[300px] flex-col justify-between rounded-[32px] border-2 border-dashed border-cream/80 bg-ink p-6 text-cream shadow-[8px_8px_0_0_var(--coral)]">
+  <div class="flex items-center justify-between gap-2">
+    <span class:list={['rounded-pill border border-ink px-3 py-1 text-[10px] font-extrabold uppercase', accentBg]}>
+      {badge}
+    </span>
+    <span class="rounded-pill border border-cream/30 px-2.5 py-0.5 text-[10px] font-bold uppercase text-cream/75">
+      9:16
+    </span>
+  </div>
+
+  <div class="my-auto flex flex-col items-center gap-4 text-center">
+    <div
+      class="flex size-16 items-center justify-center rounded-full border-2 border-cream bg-maroon text-lemon shadow-[4px_4px_0_0_var(--lemon)]"
+      aria-hidden="true"
+    >
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5.14v14l11-7-11-7Z"></path>
+      </svg>
+    </div>
+    <div class="space-y-1.5">
+      <p class="font-display text-2xl uppercase leading-tight text-cream">{title}</p>
+      <p class="text-xs leading-relaxed text-cream/80">{subtitle}</p>
+    </div>
+  </div>
+
+  <p class="rounded-xl border border-dashed border-lemon/70 bg-cream/10 px-3 py-2 text-center text-[11px] font-bold text-lemon">
+    {pendingTag}
+  </p>
+</div>

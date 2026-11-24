@@ -7,8 +7,9 @@ import Button from './Button.astro';
 import WhatsAppButton from './WhatsAppButton.astro';
 import Photo from './Photo.astro';
 import fundadoraDaniela from '@/assets/photos/feediasocial-fundadora-daniela.webp';
+import { PACKAGES } from '@/content/pricing';
+import { formatPrice, type CountryKey } from '@/lib/i18n';
 import type { ImageMetadata } from 'astro';
-import type { CountryKey } from '@/lib/i18n';
 import type { UiCopy } from '@/content/types';
 
 interface Props {
@@ -21,6 +22,11 @@ interface Props {
   image: ImageMetadata;
 }
 const { copy, country, page, waMessage, waA11y, secondaryHref, image } = Astro.props;
+const startingPrice = formatPrice(PACKAGES[0].price[country], country);
+const quickMetrics =
+  country === 'es'
+    ? [`Desde ${startingPrice}/mes`, '30 min/mes o AI Twin', 'Sin permanencia']
+    : [`Desde ${startingPrice}/mes`, '30 min/mes o AI Twin', 'Sin plazo forzoso'];
 ---
 
 <section class="hero relative overflow-hidden">
@@ -39,6 +45,16 @@ const { copy, country, page, waMessage, waA11y, secondaryHref, image } = Astro.p
         <WhatsAppButton message={waMessage} label={copy.ctaPrimary} a11yLabel={waA11y} country={country} page={page} placement="hero" size="lg" />
         <Button href={secondaryHref} variant="outline" size="lg">{copy.ctaSecondary}</Button>
       </div>
+      <ul class="flex flex-wrap items-center gap-2 pt-1 text-xs font-extrabold uppercase tracking-wide text-ink">
+        {
+          quickMetrics.map((metric) => (
+            <li class="inline-flex items-center gap-1.5 rounded-pill border border-ink bg-cream-deep px-3 py-1">
+              <span class="text-coral-deep" aria-hidden="true">✓</span>
+              <span>{metric}</span>
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
     <div class="relative mx-auto w-full max-w-md pt-2 pb-6 lg:max-w-none">

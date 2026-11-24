@@ -10,6 +10,7 @@ import FAQ from '@/components/FAQ.astro';
 import Photo from '@/components/Photo.astro';
 import RoiCalculator from '@/components/RoiCalculator.astro';
 import CarouselPreviewMockup from '@/components/CarouselPreviewMockup.astro';
+import VideoPlaceholder from '@/components/VideoPlaceholder.astro';
 import { getUi } from '@/content';
 import { PACKAGES } from '@/content/pricing';
 import { getIntentsByCountry, type IntentLandingData } from '@/content/intents';
@@ -188,7 +189,20 @@ const crumbs = [
   {
     intent.id === 'sin-camara' && (
       <section class="container-site pb-10">
-        <CarouselPreviewMockup country={country} compact />
+        <div class="grid items-center gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+          <VideoPlaceholder
+            badge="Demo AI Twin · Avatar"
+            title={country === 'es' ? 'Demo Reel con AI Twin y Avatar' : 'Demo Reel con AI Twin y Avatar'}
+            subtitle={
+              country === 'es'
+                ? 'Vídeo vertical de 15–20 s mostrando un gemelo digital y un avatar fotorrealista de marca en acción.'
+                : 'Video vertical de 15–20 s mostrando un gemelo digital y un avatar fotorrealista de marca en acción.'
+            }
+            pendingTag="[PENDIENTE: subir public/videos/demo-ai-twin.mp4]"
+            accent="coral"
+          />
+          <CarouselPreviewMockup country={country} compact />
+        </div>
       </section>
     )
   }

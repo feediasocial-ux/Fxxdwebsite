@@ -2,11 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Photo from '@/components/Photo.astro';
-import Sticker from '@/components/Sticker.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
-import BookCallButton from '@/components/BookCallButton.astro';
-import StripeBand from '@/components/StripeBand.astro';
-import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getPhase4, getUi } from '@/content';
 import { getIntentsByCountry } from '@/content/intents';
 import { getBlogArticlesByCountry } from '@/content/blog';
@@ -53,66 +49,36 @@ const intentPhotos = {
 >
   <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
 
-  <!-- Cabecera de Revista Editorial -->
-  <section class="container-site pt-6 pb-14 md:pt-10 md:pb-16">
-    <div class="grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-      <div class="space-y-4">
-        <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase">
-          {copy.eyebrow}
-        </p>
-        <h1 class="text-display-hero">{copy.h1}</h1>
-        <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
-      </div>
-
-      <div class="rounded-[28px] border-2 border-ink bg-cream-deep p-6 shadow-[6px_6px_0_0_var(--ink)]">
-        <h2 class="text-xl">{copy.editorialPromiseTitle}</h2>
-        <p class="mt-1.5 text-sm text-ink-soft">{copy.editorialPromiseText}</p>
-        <ul class="mt-4 space-y-2">
-          {
-            copy.editorialRules.map((rule) => (
-              <li class="flex gap-2 rounded-xl border border-ink bg-cream px-3 py-2 text-xs font-bold">
-                <span class="text-coral-deep" aria-hidden="true">✓</span>
-                <span>{rule}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+  <!-- Cabecera editorial limpia -->
+  <section class="container-site pt-6 pb-10 md:pt-10 md:pb-12">
+    <div class="max-w-3xl space-y-4">
+      <p class="inline-block rounded-pill border-2 border-ink bg-sky px-4 py-1 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
+        {copy.eyebrow}
+      </p>
+      <h1 class="text-display-hero">{copy.h1}</h1>
+      <p class="text-lg text-ink-soft md:text-xl">{copy.intro}</p>
     </div>
   </section>
 
-  <StripeBand colors={['var(--coral)', 'var(--cream)']} />
-
-  <!-- Artículos Editoriales con Fotografía (Layout Magazine) -->
-  <section class="container-site py-16 md:py-24">
-    <div class="max-w-3xl space-y-2">
-      <span class="inline-block rounded-pill border-2 border-ink bg-lemon px-3.5 py-1 text-xs font-bold uppercase">
-        {copy.upcomingBadge}
-      </span>
-      <h2 class="text-display-lg">{copy.upcomingTitle}</h2>
-      <p class="text-lg text-ink-soft">{copy.upcomingText}</p>
-    </div>
-
-    <!-- Artículo protagonista (2 columnas estilo portada de revista) -->
+  <!-- Artículos Editoriales (Layout Magazine) -->
+  <section class="container-site pb-16 md:pb-24">
     {
       featuredArticle && (
-        <article class="relative mt-10 overflow-hidden rounded-[32px] border-2 border-ink bg-cream-deep shadow-[10px_12px_0_0_var(--ink)]">
+        <article class="overflow-hidden rounded-[32px] border-2 border-ink bg-cream-deep shadow-[8px_10px_0_0_var(--ink)]">
           <div class="grid items-center gap-8 p-6 md:p-10 lg:grid-cols-[1.05fr_1fr]">
-            <div class="relative overflow-hidden rounded-[24px] border-2 border-ink bg-cream">
-              <a href={pathFor(featuredArticle.routeKey, country)!} class="block">
-                <Photo
-                  src={EDITORIAL_PHOTOS[featuredArticle.heroPhotoKey]}
-                  alt={featuredArticle.heroPhotoAlt}
-                  priority
-                  aspect="4/3"
-                  widths={[400, 640, 820]}
-                  sizes="(min-width: 1024px) 46vw, 90vw"
-                />
-              </a>
-              <div class="absolute top-3 left-3">
-                <Sticker color="lemon" rotate={-4}>{featuredArticle.heroSticker}</Sticker>
-              </div>
-            </div>
+            <a
+              href={pathFor(featuredArticle.routeKey, country)!}
+              class="block overflow-hidden rounded-[24px] border-2 border-ink bg-cream"
+            >
+              <Photo
+                src={EDITORIAL_PHOTOS[featuredArticle.heroPhotoKey]}
+                alt={featuredArticle.heroPhotoAlt}
+                priority
+                aspect="4/3"
+                widths={[400, 640, 820]}
+                sizes="(min-width: 1024px) 46vw, 90vw"
+              />
+            </a>
 
             <div class="space-y-4">
               <div class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase">
@@ -124,26 +90,17 @@ const intentPhotos = {
                 </span>
               </div>
 
-              <h3 class="text-2xl md:text-4xl leading-tight">
+              <h2 class="text-2xl md:text-4xl leading-tight">
                 <a href={pathFor(featuredArticle.routeKey, country)!} class="hover:underline">
                   {featuredArticle.title}
                 </a>
-              </h3>
+              </h2>
 
               <p class="text-base text-ink-soft leading-relaxed">
                 {featuredArticle.cardSummary}
               </p>
 
-              <div class="grid grid-cols-2 gap-3 pt-1">
-                {featuredArticle.keyFacts.slice(0, 2).map((fact) => (
-                  <div class="rounded-2xl border border-ink bg-cream p-3">
-                    <span class="block text-[11px] font-bold uppercase text-ink-soft">{fact.label}</span>
-                    <strong class="mt-0.5 block text-xs text-ink">{fact.value}</strong>
-                  </div>
-                ))}
-              </div>
-
-              <div class="pt-2">
+              <div class="pt-1">
                 <a
                   href={pathFor(featuredArticle.routeKey, country)!}
                   class="btn btn--primary btn--md"
@@ -157,14 +114,13 @@ const intentPhotos = {
       )
     }
 
-    <!-- Tarjetas de artículos editoriales 2 y 3 con foto -->
     <div class="mt-8 grid gap-8 md:grid-cols-2">
       {
-        restArticles.map((art, idx) => {
+        restArticles.map((art) => {
           const href = pathFor(art.routeKey, country)!;
           return (
-            <article class="flex flex-col overflow-hidden rounded-[28px] border-2 border-ink bg-cream shadow-[8px_8px_0_0_var(--ink)]">
-              <a href={href} class="relative block overflow-hidden border-b-2 border-ink bg-cream-deep">
+            <article class="flex flex-col overflow-hidden rounded-[28px] border-2 border-ink bg-cream shadow-[6px_6px_0_0_var(--ink)]">
+              <a href={href} class="block overflow-hidden border-b-2 border-ink bg-cream-deep">
                 <Photo
                   src={EDITORIAL_PHOTOS[art.heroPhotoKey]}
                   alt={art.heroPhotoAlt}
@@ -172,17 +128,9 @@ const intentPhotos = {
                   widths={[360, 560, 720]}
                   sizes="(min-width: 768px) 45vw, 92vw"
                 />
-                <span
-                  class:list={[
-                    'absolute top-3 left-3 rounded-pill border-2 border-ink px-3 py-1 text-xs font-bold uppercase text-ink',
-                    idx === 0 ? 'bg-lemon' : 'bg-sky',
-                  ]}
-                >
-                  {art.heroSticker}
-                </span>
               </a>
 
-              <div class="flex flex-1 flex-col gap-3 p-6 md:p-7">
+              <div class="flex flex-1 flex-col gap-3 p-6">
                 <div class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase text-ink-soft">
                   <span class="text-coral-deep">{art.category}</span>
                   <span>·</span>
@@ -199,7 +147,7 @@ const intentPhotos = {
 
                 <a
                   href={href}
-                  class="mt-auto inline-flex items-center gap-2 pt-3 font-bold text-ink underline underline-offset-4 hover:text-coral-deep"
+                  class="mt-auto inline-flex items-center gap-2 pt-2 font-bold text-ink underline underline-offset-4 hover:text-coral-deep"
                 >
                   {blogUi.readArticleCta}
                 </a>
@@ -211,8 +159,8 @@ const intentPhotos = {
     </div>
   </section>
 
-  <!-- Guías comparativas y de intención comercial (con foto editorial) -->
-  <section class="theme-dark py-16 md:py-24">
+  <!-- Guías comparativas y de decisión -->
+  <section class="theme-dark py-16 md:py-20">
     <div class="container-site space-y-10">
       <div class="max-w-3xl space-y-2">
         <h2 class="text-display-lg text-cream">{copy.guidesSectionTitle}</h2>
@@ -252,7 +200,7 @@ const intentPhotos = {
                   <p class="text-sm text-cream/80">{item.cardSummary}</p>
                   <a
                     href={href}
-                    class="mt-auto inline-flex items-center gap-2 pt-3 font-bold text-lemon underline underline-offset-4"
+                    class="mt-auto inline-flex items-center gap-2 pt-2 font-bold text-lemon underline underline-offset-4"
                   >
                     {blogUi.readGuideCta}
                   </a>
@@ -263,7 +211,7 @@ const intentPhotos = {
         }
       </div>
 
-      <div class="flex flex-wrap gap-3 pt-2">
+      <div class="pt-2">
         <WhatsAppButton
           message={copy.waMessage}
           label={copy.waCta}
@@ -274,17 +222,7 @@ const intentPhotos = {
           variant="lemon"
           size="lg"
         />
-        <BookCallButton
-          country={country}
-          page="blog"
-          placement="bottom"
-          variant="light"
-          size="lg"
-        />
       </div>
     </div>
   </section>
-
-  <!-- Cluster semántico completo -->
-  <TopicClusterLinks country={country} currentPath={path} />
 </BaseLayout>

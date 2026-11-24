@@ -6,7 +6,7 @@
 - [ ] `[PENDIENTE: logo definitivo]` Sustituir el logotipo tipográfico provisional (`src/components/Logo.astro`) cuando exista archivo vectorial definitivo.
 - [ ] `[PENDIENTE: número español]` Añadir un número de WhatsApp con prefijo `+34` en `PUBLIC_WA_NUMBER_ES` (actualmente usa `+52 55 3440 2921` para ambos países).
 - [ ] `[PENDIENTE: configurar URL definitiva de Calendly en PUBLIC_CALENDLY_URL]` Sustituir el enlace provisional (`https://calendly.com/feediasocial/15min`) en `.env` / GitHub Actions Variables (`PUBLIC_CALENDLY_URL`) cuando el usuario facilite su enlace definitivo de Calendly.
-- [ ] `[PENDIENTE: validar precios definitivos]` Confirmar los importes de Esencial (349 € / 3.900 MXN), Crecimiento (649 € / 7.500 MXN) y Pro (990 € / 12.900 MXN) en `src/content/pricing.ts`.
+- [x] `[PENDIENTE: validar precios definitivos]` Precios unificados y validados: Esencial (300 € / $6,300 MXN), Crecimiento (450 € / $9,450 MXN) y Pro (650 € / $13,650 MXN) en `src/content/pricing.ts`.
 - [ ] `[PENDIENTE: definir política de permanencia]` Confirmar si todos los paquetes son mes a mes sin permanencia/plazo forzoso.
 - [ ] `[PENDIENTE: perfiles de redes]` Añadir URLs reales de Instagram/TikTok/LinkedIn en `BRAND.sameAs` (`src/lib/seo.ts`).
 
@@ -22,6 +22,8 @@
 - [ ] `[FOTO: fundadores en acción]` y `[PENDIENTE: Nombre fundadora/or 1 y 2]` Sustituir los placeholders en `Hero.astro`, `HomePage.astro` y `SobreNosotrosPage.astro` por fotos reales, nombres y biografías de las dos personas fundadoras.
 - [ ] `[PENDIENTE: aportar capturas reales de Metricool y casos piloto con permiso]` Añadir capturas reales de calendarios en Metricool y documentar los primeros casos piloto reales con autorización escrita del cliente en `/es/como-trabajamos/` y `/mx/como-trabajamos/`.
 - [ ] Sustituir progresivamente las escenas editoriales ilustrativas (`src/assets/photos/CREDITS.md`) por fotografía propia del equipo.
+- [ ] `[PENDIENTE: vídeo demo AI Twin / Avatar 9:16]` Subir MP4 vertical (15–20 s) en `public/videos/demo-ai-twin.mp4` para reemplazar el `VideoPlaceholder` en `/es/contenido-redes-sin-salir-en-camara/` y `/mx/contenido-redes-sin-salir-en-camara/`.
+- [ ] `[PENDIENTE: vídeo showreel Reels 9:16]` Subir MP4 vertical (20–30 s) en `public/videos/showreel-reels.mp4` para reemplazar el `VideoPlaceholder` en `/es/como-trabajamos/` y `/mx/como-trabajamos/`.
 
 ## 4. Formularios, analítica y comprobación manual en dispositivos reales
 - [ ] `[PENDIENTE: crear cuenta Formspree y pegar endpoint]` Configurar `PUBLIC_FORM_ENDPOINT` en GitHub Actions Variables.

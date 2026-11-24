@@ -1,22 +1,17 @@
 ---
 /**
- * Plantilla de revista editorial para artículos del blog (con fotografía editorial,
- * cápsula GEO TL;DR, índice lateral sticky, tarjetas visuales paso a paso,
- * tabla comparativa semántica y JSON-LD Article + FAQPage + BreadcrumbList).
+ * Plantilla editorial escaneable en 20 segundos:
+ * Resumen clave arriba, takeaways + bullets + recursos visuales visibles al instante,
+ * y párrafos de desarrollo profundo en <details> nativo (0 KB JS, 100 % indexable por Google).
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Photo from '@/components/Photo.astro';
-import Sticker from '@/components/Sticker.astro';
-import GeoKeyFacts from '@/components/GeoKeyFacts.astro';
 import FAQ from '@/components/FAQ.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallButton from '@/components/BookCallButton.astro';
 import CarouselPreviewMockup from '@/components/CarouselPreviewMockup.astro';
 import RecordingTimeline30m from '@/components/RecordingTimeline30m.astro';
-import EeatMethodologyBox from '@/components/EeatMethodologyBox.astro';
-import StripeBand from '@/components/StripeBand.astro';
-import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getUi } from '@/content';
 import type { EditorialBlogArticle } from '@/content/blog';
 import { EDITORIAL_PHOTOS } from '@/lib/blog-photos';
@@ -70,11 +65,11 @@ const crumbs = [
   <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
 
   <article>
-    <!-- Hero Editorial estilo revista con foto protagonista -->
-    <header class="container-site pt-6 pb-12 md:pt-10 md:pb-16">
+    <!-- Hero Editorial limpio -->
+    <header class="container-site pt-6 pb-10 md:pt-10 md:pb-12">
       <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
-        <div class="space-y-5">
-          <div class="flex flex-wrap items-center gap-2.5">
+        <div class="space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
             <span class="rounded-pill border-2 border-ink bg-lemon px-3.5 py-1 text-xs font-bold uppercase">
               {article.eyebrow}
             </span>
@@ -89,24 +84,13 @@ const crumbs = [
             {article.intro}
           </p>
 
-          <div class="flex flex-wrap items-center gap-4 border-t-2 border-ink/15 pt-4 text-sm">
-            <div class="flex items-center gap-3">
-              <span
-                class="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink bg-coral font-display text-sm text-ink"
-                aria-hidden="true"
-              >
-                FS
-              </span>
-              <div>
-                <strong class="block text-ink">{article.author}</strong>
-                <span class="block text-xs text-ink-soft">{article.authorRole} · {article.updatedDate}</span>
-              </div>
-            </div>
-          </div>
+          <p class="text-xs font-bold text-ink-soft">
+            Por <strong class="text-ink">{article.author}</strong> · {article.authorRole} · Actualizado {article.updatedDate}
+          </p>
         </div>
 
-        <figure class="relative mx-auto w-full max-w-lg lg:max-w-none">
-          <div class="overflow-hidden rounded-[32px] border-2 border-ink bg-cream-deep shadow-[10px_12px_0_0_var(--coral)]">
+        <figure class="mx-auto w-full max-w-lg lg:max-w-none">
+          <div class="overflow-hidden rounded-[28px] border-2 border-ink bg-cream-deep shadow-[8px_10px_0_0_var(--coral)]">
             <Photo
               src={heroImg}
               alt={article.heroPhotoAlt}
@@ -116,40 +100,40 @@ const crumbs = [
               sizes="(min-width: 1024px) 44vw, 92vw"
             />
           </div>
-          <div class="absolute -top-4 -right-2 z-10 sm:right-4">
-            <Sticker color="lemon" rotate={6}>{article.heroSticker}</Sticker>
-          </div>
-          <figcaption class="mt-3 rounded-2xl border border-ink bg-cream-deep px-4 py-2.5 text-xs text-ink-soft">
-            {article.heroPhotoCaption}
-          </figcaption>
         </figure>
+      </div>
+
+      <!-- Resumen en 20 segundos (4 datos clave) -->
+      <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          article.keyFacts.map((fact) => (
+            <div class="rounded-2xl border-2 border-ink bg-cream-deep p-4 shadow-[3px_3px_0_0_var(--ink)]">
+              <span class="block text-[11px] font-extrabold uppercase text-coral-deep">{fact.label}</span>
+              <strong class="mt-1 block text-sm text-ink">{fact.value}</strong>
+            </div>
+          ))
+        }
       </div>
     </header>
 
-    <!-- Cápsula GEO TL;DR (Answer Capsule para Google AI Overviews / Perplexity / ChatGPT) -->
-    <GeoKeyFacts country={country} customTitle={article.tldrTitle} facts={article.keyFacts} />
-
-    <StripeBand colors={['var(--coral)', 'var(--cream)']} />
-
-    <!-- Cuerpo de revista en 2 columnas (Sidebar sticky + Columna editorial rica) -->
-    <div class="container-site py-14 md:py-20">
-      <div class="grid items-start gap-10 lg:grid-cols-[270px_1fr] xl:gap-14">
-        <!-- Columna lateral sticky (Índice + Ficha + CTA rápido) -->
-        <aside class="space-y-6 lg:sticky lg:top-24">
+    <!-- Cuerpo en 2 columnas: Índice minimal + Secciones escaneables -->
+    <div class="container-site py-10 md:py-14">
+      <div class="grid items-start gap-10 lg:grid-cols-[240px_1fr] xl:gap-14">
+        <aside class="space-y-5 lg:sticky lg:top-24">
           <nav
             aria-label={blogUi.tocTitle}
-            class="rounded-[24px] border-2 border-ink bg-cream-deep p-5 shadow-[5px_5px_0_0_var(--ink)]"
+            class="rounded-[24px] border-2 border-ink bg-cream-deep p-5 shadow-[4px_4px_0_0_var(--ink)]"
           >
-            <p class="border-b-2 border-ink pb-2.5 font-display text-lg uppercase">{blogUi.tocTitle}</p>
-            <ol class="mt-3.5 space-y-2.5 text-sm">
+            <p class="border-b-2 border-ink pb-2 font-display text-base uppercase">{blogUi.tocTitle}</p>
+            <ol class="mt-3 space-y-2 text-xs">
               {
                 article.sections.map((sec) => (
                   <li>
                     <a
                       href={`#${sec.id}`}
-                      class="group flex items-start gap-2.5 font-bold text-ink hover:text-coral-deep"
+                      class="group flex items-start gap-2 font-bold text-ink hover:text-coral-deep"
                     >
-                      <span class="mt-0.5 inline-flex h-5 w-6 shrink-0 items-center justify-center rounded border border-ink bg-lemon text-[11px] font-bold">
+                      <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded border border-ink bg-lemon text-[10px] font-bold">
                         {sec.number}
                       </span>
                       <span class="leading-snug group-hover:underline">{sec.heading}</span>
@@ -160,27 +144,8 @@ const crumbs = [
             </ol>
           </nav>
 
-          <div class="rounded-[24px] border-2 border-ink bg-cream p-5 space-y-2.5 text-xs">
-            <p class="font-display text-base uppercase text-ink">{blogUi.specsTitle}</p>
-            <div class="flex justify-between border-b border-ink/15 pb-1.5">
-              <span class="text-ink-soft">{blogUi.specReading}:</span>
-              <strong class="text-ink">{article.readingTime}</strong>
-            </div>
-            <div class="flex justify-between border-b border-ink/15 pb-1.5">
-              <span class="text-ink-soft">{blogUi.specUpdated}:</span>
-              <strong class="text-ink">{article.updatedDate}</strong>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-ink-soft">{blogUi.specMarket}:</span>
-              <strong class="text-ink">{ui.countryName}</strong>
-            </div>
-          </div>
-
-          <div class="rounded-[24px] border-2 border-ink bg-maroon p-5 text-cream shadow-[5px_5px_0_0_var(--ink)] space-y-3">
-            <span class="inline-block rounded-pill bg-lemon px-3 py-0.5 text-[11px] font-bold uppercase text-ink">
-              {blogUi.sidebarWaBadge}
-            </span>
-            <p class="font-display text-xl uppercase leading-tight text-cream">
+          <div class="rounded-[24px] border-2 border-ink bg-maroon p-5 text-cream shadow-[4px_4px_0_0_var(--ink)] space-y-3">
+            <p class="font-display text-lg uppercase leading-tight text-cream">
               {blogUi.sidebarWaTitle}
             </p>
             <WhatsAppButton
@@ -194,43 +159,29 @@ const crumbs = [
               size="md"
               class="w-full justify-center"
             />
-            <BookCallButton
-              country={country}
-              page={pageId}
-              placement="sidebar"
-              variant="light"
-              size="md"
-              class="w-full justify-center text-xs!"
-            />
           </div>
         </aside>
 
-        <!-- Columna principal de contenido editorial -->
-        <div class="space-y-14">
+        <div class="space-y-12">
           {
-            article.sections.map((sec, idx) => (
-              <section id={sec.id} class="scroll-mt-28 space-y-6">
+            article.sections.map((sec) => (
+              <section id={sec.id} class="scroll-mt-28 space-y-5">
                 <div class="flex items-center gap-3">
-                  <span class="inline-flex h-10 w-12 items-center justify-center rounded-2xl border-2 border-ink bg-lemon font-display text-xl text-ink">
+                  <span class="inline-flex h-9 w-11 shrink-0 items-center justify-center rounded-xl border-2 border-ink bg-lemon font-display text-lg text-ink">
                     {sec.number}
                   </span>
                   <h2 class="text-display-md">{sec.heading}</h2>
                 </div>
 
-                <p class="rounded-2xl border-l-4 border-coral bg-cream-deep px-5 py-4 text-lg font-bold text-ink">
+                <!-- Idea clave visible en 3 segundos -->
+                <p class="rounded-2xl border-l-4 border-coral bg-cream-deep px-5 py-3.5 text-base font-bold text-ink md:text-lg">
                   {sec.lead}
                 </p>
-
-                <div class="space-y-4 text-base text-ink-soft md:text-lg leading-relaxed">
-                  {sec.paragraphs.map((p) => (
-                    <p>{p}</p>
-                  ))}
-                </div>
 
                 {sec.bullets && (
                   <ul class="grid gap-3 sm:grid-cols-3">
                     {sec.bullets.map((b) => (
-                      <li class="flex gap-2.5 rounded-2xl border-2 border-ink bg-cream-deep p-4 text-sm font-bold text-ink">
+                      <li class="flex gap-2 rounded-2xl border-2 border-ink bg-cream p-3.5 text-sm font-bold text-ink">
                         <span class="text-coral-deep" aria-hidden="true">✓</span>
                         <span>{b}</span>
                       </li>
@@ -238,27 +189,45 @@ const crumbs = [
                   </ul>
                 )}
 
-                {/* Tarjeta visual con fotografía editorial incrustada */}
+                {sec.scriptBox && (
+                  <div class="rounded-[24px] border-2 border-ink bg-sky p-5 shadow-[5px_5px_0_0_var(--ink)] space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <h3 class="text-xl">{sec.scriptBox.title}</h3>
+                      <span class="rounded-pill border border-ink bg-cream px-2.5 py-0.5 text-xs font-bold uppercase">
+                        {sec.scriptBox.badge}
+                      </span>
+                    </div>
+                    <div class="grid gap-3 md:grid-cols-3">
+                      {sec.scriptBox.items.map((it) => (
+                        <div class="rounded-xl border border-ink bg-cream p-3.5 space-y-1">
+                          <strong class="block text-xs font-bold uppercase text-coral-deep">{it.label}</strong>
+                          <p class="text-sm font-medium text-ink">{it.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {sec.figure && (
-                  <figure class="overflow-hidden rounded-[28px] border-2 border-ink bg-cream-deep shadow-[7px_8px_0_0_var(--ink)]">
-                    <div class="grid items-center gap-6 p-5 md:grid-cols-[0.95fr_1.05fr] md:p-7">
+                  <figure class="overflow-hidden rounded-[24px] border-2 border-ink bg-cream-deep shadow-[5px_5px_0_0_var(--ink)]">
+                    <div class="grid items-center gap-5 p-4 md:grid-cols-[0.85fr_1.15fr] md:p-6">
                       <div class="overflow-hidden rounded-2xl border-2 border-ink bg-cream">
                         <Photo
                           src={EDITORIAL_PHOTOS[sec.figure.photoKey]}
                           alt={sec.figure.alt}
                           aspect="4/3"
                           widths={[360, 540]}
-                          sizes="(min-width: 768px) 320px, 88vw"
+                          sizes="(min-width: 768px) 280px, 88vw"
                         />
                       </div>
-                      <div class="space-y-3.5">
-                        <span class="inline-block rounded-pill border border-ink bg-sky px-3 py-1 text-xs font-bold uppercase text-ink">
+                      <div class="space-y-2.5">
+                        <span class="inline-block rounded-pill border border-ink bg-sky px-3 py-0.5 text-xs font-bold uppercase text-ink">
                           {sec.figure.badge}
                         </span>
                         <figcaption class="font-bold text-ink leading-snug">
                           {sec.figure.caption}
                         </figcaption>
-                        <ul class="space-y-2 border-t border-ink/20 pt-3 text-sm text-ink-soft">
+                        <ul class="space-y-1.5 border-t border-ink/20 pt-2.5 text-sm text-ink-soft">
                           {sec.figure.callouts.map((c) => (
                             <li class="flex items-start gap-2">
                               <span class="mt-0.5 font-bold text-coral-deep" aria-hidden="true">→</span>
@@ -271,55 +240,33 @@ const crumbs = [
                   </figure>
                 )}
 
-                {/* Caja de guion / ajustes técnicos */}
-                {sec.scriptBox && (
-                  <div class="rounded-[28px] border-2 border-ink bg-sky p-6 shadow-[6px_6px_0_0_var(--ink)] md:p-7 space-y-4">
-                    <div class="flex flex-wrap items-center justify-between gap-2">
-                      <h3 class="text-xl md:text-2xl">{sec.scriptBox.title}</h3>
-                      <span class="rounded-pill border border-ink bg-cream px-3 py-1 text-xs font-bold uppercase">
-                        {sec.scriptBox.badge}
-                      </span>
-                    </div>
-                    <div class="grid gap-3 md:grid-cols-3">
-                      {sec.scriptBox.items.map((it) => (
-                        <div class="rounded-2xl border-2 border-ink bg-cream p-4 space-y-1.5">
-                          <strong class="block text-xs font-bold uppercase text-coral-deep">{it.label}</strong>
-                          <p class="text-sm font-medium text-ink">{it.text}</p>
-                        </div>
+                {/* Explicación en profundidad desplegable (0 KB JS, 100 % indexable por Google) */}
+                {sec.paragraphs.length > 0 && (
+                  <details class="rounded-2xl border border-ink/40 bg-cream px-4 py-3">
+                    <summary class="cursor-pointer list-none text-xs font-extrabold uppercase tracking-wide text-ink-soft hover:text-ink select-none">
+                      + Leer explicación detallada ({sec.paragraphs.length} párrafos)
+                    </summary>
+                    <div class="mt-3 space-y-3 border-t border-ink/15 pt-3 text-sm text-ink-soft md:text-base leading-relaxed">
+                      {sec.paragraphs.map((p) => (
+                        <p>{p}</p>
                       ))}
                     </div>
-                  </div>
-                )}
-
-                {/* Pull-quote editorial después de la sección 02 */}
-                {idx === 1 && (
-                  <blockquote class="rounded-[28px] border-2 border-ink bg-maroon p-6 text-cream shadow-[8px_8px_0_0_var(--coral)] md:p-8 space-y-3">
-                    <p class="font-display text-2xl uppercase leading-snug text-lemon md:text-3xl">
-                      «{article.pullQuote.text}»
-                    </p>
-                    <footer class="text-xs font-bold uppercase tracking-wider text-cream/80">
-                      — {article.pullQuote.context}
-                    </footer>
-                  </blockquote>
+                  </details>
                 )}
               </section>
             ))
           }
 
-          <!-- Tabla comparativa semántica (Featured Snippet & GEO) -->
-          <section class="space-y-5 pt-4">
-            <div class="space-y-2">
-              <h2 class="text-display-md">{article.comparisonTable.title}</h2>
-              <p class="text-ink-soft">{article.comparisonTable.subtitle}</p>
-            </div>
-
-            <div class="overflow-x-auto rounded-[28px] border-2 border-ink bg-cream shadow-[7px_8px_0_0_var(--ink)]">
-              <table class="w-full min-w-[640px] border-collapse text-left text-sm">
+          <!-- Tabla comparativa rápida -->
+          <section class="space-y-4 pt-2">
+            <h2 class="text-display-md">{article.comparisonTable.title}</h2>
+            <div class="overflow-x-auto rounded-[24px] border-2 border-ink bg-cream shadow-[6px_6px_0_0_var(--ink)]">
+              <table class="w-full min-w-[600px] border-collapse text-left text-sm">
                 <thead>
                   <tr class="border-b-2 border-ink bg-lemon text-ink">
                     {
                       article.comparisonTable.headers.map((h) => (
-                        <th class="p-4 font-display text-base uppercase">{h}</th>
+                        <th class="p-3.5 font-display text-base uppercase">{h}</th>
                       ))
                     }
                   </tr>
@@ -328,10 +275,10 @@ const crumbs = [
                   {
                     article.comparisonTable.rows.map((row) => (
                       <tr class="hover:bg-cream-deep/60">
-                        <td class="p-4 font-bold text-ink">{row.col1}</td>
-                        <td class="p-4 text-ink-soft">{row.col2}</td>
-                        <td class="p-4 text-ink-soft">{row.col3}</td>
-                        <td class="bg-sky/35 p-4 font-bold text-ink">{row.col4}</td>
+                        <td class="p-3.5 font-bold text-ink">{row.col1}</td>
+                        <td class="p-3.5 text-ink-soft">{row.col2}</td>
+                        <td class="p-3.5 text-ink-soft">{row.col3}</td>
+                        <td class="bg-sky/35 p-3.5 font-bold text-ink">{row.col4}</td>
                       </tr>
                     ))
                   }
@@ -340,17 +287,14 @@ const crumbs = [
             </div>
           </section>
 
-          <!-- Checklist práctica de control -->
-          <section class="rounded-[28px] border-2 border-ink bg-lemon p-6 shadow-[7px_8px_0_0_var(--ink)] md:p-8 space-y-5">
-            <div class="space-y-1.5">
-              <h2 class="text-display-md">{article.checklist.title}</h2>
-              <p class="text-sm font-medium text-ink-soft">{article.checklist.subtitle}</p>
-            </div>
+          <!-- Checklist práctica -->
+          <section class="rounded-[24px] border-2 border-ink bg-lemon p-6 shadow-[6px_6px_0_0_var(--ink)] space-y-4">
+            <h2 class="text-display-md">{article.checklist.title}</h2>
             <ul class="grid gap-3 md:grid-cols-2">
               {
                 article.checklist.items.map((item, i) => (
-                  <li class="flex items-start gap-3 rounded-2xl border-2 border-ink bg-cream p-4 text-sm font-bold text-ink">
-                    <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-ink bg-coral text-xs font-bold text-ink">
+                  <li class="flex items-start gap-2.5 rounded-xl border border-ink bg-cream p-3.5 text-sm font-bold text-ink">
+                    <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-ink bg-coral text-[11px] font-bold text-ink">
                       {i + 1}
                     </span>
                     <span>{item}</span>
@@ -360,28 +304,25 @@ const crumbs = [
             </ul>
           </section>
 
-          <!-- Demostración interactiva según el tema del artículo -->
+          <!-- Recurso interactivo según el tema -->
           {article.id === 'carruseles' && <CarouselPreviewMockup country={country} compact />}
           {article.id === 'grabacion' && <RecordingTimeline30m country={country} />}
 
-          <!-- Preguntas frecuentes del artículo -->
+          <!-- Preguntas frecuentes -->
           {
             article.faqs.length > 0 && (
-              <section class="space-y-6 pt-4">
+              <section class="space-y-5 pt-2">
                 <h2 class="text-display-md">{blogUi.faqTitle}</h2>
                 <FAQ items={article.faqs} />
               </section>
             )
           }
 
-          <!-- Sello de metodología editorial verificable E-E-A-T -->
-          <EeatMethodologyBox country={country} updatedDate={article.updatedDate} />
-
-          <!-- Cierre de conversión a WhatsApp + Llamada 15 min -->
-          <footer class="rounded-[32px] border-2 border-ink bg-maroon p-7 text-cream shadow-[8px_8px_0_0_var(--ink)] md:p-10 space-y-5">
+          <!-- Cierre de conversión limpio -->
+          <footer class="rounded-[28px] border-2 border-ink bg-maroon p-7 text-cream shadow-[8px_8px_0_0_var(--ink)] md:p-9 space-y-4">
             <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
-            <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
-            <div class="flex flex-wrap gap-3">
+            <p class="text-base text-cream/85 md:text-lg">{ui.finalCta.subtitle}</p>
+            <div class="flex flex-wrap gap-3 pt-1">
               <WhatsAppButton
                 message={article.waMessage}
                 label={article.waCta}
@@ -401,13 +342,20 @@ const crumbs = [
               />
             </div>
           </footer>
+
+          <div class="flex flex-wrap items-center gap-2.5 text-sm">
+            <a href={linkTo('blog', country)} class="rounded-pill border border-ink bg-cream-deep px-3.5 py-1.5 font-bold text-ink no-underline hover:bg-lemon">
+              ← Todos los artículos
+            </a>
+            <a href={linkTo('precios', country)} class="rounded-pill border border-ink bg-cream-deep px-3.5 py-1.5 font-bold text-ink no-underline hover:bg-lemon">
+              Ver precios →
+            </a>
+            <a href={linkTo('comoTrabajamos', country)} class="rounded-pill border border-ink bg-cream-deep px-3.5 py-1.5 font-bold text-ink no-underline hover:bg-lemon">
+              Ver casos reales →
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </article>
-
-  <StripeBand colors={['var(--lemon)', 'var(--ink)']} />
-
-  <!-- Matriz de cluster semántico -->
-  <TopicClusterLinks country={country} currentPath={path} />
 </BaseLayout>

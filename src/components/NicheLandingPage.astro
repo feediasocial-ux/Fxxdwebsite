@@ -5,21 +5,15 @@ import Card from '@/components/Card.astro';
 import Button from '@/components/Button.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import BookCallButton from '@/components/BookCallButton.astro';
-import BookCallCard from '@/components/BookCallCard.astro';
 import PhoneReelMockup from '@/components/PhoneReelMockup.astro';
 import PackageCard from '@/components/PackageCard.astro';
-import NicheCard from '@/components/NicheCard.astro';
 import FAQ from '@/components/FAQ.astro';
 import Photo from '@/components/Photo.astro';
-import AuditForm from '@/components/AuditForm.astro';
-import StripeBand from '@/components/StripeBand.astro';
-import GeoKeyFacts from '@/components/GeoKeyFacts.astro';
-import TopicClusterLinks from '@/components/TopicClusterLinks.astro';
 import { getUi } from '@/content';
 import { PACKAGES } from '@/content/pricing';
 import { getNichesByCountry, type NicheLandingData } from '@/content/niches';
 import { NICHE_PHOTOS } from '@/lib/niche-photos';
-import { COUNTRIES } from '@/lib/i18n';
+import { COUNTRIES, formatPrice } from '@/lib/i18n';
 import { linkTo, pathFor } from '@/lib/routes';
 import { breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd } from '@/lib/seo';
 
@@ -34,6 +28,9 @@ const path = pathFor(niche.routeKey, country)!;
 const pageId = `nicho-${niche.id}`;
 const heroImg = NICHE_PHOTOS[niche.photoKey];
 const otherNiches = getNichesByCountry(country).filter((n) => n.id !== niche.id);
+const featuredReel = niche.reelIdeas[0];
+const extraReels = niche.reelIdeas.slice(1);
+const startingPrice = formatPrice(PACKAGES[0].price[country], country);
 
 const crumbs = [
   { name: ui.countryName, path: COUNTRIES[country].basePath },
@@ -66,27 +63,17 @@ const crumbs = [
 >
   <Breadcrumbs items={crumbs} ariaLabel={ui.a11y.breadcrumb} />
 
-  <!-- Hero del nicho -->
-  <section class="container-site pt-6 pb-16 md:pt-10 md:pb-20">
+  <!-- 1. Hero focalizada del nicho -->
+  <section class="container-site pt-6 pb-14 md:pt-10 md:pb-16">
     <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
-      <div class="space-y-6">
+      <div class="space-y-5">
         <p class="inline-block rounded-pill border-2 border-ink bg-accent-2 px-4 py-1.5 text-sm font-bold uppercase shadow-[3px_3px_0_0_var(--ink)]">
           {niche.eyebrow}
         </p>
         <h1 class="text-display-hero">{niche.h1}</h1>
         <p class="text-lg text-ink-soft md:text-xl">{niche.intro}</p>
 
-        <div class="flex flex-wrap gap-2">
-          {
-            niche.nicheVocabulary.map((term) => (
-              <span class="rounded-pill border border-ink bg-cream-deep px-3 py-1 text-xs font-bold">
-                #{term}
-              </span>
-            ))
-          }
-        </div>
-
-        <div class="flex flex-wrap items-center gap-3">
+        <div class="flex flex-wrap items-center gap-3 pt-1">
           <WhatsAppButton
             message={niche.waMessage}
             label={niche.waCta}
@@ -97,18 +84,14 @@ const crumbs = [
             placement="hero"
             size="lg"
           />
-          <BookCallButton
-            country={country}
-            page={pageId}
-            niche={niche.id}
-            placement="hero"
-            variant="light"
-            size="lg"
-          />
-          <Button href="#paquetes" variant="outline" size="md">
+          <Button href="#paquetes" variant="outline" size="lg">
             {ui.hero.ctaSecondary}
           </Button>
         </div>
+
+        <p class="text-xs font-extrabold uppercase tracking-wide text-ink-soft">
+          ✓ Desde {startingPrice}/mes · ✓ 30 min/mes o Plan B con AI Twin · ✓ Sin permanencia
+        </p>
       </div>
 
       <div class="mx-auto w-full max-w-md lg:max-w-none">
@@ -126,108 +109,124 @@ const crumbs = [
     </div>
   </section>
 
-  <!-- Cápsula GEO verificable -->
-  <GeoKeyFacts country={country} />
-
-  <StripeBand colors={['var(--accent-1)', 'var(--cream)']} />
-
-  <!-- 3 dolores específicos del nicho -->
-  <section class="container-site py-16 md:py-24">
+  <!-- 2. 3 dolores específicos + objeciones desplegables (SEO 100 % indexable, 0 fatiga visual) -->
+  <section class="container-site py-12 md:py-16">
     <h2 class="text-display-lg">{niche.painsTitle}</h2>
-    <div class="mt-10 grid gap-6 md:grid-cols-3">
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
       {
         niche.pains.map((p, idx) => (
           <Card color={idx === 1 ? 'accent-2' : 'cream-deep'} bordered class="flex flex-col gap-3">
             <span class="font-display text-4xl text-coral-deep" aria-hidden="true">0{idx + 1}</span>
             <h3 class="text-2xl">{p.title}</h3>
-            <p class="text-ink-soft">{p.text}</p>
+            <p class="text-sm text-ink-soft md:text-base">{p.text}</p>
           </Card>
         ))
       }
     </div>
-  </section>
 
-  <!-- 3 objeciones reales con respuesta -->
-  <section class="theme-dark py-16 md:py-24">
-    <div class="container-site space-y-10">
-      <h2 class="text-display-lg text-cream">{niche.objectionsTitle}</h2>
-      <div class="grid gap-6 md:grid-cols-3">
+    <details class="mt-8 rounded-[24px] border-2 border-ink bg-cream-deep p-5 shadow-[4px_4px_0_0_var(--ink)]">
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl uppercase text-ink select-none">
+        <span>{niche.objectionsTitle}</span>
+        <span class="rounded-pill border border-ink bg-lemon px-3 py-1 font-sans text-xs font-extrabold uppercase text-ink">
+          Ver respuestas ↓
+        </span>
+      </summary>
+      <div class="mt-5 grid gap-4 border-t-2 border-ink/15 pt-5 md:grid-cols-3">
         {
           niche.objections.map((obj) => (
-            <Card color="cream" bordered class="flex flex-col gap-3">
-              <h3 class="font-sans text-lg font-bold normal-case leading-snug text-coral-deep">
+            <div class="rounded-2xl border border-ink bg-cream p-4 space-y-2">
+              <h3 class="font-sans text-sm font-extrabold normal-case leading-snug text-coral-deep">
                 {obj.objection}
               </h3>
-              <p class="text-sm text-ink-soft md:text-base">{obj.answer}</p>
-            </Card>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Elemento único 1: 3 ideas de reels reales para este nicho en formato Mockup 9:16 -->
-  <section class="container-site py-16 md:py-24">
-    <div class="max-w-3xl space-y-3">
-      <h2 class="text-display-lg">{niche.reelIdeasTitle}</h2>
-      <p class="text-lg text-ink-soft">{niche.reelIdeasSubtitle}</p>
-    </div>
-
-    <div class="mt-10 grid gap-8 lg:grid-cols-3">
-      {
-        niche.reelIdeas.map((idea, idx) => (
-          <PhoneReelMockup
-            country={country}
-            badge={`Idea 0${idx + 1} · ${niche.shortTitle}`}
-            duration="25–35 s"
-            title={idea.title}
-            hook={idea.hook}
-            shots={[idea.visual]}
-            cta={`Objetivo: ${idea.goal}`}
-            accent={idx === 0 ? 'lemon' : idx === 1 ? 'coral' : 'sky'}
-          />
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- Elemento único 2: Calendario mensual de muestra (4 semanas) -->
-  <section class="container-site pb-16 md:pb-24">
-    <div class="rounded-[32px] border-2 border-ink bg-cream-deep p-6 shadow-[8px_8px_0_0_var(--ink)] md:p-10">
-      <div class="max-w-3xl space-y-3">
-        <h2 class="text-display-lg">{niche.calendarTitle}</h2>
-        <p class="text-lg text-ink-soft">{niche.calendarSubtitle}</p>
-      </div>
-
-      <div class="mt-8 grid gap-6 md:grid-cols-2">
-        {
-          niche.sampleCalendar.map((w) => (
-            <div class="rounded-[24px] border-2 border-ink bg-cream p-6 shadow-[4px_4px_0_0_var(--ink)] space-y-3">
-              <p class="font-display text-2xl uppercase">{w.week}</p>
-              <p class="text-xs font-bold uppercase text-coral-deep">{w.focus}</p>
-              <ul class="space-y-2 text-sm">
-                {w.pieces.map((piece) => (
-                  <li class="flex gap-2">
-                    <span class="font-bold" aria-hidden="true">→</span>
-                    <span>{piece}</span>
-                  </li>
-                ))}
-              </ul>
+              <p class="text-sm text-ink-soft">{obj.answer}</p>
             </div>
           ))
         }
       </div>
+    </details>
+  </section>
+
+  <!-- 3. Ejemplo real de Reel + Calendario mensual desplegable -->
+  <section class="theme-dark py-16 md:py-20">
+    <div class="container-site grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <div class="text-ink">
+        <PhoneReelMockup
+          country={country}
+          badge={`Idea 01 · ${niche.shortTitle}`}
+          duration="25–35 s"
+          title={featuredReel.title}
+          hook={featuredReel.hook}
+          shots={[featuredReel.visual]}
+          cta={`Objetivo: ${featuredReel.goal}`}
+          accent="lemon"
+        />
+      </div>
+
+      <div class="space-y-6">
+        <div class="space-y-3">
+          <h2 class="text-display-lg text-cream">{niche.reelIdeasTitle}</h2>
+          <p class="text-lg text-cream/85">{niche.reelIdeasSubtitle}</p>
+        </div>
+
+        <details class="rounded-[24px] border-2 border-cream bg-cream p-5 text-ink">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl uppercase select-none">
+            <span>Ver 2 ideas más de Reels para {niche.shortTitle}</span>
+            <span class="rounded-pill border border-ink bg-lemon px-3 py-1 font-sans text-xs font-extrabold uppercase">
+              Abrir ↓
+            </span>
+          </summary>
+          <div class="mt-4 space-y-3 border-t border-ink/20 pt-4">
+            {
+              extraReels.map((idea, idx) => (
+                <div class="rounded-2xl border border-ink bg-cream-deep p-4 space-y-1.5">
+                  <p class="text-xs font-extrabold uppercase text-coral-deep">Idea 0{idx + 2} · {idea.goal}</p>
+                  <h3 class="text-lg">{idea.title}</h3>
+                  <p class="text-sm font-bold text-ink">Gancho: «{idea.hook}»</p>
+                  <p class="text-xs text-ink-soft">{idea.visual}</p>
+                </div>
+              ))
+            }
+          </div>
+        </details>
+
+        <details class="rounded-[24px] border-2 border-cream bg-cream p-5 text-ink">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl uppercase select-none">
+            <span>{niche.calendarTitle}</span>
+            <span class="rounded-pill border border-ink bg-sky px-3 py-1 font-sans text-xs font-extrabold uppercase">
+              4 semanas ↓
+            </span>
+          </summary>
+          <div class="mt-4 grid gap-4 border-t border-ink/20 pt-4 sm:grid-cols-2">
+            {
+              niche.sampleCalendar.map((w) => (
+                <div class="rounded-2xl border border-ink bg-cream-deep p-4 space-y-2">
+                  <p class="font-display text-lg uppercase">{w.week}</p>
+                  <p class="text-[11px] font-bold uppercase text-coral-deep">{w.focus}</p>
+                  <ul class="space-y-1.5 text-xs">
+                    {w.pieces.map((piece) => (
+                      <li class="flex gap-1.5">
+                        <span class="font-bold" aria-hidden="true">→</span>
+                        <span>{piece}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            }
+          </div>
+        </details>
+      </div>
     </div>
   </section>
 
-  <!-- Paquetes con precio del país -->
-  <section id="paquetes" class="container-site py-16 md:py-24">
-    <div class="max-w-3xl space-y-4">
+  <!-- 4. Paquetes con precio del país -->
+  <section id="paquetes" class="container-site py-16 md:py-20">
+    <div class="max-w-3xl space-y-3">
       <h2 class="text-display-lg">{ui.pricing.title}</h2>
       <p class="text-lg text-ink-soft">{ui.pricing.subtitle}</p>
     </div>
 
-    <div class="mt-12 grid gap-8 md:grid-cols-3">
+    <div class="mt-10 grid gap-8 md:grid-cols-3">
       {PACKAGES.map((pkg) => <PackageCard pkg={pkg} country={country} page={pageId} />)}
     </div>
 
@@ -235,87 +234,58 @@ const crumbs = [
       <p>• {ui.pricing.adsNote}</p>
       <p>• {ui.pricing.taxNote}</p>
     </div>
-
-    <div class="mt-10">
-      <BookCallCard
-        country={country}
-        page={pageId}
-        niche={niche.id}
-        placement="below-packages"
-        mode="banner"
-        waMessage={niche.waMessage}
-      />
-    </div>
   </section>
 
-  <!-- FAQ propias del nicho -->
-  <section class="container-site py-16 md:py-24">
+  <!-- 5. FAQ propias del nicho -->
+  <section class="container-site py-12 md:py-16">
     <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
       <h2 class="text-display-lg">{niche.faqTitle}</h2>
       <FAQ items={niche.faqs} />
     </div>
   </section>
 
-  <!-- Bloque Relacionados (otros nichos + servicios + cómo funciona) -->
-  <section class="container-site pb-16">
-    <div class="space-y-6">
-      <div class="flex flex-wrap items-center justify-between gap-4">
-        <h2 class="text-display-md">Otros sectores con los que trabajamos en {ui.countryName}</h2>
-        <div class="flex flex-wrap gap-3">
-          <Button href={linkTo('servicios', country)} variant="outline">Ver todos los servicios</Button>
-          <Button href={linkTo('comoFunciona', country)} variant="outline">Cómo funciona el proceso</Button>
-        </div>
-      </div>
-
-      <div class="grid gap-6 md:grid-cols-3">
-        {
-          otherNiches.slice(0, 3).map((other) => (
-            <NicheCard
-              title={other.shortTitle}
-              text={other.cardSummary}
-              href={pathFor(other.routeKey, country)!}
-              linkLabel="Ver propuesta"
-              image={NICHE_PHOTOS[other.photoKey]}
-              imageAlt={other.photoAlt}
-              color="cream-deep"
-            />
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA final con formulario corto, WhatsApp y Llamada 15 min -->
-  <section class="container-site pb-20">
-    <div class="grid items-start gap-8 rounded-[36px] border-2 border-ink bg-maroon p-6 text-cream shadow-[10px_10px_0_0_var(--ink)] md:p-10 lg:grid-cols-[1fr_1.15fr]">
-      <div class="space-y-5">
+  <!-- 6. CTA final limpio + enlaces compactos a otros sectores -->
+  <section class="container-site pb-20 space-y-10">
+    <div class="flex flex-col items-start justify-between gap-6 rounded-[32px] border-2 border-ink bg-maroon p-8 text-cream shadow-[8px_8px_0_0_var(--ink)] lg:flex-row lg:items-center md:p-10">
+      <div class="max-w-2xl space-y-2">
         <h2 class="text-display-md text-cream">{ui.finalCta.title}</h2>
-        <p class="text-lg text-cream/85">{ui.finalCta.subtitle}</p>
-        <div class="flex flex-wrap gap-3">
-          <WhatsAppButton
-            message={niche.waMessage}
-            label={niche.waCta}
-            a11yLabel={ui.a11y.openWhatsApp}
-            country={country}
-            page={pageId}
-            niche={niche.id}
-            placement="final-cta"
-            variant="lemon"
-            size="lg"
-          />
-          <BookCallButton
-            country={country}
-            page={pageId}
-            niche={niche.id}
-            placement="final-cta"
-            variant="light"
-            size="lg"
-          />
-        </div>
+        <p class="text-base text-cream/85 md:text-lg">{ui.finalCta.subtitle}</p>
       </div>
-      <AuditForm country={country} page={pageId} />
+      <div class="flex flex-wrap gap-3 shrink-0">
+        <WhatsAppButton
+          message={niche.waMessage}
+          label={niche.waCta}
+          a11yLabel={ui.a11y.openWhatsApp}
+          country={country}
+          page={pageId}
+          niche={niche.id}
+          placement="final-cta"
+          variant="lemon"
+          size="lg"
+        />
+        <BookCallButton
+          country={country}
+          page={pageId}
+          niche={niche.id}
+          placement="final-cta"
+          variant="light"
+          size="lg"
+        />
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2.5 text-sm">
+      <span class="font-bold text-ink-soft">Otros sectores:</span>
+      {
+        otherNiches.map((other) => (
+          <a
+            href={pathFor(other.routeKey, country)!}
+            class="rounded-pill border border-ink bg-cream-deep px-3.5 py-1.5 font-bold text-ink no-underline hover:bg-lemon"
+          >
+            {other.shortTitle} →
+          </a>
+        ))
+      }
     </div>
   </section>
-
-  <TopicClusterLinks country={country} currentPath={path} />
 </BaseLayout>

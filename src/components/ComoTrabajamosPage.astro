@@ -4,6 +4,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Button from '@/components/Button.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import PhoneReelMockup from '@/components/PhoneReelMockup.astro';
+import VideoPlaceholder from '@/components/VideoPlaceholder.astro';
 import Photo from '@/components/Photo.astro';
 import { getPhase4, getUi } from '@/content';
 import { COUNTRIES, type CountryKey } from '@/lib/i18n';
@@ -181,18 +182,31 @@ const featuredScript = copy.scriptSamples[0];
       </div>
 
       <div class="grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div class="text-ink">
-          <PhoneReelMockup
-            country={country}
-            badge={featuredScript.nicheBadge}
-            duration={featuredScript.duration}
-            title={featuredScript.title}
-            hook={featuredScript.hook}
-            shots={featuredScript.body}
-            cta={featuredScript.cta}
-            shotNote={featuredScript.shotNote}
-            accent={featuredScript.color}
+        <div class="space-y-6">
+          <VideoPlaceholder
+            badge="Showreel · Reels reales"
+            title="Showreel de Reels editados"
+            subtitle={
+              country === 'es'
+                ? 'Cortes rápidos (20–30 s) de edición, subtítulos dinámicos y ganchos visuales reales del estudio.'
+                : 'Cortes rápidos (20–30 s) de edición, subtítulos dinámicos y ganchos visuales reales del estudio.'
+            }
+            pendingTag="[PENDIENTE: subir public/videos/showreel-reels.mp4]"
+            accent="lemon"
           />
+          <div class="text-ink">
+            <PhoneReelMockup
+              country={country}
+              badge={featuredScript.nicheBadge}
+              duration={featuredScript.duration}
+              title={featuredScript.title}
+              hook={featuredScript.hook}
+              shots={featuredScript.body}
+              cta={featuredScript.cta}
+              shotNote={featuredScript.shotNote}
+              accent={featuredScript.color}
+            />
+          </div>
         </div>
 
         <div class="grid gap-5 sm:grid-cols-2">
